@@ -7,24 +7,24 @@ extern "C" {
 
 
 	void (*CSDebugLog)(const char* msg);
-	DLLExport void InitCSDebugLog(void (*csharpFunctionPtr)(const char* msg)) {
+	SpineCppExport void InitCSDebugLog(void (*csharpFunctionPtr)(const char* msg)) {
 		CSDebugLog = csharpFunctionPtr;
 
 		CSDebugLog("C++ Logger Init Success");
 	}
 
-	DLLExport int CppFunction(int a, float b) {
+	SpineCppExport int CppFunction(int a, float b) {
 		return a + (int)b;
 	}
 
-	DLLEXPORT void loadBinary(const String& binaryFile, const String& atlasFile) {
+	SpineCppExport void loadBinary(const String& binaryFile, const String& atlasFile) {
 
 		Atlas* atlas = nullptr;
 		SkeletonData* skeletonData = nullptr;
 		AnimationStateData* stateData = nullptr;
 		Skeleton* skeleton = nullptr;
 		AnimationState* state = nullptr;
-
+		
 		atlas = new (__FILE__, __LINE__) Atlas(atlasFile, NULL);
 		assert(atlas != NULL);
 
@@ -44,7 +44,7 @@ extern "C" {
 		state = new (__FILE__, __LINE__) AnimationState(stateData);
 	}
 
-	DLLEXPORT void DeleteSkeletonData(SkeletonData* skData) {
+	SpineCppExport void DeleteSkeletonData(SkeletonData* skData) {
 		//SafeDeletePointer(skData);
 
 		if (!skData) {
@@ -56,7 +56,7 @@ extern "C" {
 		delete (skData);
 	}
 
-	DLLEXPORT void* LoadSkeletonData(Atlas* atlas, const char* jsonContent) {
+	SpineCppExport void* LoadSkeletonData(Atlas* atlas, const char* jsonContent) {
 		SkeletonJson json(atlas);
 		SkeletonData* skeletonData = json.readSkeletonData(jsonContent);
 		CSDebugLog("jsonContent");
@@ -64,12 +64,12 @@ extern "C" {
 		return skeletonData;
 	}
 
-	DLLEXPORT void* LoadAtlas(const char* atlasFileContent, int dataLen) {
+	SpineCppExport void* LoadAtlas(const char* atlasFileContent, int dataLen) {
 		Atlas* atlas = new (__FILE__, __LINE__) Atlas(atlasFileContent, dataLen, "", nullptr, true);
 		return atlas;
 	}
 
-	DLLExport void DeleteAtlas(Atlas* atlas) {
+	SpineCppExport void DeleteAtlas(Atlas* atlas) {
 		//SafeDeletePointer(atlas);
 		if (!atlas) {
 			char buffLog[256] = { 0 };
@@ -80,4 +80,5 @@ extern "C" {
 		delete (atlas);
 	}
 
+	
 }
