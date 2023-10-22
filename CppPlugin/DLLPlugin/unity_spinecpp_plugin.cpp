@@ -2,7 +2,9 @@
 #include <spine/spine.h>
 using namespace spine;
 
+
 extern "C" {
+
 
 	void (*CSDebugLog)(const char* msg);
 	DLLExport void InitCSDebugLog(void (*csharpFunctionPtr)(const char* msg)) {
@@ -26,6 +28,8 @@ extern "C" {
 		atlas = new (__FILE__, __LINE__) Atlas(atlasFile, NULL);
 		assert(atlas != NULL);
 
+
+
 		SkeletonBinary binary(atlas);
 		skeletonData = binary.readSkeletonDataFile(binaryFile);
 		assert(skeletonData);
@@ -40,19 +44,40 @@ extern "C" {
 		state = new (__FILE__, __LINE__) AnimationState(stateData);
 	}
 
+	DLLEXPORT void DeleteSkeletonData(SkeletonData* skData) {
+		//SafeDeletePointer(skData);
+
+		if (!skData) {
+			char buffLog[256] = { 0 };
+			sprintf_s(buffLog, "%s %d delete pointer is null return ", __FILE__, __LINE__);
+			CSDebugLog(buffLog);
+			return;
+		}
+		delete (skData);
+	}
+
+	DLLEXPORT void* LoadSkeletonData(Atlas* atlas, const char* jsonContent) {
+		SkeletonJson json(atlas);
+		SkeletonData* skeletonData = json.readSkeletonData(jsonContent);
+		CSDebugLog("jsonContent");
+		CSDebugLog(jsonContent);
+		return skeletonData;
+	}
+
 	DLLEXPORT void* LoadAtlas(const char* atlasFileContent, int dataLen) {
-		CSDebugLog("CS loadAtlas content");
-		CSDebugLog(atlasFileContent);
 		Atlas* atlas = new (__FILE__, __LINE__) Atlas(atlasFileContent, dataLen, "", nullptr, true);
 		return atlas;
 	}
 
-	DLLExport void DeleteAtlas(char* atlas) {
+	DLLExport void DeleteAtlas(Atlas* atlas) {
+		//SafeDeletePointer(atlas);
 		if (!atlas) {
-			CSDebugLog("CS : try to delete null pointer . return ");
+			char buffLog[256] = { 0 };
+			sprintf_s(buffLog, "%s %d delete pointer is null return ", __FILE__, __LINE__);
+			CSDebugLog(buffLog);
 			return;
 		}
-		delete atlas;
+		delete (atlas);
 	}
 
 }

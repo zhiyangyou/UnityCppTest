@@ -37,6 +37,8 @@ public partial class Bridge {
         new GenFuncInfo("CppFunction", "CppDele_CppFunction", "int CppDele_CppFunction(int a, float b)"),
         new GenFuncInfo("LoadAtlas", "CppDele_LoadAtlas", "IntPtr CppDele_LoadAtlas(IntPtr cChar, int dataLen)"),
         new GenFuncInfo("DeleteAtlas", "CppDele_DeleteAtlas", "void CppDele_DeleteAtlas(IntPtr cChar)"),
+        new GenFuncInfo("LoadSkeletonData", "CppDele_LoadSkeletonData", "IntPtr CppDele_LoadSkeletonData(IntPtr pAtlas,IntPtr cChar)"),
+        new GenFuncInfo("DeleteSkeletonData", "CppDele_DeleteSkeletonData", "void CppDele_DeleteSkeletonData(IntPtr pSkeletonData)"),
     };
 
     [MenuItem("Cpp/GenCppPluginFuncBinding")]

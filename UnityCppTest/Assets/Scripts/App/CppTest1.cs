@@ -27,7 +27,8 @@ namespace App {
     public class CppTest1 : MonoBehaviour {
         [SerializeField] public SkeletonDataAsset skeletonDataAsset;
 
-        private IntPtr atlasPointer;
+        private Proxy_Atlas _proxyAtlas = null;
+        private Proxy_SkeletonData _proxySkeletonData = null;
 
         private void Awake() {
             Utils.DLLLoader.OpenLibrary();
@@ -36,16 +37,19 @@ namespace App {
         }
 
         unsafe void DestoryPointers() {
-            if (atlasPointer.ToPointer() != null) {
-                Bridge.DeleteAtlas(atlasPointer);
-            }
         }
 
         private void OnGUI() {
-            if (GUI.Button(new Rect(100, 100, 300, 300), "Call Cpp")) {
+            if (GUI.Button(new Rect(100, 100, 100, 100), "Call Cpp")) {
                 DestoryPointers();
-                string atlasFileContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
-                atlasPointer = Bridge.LoadAtlas(atlasFileContent);
+                string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
+                string jsonContent = skeletonDataAsset.skeletonJSON.text;
+                _proxyAtlas = new Proxy_Atlas(atlasContent);
+                _proxySkeletonData = new Proxy_SkeletonData(_proxyAtlas, jsonContent);
+            }
+
+            if (GUI.Button(new Rect(100, 200, 100, 100), "GC")) {
+                GC.Collect();
             }
         }
 

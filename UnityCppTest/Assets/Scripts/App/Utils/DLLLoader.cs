@@ -11,6 +11,12 @@ namespace App.Utils {
         private static string _dllPath = "";
         private static IntPtr _dllHandle;
 
+        private static bool _hasLoaded = false;
+
+        public static bool HasLoaded {
+            get { return _hasLoaded; }
+        }
+
         private static string DllPath {
             get {
                 if (string.IsNullOrEmpty(_dllPath)) {
@@ -43,23 +49,27 @@ namespace App.Utils {
                 throw new Exception("Couldn't open native library: " + DllPath);
             }
 
+            _hasLoaded = true;
+
             return _dllHandle;
         }
 
         public static void CloseLibrary() {
             FreeLibrary(_dllHandle);
+            _hasLoaded = false;
         }
-
         public static T GetDelegate<T>(
             string functionName) where T : class {
+            if (!_hasLoaded) {
+                throw new Exception("Dll尚未加载");
+            }
+
             IntPtr symbol = GetProcAddress(_dllHandle, functionName);
             if (symbol == IntPtr.Zero) {
                 throw new Exception("Couldn't get function: " + functionName);
             }
 
-            return Marshal.GetDelegateForFunctionPointer(
-                symbol,
-                typeof(T)) as T;
+            return Marshal.GetDelegateForFunctionPointer(symbol, typeof(T)) as T;
         }
 #endif
     }
