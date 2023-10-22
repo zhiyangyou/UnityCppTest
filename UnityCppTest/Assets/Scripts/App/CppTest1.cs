@@ -23,18 +23,24 @@ namespace App {
 
 
     public class CppTest1 : MonoBehaviour {
-        // Start is called before the first frame update
+
+
         void Start() {
-            CppCallCSharp.InitPlugin();
-            CSharpCallCpp.Foo();
+            Bridge.InitPlugin();
+            Bridge.Foo();
 
             unsafe {
                 Enemy* enemies = (Enemy*)Marshal.AllocHGlobal(sizeof(Enemy) * 1000);
             }
         }
-
-        // Update is called once per frame
-        void Update() {
+    
+        private void Awake() {
+            Utils.DLLLoader.OpenLibrary();
         }
+
+        private void OnDestroy() {
+            Utils.DLLLoader.CloseLibrary();
+        }
+    
     }
 }

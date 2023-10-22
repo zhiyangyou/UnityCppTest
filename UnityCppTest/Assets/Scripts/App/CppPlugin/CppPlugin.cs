@@ -1,36 +1,37 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using App.Utils;
 using UnityEngine;
 
-public class Const {
-    public const string PluginName = "DLLPlugin";
-}
+    
+    
 
-public class CSharpCallCpp {
-    //C++侧的方法
-    [DllImport(Const.PluginName)]
-    static extern int CppFunction(int a, float b);
-
-    public static void Foo() {
-        int retVal = CppFunction(2, 2.7f);
-        Debug.Log($"Hello Cpp!!! {retVal}");
-    }
-}
-
-public class CppCallCSharp {
+public class Bridge {
     //一个普通的C#方法
     static int CSharpFunction(int a, float b) {
         return a + (int)b;
     }
 
-    //C++侧的方法，由C#调用，将C#的函数指针传递给C++
-    [DllImport(Const.PluginName)]
-    static extern void Init(IntPtr ptrCSharpFunction);
+    private delegate void InitDele(IntPtr funcPointer);
+
+    private static InitDele _initDele = null;
+
+    private delegate int CppFunctionDele(int a, float b);
+
+    private static CppFunctionDele _cppFunctionDele = null;
+    
+    static void Init(IntPtr ptrCSharpFunction) {
+        _initDele.Invoke(ptrCSharpFunction);
+    }
 
 
     public static void InitPlugin() {
-        Func<int, float, int> del = CSharpFunction;
-        IntPtr funcPtr = Marshal.GetFunctionPointerForDelegate(del);
-        Init(funcPtr);
+        _initDele = DLLLoader.GetDelegate<InitDele>("Init");
+        _cppFunctionDele = DLLLoader.GetDelegate<CppFunctionDele>("CppFunction");
+    }
+    
+    public static void Foo() {
+        int retVal = _cppFunctionDele.Invoke(2, 2.7f);
+        Debug.Log($"Hello Cpp!!! {retVal}");
     }
 }

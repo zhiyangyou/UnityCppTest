@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4159627c-5a4a-40a0-861c-523f71101c9f}</ProjectGuid>
     <RootNamespace>DLLPlugin</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -71,10 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\..\UnityCppTest\Assets\Plugins\x86_64</OutDir>
+    <OutDir>$(SolutionDir)..\..\DLLExportDir</OutDir>
+    <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\..\UnityCppTest\Assets\Plugins\x86_64</OutDir>
+    <OutDir>$(SolutionDir)..\..\DLLExportDir</OutDir>
+    <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,11 +116,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;DLLPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;DLLPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,11 +135,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;DLLPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;DLLPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,9 +152,75 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Animation.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\AnimationState.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\AnimationStateData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Atlas.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\AtlasAttachmentLoader.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Attachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\AttachmentLoader.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\AttachmentTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Bone.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\BoneData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\BoundingBoxAttachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\ClippingAttachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\ColorTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\ConstraintData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\CurveTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\DeformTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\DrawOrderTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Event.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\EventData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\EventTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Extension.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\IkConstraint.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\IkConstraintData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\IkConstraintTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Json.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\LinkedMesh.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Log.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\MathUtil.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\MeshAttachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PathAttachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PathConstraint.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PathConstraintData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PathConstraintMixTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PathConstraintPositionTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PathConstraintSpacingTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\PointAttachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\RegionAttachment.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\RotateTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\RTTI.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\ScaleTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Sequence.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SequenceTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\ShearTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Skeleton.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SkeletonBinary.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SkeletonBounds.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SkeletonClipping.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SkeletonData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SkeletonJson.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Skin.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Slot.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SlotData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\SpineObject.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TextureLoader.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Timeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TransformConstraint.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TransformConstraintData.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TransformConstraintTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TranslateTimeline.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Triangulator.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Updatable.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\VertexAttachment.cpp" />
+    <ClCompile Include="unity_spinecpp_plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="unity_spinecpp_plugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

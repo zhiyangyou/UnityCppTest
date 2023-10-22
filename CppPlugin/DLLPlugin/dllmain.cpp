@@ -1,7 +1,7 @@
 ﻿
 
-#define DLLExport __declspec(dllexport)
-
+#include "unity_spinecpp_plugin.h"
+#include <spine/spine.h>
 extern "C"
 {
 	// Function pointer to the C# function
