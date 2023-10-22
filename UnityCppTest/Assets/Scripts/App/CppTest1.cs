@@ -27,7 +27,7 @@ namespace App {
 
         void Start() {
             Bridge.InitPlugin();
-            Bridge.Foo();
+            Bridge.CppFunction();
 
             unsafe {
                 Enemy* enemies = (Enemy*)Marshal.AllocHGlobal(sizeof(Enemy) * 1000);
