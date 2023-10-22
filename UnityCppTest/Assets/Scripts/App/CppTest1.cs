@@ -1,5 +1,7 @@
+using System;
 using System.Runtime.InteropServices;
 using App.Utils;
+using Spine.Unity;
 using UnityEngine;
 
 namespace App {
@@ -23,24 +25,33 @@ namespace App {
 
 
     public class CppTest1 : MonoBehaviour {
+        [SerializeField] public SkeletonDataAsset skeletonDataAsset;
 
+        private IntPtr atlasPointer;
 
-        void Start() {
-            Bridge.InitPlugin();
-            Bridge.CppFunction();
-
-            unsafe {
-                Enemy* enemies = (Enemy*)Marshal.AllocHGlobal(sizeof(Enemy) * 1000);
-            }
-        }
-    
         private void Awake() {
             Utils.DLLLoader.OpenLibrary();
+            Bridge.InitPlugin();
+            Bridge.CppFunction();
+        }
+
+        unsafe void DestoryPointers() {
+            if (atlasPointer.ToPointer() != null) {
+                Bridge.DeleteAtlas(atlasPointer);
+            }
+        }
+
+        private void OnGUI() {
+            if (GUI.Button(new Rect(100, 100, 300, 300), "Call Cpp")) {
+                DestoryPointers();
+                string atlasFileContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
+                atlasPointer = Bridge.LoadAtlas(atlasFileContent);
+            }
         }
 
         private void OnDestroy() {
+            DestoryPointers();
             Utils.DLLLoader.CloseLibrary();
         }
-    
     }
 }

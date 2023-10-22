@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8874c34b3ecae1d4bb4c8f573f410731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: 2f899e95232e6144786de8fb99678a8d, type: 2}
 --- !u!1 &2125289433
 GameObject:
   m_ObjectHideFlags: 0
