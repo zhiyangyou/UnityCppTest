@@ -63,6 +63,18 @@ class SpineCppLibrary : ILibrary
     {
         ctx.IgnoreHeadersWithName("ContainerUtil");
         ctx.IgnoreHeadersWithName("MathUtil");
+
+        ctx.IgnoreClassWithName("SpineExtension");
+        ctx.IgnoreClassWithName("DefaultSpineExtension");
+        ctx.IgnoreClassWithName("SpineObject");
+        ctx.IgnoreClassWithName("String");
+        ctx.IgnoreClassWithName("Vector");
+        ctx.IgnoreClassWithName("HashMap");
+        
+        ctx.ignore("Pool");
+        
+        ctx.IgnoreClassWithName("IHasRendererObject");
+        ctx.IgnoreFunctionWithName("IHasRendererObject");
     }
 
     public void Postprocess(Driver driver, ASTContext ctx)
