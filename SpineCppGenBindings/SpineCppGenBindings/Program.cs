@@ -61,6 +61,8 @@ class SpineCppLibrary : ILibrary
 
     public void Preprocess(Driver driver, ASTContext ctx)
     {
+        ctx.IgnoreHeadersWithName("ContainerUtil");
+        ctx.IgnoreHeadersWithName("MathUtil");
     }
 
     public void Postprocess(Driver driver, ASTContext ctx)
