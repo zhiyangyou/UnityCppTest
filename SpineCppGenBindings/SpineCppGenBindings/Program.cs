@@ -70,10 +70,11 @@ class SpineCppLibrary : ILibrary
         ctx.IgnoreClassWithName("String");
         ctx.IgnoreClassWithName("Vector");
         ctx.IgnoreClassWithName("HashMap");
-        
-        ctx.ignore("Pool");
-        
+        ctx.IgnoreClassWithName("RTTI");
+        ctx.IgnoreClassWithName("Json");
         ctx.IgnoreClassWithName("IHasRendererObject");
+        ctx.IgnoreClassWithName("PathConstraintPositionTimeline");
+        
         ctx.IgnoreFunctionWithName("IHasRendererObject");
     }
 

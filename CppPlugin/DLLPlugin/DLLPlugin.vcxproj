@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\..\DLLExportDir</OutDir>
-    <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(SolutionDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)..\..\DLLExportDir</OutDir>
-    <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(SolutionDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

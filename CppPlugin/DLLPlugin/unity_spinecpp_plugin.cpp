@@ -1,5 +1,8 @@
 #include "unity_spinecpp_plugin.h"
 #include <spine/spine.h>
+
+ 
+
 using namespace spine;
 
 
@@ -24,7 +27,7 @@ extern "C" {
 		AnimationStateData* stateData = nullptr;
 		Skeleton* skeleton = nullptr;
 		AnimationState* state = nullptr;
-		
+
 		atlas = new (__FILE__, __LINE__) Atlas(atlasFile, NULL);
 		assert(atlas != NULL);
 
@@ -81,4 +84,4 @@ extern "C" {
 	}
 
 	
-}
+} 

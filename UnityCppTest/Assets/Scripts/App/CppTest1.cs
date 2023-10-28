@@ -41,7 +41,6 @@ namespace App
         {
             Utils.DLLLoader.OpenLibrary();
             Bridge.InitPlugin();
-            Bridge.CppFunction();
         }
 
         unsafe void DestoryPointers()
@@ -67,7 +66,7 @@ namespace App
             if (GUI.Button(new Rect(100, 300, 100, 100), "LoadSpineCppBySharp"))
             {
                 string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
-                // string jsonContent = skeletonDataAsset.skeletonJSON.text;
+                
                 var atlas = new spine_cpp.Spine.Atlas(atlasContent, atlasContent.Length, "", null, true);
                 int a = 0;
             }
