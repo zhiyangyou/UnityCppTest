@@ -16,114 +16,40 @@ namespace spine_cpp
 {
     namespace Spine
     {
-    }
-
-    namespace Spine
-    {
-    }
-
-    namespace Spine
-    {
-        public unsafe partial class String
+        public unsafe abstract partial class SpineExtension : IDisposable
         {
-            [StructLayout(LayoutKind.Sequential, Size = 32)]
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
             public partial struct __Internal
             {
-                internal __IntPtr vfptr_SpineObject;
-                internal ulong _length;
-                internal __IntPtr _buffer;
-                internal byte _tempowner;
-            }
-        }
-    }
+                internal __IntPtr vfptr_SpineExtension;
 
-    namespace Spine
-    {
-        namespace Vector
-        {
-            [StructLayout(LayoutKind.Sequential, Size = 32)]
-            public unsafe partial struct __Internal
-            {
-                internal __IntPtr vfptr_SpineObject;
-                internal ulong _size;
-                internal ulong _capacity;
-                internal __IntPtr _buffer;
-            }
-        }
-    }
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SpineExtension@spine@@IEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
 
-    namespace Spine
-    {
-        namespace HashMap
-        {
-            [StructLayout(LayoutKind.Sequential, Size = 24)]
-            public unsafe partial struct __Internal
-            {
-                internal __IntPtr vfptr_SpineObject;
-                internal __IntPtr _head;
-                internal ulong _size;
-            }
-
-            namespace Entry
-            {
-                [StructLayout(LayoutKind.Sequential, Size = 40)]
-                public unsafe partial struct __Internalc__N_spine_S_HashMap__K_b
-                {
-                    internal __IntPtr vfptr_SpineObject;
-                    internal long _key;
-                    internal byte _value;
-                    internal __IntPtr next;
-                    internal __IntPtr prev;
-                }
-
-                [StructLayout(LayoutKind.Sequential, Size = 56)]
-                public unsafe partial struct __Internalc__N_spine_S_HashMap____N_spine_S_AnimationStateData_S_AnimationPair_f
-                {
-                    internal __IntPtr vfptr_SpineObject;
-                    internal global::spine_cpp.Spine.AnimationStateData.AnimationPair.__Internal _key;
-                    internal float _value;
-                    internal __IntPtr next;
-                    internal __IntPtr prev;
-                }
-            }
-
-        }
-    }
-
-    namespace Spine
-    {
-        public unsafe partial class Animation : IDisposable
-        {
-            [StructLayout(LayoutKind.Sequential, Size = 104)]
-            public partial struct __Internal
-            {
-                internal __IntPtr vfptr_SpineObject;
-                internal global::spine_cpp.Spine.Vector.__Internal _timelines;
-                internal global::spine_cpp.Spine.HashMap.__Internal _timelineIds;
-                internal float _duration;
-                internal global::spine_cpp.Spine.String.__Internal _name;
-
-                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Animation@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SpineExtension@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
 
-                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getDuration@Animation@spine@@QEAAMXZ", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern float GetDuration(__IntPtr __instance);
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?readFile@SpineExtension@spine@@SAPEADAEBVString@2@PEAH@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern sbyte* ReadFile(__IntPtr path, int* length);
 
-                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setDuration@Animation@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern void SetDuration(__IntPtr __instance, float inValue);
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getInstance@SpineExtension@spine@@SAPEAV12@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetInstance();
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setInstance@SpineExtension@spine@@SAXPEAV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetInstance(__IntPtr inSpineExtension);
             }
 
             public __IntPtr __Instance { get; protected set; }
 
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Animation> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Animation>();
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SpineExtension> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SpineExtension>();
 
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Animation managed)
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SpineExtension managed)
             {
                 NativeToManagedMap[native] = managed;
             }
 
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Animation managed)
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SpineExtension managed)
             {
     
                 return NativeToManagedMap.TryGetValue(native, out managed);
@@ -131,55 +57,41 @@ namespace spine_cpp
 
             protected bool __ownsNativeInstance;
 
-            internal static Animation __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static SpineExtension __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
-                return new Animation(native.ToPointer(), skipVTables);
+                return new SpineExtensionInternal(native.ToPointer(), skipVTables);
             }
 
-            internal static Animation __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static SpineExtension __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 if (__TryGetNativeToManagedMapping(native, out var managed))
-                    return (Animation)managed;
+                    return (SpineExtension)managed;
                 var result = __CreateInstance(native, skipVTables);
                 if (saveInstance)
                     __RecordNativeToManagedMapping(native, result);
                 return result;
             }
 
-            internal static Animation __GetInstance(__IntPtr native)
+            internal static SpineExtension __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
-                var result = (Animation)managed;
+                var result = (SpineExtension)managed;
                 if (result.__ownsNativeInstance)
                     result.SetupVTables();
                 return result;
             }
 
-            internal static Animation __CreateInstance(__Internal native, bool skipVTables = false)
+            internal static SpineExtension __CreateInstance(__Internal native, bool skipVTables = false)
             {
-                return new Animation(native, skipVTables);
+                return new SpineExtensionInternal(native, skipVTables);
             }
 
-            private static void* __CopyValue(__Internal native)
-            {
-                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.Animation.__Internal.cctor(ret, new __IntPtr(&native));
-                return ret.ToPointer();
-            }
-
-            private Animation(__Internal native, bool skipVTables = false)
-                : this(__CopyValue(native), skipVTables)
-            {
-                __ownsNativeInstance = true;
-                __RecordNativeToManagedMapping(__Instance, this);
-            }
-
-            protected Animation(void* native, bool skipVTables = false)
+            protected SpineExtension(void* native, bool skipVTables = false)
             {
                 if (native == null)
                     return;
@@ -188,16 +100,752 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
-            public Animation(global::spine_cpp.Spine.Animation _0)
+            protected SpineExtension()
             {
-                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Animation.__Internal));
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SpineExtension.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.SpineExtension");
+            }
+
+            protected SpineExtension(global::spine_cpp.Spine.SpineExtension _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SpineExtension.__Internal));
                 __ownsNativeInstance = true;
                 __RecordNativeToManagedMapping(__Instance, this);
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
                 __Internal.cctor(__Instance, __arg0);
-                SetupVTables(GetType().FullName == "spine_cpp.Spine.Animation");
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.SpineExtension");
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            /// <summary>Implement this function to use your own memory allocator</summary>
+            public abstract __IntPtr Alloc(ulong size, string file, int line);
+
+            public abstract __IntPtr Calloc(ulong size, string file, int line);
+
+            public abstract __IntPtr Realloc(__IntPtr ptr, ulong size, string file, int line);
+
+            /// <summary>If you provide a spineAllocFunc, you should also provide a spineFreeFunc</summary>
+            public abstract void Free(__IntPtr mem, string file, int line);
+
+            public abstract sbyte* _readFile(global::spine_cpp.Spine.String path, ref int length);
+
+            public virtual void BeforeFree(__IntPtr ptr)
+            {
+                var ___BeforeFreeDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr>(0, 6);
+                ___BeforeFreeDelegate(__Instance, ptr);
+            }
+
+            public static sbyte* ReadFile(global::spine_cpp.Spine.String path, ref int length)
+            {
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                fixed (int* __length1 = &length)
+                {
+                    var __arg1 = __length1;
+                    var ___ret = __Internal.ReadFile(__arg0, __arg1);
+                    return ___ret;
+                }
+            }
+
+            public static global::spine_cpp.Spine.SpineExtension instance
+            {
+                get
+                {
+                    var ___ret = __Internal.GetInstance();
+                    var __result0 = global::spine_cpp.Spine.SpineExtension.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    var __arg0 = value is null ? __IntPtr.Zero : value.__Instance;
+                    __Internal.SetInstance(__arg0);
+                }
+            }
+
+            #region Virtual table interop
+
+            // virtual ~SpineExtension()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // void *_alloc(size_t size, const char *file, int line) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _AllocDelegateInstance;
+
+            private static __IntPtr _AllocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Alloc(size, file, line);
+                return ___ret;
+            }
+
+            // void *_calloc(size_t size, const char *file, int line) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _CallocDelegateInstance;
+
+            private static __IntPtr _CallocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Calloc(size, file, line);
+                return ___ret;
+            }
+
+            // void *_realloc(void *ptr, size_t size, const char *file, int line) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int _ReallocDelegateInstance;
+
+            private static __IntPtr _ReallocDelegateHook(__IntPtr __instance, __IntPtr ptr, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Realloc(ptr, size, file, line);
+                return ___ret;
+            }
+
+            // void _free(void *mem, const char *file, int line) = 0
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int _FreeDelegateInstance;
+
+            private static void _FreeDelegateHook(__IntPtr __instance, __IntPtr mem, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                __target.Free(mem, file, line);
+            }
+
+            // char *_readFile(const String &path, int *length) = 0
+            private static global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr __readFileDelegateInstance;
+
+            private static sbyte* __readFileDelegateHook(__IntPtr __instance, __IntPtr path, int* length)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var ___ret = __target._readFile(__result0, ref *length);
+                return ___ret;
+            }
+
+            // void _beforeFree(void *ptr)
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr _BeforeFreeDelegateInstance;
+
+            private static void _BeforeFreeDelegateHook(__IntPtr __instance, __IntPtr ptr)
+            {
+                var __target = global::spine_cpp.Spine.SpineExtension.__GetInstance(__instance);
+                __target.BeforeFree(ptr);
+            }
+
+            internal static class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[7];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    _AllocDelegateInstance += _AllocDelegateHook;
+                    _CallocDelegateInstance += _CallocDelegateHook;
+                    _ReallocDelegateInstance += _ReallocDelegateHook;
+                    _FreeDelegateInstance += _FreeDelegateHook;
+                    __readFileDelegateInstance += __readFileDelegateHook;
+                    _BeforeFreeDelegateInstance += _BeforeFreeDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_AllocDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CallocDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ReallocDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_FreeDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(__readFileDelegateInstance);
+                    Thunks[6] = Marshal.GetFunctionPointerForDelegate(_BeforeFreeDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
+                                ManagedVTables[0][6] = Thunks[6];
+                                VTables.Methods[0] = new Delegate[7];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            protected CppSharp.Runtime.VTables __vtables;
+            internal virtual CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal virtual void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
+        public unsafe partial class DefaultSpineExtension : global::spine_cpp.Spine.SpineExtension, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineExtension;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0DefaultSpineExtension@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0DefaultSpineExtension@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            internal static new DefaultSpineExtension __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new DefaultSpineExtension(native.ToPointer(), skipVTables);
+            }
+
+            internal static new DefaultSpineExtension __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (DefaultSpineExtension)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new DefaultSpineExtension __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (DefaultSpineExtension)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static DefaultSpineExtension __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new DefaultSpineExtension(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.DefaultSpineExtension.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private DefaultSpineExtension(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected DefaultSpineExtension(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public DefaultSpineExtension()
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.DefaultSpineExtension.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.DefaultSpineExtension");
+            }
+
+            public DefaultSpineExtension(global::spine_cpp.Spine.DefaultSpineExtension _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.DefaultSpineExtension.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.DefaultSpineExtension");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public override __IntPtr Alloc(ulong size, string file, int line)
+            {
+                var ___AllocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 1);
+                var ___ret = ___AllocDelegate(__Instance, size, file, line);
+                return ___ret;
+            }
+
+            public override __IntPtr Calloc(ulong size, string file, int line)
+            {
+                var ___CallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 2);
+                var ___ret = ___CallocDelegate(__Instance, size, file, line);
+                return ___ret;
+            }
+
+            public override __IntPtr Realloc(__IntPtr ptr, ulong size, string file, int line)
+            {
+                var ___ReallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int>(0, 3);
+                var ___ret = ___ReallocDelegate(__Instance, ptr, size, file, line);
+                return ___ret;
+            }
+
+            public override void Free(__IntPtr mem, string file, int line)
+            {
+                var ___FreeDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int>(0, 4);
+                ___FreeDelegate(__Instance, mem, file, line);
+            }
+
+            public override sbyte* _readFile(global::spine_cpp.Spine.String path, ref int length)
+            {
+                var ____readFileDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr>(0, 5);
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                fixed (int* __length1 = &length)
+                {
+                    var __arg1 = __length1;
+                    var ___ret = ____readFileDelegate(__Instance, __arg0, __arg1);
+                    return ___ret;
+                }
+            }
+
+            #region Virtual table interop
+
+            // virtual ~DefaultSpineExtension()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // void *_alloc(size_t size, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _AllocDelegateInstance;
+
+            private static __IntPtr _AllocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Alloc(size, file, line);
+                return ___ret;
+            }
+
+            // void *_calloc(size_t size, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _CallocDelegateInstance;
+
+            private static __IntPtr _CallocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Calloc(size, file, line);
+                return ___ret;
+            }
+
+            // void *_realloc(void *ptr, size_t size, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int _ReallocDelegateInstance;
+
+            private static __IntPtr _ReallocDelegateHook(__IntPtr __instance, __IntPtr ptr, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Realloc(ptr, size, file, line);
+                return ___ret;
+            }
+
+            // void _free(void *mem, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int _FreeDelegateInstance;
+
+            private static void _FreeDelegateHook(__IntPtr __instance, __IntPtr mem, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                __target.Free(mem, file, line);
+            }
+
+            // char *_readFile(const String &path, int *length) override
+            private static global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr __readFileDelegateInstance;
+
+            private static sbyte* __readFileDelegateHook(__IntPtr __instance, __IntPtr path, int* length)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var ___ret = __target._readFile(__result0, ref *length);
+                return ___ret;
+            }
+
+            // void _beforeFree(void *ptr)
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr _BeforeFreeDelegateInstance;
+
+            private static void _BeforeFreeDelegateHook(__IntPtr __instance, __IntPtr ptr)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                __target.BeforeFree(ptr);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[7];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    _AllocDelegateInstance += _AllocDelegateHook;
+                    _CallocDelegateInstance += _CallocDelegateHook;
+                    _ReallocDelegateInstance += _ReallocDelegateHook;
+                    _FreeDelegateInstance += _FreeDelegateHook;
+                    __readFileDelegateInstance += __readFileDelegateHook;
+                    _BeforeFreeDelegateInstance += _BeforeFreeDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_AllocDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CallocDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ReallocDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_FreeDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(__readFileDelegateInstance);
+                    Thunks[6] = Marshal.GetFunctionPointerForDelegate(_BeforeFreeDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
+                                ManagedVTables[0][6] = Thunks[6];
+                                VTables.Methods[0] = new Delegate[7];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
+        public unsafe partial class SpineExtensionInternal : global::spine_cpp.Spine.SpineExtension, IDisposable
+        {
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                *(__Internal*) ret = native;
+                return ret.ToPointer();
+            }
+
+            internal SpineExtensionInternal(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            internal SpineExtensionInternal(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+            }
+
+            /// <summary>Implement this function to use your own memory allocator</summary>
+            public override __IntPtr Alloc(ulong size, string file, int line)
+            {
+                var ___AllocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 1);
+                var ___ret = ___AllocDelegate(__Instance, size, file, line);
+                return ___ret;
+            }
+
+            public override __IntPtr Calloc(ulong size, string file, int line)
+            {
+                var ___CallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 2);
+                var ___ret = ___CallocDelegate(__Instance, size, file, line);
+                return ___ret;
+            }
+
+            public override __IntPtr Realloc(__IntPtr ptr, ulong size, string file, int line)
+            {
+                var ___ReallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int>(0, 3);
+                var ___ret = ___ReallocDelegate(__Instance, ptr, size, file, line);
+                return ___ret;
+            }
+
+            /// <summary>If you provide a spineAllocFunc, you should also provide a spineFreeFunc</summary>
+            public override void Free(__IntPtr mem, string file, int line)
+            {
+                var ___FreeDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int>(0, 4);
+                ___FreeDelegate(__Instance, mem, file, line);
+            }
+
+            public override sbyte* _readFile(global::spine_cpp.Spine.String path, ref int length)
+            {
+                var ____readFileDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr>(0, 5);
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                fixed (int* __length1 = &length)
+                {
+                    var __arg1 = __length1;
+                    var ___ret = ____readFileDelegate(__Instance, __arg0, __arg1);
+                    return ___ret;
+                }
+            }
+        }
+
+        public unsafe partial class Extension
+        {
+            public partial struct __Internal
+            {
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?getDefaultExtension@spine@@YAPEAVSpineExtension@1@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetDefaultExtension();
+            }
+
+            public static global::spine_cpp.Spine.SpineExtension GetDefaultExtension()
+            {
+                var ___ret = __Internal.GetDefaultExtension();
+                var __result0 = global::spine_cpp.Spine.SpineExtension.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+        }
+    }
+
+    namespace Spine
+    {
+        public unsafe partial class SpineObject : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
+            public partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SpineObject@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SpineObject@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SpineObject> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SpineObject>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SpineObject managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SpineObject managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static SpineObject __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new SpineObject(native.ToPointer(), skipVTables);
+            }
+
+            internal static SpineObject __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (SpineObject)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static SpineObject __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (SpineObject)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static SpineObject __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new SpineObject(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.SpineObject.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private SpineObject(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected SpineObject(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public SpineObject()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SpineObject.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.SpineObject");
+            }
+
+            public SpineObject(global::spine_cpp.Spine.SpineObject _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SpineObject.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.SpineObject");
             }
 
             public void Dispose()
@@ -224,28 +872,14 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
-            public float Duration
-            {
-                get
-                {
-                    var ___ret = __Internal.GetDuration(__Instance);
-                    return ___ret;
-                }
-
-                set
-                {
-                    __Internal.SetDuration(__Instance, value);
-                }
-            }
-
             #region Virtual table interop
 
-            // ~Animation()
+            // virtual ~SpineObject()
             private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
 
             private static void _dtorDelegateHook(__IntPtr __instance, int delete)
             {
-                var __target = global::spine_cpp.Spine.Animation.__GetInstance(__instance);
+                var __target = global::spine_cpp.Spine.SpineObject.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
@@ -311,6 +945,743 @@ namespace spine_cpp
                 }
             }
             internal virtual void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+    }
+
+    namespace Spine
+    {
+        public unsafe partial class String : global::spine_cpp.Spine.SpineObject, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 32)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+                internal ulong _length;
+                internal __IntPtr _buffer;
+                internal byte _tempowner;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0String@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0String@spine@@QEAA@PEBD_N1@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string chars, bool own, bool tofree);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0String@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr other);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?own@String@spine@@QEAAXAEBV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Own(__IntPtr __instance, __IntPtr other);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?own@String@spine@@QEAAXPEBD@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Own(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string chars);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?unown@String@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Unown(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?append@String@spine@@QEAAAEAV12@PEBD@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr Append(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string chars);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?append@String@spine@@QEAAAEAV12@AEBV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr Append(__IntPtr __instance, __IntPtr other);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?append@String@spine@@QEAAAEAV12@H@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr Append_1(__IntPtr __instance, int other);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?append@String@spine@@QEAAAEAV12@M@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr Append_2(__IntPtr __instance, float other);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?startsWith@String@spine@@QEAA_NAEBV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool StartsWith(__IntPtr __instance, __IntPtr needle);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??8spine@@YA_NAEBVString@0@0@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool OperatorEqualEqual(__IntPtr a, __IntPtr b);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??9spine@@YA_NAEBVString@0@0@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool OperatorExclaimEqual(__IntPtr a, __IntPtr b);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?length@String@spine@@QEBA_KXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern ulong Length(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?isEmpty@String@spine@@QEBA_NXZ", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool IsEmpty(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?buffer@String@spine@@QEBAPEBDXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr Buffer(__IntPtr __instance);
+            }
+
+            internal static new String __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new String(native.ToPointer(), skipVTables);
+            }
+
+            internal static new String __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (String)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new String __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (String)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static String __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new String(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.String.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private String(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected String(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public String()
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.String.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.String");
+            }
+
+            public String(string chars, bool own, bool tofree)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.String.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance, chars, own, tofree);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.String");
+            }
+
+            public String(global::spine_cpp.Spine.String other)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.String.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(other, null))
+                    throw new global::System.ArgumentNullException("other", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = other.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.String");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public void Own(global::spine_cpp.Spine.String other)
+            {
+                if (ReferenceEquals(other, null))
+                    throw new global::System.ArgumentNullException("other", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = other.__Instance;
+                __Internal.Own(__Instance, __arg0);
+            }
+
+            public void Own(string chars)
+            {
+                __Internal.Own(__Instance, chars);
+            }
+
+            public void Unown()
+            {
+                __Internal.Unown(__Instance);
+            }
+
+            public global::spine_cpp.Spine.String Append(string chars)
+            {
+                var ___ret = __Internal.Append(__Instance, chars);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public global::spine_cpp.Spine.String Append(global::spine_cpp.Spine.String other)
+            {
+                if (ReferenceEquals(other, null))
+                    throw new global::System.ArgumentNullException("other", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = other.__Instance;
+                var ___ret = __Internal.Append(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public global::spine_cpp.Spine.String Append(int other)
+            {
+                var ___ret = __Internal.Append_1(__Instance, other);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public global::spine_cpp.Spine.String Append(float other)
+            {
+                var ___ret = __Internal.Append_2(__Instance, other);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public bool StartsWith(global::spine_cpp.Spine.String needle)
+            {
+                if (ReferenceEquals(needle, null))
+                    throw new global::System.ArgumentNullException("needle", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = needle.__Instance;
+                var ___ret = __Internal.StartsWith(__Instance, __arg0);
+                return ___ret;
+            }
+
+            public static bool operator ==(global::spine_cpp.Spine.String a, global::spine_cpp.Spine.String b)
+            {
+                bool aNull = ReferenceEquals(a, null);
+                bool bNull = ReferenceEquals(b, null);
+                if (aNull || bNull)
+                    return aNull && bNull;
+                var __arg0 = a.__Instance;
+                var __arg1 = b.__Instance;
+                var ___ret = __Internal.OperatorEqualEqual(__arg0, __arg1);
+                return ___ret;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return this == obj as global::spine_cpp.Spine.String;
+            }
+
+            public override int GetHashCode()
+            {
+                if (__Instance == __IntPtr.Zero)
+                    return __IntPtr.Zero.GetHashCode();
+                return (*(global::spine_cpp.Spine.String.__Internal*) __Instance).GetHashCode();
+            }
+
+            public static bool operator !=(global::spine_cpp.Spine.String a, global::spine_cpp.Spine.String b)
+            {
+                bool aNull = ReferenceEquals(a, null);
+                bool bNull = ReferenceEquals(b, null);
+                if (aNull || bNull)
+                    return !(aNull && bNull);
+                var __arg0 = a.__Instance;
+                var __arg1 = b.__Instance;
+                var ___ret = __Internal.OperatorExclaimEqual(__arg0, __arg1);
+                return ___ret;
+            }
+
+            public ulong Length
+            {
+                get
+                {
+                    var ___ret = __Internal.Length(__Instance);
+                    return ___ret;
+                }
+            }
+
+            public bool IsEmpty
+            {
+                get
+                {
+                    var ___ret = __Internal.IsEmpty(__Instance);
+                    return ___ret;
+                }
+            }
+
+            public string Buffer
+            {
+                get
+                {
+                    var ___ret = __Internal.Buffer(__Instance);
+                    return CppSharp.Runtime.MarshalUtil.GetString(global::System.Text.Encoding.UTF8, ___ret);
+                }
+            }
+
+            #region Virtual table interop
+
+            // ~String()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.String.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                VTables.Methods[0] = new Delegate[1];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+    }
+
+    namespace Spine
+    {
+        namespace Vector
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 32)]
+            public unsafe partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+                internal ulong _size;
+                internal ulong _capacity;
+                internal __IntPtr _buffer;
+            }
+        }
+    }
+
+    namespace Spine
+    {
+        namespace HashMap
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 24)]
+            public unsafe partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+                internal __IntPtr _head;
+                internal ulong _size;
+            }
+
+            namespace Entry
+            {
+                [StructLayout(LayoutKind.Sequential, Size = 40)]
+                public unsafe partial struct __Internalc__N_spine_S_HashMap__K_b
+                {
+                    internal __IntPtr vfptr_SpineObject;
+                    internal long _key;
+                    internal byte _value;
+                    internal __IntPtr next;
+                    internal __IntPtr prev;
+                }
+
+                [StructLayout(LayoutKind.Sequential, Size = 56)]
+                public unsafe partial struct __Internalc__N_spine_S_HashMap____N_spine_S_AnimationStateData_S_AnimationPair_f
+                {
+                    internal __IntPtr vfptr_SpineObject;
+                    internal global::spine_cpp.Spine.AnimationStateData.AnimationPair.__Internal _key;
+                    internal float _value;
+                    internal __IntPtr next;
+                    internal __IntPtr prev;
+                }
+            }
+
+        }
+    }
+
+    namespace Spine
+    {
+        public unsafe partial class Animation : global::spine_cpp.Spine.SpineObject, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 104)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+                internal global::spine_cpp.Spine.Vector.__Internal _timelines;
+                internal global::spine_cpp.Spine.HashMap.__Internal _timelineIds;
+                internal float _duration;
+                internal global::spine_cpp.Spine.String.__Internal _name;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Animation@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@Animation@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getDuration@Animation@spine@@QEAAMXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float GetDuration(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setDuration@Animation@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetDuration(__IntPtr __instance, float inValue);
+            }
+
+            internal static new Animation __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new Animation(native.ToPointer(), skipVTables);
+            }
+
+            internal static new Animation __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (Animation)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new Animation __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (Animation)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static Animation __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new Animation(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.Animation.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private Animation(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected Animation(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public Animation(global::spine_cpp.Spine.Animation _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Animation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Animation");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+            }
+
+            public float Duration
+            {
+                get
+                {
+                    var ___ret = __Internal.GetDuration(__Instance);
+                    return ___ret;
+                }
+
+                set
+                {
+                    __Internal.SetDuration(__Instance, value);
+                }
+            }
+
+            #region Virtual table interop
+
+            // ~Animation()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.Animation.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                VTables.Methods[0] = new Delegate[1];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+    }
+
+    namespace Spine
+    {
+        public unsafe static partial class ContainerUtil
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+            }
+
+            #region Virtual table interop
+
+            // ContainerUtil
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.ContainerUtil.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                VTables.Methods[0] = new Delegate[1];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -619,10 +1990,1039 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class Color : IDisposable
+        public unsafe static partial class MathUtil
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?sign@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Sign(float val);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?clamp@MathUtil@spine@@SAMMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Clamp(float x, float lower, float upper);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?abs@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Abs(float v);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?sin@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Sin(float radians);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?cos@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Cos(float radians);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?sinDeg@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float SinDeg(float degrees);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?cosDeg@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float CosDeg(float degrees);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?atan2@MathUtil@spine@@SAMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Atan2(float y, float x);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?acos@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Acos(float v);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?sqrt@MathUtil@spine@@SAMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Sqrt(float v);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?fmod@MathUtil@spine@@SAMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Fmod(float a, float b);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?isNan@MathUtil@spine@@SA_NM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool IsNan(float v);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?randomTriangular@MathUtil@spine@@SAMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float RandomTriangular(float min, float max);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?randomTriangular@MathUtil@spine@@SAMMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float RandomTriangular(float min, float max, float mode);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?pow@MathUtil@spine@@SAMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Pow(float a, float b);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?random@MathUtil@spine@@SAMXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float Random();
+            }
+
+            public static float Sign(float val)
+            {
+                var ___ret = __Internal.Sign(val);
+                return ___ret;
+            }
+
+            public static float Clamp(float x, float lower, float upper)
+            {
+                var ___ret = __Internal.Clamp(x, lower, upper);
+                return ___ret;
+            }
+
+            public static float Abs(float v)
+            {
+                var ___ret = __Internal.Abs(v);
+                return ___ret;
+            }
+
+            /// <summary>Returns the sine in radians from a lookup table.</summary>
+            public static float Sin(float radians)
+            {
+                var ___ret = __Internal.Sin(radians);
+                return ___ret;
+            }
+
+            /// <summary>Returns the cosine in radians from a lookup table.</summary>
+            public static float Cos(float radians)
+            {
+                var ___ret = __Internal.Cos(radians);
+                return ___ret;
+            }
+
+            /// <summary>Returns the sine in radians from a lookup table.</summary>
+            public static float SinDeg(float degrees)
+            {
+                var ___ret = __Internal.SinDeg(degrees);
+                return ___ret;
+            }
+
+            /// <summary>Returns the cosine in radians from a lookup table.</summary>
+            public static float CosDeg(float degrees)
+            {
+                var ___ret = __Internal.CosDeg(degrees);
+                return ___ret;
+            }
+
+            /// <summary>
+            /// <para>Returns atan2 in radians, faster but less accurate than Math.Atan2. Average error of 0.00231 radians (0.1323</para>
+            /// <para>degrees), largest error of 0.00488 radians (0.2796 degrees).</para>
+            /// </summary>
+            public static float Atan2(float y, float x)
+            {
+                var ___ret = __Internal.Atan2(y, x);
+                return ___ret;
+            }
+
+            public static float Acos(float v)
+            {
+                var ___ret = __Internal.Acos(v);
+                return ___ret;
+            }
+
+            public static float Sqrt(float v)
+            {
+                var ___ret = __Internal.Sqrt(v);
+                return ___ret;
+            }
+
+            public static float Fmod(float a, float b)
+            {
+                var ___ret = __Internal.Fmod(a, b);
+                return ___ret;
+            }
+
+            public static bool IsNan(float v)
+            {
+                var ___ret = __Internal.IsNan(v);
+                return ___ret;
+            }
+
+            public static float RandomTriangular(float min, float max)
+            {
+                var ___ret = __Internal.RandomTriangular(min, max);
+                return ___ret;
+            }
+
+            public static float RandomTriangular(float min, float max, float mode)
+            {
+                var ___ret = __Internal.RandomTriangular(min, max, mode);
+                return ___ret;
+            }
+
+            public static float Pow(float a, float b)
+            {
+                var ___ret = __Internal.Pow(a, b);
+                return ___ret;
+            }
+
+            public static float Pi
+            {
+                get
+                {
+                    var __ptr = (float*)global::spine_cpp.__Symbols.DLLPlugin._Pi_MathUtil_spine__2MB;
+                    return *__ptr;
+                }
+            }
+
+            public static float Pi2
+            {
+                get
+                {
+                    var __ptr = (float*)global::spine_cpp.__Symbols.DLLPlugin._Pi_2_MathUtil_spine__2MB;
+                    return *__ptr;
+                }
+            }
+
+            public static float DegRad
+            {
+                get
+                {
+                    var __ptr = (float*)global::spine_cpp.__Symbols.DLLPlugin._Deg_Rad_MathUtil_spine__2MB;
+                    return *__ptr;
+                }
+            }
+
+            public static float RadDeg
+            {
+                get
+                {
+                    var __ptr = (float*)global::spine_cpp.__Symbols.DLLPlugin._Rad_Deg_MathUtil_spine__2MB;
+                    return *__ptr;
+                }
+            }
+
+            public static float Random
+            {
+                get
+                {
+                    var ___ret = __Internal.Random();
+                    return ___ret;
+                }
+            }
+
+            #region Virtual table interop
+
+            // MathUtil
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.MathUtil.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                VTables.Methods[0] = new Delegate[1];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
+        public unsafe abstract partial class Interpolation : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
+            public partial struct __Internal
+            {
+                internal __IntPtr vfptr_Interpolation;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Interpolation@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Interpolation@spine@@QEAA@AEBU01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Interpolation> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Interpolation>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Interpolation managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Interpolation managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static Interpolation __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new InterpolationInternal(native.ToPointer(), skipVTables);
+            }
+
+            internal static Interpolation __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (Interpolation)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static Interpolation __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (Interpolation)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static Interpolation __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new InterpolationInternal(native, skipVTables);
+            }
+
+            protected Interpolation(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            protected Interpolation()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Interpolation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Interpolation");
+            }
+
+            protected Interpolation(global::spine_cpp.Spine.Interpolation _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Interpolation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Interpolation");
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public abstract float Apply(float a);
+
+            public virtual float Interpolate(float start, float end, float a)
+            {
+                var ___InterpolateDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_float___IntPtr_float_float_float>(0, 1);
+                var ___ret = ___InterpolateDelegate(__Instance, start, end, a);
+                return ___ret;
+            }
+
+            #region Virtual table interop
+
+            // float apply(float a) = 0
+            private static global::spine_cpp.Delegates.Func_float___IntPtr_float _ApplyDelegateInstance;
+
+            private static float _ApplyDelegateHook(__IntPtr __instance, float a)
+            {
+                var __target = global::spine_cpp.Spine.Interpolation.__GetInstance(__instance);
+                var ___ret = __target.Apply(a);
+                return ___ret;
+            }
+
+            // float interpolate(float start, float end, float a)
+            private static global::spine_cpp.Delegates.Func_float___IntPtr_float_float_float _InterpolateDelegateInstance;
+
+            private static float _InterpolateDelegateHook(__IntPtr __instance, float start, float end, float a)
+            {
+                var __target = global::spine_cpp.Spine.Interpolation.__GetInstance(__instance);
+                var ___ret = __target.Interpolate(start, end, a);
+                return ___ret;
+            }
+
+            // virtual ~Interpolation()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.Interpolation.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _ApplyDelegateInstance += _ApplyDelegateHook;
+                    _InterpolateDelegateInstance += _InterpolateDelegateHook;
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_ApplyDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_InterpolateDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
+                                ManagedVTablesDtorOnly[0][2] = Thunks[2];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                VTables.Methods[0] = new Delegate[3];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            protected CppSharp.Runtime.VTables __vtables;
+            internal virtual CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal virtual void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
+        public unsafe partial class PowInterpolation : global::spine_cpp.Spine.Interpolation, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 16)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_Interpolation;
+                internal int power;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PowInterpolation@spine@@QEAA@H@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, int power);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PowInterpolation@spine@@QEAA@AEBU01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            internal static new PowInterpolation __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new PowInterpolation(native.ToPointer(), skipVTables);
+            }
+
+            internal static new PowInterpolation __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (PowInterpolation)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new PowInterpolation __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (PowInterpolation)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static PowInterpolation __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new PowInterpolation(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.PowInterpolation.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private PowInterpolation(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected PowInterpolation(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public PowInterpolation(int power)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PowInterpolation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance, power);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PowInterpolation");
+            }
+
+            public PowInterpolation(global::spine_cpp.Spine.PowInterpolation _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PowInterpolation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PowInterpolation");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 2);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public override float Apply(float a)
+            {
+                var ___ApplyDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_float___IntPtr_float>(0, 0);
+                var ___ret = ___ApplyDelegate(__Instance, a);
+                return ___ret;
+            }
+
+            public static implicit operator global::spine_cpp.Spine.PowInterpolation(int power)
+            {
+                return new global::spine_cpp.Spine.PowInterpolation(power);
+            }
+
+            public int Power
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->power;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->power = value;
+                }
+            }
+
+            #region Virtual table interop
+
+            // float apply(float a)
+            private static global::spine_cpp.Delegates.Func_float___IntPtr_float _ApplyDelegateInstance;
+
+            private static float _ApplyDelegateHook(__IntPtr __instance, float a)
+            {
+                var __target = global::spine_cpp.Spine.PowInterpolation.__GetInstance(__instance);
+                var ___ret = __target.Apply(a);
+                return ___ret;
+            }
+
+            // float interpolate(float start, float end, float a)
+            private static global::spine_cpp.Delegates.Func_float___IntPtr_float_float_float _InterpolateDelegateInstance;
+
+            private static float _InterpolateDelegateHook(__IntPtr __instance, float start, float end, float a)
+            {
+                var __target = global::spine_cpp.Spine.PowInterpolation.__GetInstance(__instance);
+                var ___ret = __target.Interpolate(start, end, a);
+                return ___ret;
+            }
+
+            // PowInterpolation
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.PowInterpolation.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _ApplyDelegateInstance += _ApplyDelegateHook;
+                    _InterpolateDelegateInstance += _InterpolateDelegateHook;
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_ApplyDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_InterpolateDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
+                                ManagedVTablesDtorOnly[0][2] = Thunks[2];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                VTables.Methods[0] = new Delegate[3];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
+        public unsafe partial class PowOutInterpolation : global::spine_cpp.Spine.Interpolation, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 16)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_Interpolation;
+                internal int power;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PowOutInterpolation@spine@@QEAA@H@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, int power);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PowOutInterpolation@spine@@QEAA@AEBU01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            internal static new PowOutInterpolation __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new PowOutInterpolation(native.ToPointer(), skipVTables);
+            }
+
+            internal static new PowOutInterpolation __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (PowOutInterpolation)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new PowOutInterpolation __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (PowOutInterpolation)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static PowOutInterpolation __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new PowOutInterpolation(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.PowOutInterpolation.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private PowOutInterpolation(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected PowOutInterpolation(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public PowOutInterpolation(int power)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PowOutInterpolation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance, power);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PowOutInterpolation");
+            }
+
+            public PowOutInterpolation(global::spine_cpp.Spine.PowOutInterpolation _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PowOutInterpolation.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PowOutInterpolation");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 2);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public override float Apply(float a)
+            {
+                var ___ApplyDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_float___IntPtr_float>(0, 0);
+                var ___ret = ___ApplyDelegate(__Instance, a);
+                return ___ret;
+            }
+
+            public static implicit operator global::spine_cpp.Spine.PowOutInterpolation(int power)
+            {
+                return new global::spine_cpp.Spine.PowOutInterpolation(power);
+            }
+
+            public int Power
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->power;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->power = value;
+                }
+            }
+
+            #region Virtual table interop
+
+            // float apply(float a)
+            private static global::spine_cpp.Delegates.Func_float___IntPtr_float _ApplyDelegateInstance;
+
+            private static float _ApplyDelegateHook(__IntPtr __instance, float a)
+            {
+                var __target = global::spine_cpp.Spine.PowOutInterpolation.__GetInstance(__instance);
+                var ___ret = __target.Apply(a);
+                return ___ret;
+            }
+
+            // float interpolate(float start, float end, float a)
+            private static global::spine_cpp.Delegates.Func_float___IntPtr_float_float_float _InterpolateDelegateInstance;
+
+            private static float _InterpolateDelegateHook(__IntPtr __instance, float start, float end, float a)
+            {
+                var __target = global::spine_cpp.Spine.PowOutInterpolation.__GetInstance(__instance);
+                var ___ret = __target.Interpolate(start, end, a);
+                return ___ret;
+            }
+
+            // PowOutInterpolation
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.PowOutInterpolation.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _ApplyDelegateInstance += _ApplyDelegateHook;
+                    _InterpolateDelegateInstance += _InterpolateDelegateHook;
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_ApplyDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_InterpolateDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
+                                ManagedVTablesDtorOnly[0][2] = Thunks[2];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                VTables.Methods[0] = new Delegate[3];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
+        public unsafe partial class InterpolationInternal : global::spine_cpp.Spine.Interpolation, IDisposable
+        {
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                *(__Internal*) ret = native;
+                return ret.ToPointer();
+            }
+
+            internal InterpolationInternal(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            internal InterpolationInternal(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+            }
+
+            public override float Apply(float a)
+            {
+                var ___ApplyDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_float___IntPtr_float>(0, 0);
+                var ___ret = ___ApplyDelegate(__Instance, a);
+                return ___ret;
+            }
+        }
+    }
+
+    namespace Spine
+    {
+        public unsafe partial class Color : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 24)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal float r;
@@ -661,32 +3061,14 @@ namespace spine_cpp
                 internal static extern __IntPtr Clamp(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Color> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Color>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Color managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Color managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Color __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Color __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Color(native.ToPointer(), skipVTables);
             }
 
-            internal static Color __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Color __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -698,7 +3080,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Color __GetInstance(__IntPtr native)
+            internal static new Color __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -728,15 +3110,16 @@ namespace spine_cpp
             }
 
             protected Color(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Color()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Color.__Internal));
                 __ownsNativeInstance = true;
@@ -746,6 +3129,7 @@ namespace spine_cpp
             }
 
             public Color(float r, float g, float b, float a)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Color.__Internal));
                 __ownsNativeInstance = true;
@@ -755,6 +3139,7 @@ namespace spine_cpp
             }
 
             public Color(global::spine_cpp.Spine.Color _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Color.__Internal));
                 __ownsNativeInstance = true;
@@ -766,14 +3151,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Color");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -911,7 +3291,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -959,8 +3339,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -972,7 +3351,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -983,10 +3362,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class Slot : IDisposable
+        public unsafe partial class Slot : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 136)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr _data;
@@ -1047,32 +3426,14 @@ namespace spine_cpp
                 internal static extern void SetSequenceIndex(__IntPtr __instance, int index);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Slot> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Slot>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Slot managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Slot managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Slot __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Slot __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Slot(native.ToPointer(), skipVTables);
             }
 
-            internal static Slot __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Slot __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -1084,7 +3445,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Slot __GetInstance(__IntPtr native)
+            internal static new Slot __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -1114,15 +3475,16 @@ namespace spine_cpp
             }
 
             protected Slot(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Slot(global::spine_cpp.Spine.SlotData data, global::spine_cpp.Spine.Bone bone)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Slot.__Internal));
                 __ownsNativeInstance = true;
@@ -1138,6 +3500,7 @@ namespace spine_cpp
             }
 
             public Slot(global::spine_cpp.Spine.Slot _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Slot.__Internal));
                 __ownsNativeInstance = true;
@@ -1149,14 +3512,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Slot");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -1293,7 +3651,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -1341,8 +3699,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -1354,7 +3711,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -1593,10 +3950,10 @@ namespace spine_cpp
         }
 
         /// <summary>State for the playback of an animation</summary>
-        public unsafe partial class TrackEntry : global::spine_cpp.Spine.IHasRendererObject, IDisposable
+        public unsafe partial class TrackEntry : global::spine_cpp.Spine.SpineObject, global::spine_cpp.Spine.IHasRendererObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 272)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr vfptr_HasRendererObject;
@@ -1799,32 +4156,14 @@ namespace spine_cpp
                 internal static extern __IntPtr GetRendererObject(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.TrackEntry> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.TrackEntry>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.TrackEntry managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.TrackEntry managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static TrackEntry __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new TrackEntry __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new TrackEntry(native.ToPointer(), skipVTables);
             }
 
-            internal static TrackEntry __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new TrackEntry __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -1836,7 +4175,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static TrackEntry __GetInstance(__IntPtr native)
+            internal static new TrackEntry __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -1866,10 +4205,10 @@ namespace spine_cpp
             }
 
             protected TrackEntry(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
@@ -1880,7 +4219,7 @@ namespace spine_cpp
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.TrackEntry.__Internal));
                 __ownsNativeInstance = true;
                 __RecordNativeToManagedMapping(__Instance, this);
-                __Internal.ctor(__Instance + 8);
+                __Internal.ctor(__Instance);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.TrackEntry");
             }
 
@@ -1893,18 +4232,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance + 8, __arg0);
+                __Internal.cctor(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.TrackEntry");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -1915,7 +4249,7 @@ namespace spine_cpp
                 if (callNativeDtor)
                 {
                     var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
-                    ___dtorDelegate(__Instance + 8, 0);
+                    ___dtorDelegate(__Instance, 0);
                 }
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
@@ -1934,19 +4268,19 @@ namespace spine_cpp
             /// </remarks>
             public void ResetRotationDirections()
             {
-                __Internal.ResetRotationDirections(__Instance + 8);
+                __Internal.ResetRotationDirections(__Instance);
             }
 
             public void SetListener(global::spine_cpp.Spine.AnimationStateListener listener)
             {
                 var __arg0 = listener == null ? global::System.IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(listener);
-                __Internal.SetListener(__Instance + 8, __arg0);
+                __Internal.SetListener(__Instance, __arg0);
             }
 
             public void SetListener(global::spine_cpp.Spine.AnimationStateListenerObject listener)
             {
                 var __arg0 = listener is null ? __IntPtr.Zero : listener.__Instance;
-                __Internal.SetListener_1(__Instance + 8, __arg0);
+                __Internal.SetListener_1(__Instance, __arg0);
             }
 
             public void SetRendererObject(__IntPtr rendererObject, global::spine_cpp.Spine.DisposeRendererObject dispose)
@@ -1968,7 +4302,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetTrackIndex(__Instance + 8);
+                    var ___ret = __Internal.GetTrackIndex(__Instance);
                     return ___ret;
                 }
             }
@@ -1978,7 +4312,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAnimation(__Instance + 8);
+                    var ___ret = __Internal.GetAnimation(__Instance);
                     var __result0 = global::spine_cpp.Spine.Animation.__GetOrCreateInstance(___ret, true);
                     return __result0;
                 }
@@ -1988,7 +4322,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetPrevious(__Instance + 8);
+                    var ___ret = __Internal.GetPrevious(__Instance);
                     var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                     return __result0;
                 }
@@ -1999,13 +4333,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetLoop(__Instance + 8);
+                    var ___ret = __Internal.GetLoop(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetLoop(__Instance + 8, value);
+                    __Internal.SetLoop(__Instance, value);
                 }
             }
 
@@ -2026,13 +4360,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetHoldPrevious(__Instance + 8);
+                    var ___ret = __Internal.GetHoldPrevious(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetHoldPrevious(__Instance + 8, value);
+                    __Internal.SetHoldPrevious(__Instance, value);
                 }
             }
 
@@ -2040,13 +4374,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetReverse(__Instance + 8);
+                    var ___ret = __Internal.GetReverse(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetReverse(__Instance + 8, value);
+                    __Internal.SetReverse(__Instance, value);
                 }
             }
 
@@ -2054,13 +4388,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetShortestRotation(__Instance + 8);
+                    var ___ret = __Internal.GetShortestRotation(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetShortestRotation(__Instance + 8, value);
+                    __Internal.SetShortestRotation(__Instance, value);
                 }
             }
 
@@ -2073,13 +4407,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetDelay(__Instance + 8);
+                    var ___ret = __Internal.GetDelay(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetDelay(__Instance + 8, value);
+                    __Internal.SetDelay(__Instance, value);
                 }
             }
 
@@ -2091,13 +4425,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetTrackTime(__Instance + 8);
+                    var ___ret = __Internal.GetTrackTime(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetTrackTime(__Instance + 8, value);
+                    __Internal.SetTrackTime(__Instance, value);
                 }
             }
 
@@ -2115,13 +4449,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetTrackEnd(__Instance + 8);
+                    var ___ret = __Internal.GetTrackEnd(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetTrackEnd(__Instance + 8, value);
+                    __Internal.SetTrackEnd(__Instance, value);
                 }
             }
 
@@ -2134,13 +4468,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAnimationStart(__Instance + 8);
+                    var ___ret = __Internal.GetAnimationStart(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetAnimationStart(__Instance + 8, value);
+                    __Internal.SetAnimationStart(__Instance, value);
                 }
             }
 
@@ -2152,13 +4486,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAnimationEnd(__Instance + 8);
+                    var ___ret = __Internal.GetAnimationEnd(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetAnimationEnd(__Instance + 8, value);
+                    __Internal.SetAnimationEnd(__Instance, value);
                 }
             }
 
@@ -2171,13 +4505,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAnimationLast(__Instance + 8);
+                    var ___ret = __Internal.GetAnimationLast(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetAnimationLast(__Instance + 8, value);
+                    __Internal.SetAnimationLast(__Instance, value);
                 }
             }
 
@@ -2189,7 +4523,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAnimationTime(__Instance + 8);
+                    var ___ret = __Internal.GetAnimationTime(__Instance);
                     return ___ret;
                 }
             }
@@ -2202,13 +4536,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetTimeScale(__Instance + 8);
+                    var ___ret = __Internal.GetTimeScale(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetTimeScale(__Instance + 8, value);
+                    __Internal.SetTimeScale(__Instance, value);
                 }
             }
 
@@ -2224,13 +4558,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAlpha(__Instance + 8);
+                    var ___ret = __Internal.GetAlpha(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetAlpha(__Instance + 8, value);
+                    __Internal.SetAlpha(__Instance, value);
                 }
             }
 
@@ -2242,13 +4576,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetEventThreshold(__Instance + 8);
+                    var ___ret = __Internal.GetEventThreshold(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetEventThreshold(__Instance + 8, value);
+                    __Internal.SetEventThreshold(__Instance, value);
                 }
             }
 
@@ -2261,13 +4595,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetAttachmentThreshold(__Instance + 8);
+                    var ___ret = __Internal.GetAttachmentThreshold(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetAttachmentThreshold(__Instance + 8, value);
+                    __Internal.SetAttachmentThreshold(__Instance, value);
                 }
             }
 
@@ -2280,13 +4614,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetDrawOrderThreshold(__Instance + 8);
+                    var ___ret = __Internal.GetDrawOrderThreshold(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetDrawOrderThreshold(__Instance + 8, value);
+                    __Internal.SetDrawOrderThreshold(__Instance, value);
                 }
             }
 
@@ -2295,7 +4629,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetNext(__Instance + 8);
+                    var ___ret = __Internal.GetNext(__Instance);
                     var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                     return __result0;
                 }
@@ -2306,7 +4640,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.IsComplete(__Instance + 8);
+                    var ___ret = __Internal.IsComplete(__Instance);
                     return ___ret;
                 }
             }
@@ -2319,13 +4653,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetMixTime(__Instance + 8);
+                    var ___ret = __Internal.GetMixTime(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetMixTime(__Instance + 8, value);
+                    __Internal.SetMixTime(__Instance, value);
                 }
             }
 
@@ -2343,13 +4677,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetMixDuration(__Instance + 8);
+                    var ___ret = __Internal.GetMixDuration(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetMixDuration(__Instance + 8, value);
+                    __Internal.SetMixDuration(__Instance, value);
                 }
             }
 
@@ -2357,13 +4691,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetMixBlend(__Instance + 8);
+                    var ___ret = __Internal.GetMixBlend(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetMixBlend(__Instance + 8, value);
+                    __Internal.SetMixBlend(__Instance, value);
                 }
             }
 
@@ -2375,7 +4709,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetMixingFrom(__Instance + 8);
+                    var ___ret = __Internal.GetMixingFrom(__Instance);
                     var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                     return __result0;
                 }
@@ -2389,7 +4723,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetMixingTo(__Instance + 8);
+                    var ___ret = __Internal.GetMixingTo(__Instance);
                     var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                     return __result0;
                 }
@@ -2399,7 +4733,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetTrackComplete(__Instance + 8);
+                    var ___ret = __Internal.GetTrackComplete(__Instance);
                     return ___ret;
                 }
             }
@@ -2424,7 +4758,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[2];
@@ -2479,8 +4813,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -2492,7 +4825,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -2500,10 +4833,10 @@ namespace spine_cpp
             #endregion
         }
 
-        public unsafe partial class EventQueueEntry : IDisposable
+        public unsafe partial class EventQueueEntry : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 32)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.EventType _type;
@@ -2517,32 +4850,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.EventQueueEntry> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.EventQueueEntry>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.EventQueueEntry managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.EventQueueEntry managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static EventQueueEntry __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new EventQueueEntry __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new EventQueueEntry(native.ToPointer(), skipVTables);
             }
 
-            internal static EventQueueEntry __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new EventQueueEntry __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -2554,7 +4869,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static EventQueueEntry __GetInstance(__IntPtr native)
+            internal static new EventQueueEntry __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -2584,15 +4899,16 @@ namespace spine_cpp
             }
 
             protected EventQueueEntry(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public EventQueueEntry(global::spine_cpp.Spine.EventType eventType, global::spine_cpp.Spine.TrackEntry trackEntry, global::spine_cpp.Spine.Event @event)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.EventQueueEntry.__Internal));
                 __ownsNativeInstance = true;
@@ -2604,6 +4920,7 @@ namespace spine_cpp
             }
 
             public EventQueueEntry(global::spine_cpp.Spine.EventQueueEntry _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.EventQueueEntry.__Internal));
                 __ownsNativeInstance = true;
@@ -2615,14 +4932,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.EventQueueEntry");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -2691,7 +5003,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -2739,8 +5051,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -2752,7 +5063,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -2760,10 +5071,10 @@ namespace spine_cpp
             #endregion
         }
 
-        public unsafe partial class EventQueue : IDisposable
+        public unsafe partial class EventQueue : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 56)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Vector.__Internal _eventQueueEntries;
@@ -2774,32 +5085,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.EventQueue> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.EventQueue>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.EventQueue managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.EventQueue managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static EventQueue __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new EventQueue __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new EventQueue(native.ToPointer(), skipVTables);
             }
 
-            internal static EventQueue __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new EventQueue __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -2808,6 +5101,16 @@ namespace spine_cpp
                 var result = __CreateInstance(native, skipVTables);
                 if (saveInstance)
                     __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new EventQueue __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (EventQueue)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
                 return result;
             }
 
@@ -2831,13 +5134,16 @@ namespace spine_cpp
             }
 
             protected EventQueue(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
+                if (!skipVTables)
+                    SetupVTables(true);
             }
 
             public EventQueue(global::spine_cpp.Spine.EventQueue _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.EventQueue.__Internal));
                 __ownsNativeInstance = true;
@@ -2846,31 +5152,111 @@ namespace spine_cpp
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
                 __Internal.cctor(__Instance, __arg0);
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.EventQueue");
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
                 NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
                 DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
             }
+
+            #region Virtual table interop
+
+            // ~EventQueue()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.EventQueue.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                VTables.Methods[0] = new Delegate[1];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
         }
 
-        public unsafe partial class AnimationState : global::spine_cpp.Spine.IHasRendererObject, IDisposable
+        public unsafe partial class AnimationState : global::spine_cpp.Spine.SpineObject, global::spine_cpp.Spine.IHasRendererObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 216)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr vfptr_HasRendererObject;
@@ -2908,11 +5294,17 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?clearTrack@AnimationState@spine@@QEAAX_K@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void ClearTrack(__IntPtr __instance, ulong trackIndex);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAnimation@AnimationState@spine@@QEAAPEAVTrackEntry@2@_KAEBVString@2@_N@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr SetAnimation(__IntPtr __instance, ulong trackIndex, __IntPtr animationName, bool loop);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAnimation@AnimationState@spine@@QEAAPEAVTrackEntry@2@_KPEAVAnimation@2@_N@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr SetAnimation(__IntPtr __instance, ulong trackIndex, __IntPtr animation, bool loop);
+                internal static extern __IntPtr SetAnimation_1(__IntPtr __instance, ulong trackIndex, __IntPtr animation, bool loop);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?addAnimation@AnimationState@spine@@QEAAPEAVTrackEntry@2@_KAEBVString@2@_NM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr AddAnimation(__IntPtr __instance, ulong trackIndex, __IntPtr animationName, bool loop, float delay);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?addAnimation@AnimationState@spine@@QEAAPEAVTrackEntry@2@_KPEAVAnimation@2@_NM@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr AddAnimation(__IntPtr __instance, ulong trackIndex, __IntPtr animation, bool loop, float delay);
+                internal static extern __IntPtr AddAnimation_1(__IntPtr __instance, ulong trackIndex, __IntPtr animation, bool loop, float delay);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setEmptyAnimation@AnimationState@spine@@QEAAPEAVTrackEntry@2@_KM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr SetEmptyAnimation(__IntPtr __instance, ulong trackIndex, float mixDuration);
@@ -2964,32 +5356,14 @@ namespace spine_cpp
                 internal static extern __IntPtr GetRendererObject(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AnimationState> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AnimationState>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.AnimationState managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.AnimationState managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static AnimationState __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new AnimationState __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new AnimationState(native.ToPointer(), skipVTables);
             }
 
-            internal static AnimationState __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new AnimationState __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -3001,7 +5375,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static AnimationState __GetInstance(__IntPtr native)
+            internal static new AnimationState __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -3031,10 +5405,10 @@ namespace spine_cpp
             }
 
             protected AnimationState(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
@@ -3046,7 +5420,7 @@ namespace spine_cpp
                 __ownsNativeInstance = true;
                 __RecordNativeToManagedMapping(__Instance, this);
                 var __arg0 = data is null ? __IntPtr.Zero : data.__Instance;
-                __Internal.ctor(__Instance + 8, __arg0);
+                __Internal.ctor(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.AnimationState");
             }
 
@@ -3059,18 +5433,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor_1(__Instance + 8, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.AnimationState");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -3081,7 +5450,7 @@ namespace spine_cpp
                 if (callNativeDtor)
                 {
                     var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
-                    ___dtorDelegate(__Instance + 8, 0);
+                    ___dtorDelegate(__Instance, 0);
                 }
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
@@ -3092,7 +5461,7 @@ namespace spine_cpp
             /// <param name="delta">delta time</param>
             public void Update(float delta)
             {
-                __Internal.Update(__Instance + 8, delta);
+                __Internal.Update(__Instance, delta);
             }
 
             /// <summary>
@@ -3104,7 +5473,7 @@ namespace spine_cpp
                 if (ReferenceEquals(skeleton, null))
                     throw new global::System.ArgumentNullException("skeleton", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = skeleton.__Instance;
-                var ___ret = __Internal.Apply(__Instance + 8, __arg0);
+                var ___ret = __Internal.Apply(__Instance, __arg0);
                 return ___ret;
             }
 
@@ -3115,7 +5484,7 @@ namespace spine_cpp
             /// </summary>
             public void ClearTracks()
             {
-                __Internal.ClearTracks(__Instance + 8);
+                __Internal.ClearTracks(__Instance);
             }
 
             /// <summary>
@@ -3125,7 +5494,18 @@ namespace spine_cpp
             /// </summary>
             public void ClearTrack(ulong trackIndex)
             {
-                __Internal.ClearTrack(__Instance + 8, trackIndex);
+                __Internal.ClearTrack(__Instance, trackIndex);
+            }
+
+            /// <summary>Sets an animation by name. setAnimation(int, Animation, bool)</summary>
+            public global::spine_cpp.Spine.TrackEntry SetAnimation(ulong trackIndex, global::spine_cpp.Spine.String animationName, bool loop)
+            {
+                if (ReferenceEquals(animationName, null))
+                    throw new global::System.ArgumentNullException("animationName", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = animationName.__Instance;
+                var ___ret = __Internal.SetAnimation(__Instance, trackIndex, __arg1, loop);
+                var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
+                return __result0;
             }
 
             /// <summary>Sets the current animation for a track, discarding any queued animations.</summary>
@@ -3141,7 +5521,21 @@ namespace spine_cpp
             public global::spine_cpp.Spine.TrackEntry SetAnimation(ulong trackIndex, global::spine_cpp.Spine.Animation animation, bool loop)
             {
                 var __arg1 = animation is null ? __IntPtr.Zero : animation.__Instance;
-                var ___ret = __Internal.SetAnimation(__Instance + 8, trackIndex, __arg1, loop);
+                var ___ret = __Internal.SetAnimation_1(__Instance, trackIndex, __arg1, loop);
+                var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <summary>
+            /// <para>Queues an animation by name.</para>
+            /// <para>addAnimation(int, Animation, bool, float)</para>
+            /// </summary>
+            public global::spine_cpp.Spine.TrackEntry AddAnimation(ulong trackIndex, global::spine_cpp.Spine.String animationName, bool loop, float delay)
+            {
+                if (ReferenceEquals(animationName, null))
+                    throw new global::System.ArgumentNullException("animationName", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = animationName.__Instance;
+                var ___ret = __Internal.AddAnimation(__Instance, trackIndex, __arg1, loop, delay);
                 var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                 return __result0;
             }
@@ -3161,7 +5555,7 @@ namespace spine_cpp
             public global::spine_cpp.Spine.TrackEntry AddAnimation(ulong trackIndex, global::spine_cpp.Spine.Animation animation, bool loop, float delay)
             {
                 var __arg1 = animation is null ? __IntPtr.Zero : animation.__Instance;
-                var ___ret = __Internal.AddAnimation(__Instance + 8, trackIndex, __arg1, loop, delay);
+                var ___ret = __Internal.AddAnimation_1(__Instance, trackIndex, __arg1, loop, delay);
                 var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                 return __result0;
             }
@@ -3169,7 +5563,7 @@ namespace spine_cpp
             /// <summary>Sets an empty animation for a track, discarding any queued animations, and mixes to it over the specified mix duration.</summary>
             public global::spine_cpp.Spine.TrackEntry SetEmptyAnimation(ulong trackIndex, float mixDuration)
             {
-                var ___ret = __Internal.SetEmptyAnimation(__Instance + 8, trackIndex, mixDuration);
+                var ___ret = __Internal.SetEmptyAnimation(__Instance, trackIndex, mixDuration);
                 var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                 return __result0;
             }
@@ -3187,7 +5581,7 @@ namespace spine_cpp
             /// <returns>A track entry to allow further customization of animation playback. References to the track entry must not be kept after AnimationState.Dispose.</returns>
             public global::spine_cpp.Spine.TrackEntry AddEmptyAnimation(ulong trackIndex, float mixDuration, float delay)
             {
-                var ___ret = __Internal.AddEmptyAnimation(__Instance + 8, trackIndex, mixDuration, delay);
+                var ___ret = __Internal.AddEmptyAnimation(__Instance, trackIndex, mixDuration, delay);
                 var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                 return __result0;
             }
@@ -3195,13 +5589,13 @@ namespace spine_cpp
             /// <summary>Sets an empty animation for every track, discarding any queued animations, and mixes to it over the specified mix duration.</summary>
             public void SetEmptyAnimations(float mixDuration)
             {
-                __Internal.SetEmptyAnimations(__Instance + 8, mixDuration);
+                __Internal.SetEmptyAnimations(__Instance, mixDuration);
             }
 
             /// <returns>The track entry for the animation currently playing on the track, or NULL if no animation is currently playing.</returns>
             public global::spine_cpp.Spine.TrackEntry GetCurrent(ulong trackIndex)
             {
-                var ___ret = __Internal.GetCurrent(__Instance + 8, trackIndex);
+                var ___ret = __Internal.GetCurrent(__Instance, trackIndex);
                 var __result0 = global::spine_cpp.Spine.TrackEntry.__GetOrCreateInstance(___ret, true);
                 return __result0;
             }
@@ -3209,29 +5603,29 @@ namespace spine_cpp
             public void SetListener(global::spine_cpp.Spine.AnimationStateListener listener)
             {
                 var __arg0 = listener == null ? global::System.IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(listener);
-                __Internal.SetListener(__Instance + 8, __arg0);
+                __Internal.SetListener(__Instance, __arg0);
             }
 
             public void SetListener(global::spine_cpp.Spine.AnimationStateListenerObject listener)
             {
                 var __arg0 = listener is null ? __IntPtr.Zero : listener.__Instance;
-                __Internal.SetListener_1(__Instance + 8, __arg0);
+                __Internal.SetListener_1(__Instance, __arg0);
             }
 
             public void DisableQueue()
             {
-                __Internal.DisableQueue(__Instance + 8);
+                __Internal.DisableQueue(__Instance);
             }
 
             public void EnableQueue()
             {
-                __Internal.EnableQueue(__Instance + 8);
+                __Internal.EnableQueue(__Instance);
             }
 
             public void DisposeTrackEntry(global::spine_cpp.Spine.TrackEntry entry)
             {
                 var __arg0 = entry is null ? __IntPtr.Zero : entry.__Instance;
-                __Internal.DisposeTrackEntry(__Instance + 8, __arg0);
+                __Internal.DisposeTrackEntry(__Instance, __arg0);
             }
 
             public static explicit operator global::spine_cpp.Spine.AnimationState(global::spine_cpp.Spine.AnimationStateData data)
@@ -3257,7 +5651,7 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetData(__Instance + 8);
+                    var ___ret = __Internal.GetData(__Instance);
                     var __result0 = global::spine_cpp.Spine.AnimationStateData.__GetOrCreateInstance(___ret, true);
                     return __result0;
                 }
@@ -3267,13 +5661,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetTimeScale(__Instance + 8);
+                    var ___ret = __Internal.GetTimeScale(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetTimeScale(__Instance + 8, value);
+                    __Internal.SetTimeScale(__Instance, value);
                 }
             }
 
@@ -3281,13 +5675,13 @@ namespace spine_cpp
             {
                 get
                 {
-                    var ___ret = __Internal.GetManualTrackEntryDisposal(__Instance + 8);
+                    var ___ret = __Internal.GetManualTrackEntryDisposal(__Instance);
                     return ___ret;
                 }
 
                 set
                 {
-                    __Internal.SetManualTrackEntryDisposal(__Instance + 8, value);
+                    __Internal.SetManualTrackEntryDisposal(__Instance, value);
                 }
             }
 
@@ -3311,7 +5705,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[2];
@@ -3366,8 +5760,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -3379,7 +5772,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -3423,10 +5816,10 @@ namespace spine_cpp
     namespace Spine
     {
         /// <summary>Stores mix (crossfade) durations to be applied when AnimationState animations are changed.</summary>
-        public unsafe partial class AnimationStateData : IDisposable
+        public unsafe partial class AnimationStateData : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 48)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr _skeletonData;
@@ -3439,8 +5832,11 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0AnimationStateData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setMix@AnimationStateData@spine@@QEAAXAEBVString@2@0M@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetMix(__IntPtr __instance, __IntPtr fromName, __IntPtr toName, float duration);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setMix@AnimationStateData@spine@@QEAAXPEAVAnimation@2@0M@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern void SetMix(__IntPtr __instance, __IntPtr from, __IntPtr to, float duration);
+                internal static extern void SetMix_1(__IntPtr __instance, __IntPtr from, __IntPtr to, float duration);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getMix@AnimationStateData@spine@@QEAAMPEAVAnimation@2@0@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern float GetMix(__IntPtr __instance, __IntPtr from, __IntPtr to);
@@ -3469,32 +5865,14 @@ namespace spine_cpp
                 }
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AnimationStateData> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AnimationStateData>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.AnimationStateData managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.AnimationStateData managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static AnimationStateData __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new AnimationStateData __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new AnimationStateData(native.ToPointer(), skipVTables);
             }
 
-            internal static AnimationStateData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new AnimationStateData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -3506,7 +5884,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static AnimationStateData __GetInstance(__IntPtr native)
+            internal static new AnimationStateData __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -3536,15 +5914,16 @@ namespace spine_cpp
             }
 
             protected AnimationStateData(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public AnimationStateData(global::spine_cpp.Spine.SkeletonData skeletonData)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.AnimationStateData.__Internal));
                 __ownsNativeInstance = true;
@@ -3555,6 +5934,7 @@ namespace spine_cpp
             }
 
             public AnimationStateData(global::spine_cpp.Spine.AnimationStateData _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.AnimationStateData.__Internal));
                 __ownsNativeInstance = true;
@@ -3566,14 +5946,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.AnimationStateData");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -3590,6 +5965,18 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            /// <summary>Sets a mix duration by animation names.</summary>
+            public void SetMix(global::spine_cpp.Spine.String fromName, global::spine_cpp.Spine.String toName, float duration)
+            {
+                if (ReferenceEquals(fromName, null))
+                    throw new global::System.ArgumentNullException("fromName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = fromName.__Instance;
+                if (ReferenceEquals(toName, null))
+                    throw new global::System.ArgumentNullException("toName", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = toName.__Instance;
+                __Internal.SetMix(__Instance, __arg0, __arg1, duration);
+            }
+
             /// <summary>
             /// <para>Sets a mix duration when changing from the specified animation to the other.</para>
             /// <para>See TrackEntry.MixDuration.</para>
@@ -3598,7 +5985,7 @@ namespace spine_cpp
             {
                 var __arg0 = from is null ? __IntPtr.Zero : from.__Instance;
                 var __arg1 = to is null ? __IntPtr.Zero : to.__Instance;
-                __Internal.SetMix(__Instance, __arg0, __arg1, duration);
+                __Internal.SetMix_1(__Instance, __arg0, __arg1, duration);
             }
 
             /// <summary>
@@ -3661,7 +6048,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -3709,8 +6096,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -3722,7 +6108,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -3733,10 +6119,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class TextureRegion : IDisposable
+        public unsafe partial class TextureRegion : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 64)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr rendererObject;
@@ -3759,32 +6145,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.TextureRegion> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.TextureRegion>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.TextureRegion managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.TextureRegion managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static TextureRegion __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new TextureRegion __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new TextureRegion(native.ToPointer(), skipVTables);
             }
 
-            internal static TextureRegion __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new TextureRegion __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -3796,7 +6164,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static TextureRegion __GetInstance(__IntPtr native)
+            internal static new TextureRegion __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -3826,15 +6194,16 @@ namespace spine_cpp
             }
 
             protected TextureRegion(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public TextureRegion()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.TextureRegion.__Internal));
                 __ownsNativeInstance = true;
@@ -3844,6 +6213,7 @@ namespace spine_cpp
             }
 
             public TextureRegion(global::spine_cpp.Spine.TextureRegion _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.TextureRegion.__Internal));
                 __ownsNativeInstance = true;
@@ -3855,14 +6225,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.TextureRegion");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -4046,7 +6411,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -4094,8 +6459,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -4107,7 +6471,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -4148,10 +6512,10 @@ namespace spine_cpp
             TextureWrapRepeat = 2
         }
 
-        public unsafe partial class AtlasPage : IDisposable
+        public unsafe partial class AtlasPage : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 120)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.String.__Internal name;
@@ -4167,36 +6531,21 @@ namespace spine_cpp
                 internal int index;
                 internal __IntPtr texture;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0AtlasPage@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr inName);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0AtlasPage@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AtlasPage> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AtlasPage>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.AtlasPage managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.AtlasPage managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static AtlasPage __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new AtlasPage __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new AtlasPage(native.ToPointer(), skipVTables);
             }
 
-            internal static AtlasPage __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new AtlasPage __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -4208,7 +6557,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static AtlasPage __GetInstance(__IntPtr native)
+            internal static new AtlasPage __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -4226,7 +6575,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.AtlasPage.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.AtlasPage.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -4238,15 +6587,29 @@ namespace spine_cpp
             }
 
             protected AtlasPage(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public AtlasPage(global::spine_cpp.Spine.String inName)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.AtlasPage.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(inName, null))
+                    throw new global::System.ArgumentNullException("inName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = inName.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.AtlasPage");
+            }
+
             public AtlasPage(global::spine_cpp.Spine.AtlasPage _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.AtlasPage.__Internal));
                 __ownsNativeInstance = true;
@@ -4254,18 +6617,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.AtlasPage");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -4280,6 +6638,41 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.AtlasPage(global::spine_cpp.Spine.String inName)
+            {
+                return new global::spine_cpp.Spine.AtlasPage(inName);
+            }
+
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    return global::spine_cpp.Spine.String.__CreateInstance(new __IntPtr(&((__Internal*)__Instance)->name));
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
+                    ((__Internal*)__Instance)->name = *(global::spine_cpp.Spine.String.__Internal*) value.__Instance;
+                }
+            }
+
+            public global::spine_cpp.Spine.String TexturePath
+            {
+                get
+                {
+                    return global::spine_cpp.Spine.String.__CreateInstance(new __IntPtr(&((__Internal*)__Instance)->texturePath));
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
+                    ((__Internal*)__Instance)->texturePath = *(global::spine_cpp.Spine.String.__Internal*) value.__Instance;
+                }
             }
 
             public global::spine_cpp.Spine.Format Format
@@ -4423,7 +6816,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -4471,8 +6864,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -4484,7 +6876,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -4640,6 +7032,21 @@ namespace spine_cpp
                 }
             }
 
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    return global::spine_cpp.Spine.String.__CreateInstance(new __IntPtr(&((__Internal*)__Instance)->name));
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
+                    ((__Internal*)__Instance)->name = *(global::spine_cpp.Spine.String.__Internal*) value.__Instance;
+                }
+            }
+
             public int Index
             {
                 get
@@ -4758,15 +7165,18 @@ namespace spine_cpp
             #endregion
         }
 
-        public unsafe partial class Atlas : IDisposable
+        public unsafe partial class Atlas : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 80)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Vector.__Internal _pages;
                 internal global::spine_cpp.Spine.Vector.__Internal _regions;
                 internal __IntPtr _textureLoader;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Atlas@spine@@QEAA@AEBVString@1@PEAVTextureLoader@1@_N@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr path, __IntPtr textureLoader, bool createTexture);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Atlas@spine@@QEAA@PEBDH0PEAVTextureLoader@1@_N@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr ctor(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string data, int length, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string dir, __IntPtr textureLoader, bool createTexture);
@@ -4776,34 +7186,19 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?flipV@Atlas@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void FlipV(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findRegion@Atlas@spine@@QEAAPEAVAtlasRegion@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindRegion(__IntPtr __instance, __IntPtr name);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Atlas> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Atlas>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Atlas managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Atlas managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Atlas __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Atlas __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Atlas(native.ToPointer(), skipVTables);
             }
 
-            internal static Atlas __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Atlas __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -4815,7 +7210,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Atlas __GetInstance(__IntPtr native)
+            internal static new Atlas __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -4845,15 +7240,30 @@ namespace spine_cpp
             }
 
             protected Atlas(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public Atlas(global::spine_cpp.Spine.String path, global::spine_cpp.Spine.TextureLoader textureLoader, bool createTexture)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Atlas.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                var __arg1 = textureLoader is null ? __IntPtr.Zero : textureLoader.__Instance;
+                __Internal.ctor(__Instance, __arg0, __arg1, createTexture);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Atlas");
+            }
+
             public Atlas(string data, int length, string dir, global::spine_cpp.Spine.TextureLoader textureLoader, bool createTexture)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Atlas.__Internal));
                 __ownsNativeInstance = true;
@@ -4864,6 +7274,7 @@ namespace spine_cpp
             }
 
             public Atlas(global::spine_cpp.Spine.Atlas _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Atlas.__Internal));
                 __ownsNativeInstance = true;
@@ -4875,14 +7286,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Atlas");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -4904,6 +7310,21 @@ namespace spine_cpp
                 __Internal.FlipV(__Instance);
             }
 
+            /// <summary>
+            /// <para>Returns the first region found with the specified name. This method uses String comparison to find the region, so the result</para>
+            /// <para>should be cached rather than calling this method multiple times.</para>
+            /// </summary>
+            /// <returns>The region, or NULL.</returns>
+            public global::spine_cpp.Spine.AtlasRegion FindRegion(global::spine_cpp.Spine.String name)
+            {
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                var ___ret = __Internal.FindRegion(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.AtlasRegion.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
             #region Virtual table interop
 
             // ~Atlas()
@@ -4915,7 +7336,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -4963,8 +7384,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -4976,7 +7396,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -4987,14 +7407,172 @@ namespace spine_cpp
 
     namespace Spine
     {
+        public unsafe partial class RTTI : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 16)]
+            public partial struct __Internal
+            {
+                internal __IntPtr _className;
+                internal __IntPtr _pBaseRTTI;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0RTTI@spine@@QEAA@PEBD@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string className);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0RTTI@spine@@QEAA@PEBDAEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string className, __IntPtr baseRTTI);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?isExactly@RTTI@spine@@QEBA_NAEBV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool IsExactly(__IntPtr __instance, __IntPtr rtti);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?instanceOf@RTTI@spine@@QEBA_NAEBV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool InstanceOf(__IntPtr __instance, __IntPtr rtti);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getClassName@RTTI@spine@@QEBAPEBDXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetClassName(__IntPtr __instance);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.RTTI> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.RTTI>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.RTTI managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.RTTI managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static RTTI __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new RTTI(native.ToPointer(), skipVTables);
+            }
+
+            internal static RTTI __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (RTTI)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static RTTI __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new RTTI(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                *(__Internal*) ret = native;
+                return ret.ToPointer();
+            }
+
+            private RTTI(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected RTTI(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public RTTI(string className)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.RTTI.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance, className);
+            }
+
+            public RTTI(string className, global::spine_cpp.Spine.RTTI baseRTTI)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.RTTI.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(baseRTTI, null))
+                    throw new global::System.ArgumentNullException("baseRTTI", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = baseRTTI.__Instance;
+                __Internal.ctor(__Instance, className, __arg1);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public bool IsExactly(global::spine_cpp.Spine.RTTI rtti)
+            {
+                if (ReferenceEquals(rtti, null))
+                    throw new global::System.ArgumentNullException("rtti", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = rtti.__Instance;
+                var ___ret = __Internal.IsExactly(__Instance, __arg0);
+                return ___ret;
+            }
+
+            public bool InstanceOf(global::spine_cpp.Spine.RTTI rtti)
+            {
+                if (ReferenceEquals(rtti, null))
+                    throw new global::System.ArgumentNullException("rtti", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = rtti.__Instance;
+                var ___ret = __Internal.InstanceOf(__Instance, __arg0);
+                return ___ret;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.RTTI(string className)
+            {
+                return new global::spine_cpp.Spine.RTTI(className);
+            }
+
+            public string ClassName
+            {
+                get
+                {
+                    var ___ret = __Internal.GetClassName(__Instance);
+                    return CppSharp.Runtime.MarshalUtil.GetString(global::System.Text.Encoding.UTF8, ___ret);
+                }
+            }
+        }
     }
 
     namespace Spine
     {
-        public unsafe abstract partial class AttachmentLoader : IDisposable
+        public unsafe abstract partial class AttachmentLoader : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 8)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
 
@@ -5005,32 +7583,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AttachmentLoader> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.AttachmentLoader>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.AttachmentLoader managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.AttachmentLoader managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static AttachmentLoader __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new AttachmentLoader __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new AttachmentLoaderInternal(native.ToPointer(), skipVTables);
             }
 
-            internal static AttachmentLoader __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new AttachmentLoader __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -5042,7 +7602,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static AttachmentLoader __GetInstance(__IntPtr native)
+            internal static new AttachmentLoader __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -5058,15 +7618,16 @@ namespace spine_cpp
             }
 
             protected AttachmentLoader(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             protected AttachmentLoader()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.AttachmentLoader.__Internal));
                 __ownsNativeInstance = true;
@@ -5076,6 +7637,7 @@ namespace spine_cpp
             }
 
             protected AttachmentLoader(global::spine_cpp.Spine.AttachmentLoader _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.AttachmentLoader.__Internal));
                 __ownsNativeInstance = true;
@@ -5087,14 +7649,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.AttachmentLoader");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -5106,7 +7663,43 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            /// <returns>May be NULL to not load any attachment.</returns>
+            public abstract global::spine_cpp.Spine.RegionAttachment NewRegionAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.String path, global::spine_cpp.Spine.Sequence sequence);
+
+            /// <returns>May be NULL to not load any attachment.</returns>
+            public abstract global::spine_cpp.Spine.MeshAttachment NewMeshAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.String path, global::spine_cpp.Spine.Sequence sequence);
+
+            /// <returns>May be NULL to not load any attachment.</returns>
+            public abstract global::spine_cpp.Spine.BoundingBoxAttachment NewBoundingBoxAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name);
+
+            /// <returns>May be NULL to not load any attachment</returns>
+            public abstract global::spine_cpp.Spine.PathAttachment NewPathAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name);
+
+            public abstract global::spine_cpp.Spine.PointAttachment NewPointAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name);
+
+            public abstract global::spine_cpp.Spine.ClippingAttachment NewClippingAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name);
+
             public abstract void ConfigureAttachment(global::spine_cpp.Spine.Attachment attachment);
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_AttachmentLoader_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public virtual global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    var ___GetRTTIDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr>(0, 1);
+                    var ___ret = ___GetRTTIDelegate(__Instance);
+                    var __result0 = global::spine_cpp.Spine.RTTI.__GetOrCreateInstance(___ret, false);
+                    return __result0;
+                }
+            }
 
             #region Virtual table interop
 
@@ -5119,6 +7712,94 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
+            // RegionAttachment *newRegionAttachment(Skin &skin, const String &name, const String &path, Sequence *sequence) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr _NewRegionAttachmentDelegateInstance;
+
+            private static __IntPtr _NewRegionAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name, __IntPtr path, __IntPtr sequence)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var __result2 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var __result3 = global::spine_cpp.Spine.Sequence.__GetOrCreateInstance(sequence, false, skipVTables: true);
+                var ___ret = __target.NewRegionAttachment(__result0, __result1, __result2, __result3);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // MeshAttachment *newMeshAttachment(Skin &skin, const String &name, const String &path, Sequence *sequence) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr _NewMeshAttachmentDelegateInstance;
+
+            private static __IntPtr _NewMeshAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name, __IntPtr path, __IntPtr sequence)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var __result2 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var __result3 = global::spine_cpp.Spine.Sequence.__GetOrCreateInstance(sequence, false, skipVTables: true);
+                var ___ret = __target.NewMeshAttachment(__result0, __result1, __result2, __result3);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // BoundingBoxAttachment *newBoundingBoxAttachment(Skin &skin, const String &name) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewBoundingBoxAttachmentDelegateInstance;
+
+            private static __IntPtr _NewBoundingBoxAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewBoundingBoxAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // PathAttachment *newPathAttachment(Skin &skin, const String &name) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewPathAttachmentDelegateInstance;
+
+            private static __IntPtr _NewPathAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewPathAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // PointAttachment *newPointAttachment(Skin &skin, const String &name) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewPointAttachmentDelegateInstance;
+
+            private static __IntPtr _NewPointAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewPointAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // ClippingAttachment *newClippingAttachment(Skin &skin, const String &name) = 0
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewClippingAttachmentDelegateInstance;
+
+            private static __IntPtr _NewClippingAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewClippingAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
             // void configureAttachment(Attachment *attachment) = 0
             private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr _ConfigureAttachmentDelegateInstance;
 
@@ -5129,12 +7810,12 @@ namespace spine_cpp
                 __target.ConfigureAttachment(__result0);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[9];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -5142,9 +7823,23 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
+                    _NewRegionAttachmentDelegateInstance += _NewRegionAttachmentDelegateHook;
+                    _NewMeshAttachmentDelegateInstance += _NewMeshAttachmentDelegateHook;
+                    _NewBoundingBoxAttachmentDelegateInstance += _NewBoundingBoxAttachmentDelegateHook;
+                    _NewPathAttachmentDelegateInstance += _NewPathAttachmentDelegateHook;
+                    _NewPointAttachmentDelegateInstance += _NewPointAttachmentDelegateHook;
+                    _NewClippingAttachmentDelegateInstance += _NewClippingAttachmentDelegateHook;
                     _ConfigureAttachmentDelegateInstance += _ConfigureAttachmentDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_ConfigureAttachmentDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_NewRegionAttachmentDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_NewMeshAttachmentDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_NewBoundingBoxAttachmentDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(_NewPathAttachmentDelegateInstance);
+                    Thunks[6] = Marshal.GetFunctionPointerForDelegate(_NewPointAttachmentDelegateInstance);
+                    Thunks[7] = Marshal.GetFunctionPointerForDelegate(_NewClippingAttachmentDelegateInstance);
+                    Thunks[8] = Marshal.GetFunctionPointerForDelegate(_ConfigureAttachmentDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -5162,7 +7857,14 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 9, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][8] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
+                                ManagedVTables[0][6] = Thunks[6];
+                                ManagedVTables[0][7] = Thunks[7];
+                                ManagedVTables[0][8] = Thunks[8];
                                 VTables.Methods[0] = new Delegate[9];
                             }
                         }
@@ -5180,8 +7882,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -5193,7 +7894,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -5220,6 +7921,102 @@ namespace spine_cpp
             internal AttachmentLoaderInternal(void* native, bool skipVTables = false)
                 : base((void*) native)
             {
+            }
+
+            /// <returns>May be NULL to not load any attachment.</returns>
+            public override global::spine_cpp.Spine.RegionAttachment NewRegionAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.String path, global::spine_cpp.Spine.Sequence sequence)
+            {
+                var ___NewRegionAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr>(0, 2);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg2 = path.__Instance;
+                var __arg3 = sequence is null ? __IntPtr.Zero : sequence.__Instance;
+                var ___ret = ___NewRegionAttachmentDelegate(__Instance, __arg0, __arg1, __arg2, __arg3);
+                var __result0 = global::spine_cpp.Spine.RegionAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL to not load any attachment.</returns>
+            public override global::spine_cpp.Spine.MeshAttachment NewMeshAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.String path, global::spine_cpp.Spine.Sequence sequence)
+            {
+                var ___NewMeshAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr>(0, 3);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg2 = path.__Instance;
+                var __arg3 = sequence is null ? __IntPtr.Zero : sequence.__Instance;
+                var ___ret = ___NewMeshAttachmentDelegate(__Instance, __arg0, __arg1, __arg2, __arg3);
+                var __result0 = global::spine_cpp.Spine.MeshAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL to not load any attachment.</returns>
+            public override global::spine_cpp.Spine.BoundingBoxAttachment NewBoundingBoxAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewBoundingBoxAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 4);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewBoundingBoxAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.BoundingBoxAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL to not load any attachment</returns>
+            public override global::spine_cpp.Spine.PathAttachment NewPathAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewPathAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 5);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewPathAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.PathAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.PointAttachment NewPointAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewPointAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 6);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewPointAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.PointAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.ClippingAttachment NewClippingAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewClippingAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 7);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewClippingAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.ClippingAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
             }
 
             public override void ConfigureAttachment(global::spine_cpp.Spine.Attachment attachment)
@@ -5250,6 +8047,9 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0AtlasAttachmentLoader@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findRegion@AtlasAttachmentLoader@spine@@QEAAPEAVAtlasRegion@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindRegion(__IntPtr __instance, __IntPtr name);
             }
 
             internal static new AtlasAttachmentLoader __CreateInstance(__IntPtr native, bool skipVTables = false)
@@ -5352,6 +8152,98 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public override global::spine_cpp.Spine.RegionAttachment NewRegionAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.String path, global::spine_cpp.Spine.Sequence sequence)
+            {
+                var ___NewRegionAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr>(0, 2);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg2 = path.__Instance;
+                var __arg3 = sequence is null ? __IntPtr.Zero : sequence.__Instance;
+                var ___ret = ___NewRegionAttachmentDelegate(__Instance, __arg0, __arg1, __arg2, __arg3);
+                var __result0 = global::spine_cpp.Spine.RegionAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.MeshAttachment NewMeshAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.String path, global::spine_cpp.Spine.Sequence sequence)
+            {
+                var ___NewMeshAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr>(0, 3);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg2 = path.__Instance;
+                var __arg3 = sequence is null ? __IntPtr.Zero : sequence.__Instance;
+                var ___ret = ___NewMeshAttachmentDelegate(__Instance, __arg0, __arg1, __arg2, __arg3);
+                var __result0 = global::spine_cpp.Spine.MeshAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.BoundingBoxAttachment NewBoundingBoxAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewBoundingBoxAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 4);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewBoundingBoxAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.BoundingBoxAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.PathAttachment NewPathAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewPathAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 5);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewPathAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.PathAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.PointAttachment NewPointAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewPointAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 6);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewPointAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.PointAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public override global::spine_cpp.Spine.ClippingAttachment NewClippingAttachment(global::spine_cpp.Spine.Skin skin, global::spine_cpp.Spine.String name)
+            {
+                var ___NewClippingAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr>(0, 7);
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skin.__Instance;
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = ___NewClippingAttachmentDelegate(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.ClippingAttachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
             public override void ConfigureAttachment(global::spine_cpp.Spine.Attachment attachment)
             {
                 var ___ConfigureAttachmentDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr>(0, 8);
@@ -5359,9 +8251,36 @@ namespace spine_cpp
                 ___ConfigureAttachmentDelegate(__Instance, __arg0);
             }
 
+            public global::spine_cpp.Spine.AtlasRegion FindRegion(global::spine_cpp.Spine.String name)
+            {
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                var ___ret = __Internal.FindRegion(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.AtlasRegion.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
             public static explicit operator global::spine_cpp.Spine.AtlasAttachmentLoader(global::spine_cpp.Spine.Atlas atlas)
             {
                 return new global::spine_cpp.Spine.AtlasAttachmentLoader(atlas);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_AtlasAttachmentLoader_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             #region Virtual table interop
@@ -5373,6 +8292,94 @@ namespace spine_cpp
             {
                 var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
+            // RegionAttachment *newRegionAttachment(Skin &skin, const String &name, const String &path, Sequence *sequence)
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr _NewRegionAttachmentDelegateInstance;
+
+            private static __IntPtr _NewRegionAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name, __IntPtr path, __IntPtr sequence)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var __result2 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var __result3 = global::spine_cpp.Spine.Sequence.__GetOrCreateInstance(sequence, false, skipVTables: true);
+                var ___ret = __target.NewRegionAttachment(__result0, __result1, __result2, __result3);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // MeshAttachment *newMeshAttachment(Skin &skin, const String &name, const String &path, Sequence *sequence)
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr _NewMeshAttachmentDelegateInstance;
+
+            private static __IntPtr _NewMeshAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name, __IntPtr path, __IntPtr sequence)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var __result2 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var __result3 = global::spine_cpp.Spine.Sequence.__GetOrCreateInstance(sequence, false, skipVTables: true);
+                var ___ret = __target.NewMeshAttachment(__result0, __result1, __result2, __result3);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // BoundingBoxAttachment *newBoundingBoxAttachment(Skin &skin, const String &name)
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewBoundingBoxAttachmentDelegateInstance;
+
+            private static __IntPtr _NewBoundingBoxAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewBoundingBoxAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // PathAttachment *newPathAttachment(Skin &skin, const String &name)
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewPathAttachmentDelegateInstance;
+
+            private static __IntPtr _NewPathAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewPathAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // PointAttachment *newPointAttachment(Skin &skin, const String &name)
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewPointAttachmentDelegateInstance;
+
+            private static __IntPtr _NewPointAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewPointAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
+            }
+
+            // ClippingAttachment *newClippingAttachment(Skin &skin, const String &name)
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr___IntPtr _NewClippingAttachmentDelegateInstance;
+
+            private static __IntPtr _NewClippingAttachmentDelegateHook(__IntPtr __instance, __IntPtr skin, __IntPtr name)
+            {
+                var __target = global::spine_cpp.Spine.AtlasAttachmentLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(skin, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(name, false, skipVTables: true);
+                var ___ret = __target.NewClippingAttachment(__result0, __result1);
+                return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
             }
 
             // void configureAttachment(Attachment *attachment)
@@ -5390,7 +8397,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[9];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -5398,9 +8405,23 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
+                    _NewRegionAttachmentDelegateInstance += _NewRegionAttachmentDelegateHook;
+                    _NewMeshAttachmentDelegateInstance += _NewMeshAttachmentDelegateHook;
+                    _NewBoundingBoxAttachmentDelegateInstance += _NewBoundingBoxAttachmentDelegateHook;
+                    _NewPathAttachmentDelegateInstance += _NewPathAttachmentDelegateHook;
+                    _NewPointAttachmentDelegateInstance += _NewPointAttachmentDelegateHook;
+                    _NewClippingAttachmentDelegateInstance += _NewClippingAttachmentDelegateHook;
                     _ConfigureAttachmentDelegateInstance += _ConfigureAttachmentDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_ConfigureAttachmentDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_NewRegionAttachmentDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_NewMeshAttachmentDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_NewBoundingBoxAttachmentDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(_NewPathAttachmentDelegateInstance);
+                    Thunks[6] = Marshal.GetFunctionPointerForDelegate(_NewPointAttachmentDelegateInstance);
+                    Thunks[7] = Marshal.GetFunctionPointerForDelegate(_NewClippingAttachmentDelegateInstance);
+                    Thunks[8] = Marshal.GetFunctionPointerForDelegate(_ConfigureAttachmentDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -5418,7 +8439,14 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 9, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][8] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
+                                ManagedVTables[0][6] = Thunks[6];
+                                ManagedVTables[0][7] = Thunks[7];
+                                ManagedVTables[0][8] = Thunks[8];
                                 VTables.Methods[0] = new Delegate[9];
                             }
                         }
@@ -5459,17 +8487,20 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe abstract partial class Attachment : IDisposable
+        public unsafe abstract partial class Attachment : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 48)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.String.__Internal _name;
                 internal int _refCount;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Attachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Attachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?reference@Attachment@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void Reference(__IntPtr __instance);
@@ -5477,36 +8508,21 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?dereference@Attachment@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void Dereference(__IntPtr __instance);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@Attachment@spine@@QEBAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getRefCount@Attachment@spine@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int GetRefCount(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Attachment> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Attachment>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Attachment managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Attachment managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Attachment __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Attachment __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new AttachmentInternal(native.ToPointer(), skipVTables);
             }
 
-            internal static Attachment __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Attachment __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -5518,7 +8534,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Attachment __GetInstance(__IntPtr native)
+            internal static new Attachment __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -5534,15 +8550,29 @@ namespace spine_cpp
             }
 
             protected Attachment(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            protected Attachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Attachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Attachment");
+            }
+
             protected Attachment(global::spine_cpp.Spine.Attachment _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Attachment.__Internal));
                 __ownsNativeInstance = true;
@@ -5550,18 +8580,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Attachment");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -5581,6 +8606,36 @@ namespace spine_cpp
             public void Dereference()
             {
                 __Internal.Dereference(__Instance);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_Attachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public virtual global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    var ___GetRTTIDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr>(0, 1);
+                    var ___ret = ___GetRTTIDelegate(__Instance);
+                    var __result0 = global::spine_cpp.Spine.RTTI.__GetOrCreateInstance(___ret, false);
+                    return __result0;
+                }
+            }
+
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
             }
 
             public abstract global::spine_cpp.Spine.Attachment Copy
@@ -5608,6 +8663,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.Attachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy() = 0
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -5618,12 +8685,12 @@ namespace spine_cpp
                 return ___ret is null ? __IntPtr.Zero : ___ret.__Instance;
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -5631,9 +8698,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -5651,7 +8720,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[3];
                             }
                         }
@@ -5669,8 +8739,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -5682,7 +8751,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -5726,10 +8795,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe abstract partial class Timeline : IDisposable
+        public unsafe abstract partial class Timeline : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 80)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Vector.__Internal _propertyIds;
@@ -5755,32 +8824,14 @@ namespace spine_cpp
                 internal static extern float GetDuration(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Timeline> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Timeline>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Timeline managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Timeline managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Timeline __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Timeline __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new TimelineInternal(native.ToPointer(), skipVTables);
             }
 
-            internal static Timeline __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Timeline __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -5792,7 +8843,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Timeline __GetInstance(__IntPtr native)
+            internal static new Timeline __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -5808,15 +8859,16 @@ namespace spine_cpp
             }
 
             protected Timeline(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             protected Timeline(ulong frameCount, ulong frameEntries)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Timeline.__Internal));
                 __ownsNativeInstance = true;
@@ -5826,6 +8878,7 @@ namespace spine_cpp
             }
 
             protected Timeline(global::spine_cpp.Spine.Timeline _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Timeline.__Internal));
                 __ownsNativeInstance = true;
@@ -5837,14 +8890,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Timeline");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -5861,6 +8909,15 @@ namespace spine_cpp
                 __Internal.SetPropertyIds(__Instance, propertyIds, propertyIdsCount);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_Timeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected ulong _frameEntries
             {
                 get
@@ -5871,6 +8928,17 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_frameEntries = value;
+                }
+            }
+
+            public virtual global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    var ___GetRTTIDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr>(0, 1);
+                    var ___ret = ___GetRTTIDelegate(__Instance);
+                    var __result0 = global::spine_cpp.Spine.RTTI.__GetOrCreateInstance(___ret, false);
+                    return __result0;
                 }
             }
 
@@ -5912,12 +8980,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.Timeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -5925,7 +9005,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -5943,6 +9025,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[4];
                             }
                         }
@@ -5960,8 +9043,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -5973,7 +9055,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -6023,6 +9105,12 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0AttachmentTimeline@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setFrame@AttachmentTimeline@spine@@QEAAXHMAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetFrame(__IntPtr __instance, int frame, float time, __IntPtr attachmentName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAttachment@AttachmentTimeline@spine@@IEAAXAEAVSkeleton@2@AEAVSlot@2@PEAVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetAttachment(__IntPtr __instance, __IntPtr skeleton, __IntPtr slot, __IntPtr attachmentName);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getSlotIndex@AttachmentTimeline@spine@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int GetSlotIndex(__IntPtr __instance);
@@ -6130,6 +9218,36 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            /// <summary>Sets the time and value of the specified keyframe.</summary>
+            public void SetFrame(int frame, float time, global::spine_cpp.Spine.String attachmentName)
+            {
+                if (ReferenceEquals(attachmentName, null))
+                    throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                var __arg2 = attachmentName.__Instance;
+                __Internal.SetFrame(__Instance, frame, time, __arg2);
+            }
+
+            protected void SetAttachment(global::spine_cpp.Spine.Skeleton skeleton, global::spine_cpp.Spine.Slot slot, global::spine_cpp.Spine.String attachmentName)
+            {
+                if (ReferenceEquals(skeleton, null))
+                    throw new global::System.ArgumentNullException("skeleton", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skeleton.__Instance;
+                if (ReferenceEquals(slot, null))
+                    throw new global::System.ArgumentNullException("slot", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = slot.__Instance;
+                var __arg2 = attachmentName is null ? __IntPtr.Zero : attachmentName.__Instance;
+                __Internal.SetAttachment(__Instance, __arg0, __arg1, __arg2);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_AttachmentTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -6140,6 +9258,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_slotIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -6168,12 +9294,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.AttachmentTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -6181,7 +9319,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -6199,6 +9339,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[4];
                             }
                         }
@@ -6239,10 +9380,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe abstract partial class Updatable : IDisposable
+        public unsafe abstract partial class Updatable : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 8)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
 
@@ -6253,32 +9394,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Updatable> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Updatable>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Updatable managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Updatable managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Updatable __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Updatable __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new UpdatableInternal(native.ToPointer(), skipVTables);
             }
 
-            internal static Updatable __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Updatable __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -6290,7 +9413,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Updatable __GetInstance(__IntPtr native)
+            internal static new Updatable __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -6306,15 +9429,16 @@ namespace spine_cpp
             }
 
             protected Updatable(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             protected Updatable()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Updatable.__Internal));
                 __ownsNativeInstance = true;
@@ -6324,6 +9448,7 @@ namespace spine_cpp
             }
 
             protected Updatable(global::spine_cpp.Spine.Updatable _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Updatable.__Internal));
                 __ownsNativeInstance = true;
@@ -6335,14 +9460,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Updatable");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -6355,6 +9475,26 @@ namespace spine_cpp
             }
 
             public abstract void Update();
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_Updatable_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public virtual global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    var ___GetRTTIDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr>(0, 1);
+                    var ___ret = ___GetRTTIDelegate(__Instance);
+                    var __result0 = global::spine_cpp.Spine.RTTI.__GetOrCreateInstance(___ret, false);
+                    return __result0;
+                }
+            }
 
             public abstract bool Active
             {
@@ -6372,6 +9512,18 @@ namespace spine_cpp
             {
                 var __target = global::spine_cpp.Spine.Updatable.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.Updatable.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
             }
 
             // void update() = 0
@@ -6402,12 +9554,12 @@ namespace spine_cpp
                 __target.Active = inValue;
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[4];
+                private static readonly IntPtr[] Thunks = new IntPtr[5];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -6415,13 +9567,15 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _UpdateDelegateInstance += _UpdateDelegateHook;
                     _IsActiveDelegateInstance += _IsActiveDelegateHook;
                     _SetActiveDelegateInstance += _SetActiveDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
-                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -6439,9 +9593,10 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][3] = Thunks[2];
-                                ManagedVTables[0][4] = Thunks[3];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -6459,8 +9614,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -6472,7 +9626,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -6940,6 +10094,23 @@ namespace spine_cpp
                 __Internal.RotateWorld(__Instance, degrees);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_Bone_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public static bool yDown
             {
                 get
@@ -7361,6 +10532,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.Bone.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void update()
             private static global::spine_cpp.Delegates.Action___IntPtr _UpdateDelegateInstance;
 
@@ -7394,7 +10577,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[4];
+                private static readonly IntPtr[] Thunks = new IntPtr[5];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -7402,13 +10585,15 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _UpdateDelegateInstance += _UpdateDelegateHook;
                     _IsActiveDelegateInstance += _IsActiveDelegateHook;
                     _SetActiveDelegateInstance += _SetActiveDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
-                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -7426,9 +10611,10 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][3] = Thunks[2];
-                                ManagedVTables[0][4] = Thunks[3];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -7469,10 +10655,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class BoneData : IDisposable
+        public unsafe partial class BoneData : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 120)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal int _index;
@@ -7490,11 +10676,17 @@ namespace spine_cpp
                 internal byte _skinRequired;
                 internal global::spine_cpp.Spine.Color.__Internal _color;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0BoneData@spine@@QEAA@HAEBVString@1@PEAV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, int index, __IntPtr name, __IntPtr parent);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0BoneData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getIndex@BoneData@spine@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int GetIndex(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@BoneData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getParent@BoneData@spine@@QEAAPEAV12@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetParent(__IntPtr __instance);
@@ -7564,32 +10756,14 @@ namespace spine_cpp
                 internal static extern __IntPtr GetColor(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.BoneData> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.BoneData>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.BoneData managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.BoneData managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static BoneData __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new BoneData __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new BoneData(native.ToPointer(), skipVTables);
             }
 
-            internal static BoneData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new BoneData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -7601,7 +10775,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static BoneData __GetInstance(__IntPtr native)
+            internal static new BoneData __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -7631,15 +10805,30 @@ namespace spine_cpp
             }
 
             protected BoneData(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public BoneData(int index, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.BoneData parent)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.BoneData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var __arg2 = parent is null ? __IntPtr.Zero : parent.__Instance;
+                __Internal.ctor(__Instance, index, __arg1, __arg2);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.BoneData");
+            }
+
             public BoneData(global::spine_cpp.Spine.BoneData _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.BoneData.__Internal));
                 __ownsNativeInstance = true;
@@ -7651,14 +10840,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.BoneData");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -7682,6 +10866,17 @@ namespace spine_cpp
                 {
                     var ___ret = __Internal.GetIndex(__Instance);
                     return ___ret;
+                }
+            }
+
+            /// <summary>The name of the bone, which is unique within the skeleton.</summary>
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
                 }
             }
 
@@ -7865,7 +11060,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -7913,8 +11108,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -7926,7 +11120,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -7952,8 +11146,11 @@ namespace spine_cpp
                 internal __IntPtr _timelineAttachment;
                 internal int _id;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0VertexAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0VertexAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?computeWorldVertices@VertexAttachment@spine@@QEAAXAEAVSlot@2@PEAM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void ComputeWorldVertices(__IntPtr __instance, __IntPtr slot, float* worldVertices);
@@ -8020,6 +11217,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            protected VertexAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.VertexAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.VertexAttachment");
+            }
+
             protected VertexAttachment(global::spine_cpp.Spine.VertexAttachment _0)
                 : this((void*) null)
             {
@@ -8029,7 +11239,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.VertexAttachment");
             }
 
@@ -8084,6 +11294,15 @@ namespace spine_cpp
                 __Internal.CopyTo(__Instance, __arg0);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_VertexAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected ulong _worldVerticesLength
             {
                 get
@@ -8108,6 +11327,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_timelineAttachment = value is null ? __IntPtr.Zero : value.__Instance;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -8162,6 +11389,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.VertexAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy() = 0
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -8187,7 +11426,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static readonly IntPtr[] Thunks = new IntPtr[4];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -8195,11 +11434,13 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     _ComputeWorldVertices_1DelegateInstance += _ComputeWorldVertices_1DelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -8217,8 +11458,9 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][4] = Thunks[2];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][4] = Thunks[3];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -8308,8 +11550,11 @@ namespace spine_cpp
                 internal int _id;
                 internal global::spine_cpp.Spine.Color.__Internal _color;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0BoundingBoxAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0BoundingBoxAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getColor@BoundingBoxAttachment@spine@@QEAAAEAVColor@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetColor(__IntPtr __instance);
@@ -8352,7 +11597,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.BoundingBoxAttachment.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.BoundingBoxAttachment.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -8372,6 +11617,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public BoundingBoxAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.BoundingBoxAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.BoundingBoxAttachment");
+            }
+
             public BoundingBoxAttachment(global::spine_cpp.Spine.BoundingBoxAttachment _0)
                 : this((void*) null)
             {
@@ -8381,7 +11639,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.BoundingBoxAttachment");
             }
 
@@ -8402,6 +11660,28 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.BoundingBoxAttachment(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.BoundingBoxAttachment(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_BoundingBoxAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             public global::spine_cpp.Spine.Color Color
@@ -8436,6 +11716,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.BoundingBoxAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy()
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -8461,7 +11753,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static readonly IntPtr[] Thunks = new IntPtr[4];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -8469,11 +11761,13 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     _ComputeWorldVertices_1DelegateInstance += _ComputeWorldVertices_1DelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -8491,8 +11785,9 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][4] = Thunks[2];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][4] = Thunks[3];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -8549,8 +11844,11 @@ namespace spine_cpp
                 internal __IntPtr _endSlot;
                 internal global::spine_cpp.Spine.Color.__Internal _color;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0ClippingAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0ClippingAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getEndSlot@ClippingAttachment@spine@@QEAAPEAVSlotData@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetEndSlot(__IntPtr __instance);
@@ -8599,7 +11897,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.ClippingAttachment.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.ClippingAttachment.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -8619,6 +11917,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public ClippingAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.ClippingAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.ClippingAttachment");
+            }
+
             public ClippingAttachment(global::spine_cpp.Spine.ClippingAttachment _0)
                 : this((void*) null)
             {
@@ -8628,7 +11939,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.ClippingAttachment");
             }
 
@@ -8649,6 +11960,28 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.ClippingAttachment(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.ClippingAttachment(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ClippingAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             public global::spine_cpp.Spine.SlotData EndSlot
@@ -8699,6 +12032,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ClippingAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy()
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -8724,7 +12069,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static readonly IntPtr[] Thunks = new IntPtr[4];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -8732,11 +12077,13 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     _ComputeWorldVertices_1DelegateInstance += _ComputeWorldVertices_1DelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -8754,8 +12101,9 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][4] = Thunks[2];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][4] = Thunks[3];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -8926,6 +12274,23 @@ namespace spine_cpp
                 return ___ret;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_CurveTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             #region Virtual table interop
 
             // virtual ~CurveTimeline()
@@ -8935,6 +12300,18 @@ namespace spine_cpp
             {
                 var __target = global::spine_cpp.Spine.CurveTimeline.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.CurveTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
             }
 
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
@@ -8951,7 +12328,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -8959,9 +12336,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -8979,7 +12358,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -9132,6 +12512,23 @@ namespace spine_cpp
                 return ___ret;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_CurveTimeline1_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             #region Virtual table interop
 
             // virtual ~CurveTimeline1()
@@ -9141,6 +12538,18 @@ namespace spine_cpp
             {
                 var __target = global::spine_cpp.Spine.CurveTimeline1.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.CurveTimeline1.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
             }
 
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
@@ -9157,7 +12566,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -9165,9 +12574,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -9185,7 +12596,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -9338,6 +12750,23 @@ namespace spine_cpp
                 return ___ret;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_CurveTimeline2_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             #region Virtual table interop
 
             // virtual ~CurveTimeline2()
@@ -9347,6 +12776,18 @@ namespace spine_cpp
             {
                 var __target = global::spine_cpp.Spine.CurveTimeline2.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.CurveTimeline2.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
             }
 
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
@@ -9363,7 +12804,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -9371,9 +12812,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -9391,7 +12834,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -9631,6 +13075,15 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frame, time, r, g, b, a);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_RGBATimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -9641,6 +13094,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_slotIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -9669,6 +13130,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.RGBATimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -9683,7 +13156,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -9691,9 +13164,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -9711,7 +13186,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -9882,6 +13358,15 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frame, time, r, g, b);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_RGBTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -9892,6 +13377,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_slotIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -9920,6 +13413,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.RGBTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -9934,7 +13439,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -9942,9 +13447,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -9962,7 +13469,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -10124,6 +13632,15 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_AlphaTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -10134,6 +13651,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_slotIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -10162,6 +13687,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.AlphaTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -10176,7 +13713,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -10184,9 +13721,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -10204,7 +13743,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -10375,6 +13915,15 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frame, time, r, g, b, a, r2, g2, b2);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_RGBA2Timeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -10385,6 +13934,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_slotIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -10413,6 +13970,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.RGBA2Timeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -10427,7 +13996,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -10435,9 +14004,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -10455,7 +14026,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -10626,6 +14198,15 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frame, time, r, g, b, r2, g2, b2);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_RGB2Timeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -10636,6 +14217,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_slotIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -10664,6 +14253,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.RGB2Timeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -10678,7 +14279,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -10686,9 +14287,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -10706,7 +14309,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -10748,18 +14352,24 @@ namespace spine_cpp
     namespace Spine
     {
         /// <summary>The interface for all constraints.</summary>
-        public unsafe partial class ConstraintData : IDisposable
+        public unsafe partial class ConstraintData : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 56)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.String.__Internal _name;
                 internal ulong _order;
                 internal byte _skinRequired;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0ConstraintData@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0ConstraintData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@ConstraintData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getOrder@ConstraintData@spine@@QEAA_KXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern ulong GetOrder(__IntPtr __instance);
@@ -10775,32 +14385,14 @@ namespace spine_cpp
                 internal static extern void SetSkinRequired(__IntPtr __instance, bool inValue);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.ConstraintData> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.ConstraintData>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.ConstraintData managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.ConstraintData managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static ConstraintData __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new ConstraintData __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new ConstraintData(native.ToPointer(), skipVTables);
             }
 
-            internal static ConstraintData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new ConstraintData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -10812,7 +14404,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static ConstraintData __GetInstance(__IntPtr native)
+            internal static new ConstraintData __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -10830,7 +14422,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.ConstraintData.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.ConstraintData.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -10842,15 +14434,29 @@ namespace spine_cpp
             }
 
             protected ConstraintData(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public ConstraintData(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.ConstraintData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.ConstraintData");
+            }
+
             public ConstraintData(global::spine_cpp.Spine.ConstraintData _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.ConstraintData.__Internal));
                 __ownsNativeInstance = true;
@@ -10858,18 +14464,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.ConstraintData");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -10884,6 +14485,42 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static implicit operator global::spine_cpp.Spine.ConstraintData(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.ConstraintData(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ConstraintData_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public virtual global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    var ___GetRTTIDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr>(0, 1);
+                    var ___ret = ___GetRTTIDelegate(__Instance);
+                    var __result0 = global::spine_cpp.Spine.RTTI.__GetOrCreateInstance(___ret, false);
+                    return __result0;
+                }
+            }
+
+            /// <summary>The IK constraint's name, which is unique within the skeleton.</summary>
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
             }
 
             /// <summary>The ordinal for the order a skeleton's constraints will be applied.</summary>
@@ -10927,12 +14564,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ConstraintData.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -10940,7 +14589,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -10958,6 +14609,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 2, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[2];
                             }
                         }
@@ -10975,8 +14627,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -10988,7 +14639,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -11146,6 +14797,15 @@ namespace spine_cpp
                 return ___ret;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_DeformTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _slotIndex
             {
                 get
@@ -11170,6 +14830,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_attachment = value is null ? __IntPtr.Zero : value.__Instance;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -11214,6 +14882,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.DeformTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -11228,7 +14908,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -11236,9 +14916,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -11256,7 +14938,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -11419,6 +15102,23 @@ namespace spine_cpp
                 return new global::spine_cpp.Spine.DrawOrderTimeline(frameCount);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_DrawOrderTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             #region Virtual table interop
 
             // DrawOrderTimeline
@@ -11430,12 +15130,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.DrawOrderTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -11443,7 +15155,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -11461,6 +15175,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[4];
                             }
                         }
@@ -11502,10 +15217,10 @@ namespace spine_cpp
     namespace Spine
     {
         /// <summary>Stores the current pose values for an Event.</summary>
-        public unsafe partial class Event : IDisposable
+        public unsafe partial class Event : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 72)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr _data;
@@ -11540,6 +15255,12 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setFloatValue@Event@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetFloatValue(__IntPtr __instance, float inValue);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getStringValue@Event@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetStringValue(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setStringValue@Event@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetStringValue(__IntPtr __instance, __IntPtr inValue);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getVolume@Event@spine@@QEAAMXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern float GetVolume(__IntPtr __instance);
 
@@ -11553,32 +15274,14 @@ namespace spine_cpp
                 internal static extern void SetBalance(__IntPtr __instance, float inValue);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Event> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Event>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Event managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Event managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Event __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Event __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Event(native.ToPointer(), skipVTables);
             }
 
-            internal static Event __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Event __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -11590,7 +15293,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Event __GetInstance(__IntPtr native)
+            internal static new Event __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -11620,15 +15323,16 @@ namespace spine_cpp
             }
 
             protected Event(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Event(float time, global::spine_cpp.Spine.EventData data)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Event.__Internal));
                 __ownsNativeInstance = true;
@@ -11641,6 +15345,7 @@ namespace spine_cpp
             }
 
             public Event(global::spine_cpp.Spine.Event _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Event.__Internal));
                 __ownsNativeInstance = true;
@@ -11652,14 +15357,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Event");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -11724,6 +15424,24 @@ namespace spine_cpp
                 }
             }
 
+            public global::spine_cpp.Spine.String StringValue
+            {
+                get
+                {
+                    var ___ret = __Internal.GetStringValue(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetStringValue(__Instance, __arg0);
+                }
+            }
+
             public float Volume
             {
                 get
@@ -11763,7 +15481,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -11811,8 +15529,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -11824,7 +15541,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -11836,10 +15553,10 @@ namespace spine_cpp
     namespace Spine
     {
         /// <summary>Stores the setup pose values for an Event.</summary>
-        public unsafe partial class EventData : IDisposable
+        public unsafe partial class EventData : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 120)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.String.__Internal _name;
@@ -11850,8 +15567,14 @@ namespace spine_cpp
                 internal float _volume;
                 internal float _balance;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0EventData@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0EventData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@EventData@spine@@QEBAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getIntValue@EventData@spine@@QEBAHXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int GetIntValue(__IntPtr __instance);
@@ -11864,6 +15587,18 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setFloatValue@EventData@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetFloatValue(__IntPtr __instance, float inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getStringValue@EventData@spine@@QEBAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetStringValue(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setStringValue@EventData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetStringValue(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAudioPath@EventData@spine@@QEBAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetAudioPath(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAudioPath@EventData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetAudioPath(__IntPtr __instance, __IntPtr inValue);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getVolume@EventData@spine@@QEBAMXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern float GetVolume(__IntPtr __instance);
@@ -11878,32 +15613,14 @@ namespace spine_cpp
                 internal static extern void SetBalance(__IntPtr __instance, float inValue);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.EventData> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.EventData>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.EventData managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.EventData managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static EventData __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new EventData __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new EventData(native.ToPointer(), skipVTables);
             }
 
-            internal static EventData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new EventData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -11915,7 +15632,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static EventData __GetInstance(__IntPtr native)
+            internal static new EventData __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -11933,7 +15650,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.EventData.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.EventData.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -11945,15 +15662,29 @@ namespace spine_cpp
             }
 
             protected EventData(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public EventData(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.EventData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.EventData");
+            }
+
             public EventData(global::spine_cpp.Spine.EventData _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.EventData.__Internal));
                 __ownsNativeInstance = true;
@@ -11961,18 +15692,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.EventData");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -11987,6 +15713,22 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.EventData(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.EventData(name);
+            }
+
+            /// <summary>The name of the event, which is unique within the skeleton.</summary>
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
             }
 
             public int IntValue
@@ -12014,6 +15756,42 @@ namespace spine_cpp
                 set
                 {
                     __Internal.SetFloatValue(__Instance, value);
+                }
+            }
+
+            public global::spine_cpp.Spine.String StringValue
+            {
+                get
+                {
+                    var ___ret = __Internal.GetStringValue(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetStringValue(__Instance, __arg0);
+                }
+            }
+
+            public global::spine_cpp.Spine.String AudioPath
+            {
+                get
+                {
+                    var ___ret = __Internal.GetAudioPath(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetAudioPath(__Instance, __arg0);
                 }
             }
 
@@ -12056,7 +15834,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -12104,8 +15882,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -12117,7 +15894,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -12260,6 +16037,23 @@ namespace spine_cpp
                 return new global::spine_cpp.Spine.EventTimeline(frameCount);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_EventTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             #region Virtual table interop
 
             // ~EventTimeline()
@@ -12271,12 +16065,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.EventTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -12284,7 +16090,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -12302,6 +16110,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[4];
                             }
                         }
@@ -12551,6 +16360,23 @@ namespace spine_cpp
                 __Internal.Apply(__arg0, __arg1, targetX, targetY, bendDir, stretch, uniform, softness, alpha);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_IkConstraint_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public virtual int Order
             {
                 get
@@ -12684,6 +16510,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.IkConstraint.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void update()
             private static global::spine_cpp.Delegates.Action___IntPtr _UpdateDelegateInstance;
 
@@ -12727,7 +16565,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[5];
+                private static readonly IntPtr[] Thunks = new IntPtr[6];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -12735,15 +16573,17 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _UpdateDelegateInstance += _UpdateDelegateHook;
                     _IsActiveDelegateInstance += _IsActiveDelegateHook;
                     _SetActiveDelegateInstance += _SetActiveDelegateHook;
                     _GetOrderDelegateInstance += _GetOrderDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
-                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
-                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_GetOrderDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(_GetOrderDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -12761,10 +16601,11 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 6, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][3] = Thunks[2];
-                                ManagedVTables[0][4] = Thunks[3];
-                                ManagedVTables[0][5] = Thunks[4];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
                                 VTables.Methods[0] = new Delegate[6];
                             }
                         }
@@ -12823,8 +16664,11 @@ namespace spine_cpp
                 internal float _mix;
                 internal float _softness;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0IkConstraintData@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0IkConstraintData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getTarget@IkConstraintData@spine@@QEAAPEAVBoneData@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetTarget(__IntPtr __instance);
@@ -12909,7 +16753,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.IkConstraintData.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.IkConstraintData.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -12929,6 +16773,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public IkConstraintData(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.IkConstraintData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.IkConstraintData");
+            }
+
             public IkConstraintData(global::spine_cpp.Spine.IkConstraintData _0)
                 : this((void*) null)
             {
@@ -12938,7 +16795,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.IkConstraintData");
             }
 
@@ -12959,6 +16816,28 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.IkConstraintData(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.IkConstraintData(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_IkConstraintData_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             /// <summary>The bone that is the IK target.</summary>
@@ -13074,12 +16953,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.IkConstraintData.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -13087,7 +16978,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -13105,6 +16998,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 2, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[2];
                             }
                         }
@@ -13278,6 +17172,23 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frame, time, mix, softness, bendDirection, compress, stretch);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_IkConstraintTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int IkConstraintIndex
             {
                 get
@@ -13303,6 +17214,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.IkConstraintTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -13317,7 +17240,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -13325,9 +17248,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -13345,7 +17270,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -13386,121 +17312,133 @@ namespace spine_cpp
 
     namespace Spine
     {
-    }
-
-    namespace Spine
-    {
-        public unsafe partial class LinkedMesh : IDisposable
+        public unsafe partial class Json : global::spine_cpp.Spine.SpineObject, IDisposable
         {
-            [StructLayout(LayoutKind.Sequential, Size = 96)]
-            public partial struct __Internal
+            [StructLayout(LayoutKind.Sequential, Size = 56)]
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
-                internal __IntPtr _mesh;
-                internal global::spine_cpp.Spine.String.__Internal _skin;
-                internal ulong _slotIndex;
-                internal global::spine_cpp.Spine.String.__Internal _parent;
-                internal byte _inheritTimeline;
+                internal __IntPtr _next;
+                internal __IntPtr _child;
+                internal int _type;
+                internal int _size;
+                internal __IntPtr _valueString;
+                internal int _valueInt;
+                internal float _valueFloat;
+                internal __IntPtr _name;
 
-                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0LinkedMesh@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Json@spine@@QEAA@PEBD@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string value);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Json@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getItem@Json@spine@@SAPEAV12@PEAV12@PEBD@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetItem(__IntPtr @object, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string @string);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getItem@Json@spine@@SAPEAV12@PEAV12@H@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetItem_1(__IntPtr @object, int childIndex);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getString@Json@spine@@SAPEBDPEAV12@PEBD1@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetString(__IntPtr @object, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string name, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string defaultValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getFloat@Json@spine@@SAMPEAV12@PEBDM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern float GetFloat(__IntPtr @object, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string name, float defaultValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getInt@Json@spine@@SAHPEAV12@PEBDH@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int GetInt(__IntPtr @object, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string name, int defaultValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getBoolean@Json@spine@@SA_NPEAV12@PEBD_N@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool GetBoolean(__IntPtr @object, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string name, bool defaultValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getError@Json@spine@@SAPEBDXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetError();
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.LinkedMesh> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.LinkedMesh>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.LinkedMesh managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.LinkedMesh managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static LinkedMesh __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Json __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
-                return new LinkedMesh(native.ToPointer(), skipVTables);
+                return new Json(native.ToPointer(), skipVTables);
             }
 
-            internal static LinkedMesh __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Json __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 if (__TryGetNativeToManagedMapping(native, out var managed))
-                    return (LinkedMesh)managed;
+                    return (Json)managed;
                 var result = __CreateInstance(native, skipVTables);
                 if (saveInstance)
                     __RecordNativeToManagedMapping(native, result);
                 return result;
             }
 
-            internal static LinkedMesh __GetInstance(__IntPtr native)
+            internal static new Json __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
-                var result = (LinkedMesh)managed;
+                var result = (Json)managed;
                 if (result.__ownsNativeInstance)
                     result.SetupVTables();
                 return result;
             }
 
-            internal static LinkedMesh __CreateInstance(__Internal native, bool skipVTables = false)
+            internal static Json __CreateInstance(__Internal native, bool skipVTables = false)
             {
-                return new LinkedMesh(native, skipVTables);
+                return new Json(native, skipVTables);
             }
 
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.LinkedMesh.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.Json.__Internal.cctor(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
-            private LinkedMesh(__Internal native, bool skipVTables = false)
+            private Json(__Internal native, bool skipVTables = false)
                 : this(__CopyValue(native), skipVTables)
             {
                 __ownsNativeInstance = true;
                 __RecordNativeToManagedMapping(__Instance, this);
             }
 
-            protected LinkedMesh(void* native, bool skipVTables = false)
+            protected Json(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
-            public LinkedMesh(global::spine_cpp.Spine.LinkedMesh _0)
+            public Json(string value)
+                : this((void*) null)
             {
-                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.LinkedMesh.__Internal));
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Json.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance, value);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Json");
+            }
+
+            public Json(global::spine_cpp.Spine.Json _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Json.__Internal));
                 __ownsNativeInstance = true;
                 __RecordNativeToManagedMapping(__Instance, this);
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
                 __Internal.cctor(__Instance, __arg0);
-                SetupVTables(GetType().FullName == "spine_cpp.Spine.LinkedMesh");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Json");
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -13517,18 +17455,139 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static explicit operator global::spine_cpp.Spine.Json(string value)
+            {
+                return new global::spine_cpp.Spine.Json(value);
+            }
+
+            public static global::spine_cpp.Spine.Json GetItem(global::spine_cpp.Spine.Json @object, string @string)
+            {
+                var __arg0 = @object is null ? __IntPtr.Zero : @object.__Instance;
+                var ___ret = __Internal.GetItem(__arg0, @string);
+                var __result0 = global::spine_cpp.Spine.Json.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public static global::spine_cpp.Spine.Json GetItem(global::spine_cpp.Spine.Json @object, int childIndex)
+            {
+                var __arg0 = @object is null ? __IntPtr.Zero : @object.__Instance;
+                var ___ret = __Internal.GetItem_1(__arg0, childIndex);
+                var __result0 = global::spine_cpp.Spine.Json.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public static string GetString(global::spine_cpp.Spine.Json @object, string name, string defaultValue)
+            {
+                var __arg0 = @object is null ? __IntPtr.Zero : @object.__Instance;
+                var ___ret = __Internal.GetString(__arg0, name, defaultValue);
+                return CppSharp.Runtime.MarshalUtil.GetString(global::System.Text.Encoding.UTF8, ___ret);
+            }
+
+            public static float GetFloat(global::spine_cpp.Spine.Json @object, string name, float defaultValue)
+            {
+                var __arg0 = @object is null ? __IntPtr.Zero : @object.__Instance;
+                var ___ret = __Internal.GetFloat(__arg0, name, defaultValue);
+                return ___ret;
+            }
+
+            public static int GetInt(global::spine_cpp.Spine.Json @object, string name, int defaultValue)
+            {
+                var __arg0 = @object is null ? __IntPtr.Zero : @object.__Instance;
+                var ___ret = __Internal.GetInt(__arg0, name, defaultValue);
+                return ___ret;
+            }
+
+            public static bool GetBoolean(global::spine_cpp.Spine.Json @object, string name, bool defaultValue)
+            {
+                var __arg0 = @object is null ? __IntPtr.Zero : @object.__Instance;
+                var ___ret = __Internal.GetBoolean(__arg0, name, defaultValue);
+                return ___ret;
+            }
+
+            public static int JSON_FALSE
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_FALSE_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static int JSON_TRUE
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_TRUE_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static int JSON_NULL
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_NULL_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static int JSON_NUMBER
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_NUMBER_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static int JSON_STRING
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_STRING_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static int JSON_ARRAY
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_ARRAY_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static int JSON_OBJECT
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.DLLPlugin._JSON_OBJECT_Json_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            public static string error
+            {
+                get
+                {
+                    var ___ret = __Internal.GetError();
+                    return CppSharp.Runtime.MarshalUtil.GetString(global::System.Text.Encoding.UTF8, ___ret);
+                }
+            }
+
             #region Virtual table interop
 
-            // LinkedMesh
+            // ~Json()
             private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
 
             private static void _dtorDelegateHook(__IntPtr __instance, int delete)
             {
-                var __target = global::spine_cpp.Spine.LinkedMesh.__GetInstance(__instance);
+                var __target = global::spine_cpp.Spine.Json.__GetInstance(__instance);
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -13576,8 +17635,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -13589,7 +17647,214 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+    }
+
+    namespace Spine
+    {
+        public unsafe partial class LinkedMesh : global::spine_cpp.Spine.SpineObject, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 96)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+                internal __IntPtr _mesh;
+                internal global::spine_cpp.Spine.String.__Internal _skin;
+                internal ulong _slotIndex;
+                internal global::spine_cpp.Spine.String.__Internal _parent;
+                internal byte _inheritTimeline;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0LinkedMesh@spine@@QEAA@PEAVMeshAttachment@1@AEBVString@1@_K1_N@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr mesh, __IntPtr skin, ulong slotIndex, __IntPtr parent, bool inheritTimeline);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0LinkedMesh@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            internal static new LinkedMesh __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new LinkedMesh(native.ToPointer(), skipVTables);
+            }
+
+            internal static new LinkedMesh __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (LinkedMesh)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new LinkedMesh __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (LinkedMesh)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static LinkedMesh __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new LinkedMesh(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.LinkedMesh.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private LinkedMesh(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected LinkedMesh(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public LinkedMesh(global::spine_cpp.Spine.MeshAttachment mesh, global::spine_cpp.Spine.String skin, ulong slotIndex, global::spine_cpp.Spine.String parent, bool inheritTimeline)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.LinkedMesh.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                var __arg0 = mesh is null ? __IntPtr.Zero : mesh.__Instance;
+                if (ReferenceEquals(skin, null))
+                    throw new global::System.ArgumentNullException("skin", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = skin.__Instance;
+                if (ReferenceEquals(parent, null))
+                    throw new global::System.ArgumentNullException("parent", "Cannot be null because it is a C++ reference (&).");
+                var __arg3 = parent.__Instance;
+                __Internal.ctor(__Instance, __arg0, __arg1, slotIndex, __arg3, inheritTimeline);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.LinkedMesh");
+            }
+
+            public LinkedMesh(global::spine_cpp.Spine.LinkedMesh _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.LinkedMesh.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.LinkedMesh");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            #region Virtual table interop
+
+            // LinkedMesh
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.LinkedMesh.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 1, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                VTables.Methods[0] = new Delegate[1];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -13611,10 +17876,10 @@ namespace spine_cpp
             PingpongReverse = 6
         }
 
-        public unsafe partial class Sequence : IDisposable
+        public unsafe partial class Sequence : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 64)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal int _id;
@@ -13631,6 +17896,9 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?apply@Sequence@spine@@QEAAXPEAVSlot@2@PEAVAttachment@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void Apply(__IntPtr __instance, __IntPtr slot, __IntPtr attachment);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getPath@Sequence@spine@@QEAA?AVString@2@AEBV32@H@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void GetPath(__IntPtr __instance, __IntPtr @return, __IntPtr basePath, int index);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?copy@Sequence@spine@@QEAAPEAV12@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr Copy(__IntPtr __instance);
@@ -13660,32 +17928,14 @@ namespace spine_cpp
                 internal static extern void SetSetupIndex(__IntPtr __instance, int setupIndex);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Sequence> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Sequence>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Sequence managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Sequence managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Sequence __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Sequence __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Sequence(native.ToPointer(), skipVTables);
             }
 
-            internal static Sequence __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Sequence __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -13697,7 +17947,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Sequence __GetInstance(__IntPtr native)
+            internal static new Sequence __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -13727,15 +17977,16 @@ namespace spine_cpp
             }
 
             protected Sequence(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Sequence(int count)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Sequence.__Internal));
                 __ownsNativeInstance = true;
@@ -13745,6 +17996,7 @@ namespace spine_cpp
             }
 
             public Sequence(global::spine_cpp.Spine.Sequence _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Sequence.__Internal));
                 __ownsNativeInstance = true;
@@ -13756,14 +18008,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Sequence");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -13785,6 +18032,20 @@ namespace spine_cpp
                 var __arg0 = slot is null ? __IntPtr.Zero : slot.__Instance;
                 var __arg1 = attachment is null ? __IntPtr.Zero : attachment.__Instance;
                 __Internal.Apply(__Instance, __arg0, __arg1);
+            }
+
+            public global::spine_cpp.Spine.String GetPath(global::spine_cpp.Spine.String basePath, int index)
+            {
+                if (ReferenceEquals(basePath, null))
+                    throw new global::System.ArgumentNullException("basePath", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = basePath.__Instance;
+                var ___ret = new global::spine_cpp.Spine.String.__Internal();
+                __Internal.GetPath(__Instance, new IntPtr(&___ret), __arg0, index);
+                var _____ret = global::spine_cpp.Spine.String.__CreateInstance(___ret);
+                var __vtables = new IntPtr[] { *(__IntPtr*) (new __IntPtr(&___ret) + 0) };
+                var __slot = *(__IntPtr*) (__vtables[0] + 0 * sizeof(__IntPtr));
+                Marshal.GetDelegateForFunctionPointer<global::spine_cpp.Delegates.Action___IntPtr_int>(__slot)(new __IntPtr(&___ret), 0);
+                return _____ret;
             }
 
             public static implicit operator global::spine_cpp.Spine.Sequence(int count)
@@ -13869,7 +18130,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -13917,8 +18178,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -13930,7 +18190,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -13968,8 +18228,11 @@ namespace spine_cpp
                 internal __IntPtr _region;
                 internal __IntPtr _sequence;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0MeshAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0MeshAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?updateRegion@MeshAttachment@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void UpdateRegion(__IntPtr __instance);
@@ -13985,6 +18248,12 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getColor@MeshAttachment@spine@@QEAAAEAVColor@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetColor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getPath@MeshAttachment@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetPath(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setPath@MeshAttachment@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetPath(__IntPtr __instance, __IntPtr inValue);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getRegion@MeshAttachment@spine@@QEAAPEAVTextureRegion@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetRegion(__IntPtr __instance);
@@ -14054,7 +18323,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.MeshAttachment.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.MeshAttachment.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -14074,6 +18343,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public MeshAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.MeshAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.MeshAttachment");
+            }
+
             public MeshAttachment(global::spine_cpp.Spine.MeshAttachment _0)
                 : this((void*) null)
             {
@@ -14083,7 +18365,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.MeshAttachment");
             }
 
@@ -14123,6 +18405,28 @@ namespace spine_cpp
                 return __result0;
             }
 
+            public static explicit operator global::spine_cpp.Spine.MeshAttachment(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.MeshAttachment(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_MeshAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int HullLength
             {
                 get
@@ -14144,6 +18448,24 @@ namespace spine_cpp
                     var ___ret = __Internal.GetColor(__Instance);
                     var __result0 = global::spine_cpp.Spine.Color.__GetOrCreateInstance(___ret, true);
                     return __result0;
+                }
+            }
+
+            public global::spine_cpp.Spine.String Path
+            {
+                get
+                {
+                    var ___ret = __Internal.GetPath(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetPath(__Instance, __arg0);
                 }
             }
 
@@ -14245,6 +18567,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.MeshAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy()
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -14270,7 +18604,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static readonly IntPtr[] Thunks = new IntPtr[4];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -14278,11 +18612,13 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     _ComputeWorldVerticesDelegateInstance += _ComputeWorldVerticesDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVerticesDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVerticesDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -14300,8 +18636,9 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][4] = Thunks[2];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][4] = Thunks[3];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -14360,8 +18697,11 @@ namespace spine_cpp
                 internal byte _constantSpeed;
                 internal global::spine_cpp.Spine.Color.__Internal _color;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PathAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PathAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?isClosed@PathAttachment@spine@@QEAA_NXZ", CallingConvention = __CallingConvention.Cdecl)]
                 [return: MarshalAs(UnmanagedType.I1)]
@@ -14418,7 +18758,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.PathAttachment.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.PathAttachment.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -14438,6 +18778,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public PathAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PathAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PathAttachment");
+            }
+
             public PathAttachment(global::spine_cpp.Spine.PathAttachment _0)
                 : this((void*) null)
             {
@@ -14447,7 +18800,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.PathAttachment");
             }
 
@@ -14468,6 +18821,28 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.PathAttachment(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.PathAttachment(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PathAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             public bool Closed
@@ -14530,6 +18905,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PathAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy()
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -14555,7 +18942,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static readonly IntPtr[] Thunks = new IntPtr[4];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -14563,11 +18950,13 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     _ComputeWorldVertices_1DelegateInstance += _ComputeWorldVertices_1DelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ComputeWorldVertices_1DelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -14585,8 +18974,9 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][4] = Thunks[2];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][4] = Thunks[3];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -14806,6 +19196,23 @@ namespace spine_cpp
                 ___UpdateDelegate(__Instance);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PathConstraint_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public virtual int Order
             {
                 get
@@ -14939,6 +19346,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraint.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void update()
             private static global::spine_cpp.Delegates.Action___IntPtr _UpdateDelegateInstance;
 
@@ -14982,7 +19401,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[5];
+                private static readonly IntPtr[] Thunks = new IntPtr[6];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -14990,15 +19409,17 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _UpdateDelegateInstance += _UpdateDelegateHook;
                     _IsActiveDelegateInstance += _IsActiveDelegateHook;
                     _SetActiveDelegateInstance += _SetActiveDelegateHook;
                     _GetOrderDelegateInstance += _GetOrderDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
-                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
-                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_GetOrderDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(_GetOrderDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -15016,10 +19437,11 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 6, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][3] = Thunks[2];
-                                ManagedVTables[0][4] = Thunks[3];
-                                ManagedVTables[0][5] = Thunks[4];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
                                 VTables.Methods[0] = new Delegate[6];
                             }
                         }
@@ -15081,8 +19503,11 @@ namespace spine_cpp
                 internal float _mixX;
                 internal float _mixY;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PathConstraintData@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PathConstraintData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getTarget@PathConstraintData@spine@@QEAAPEAVSlotData@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetTarget(__IntPtr __instance);
@@ -15182,7 +19607,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.PathConstraintData.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.PathConstraintData.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -15202,6 +19627,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public PathConstraintData(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PathConstraintData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PathConstraintData");
+            }
+
             public PathConstraintData(global::spine_cpp.Spine.PathConstraintData _0)
                 : this((void*) null)
             {
@@ -15211,7 +19649,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.PathConstraintData");
             }
 
@@ -15232,6 +19670,28 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.PathConstraintData(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.PathConstraintData(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PathConstraintData_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             public global::spine_cpp.Spine.SlotData Target
@@ -15387,12 +19847,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraintData.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -15400,7 +19872,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -15418,6 +19892,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 2, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[2];
                             }
                         }
@@ -15591,6 +20066,23 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frameIndex, time, mixRotate, mixX, mixY);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PathConstraintMixTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int PathConstraintIndex
             {
                 get
@@ -15616,6 +20108,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraintMixTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -15630,7 +20134,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -15638,9 +20142,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -15658,7 +20164,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -15699,6 +20206,288 @@ namespace spine_cpp
 
     namespace Spine
     {
+        public unsafe partial class PathConstraintPositionTimeline : global::spine_cpp.Spine.CurveTimeline1, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 120)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineObject;
+                internal global::spine_cpp.Spine.Vector.__Internal _propertyIds;
+                internal global::spine_cpp.Spine.Vector.__Internal _frames;
+                internal ulong _frameEntries;
+                internal global::spine_cpp.Spine.Vector.__Internal _curves;
+                internal int _pathConstraintIndex;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PathConstraintPositionTimeline@spine@@QEAA@_K0H@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, ulong frameCount, ulong bezierCount, int pathConstraintIndex);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PathConstraintPositionTimeline@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getPathConstraintIndex@PathConstraintPositionTimeline@spine@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int GetPathConstraintIndex(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setPathConstraintIndex@PathConstraintPositionTimeline@spine@@QEAAXH@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetPathConstraintIndex(__IntPtr __instance, int inValue);
+            }
+
+            internal static new PathConstraintPositionTimeline __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new PathConstraintPositionTimeline(native.ToPointer(), skipVTables);
+            }
+
+            internal static new PathConstraintPositionTimeline __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (PathConstraintPositionTimeline)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new PathConstraintPositionTimeline __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (PathConstraintPositionTimeline)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static PathConstraintPositionTimeline __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new PathConstraintPositionTimeline(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.PathConstraintPositionTimeline.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private PathConstraintPositionTimeline(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected PathConstraintPositionTimeline(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public PathConstraintPositionTimeline(ulong frameCount, ulong bezierCount, int pathConstraintIndex)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PathConstraintPositionTimeline.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance, frameCount, bezierCount, pathConstraintIndex);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PathConstraintPositionTimeline");
+            }
+
+            public PathConstraintPositionTimeline(global::spine_cpp.Spine.PathConstraintPositionTimeline _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PathConstraintPositionTimeline.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PathConstraintPositionTimeline");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PathConstraintPositionTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public static int ENTRIES
+            {
+                get
+                {
+                    var __ptr = (int*)global::spine_cpp.__Symbols.spine_cpp._ENTRIES_PathConstraintPositionTimeline_spine__2HB;
+                    return *__ptr;
+                }
+            }
+
+            protected int _pathConstraintIndex
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->_pathConstraintIndex;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->_pathConstraintIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
+            public int PathConstraintIndex
+            {
+                get
+                {
+                    var ___ret = __Internal.GetPathConstraintIndex(__Instance);
+                    return ___ret;
+                }
+
+                set
+                {
+                    __Internal.SetPathConstraintIndex(__Instance, value);
+                }
+            }
+
+            #region Virtual table interop
+
+            // virtual ~PathConstraintPositionTimeline()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraintPositionTimeline.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraintPositionTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
+            // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
+            private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
+
+            private static void _SetBezierDelegateHook(__IntPtr __instance, ulong bezier, ulong frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraintPositionTimeline.__GetInstance(__instance);
+                __target.SetBezier(bezier, frame, value, time1, value1, cx1, cy1, cx2, cy2, time2, value2);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
+                    _SetBezierDelegateInstance += _SetBezierDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
+                                VTables.Methods[0] = new Delegate[5];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
     }
 
     namespace Spine
@@ -15827,6 +20616,15 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PathConstraintSpacingTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
             protected int _pathConstraintIndex
             {
                 get
@@ -15837,6 +20635,14 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->_pathConstraintIndex = value;
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -15865,6 +20671,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PathConstraintSpacingTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -15879,7 +20697,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -15887,9 +20705,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -15907,7 +20727,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -15968,8 +20789,11 @@ namespace spine_cpp
                 internal float _rotation;
                 internal global::spine_cpp.Spine.Color.__Internal _color;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PointAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0PointAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?computeWorldPosition@PointAttachment@spine@@QEAAXAEAVBone@2@AEAM1@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void ComputeWorldPosition(__IntPtr __instance, __IntPtr bone, float* ox, float* oy);
@@ -16036,7 +20860,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.PointAttachment.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.PointAttachment.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -16056,6 +20880,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public PointAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.PointAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.PointAttachment");
+            }
+
             public PointAttachment(global::spine_cpp.Spine.PointAttachment _0)
                 : this((void*) null)
             {
@@ -16065,7 +20902,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.PointAttachment");
             }
 
@@ -16111,6 +20948,28 @@ namespace spine_cpp
                 var __arg0 = bone.__Instance;
                 var ___ret = __Internal.ComputeWorldRotation(__Instance, __arg0);
                 return ___ret;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.PointAttachment(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.PointAttachment(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_PointAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             public float X
@@ -16187,6 +21046,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.PointAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy()
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -16202,7 +21073,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -16210,9 +21081,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -16230,7 +21103,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[3];
                             }
                         }
@@ -16295,8 +21169,11 @@ namespace spine_cpp
                 internal __IntPtr _region;
                 internal __IntPtr _sequence;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0RegionAttachment@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0RegionAttachment@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?updateRegion@RegionAttachment@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void UpdateRegion(__IntPtr __instance);
@@ -16349,6 +21226,12 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getColor@RegionAttachment@spine@@QEAAAEAVColor@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetColor(__IntPtr __instance);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getPath@RegionAttachment@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetPath(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setPath@RegionAttachment@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetPath(__IntPtr __instance, __IntPtr inValue);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getRegion@RegionAttachment@spine@@QEAAPEAVTextureRegion@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetRegion(__IntPtr __instance);
 
@@ -16399,7 +21282,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.RegionAttachment.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.RegionAttachment.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -16419,6 +21302,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public RegionAttachment(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.RegionAttachment.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.RegionAttachment");
+            }
+
             public RegionAttachment(global::spine_cpp.Spine.RegionAttachment _0)
                 : this((void*) null)
             {
@@ -16428,7 +21324,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.RegionAttachment");
             }
 
@@ -16470,6 +21366,28 @@ namespace spine_cpp
                 {
                     var __arg1 = __worldVertices1;
                     __Internal.ComputeWorldVertices(__Instance, __arg0, __arg1, offset, stride);
+                }
+            }
+
+            public static explicit operator global::spine_cpp.Spine.RegionAttachment(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.RegionAttachment(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_RegionAttachment_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
                 }
             }
 
@@ -16581,6 +21499,24 @@ namespace spine_cpp
                 }
             }
 
+            public global::spine_cpp.Spine.String Path
+            {
+                get
+                {
+                    var ___ret = __Internal.GetPath(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetPath(__Instance, __arg0);
+                }
+            }
+
             public global::spine_cpp.Spine.TextureRegion Region
             {
                 get
@@ -16635,6 +21571,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.RegionAttachment.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // Attachment *copy()
             private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _CopyDelegateInstance;
 
@@ -16650,7 +21598,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -16658,9 +21606,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _CopyDelegateInstance += _CopyDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CopyDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -16678,7 +21628,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[3];
                             }
                         }
@@ -16843,6 +21794,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_RotateTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -16868,6 +21836,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.RotateTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -16882,7 +21862,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -16890,9 +21870,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -16910,7 +21892,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -17075,6 +22058,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_TranslateTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -17100,6 +22100,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.TranslateTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -17114,7 +22126,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -17122,9 +22134,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -17142,7 +22156,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -17304,6 +22319,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_TranslateXTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -17329,6 +22361,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.TranslateXTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -17343,7 +22387,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -17351,9 +22395,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -17371,7 +22417,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -17533,6 +22580,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_TranslateYTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -17558,6 +22622,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.TranslateYTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -17572,7 +22648,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -17580,9 +22656,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -17600,7 +22678,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -17765,6 +22844,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ScaleTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -17790,6 +22886,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ScaleTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -17804,7 +22912,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -17812,9 +22920,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -17832,7 +22942,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -17994,6 +23105,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ScaleXTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -18019,6 +23147,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ScaleXTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -18033,7 +23173,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -18041,9 +23181,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -18061,7 +23203,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -18223,6 +23366,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ScaleYTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -18248,6 +23408,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ScaleYTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -18262,7 +23434,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -18270,9 +23442,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -18290,7 +23464,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -18455,6 +23630,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ShearTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -18480,6 +23672,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ShearTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -18494,7 +23698,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -18502,9 +23706,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -18522,7 +23728,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -18684,6 +23891,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ShearXTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -18709,6 +23933,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ShearXTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -18723,7 +23959,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -18731,9 +23967,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -18751,7 +23989,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -18913,6 +24152,23 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_ShearYTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int BoneIndex
             {
                 get
@@ -18938,6 +24194,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.ShearYTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -18952,7 +24220,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -18960,9 +24228,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -18980,7 +24250,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -19021,10 +24292,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class Skeleton : IDisposable
+        public unsafe partial class Skeleton : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 288)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr _data;
@@ -19069,6 +24340,33 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setSlotsToSetupPose@Skeleton@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetSlotsToSetupPose(__IntPtr __instance);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findBone@Skeleton@spine@@QEAAPEAVBone@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindBone(__IntPtr __instance, __IntPtr boneName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findSlot@Skeleton@spine@@QEAAPEAVSlot@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindSlot(__IntPtr __instance, __IntPtr slotName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setSkin@Skeleton@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetSkin(__IntPtr __instance, __IntPtr skinName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAttachment@Skeleton@spine@@QEAAPEAVAttachment@2@AEBVString@2@0@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetAttachment(__IntPtr __instance, __IntPtr slotName, __IntPtr attachmentName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAttachment@Skeleton@spine@@QEAAPEAVAttachment@2@HAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetAttachment(__IntPtr __instance, int slotIndex, __IntPtr attachmentName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAttachment@Skeleton@spine@@QEAAXAEBVString@2@0@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetAttachment(__IntPtr __instance, __IntPtr slotName, __IntPtr attachmentName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findIkConstraint@Skeleton@spine@@QEAAPEAVIkConstraint@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindIkConstraint(__IntPtr __instance, __IntPtr constraintName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findTransformConstraint@Skeleton@spine@@QEAAPEAVTransformConstraint@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindTransformConstraint(__IntPtr __instance, __IntPtr constraintName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findPathConstraint@Skeleton@spine@@QEAAPEAVPathConstraint@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindPathConstraint(__IntPtr __instance, __IntPtr constraintName);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setPosition@Skeleton@spine@@QEAAXMM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetPosition(__IntPtr __instance, float x, float y);
 
@@ -19076,7 +24374,7 @@ namespace spine_cpp
                 internal static extern __IntPtr GetSkin(__IntPtr __instance);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setSkin@Skeleton@spine@@QEAAXPEAVSkin@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern void SetSkin(__IntPtr __instance, __IntPtr newSkin);
+                internal static extern void SetSkin_1(__IntPtr __instance, __IntPtr newSkin);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getRootBone@Skeleton@spine@@QEAAPEAVBone@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetRootBone(__IntPtr __instance);
@@ -19112,32 +24410,14 @@ namespace spine_cpp
                 internal static extern void SetScaleY(__IntPtr __instance, float inValue);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Skeleton> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Skeleton>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Skeleton managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Skeleton managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Skeleton __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Skeleton __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Skeleton(native.ToPointer(), skipVTables);
             }
 
-            internal static Skeleton __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Skeleton __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -19149,7 +24429,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Skeleton __GetInstance(__IntPtr native)
+            internal static new Skeleton __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -19179,15 +24459,16 @@ namespace spine_cpp
             }
 
             protected Skeleton(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Skeleton(global::spine_cpp.Spine.SkeletonData skeletonData)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skeleton.__Internal));
                 __ownsNativeInstance = true;
@@ -19198,6 +24479,7 @@ namespace spine_cpp
             }
 
             public Skeleton(global::spine_cpp.Spine.Skeleton _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skeleton.__Internal));
                 __ownsNativeInstance = true;
@@ -19209,14 +24491,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Skeleton");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -19276,6 +24553,107 @@ namespace spine_cpp
                 __Internal.SetSlotsToSetupPose(__Instance);
             }
 
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.Bone FindBone(global::spine_cpp.Spine.String boneName)
+            {
+                if (ReferenceEquals(boneName, null))
+                    throw new global::System.ArgumentNullException("boneName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = boneName.__Instance;
+                var ___ret = __Internal.FindBone(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.Bone.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.Slot FindSlot(global::spine_cpp.Spine.String slotName)
+            {
+                if (ReferenceEquals(slotName, null))
+                    throw new global::System.ArgumentNullException("slotName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = slotName.__Instance;
+                var ___ret = __Internal.FindSlot(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.Slot.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <summary>Sets a skin by name (see setSkin).</summary>
+            public void SetSkin(global::spine_cpp.Spine.String skinName)
+            {
+                if (ReferenceEquals(skinName, null))
+                    throw new global::System.ArgumentNullException("skinName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skinName.__Instance;
+                __Internal.SetSkin(__Instance, __arg0);
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.Attachment GetAttachment(global::spine_cpp.Spine.String slotName, global::spine_cpp.Spine.String attachmentName)
+            {
+                if (ReferenceEquals(slotName, null))
+                    throw new global::System.ArgumentNullException("slotName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = slotName.__Instance;
+                if (ReferenceEquals(attachmentName, null))
+                    throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = attachmentName.__Instance;
+                var ___ret = __Internal.GetAttachment(__Instance, __arg0, __arg1);
+                var __result0 = global::spine_cpp.Spine.Attachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.Attachment GetAttachment(int slotIndex, global::spine_cpp.Spine.String attachmentName)
+            {
+                if (ReferenceEquals(attachmentName, null))
+                    throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = attachmentName.__Instance;
+                var ___ret = __Internal.GetAttachment(__Instance, slotIndex, __arg1);
+                var __result0 = global::spine_cpp.Spine.Attachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <param name="attachmentName">May be empty.</param>
+            public void SetAttachment(global::spine_cpp.Spine.String slotName, global::spine_cpp.Spine.String attachmentName)
+            {
+                if (ReferenceEquals(slotName, null))
+                    throw new global::System.ArgumentNullException("slotName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = slotName.__Instance;
+                if (ReferenceEquals(attachmentName, null))
+                    throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = attachmentName.__Instance;
+                __Internal.SetAttachment(__Instance, __arg0, __arg1);
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.IkConstraint FindIkConstraint(global::spine_cpp.Spine.String constraintName)
+            {
+                if (ReferenceEquals(constraintName, null))
+                    throw new global::System.ArgumentNullException("constraintName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = constraintName.__Instance;
+                var ___ret = __Internal.FindIkConstraint(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.IkConstraint.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.TransformConstraint FindTransformConstraint(global::spine_cpp.Spine.String constraintName)
+            {
+                if (ReferenceEquals(constraintName, null))
+                    throw new global::System.ArgumentNullException("constraintName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = constraintName.__Instance;
+                var ___ret = __Internal.FindTransformConstraint(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.TransformConstraint.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.PathConstraint FindPathConstraint(global::spine_cpp.Spine.String constraintName)
+            {
+                if (ReferenceEquals(constraintName, null))
+                    throw new global::System.ArgumentNullException("constraintName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = constraintName.__Instance;
+                var ___ret = __Internal.FindPathConstraint(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.PathConstraint.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
             public void SetPosition(float x, float y)
             {
                 __Internal.SetPosition(__Instance, x, y);
@@ -19298,7 +24676,7 @@ namespace spine_cpp
                 set
                 {
                     var __arg0 = value is null ? __IntPtr.Zero : value.__Instance;
-                    __Internal.SetSkin(__Instance, __arg0);
+                    __Internal.SetSkin_1(__Instance, __arg0);
                 }
             }
 
@@ -19399,7 +24777,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -19447,8 +24825,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -19460,7 +24837,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -19471,10 +24848,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class SkeletonBinary : IDisposable
+        public unsafe partial class SkeletonBinary : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 88)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr _attachmentLoader;
@@ -19495,36 +24872,24 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?readSkeletonData@SkeletonBinary@spine@@QEAAPEAVSkeletonData@2@PEBEH@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr ReadSkeletonData(__IntPtr __instance, byte* binary, int length);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?readSkeletonDataFile@SkeletonBinary@spine@@QEAAPEAVSkeletonData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ReadSkeletonDataFile(__IntPtr __instance, __IntPtr path);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setScale@SkeletonBinary@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetScale(__IntPtr __instance, float scale);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getError@SkeletonBinary@spine@@QEAAAEAVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetError(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonBinary> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonBinary>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SkeletonBinary managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SkeletonBinary managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static SkeletonBinary __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new SkeletonBinary __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new SkeletonBinary(native.ToPointer(), skipVTables);
             }
 
-            internal static SkeletonBinary __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new SkeletonBinary __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -19536,7 +24901,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static SkeletonBinary __GetInstance(__IntPtr native)
+            internal static new SkeletonBinary __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -19566,15 +24931,16 @@ namespace spine_cpp
             }
 
             protected SkeletonBinary(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public SkeletonBinary(global::spine_cpp.Spine.Atlas atlasArray)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonBinary.__Internal));
                 __ownsNativeInstance = true;
@@ -19585,6 +24951,7 @@ namespace spine_cpp
             }
 
             public SkeletonBinary(global::spine_cpp.Spine.AttachmentLoader attachmentLoader, bool ownsLoader)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonBinary.__Internal));
                 __ownsNativeInstance = true;
@@ -19595,6 +24962,7 @@ namespace spine_cpp
             }
 
             public SkeletonBinary(global::spine_cpp.Spine.SkeletonBinary _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonBinary.__Internal));
                 __ownsNativeInstance = true;
@@ -19606,14 +24974,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.SkeletonBinary");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -19633,6 +24996,16 @@ namespace spine_cpp
             public global::spine_cpp.Spine.SkeletonData ReadSkeletonData(byte* binary, int length)
             {
                 var ___ret = __Internal.ReadSkeletonData(__Instance, binary, length);
+                var __result0 = global::spine_cpp.Spine.SkeletonData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public global::spine_cpp.Spine.SkeletonData ReadSkeletonDataFile(global::spine_cpp.Spine.String path)
+            {
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                var ___ret = __Internal.ReadSkeletonDataFile(__Instance, __arg0);
                 var __result0 = global::spine_cpp.Spine.SkeletonData.__GetOrCreateInstance(___ret, true);
                 return __result0;
             }
@@ -19671,6 +25044,16 @@ namespace spine_cpp
             public const int CURVE_LINEAR = 0;
             public const int CURVE_STEPPED = 1;
             public const int CURVE_BEZIER = 2;
+            public global::spine_cpp.Spine.String Error
+            {
+                get
+                {
+                    var ___ret = __Internal.GetError(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+            }
+
             #region Virtual table interop
 
             // ~SkeletonBinary()
@@ -19682,7 +25065,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -19730,8 +25113,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -19743,7 +25125,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -19758,10 +25140,10 @@ namespace spine_cpp
         /// <para>Collects each BoundingBoxAttachment that is visible and computes the world vertices for its polygon.</para>
         /// <para>The polygon vertices are provided along with convenience methods for doing hit detection.</para>
         /// </summary>
-        public unsafe partial class SkeletonBounds : IDisposable
+        public unsafe partial class SkeletonBounds : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 128)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Pool.__Internalc__N_spine_S_Pool____N_spine_S_Polygon _polygonPool;
@@ -19820,32 +25202,14 @@ namespace spine_cpp
                 internal static extern float GetHeight(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonBounds> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonBounds>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SkeletonBounds managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SkeletonBounds managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static SkeletonBounds __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new SkeletonBounds __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new SkeletonBounds(native.ToPointer(), skipVTables);
             }
 
-            internal static SkeletonBounds __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new SkeletonBounds __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -19857,7 +25221,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static SkeletonBounds __GetInstance(__IntPtr native)
+            internal static new SkeletonBounds __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -19887,15 +25251,16 @@ namespace spine_cpp
             }
 
             protected SkeletonBounds(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public SkeletonBounds()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonBounds.__Internal));
                 __ownsNativeInstance = true;
@@ -19905,6 +25270,7 @@ namespace spine_cpp
             }
 
             public SkeletonBounds(global::spine_cpp.Spine.SkeletonBounds _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonBounds.__Internal));
                 __ownsNativeInstance = true;
@@ -19916,14 +25282,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.SkeletonBounds");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -20069,7 +25430,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -20117,8 +25478,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -20130,7 +25490,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -20138,10 +25498,10 @@ namespace spine_cpp
             #endregion
         }
 
-        public unsafe partial class Polygon : IDisposable
+        public unsafe partial class Polygon : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 48)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Vector.__Internal _vertices;
@@ -20154,32 +25514,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Polygon> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Polygon>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Polygon managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Polygon managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Polygon __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Polygon __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Polygon(native.ToPointer(), skipVTables);
             }
 
-            internal static Polygon __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Polygon __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -20191,7 +25533,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Polygon __GetInstance(__IntPtr native)
+            internal static new Polygon __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -20221,15 +25563,16 @@ namespace spine_cpp
             }
 
             protected Polygon(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Polygon()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Polygon.__Internal));
                 __ownsNativeInstance = true;
@@ -20239,6 +25582,7 @@ namespace spine_cpp
             }
 
             public Polygon(global::spine_cpp.Spine.Polygon _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Polygon.__Internal));
                 __ownsNativeInstance = true;
@@ -20250,14 +25594,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Polygon");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -20298,7 +25637,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -20346,8 +25685,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -20359,7 +25697,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -20370,10 +25708,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class Triangulator : IDisposable
+        public unsafe partial class Triangulator : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 248)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Vector.__Internal _convexPolygons;
@@ -20391,32 +25729,14 @@ namespace spine_cpp
                 internal static extern __IntPtr ctor(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Triangulator> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Triangulator>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Triangulator managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Triangulator managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Triangulator __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Triangulator __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Triangulator(native.ToPointer(), skipVTables);
             }
 
-            internal static Triangulator __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Triangulator __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -20428,7 +25748,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Triangulator __GetInstance(__IntPtr native)
+            internal static new Triangulator __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -20458,15 +25778,16 @@ namespace spine_cpp
             }
 
             protected Triangulator(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Triangulator(global::spine_cpp.Spine.Triangulator _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Triangulator.__Internal));
                 __ownsNativeInstance = true;
@@ -20479,6 +25800,7 @@ namespace spine_cpp
             }
 
             public Triangulator()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Triangulator.__Internal));
                 __ownsNativeInstance = true;
@@ -20487,14 +25809,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Triangulator");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -20522,7 +25839,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -20570,8 +25887,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -20583,7 +25899,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -20594,10 +25910,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class SkeletonClipping : IDisposable
+        public unsafe partial class SkeletonClipping : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 464)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Triangulator.__Internal _triangulator;
@@ -20633,32 +25949,14 @@ namespace spine_cpp
                 internal static extern bool IsClipping(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonClipping> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonClipping>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SkeletonClipping managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SkeletonClipping managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static SkeletonClipping __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new SkeletonClipping __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new SkeletonClipping(native.ToPointer(), skipVTables);
             }
 
-            internal static SkeletonClipping __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new SkeletonClipping __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -20670,7 +25968,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static SkeletonClipping __GetInstance(__IntPtr native)
+            internal static new SkeletonClipping __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -20700,15 +25998,16 @@ namespace spine_cpp
             }
 
             protected SkeletonClipping(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public SkeletonClipping()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonClipping.__Internal));
                 __ownsNativeInstance = true;
@@ -20718,6 +26017,7 @@ namespace spine_cpp
             }
 
             public SkeletonClipping(global::spine_cpp.Spine.SkeletonClipping _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonClipping.__Internal));
                 __ownsNativeInstance = true;
@@ -20729,14 +26029,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.SkeletonClipping");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -20813,7 +26108,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -20861,8 +26156,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -20874,7 +26168,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -20886,10 +26180,10 @@ namespace spine_cpp
     namespace Spine
     {
         /// <summary>Stores the setup pose and all of the stateless data for a skeleton.</summary>
-        public unsafe partial class SkeletonData : IDisposable
+        public unsafe partial class SkeletonData : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 488)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.String.__Internal _name;
@@ -20918,6 +26212,36 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SkeletonData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findBone@SkeletonData@spine@@QEAAPEAVBoneData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindBone(__IntPtr __instance, __IntPtr boneName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findSlot@SkeletonData@spine@@QEAAPEAVSlotData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindSlot(__IntPtr __instance, __IntPtr slotName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findSkin@SkeletonData@spine@@QEAAPEAVSkin@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindSkin(__IntPtr __instance, __IntPtr skinName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findEvent@SkeletonData@spine@@QEAAPEAVEventData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindEvent(__IntPtr __instance, __IntPtr eventDataName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findAnimation@SkeletonData@spine@@QEAAPEAVAnimation@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindAnimation(__IntPtr __instance, __IntPtr animationName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findIkConstraint@SkeletonData@spine@@QEAAPEAVIkConstraintData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindIkConstraint(__IntPtr __instance, __IntPtr constraintName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findTransformConstraint@SkeletonData@spine@@QEAAPEAVTransformConstraintData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindTransformConstraint(__IntPtr __instance, __IntPtr constraintName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?findPathConstraint@SkeletonData@spine@@QEAAPEAVPathConstraintData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr FindPathConstraint(__IntPtr __instance, __IntPtr constraintName);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@SkeletonData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setName@SkeletonData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetName(__IntPtr __instance, __IntPtr inValue);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getDefaultSkin@SkeletonData@spine@@QEAAPEAVSkin@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetDefaultSkin(__IntPtr __instance);
@@ -20949,6 +26273,30 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setHeight@SkeletonData@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetHeight(__IntPtr __instance, float inValue);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getVersion@SkeletonData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetVersion(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setVersion@SkeletonData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetVersion(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getHash@SkeletonData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetHash(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setHash@SkeletonData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetHash(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getImagesPath@SkeletonData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetImagesPath(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setImagesPath@SkeletonData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetImagesPath(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAudioPath@SkeletonData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetAudioPath(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAudioPath@SkeletonData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetAudioPath(__IntPtr __instance, __IntPtr inValue);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getFps@SkeletonData@spine@@QEAAMXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern float GetFps(__IntPtr __instance);
 
@@ -20956,32 +26304,14 @@ namespace spine_cpp
                 internal static extern void SetFps(__IntPtr __instance, float inValue);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonData> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonData>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SkeletonData managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SkeletonData managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static SkeletonData __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new SkeletonData __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new SkeletonData(native.ToPointer(), skipVTables);
             }
 
-            internal static SkeletonData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new SkeletonData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -20993,7 +26323,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static SkeletonData __GetInstance(__IntPtr native)
+            internal static new SkeletonData __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -21023,15 +26353,16 @@ namespace spine_cpp
             }
 
             protected SkeletonData(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public SkeletonData()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonData.__Internal));
                 __ownsNativeInstance = true;
@@ -21041,6 +26372,7 @@ namespace spine_cpp
             }
 
             public SkeletonData(global::spine_cpp.Spine.SkeletonData _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonData.__Internal));
                 __ownsNativeInstance = true;
@@ -21052,14 +26384,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.SkeletonData");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -21074,6 +26401,116 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            /// <summary>
+            /// <para>Finds a bone by comparing each bone's name.</para>
+            /// <para>It is more efficient to cache the results of this method than to call it multiple times.</para>
+            /// </summary>
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.BoneData FindBone(global::spine_cpp.Spine.String boneName)
+            {
+                if (ReferenceEquals(boneName, null))
+                    throw new global::System.ArgumentNullException("boneName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = boneName.__Instance;
+                var ___ret = __Internal.FindBone(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.BoneData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.SlotData FindSlot(global::spine_cpp.Spine.String slotName)
+            {
+                if (ReferenceEquals(slotName, null))
+                    throw new global::System.ArgumentNullException("slotName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = slotName.__Instance;
+                var ___ret = __Internal.FindSlot(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.SlotData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.Skin FindSkin(global::spine_cpp.Spine.String skinName)
+            {
+                if (ReferenceEquals(skinName, null))
+                    throw new global::System.ArgumentNullException("skinName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skinName.__Instance;
+                var ___ret = __Internal.FindSkin(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.Skin.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.EventData FindEvent(global::spine_cpp.Spine.String eventDataName)
+            {
+                if (ReferenceEquals(eventDataName, null))
+                    throw new global::System.ArgumentNullException("eventDataName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = eventDataName.__Instance;
+                var ___ret = __Internal.FindEvent(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.EventData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.Animation FindAnimation(global::spine_cpp.Spine.String animationName)
+            {
+                if (ReferenceEquals(animationName, null))
+                    throw new global::System.ArgumentNullException("animationName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = animationName.__Instance;
+                var ___ret = __Internal.FindAnimation(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.Animation.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.IkConstraintData FindIkConstraint(global::spine_cpp.Spine.String constraintName)
+            {
+                if (ReferenceEquals(constraintName, null))
+                    throw new global::System.ArgumentNullException("constraintName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = constraintName.__Instance;
+                var ___ret = __Internal.FindIkConstraint(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.IkConstraintData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.TransformConstraintData FindTransformConstraint(global::spine_cpp.Spine.String constraintName)
+            {
+                if (ReferenceEquals(constraintName, null))
+                    throw new global::System.ArgumentNullException("constraintName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = constraintName.__Instance;
+                var ___ret = __Internal.FindTransformConstraint(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.TransformConstraintData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            /// <returns>May be NULL.</returns>
+            public global::spine_cpp.Spine.PathConstraintData FindPathConstraint(global::spine_cpp.Spine.String constraintName)
+            {
+                if (ReferenceEquals(constraintName, null))
+                    throw new global::System.ArgumentNullException("constraintName", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = constraintName.__Instance;
+                var ___ret = __Internal.FindPathConstraint(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.PathConstraintData.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetName(__Instance, __arg0);
+                }
             }
 
             /// <summary>
@@ -21153,6 +26590,79 @@ namespace spine_cpp
                 }
             }
 
+            /// <summary>The Spine version used to export this data, or NULL.</summary>
+            public global::spine_cpp.Spine.String Version
+            {
+                get
+                {
+                    var ___ret = __Internal.GetVersion(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetVersion(__Instance, __arg0);
+                }
+            }
+
+            public global::spine_cpp.Spine.String Hash
+            {
+                get
+                {
+                    var ___ret = __Internal.GetHash(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetHash(__Instance, __arg0);
+                }
+            }
+
+            public global::spine_cpp.Spine.String ImagesPath
+            {
+                get
+                {
+                    var ___ret = __Internal.GetImagesPath(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetImagesPath(__Instance, __arg0);
+                }
+            }
+
+            public global::spine_cpp.Spine.String AudioPath
+            {
+                get
+                {
+                    var ___ret = __Internal.GetAudioPath(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetAudioPath(__Instance, __arg0);
+                }
+            }
+
             /// <summary>The dopesheet FPS in Spine. Available only when nonessential data was exported.</summary>
             public float Fps
             {
@@ -21179,7 +26689,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -21227,8 +26737,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -21240,7 +26749,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -21251,10 +26760,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class SkeletonJson : IDisposable
+        public unsafe partial class SkeletonJson : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 88)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal __IntPtr _attachmentLoader;
@@ -21272,39 +26781,27 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SkeletonJson@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?readSkeletonDataFile@SkeletonJson@spine@@QEAAPEAVSkeletonData@2@AEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ReadSkeletonDataFile(__IntPtr __instance, __IntPtr path);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?readSkeletonData@SkeletonJson@spine@@QEAAPEAVSkeletonData@2@PEBD@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr ReadSkeletonData(__IntPtr __instance, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string json);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setScale@SkeletonJson@spine@@QEAAXM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetScale(__IntPtr __instance, float scale);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getError@SkeletonJson@spine@@QEAAAEAVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetError(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonJson> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SkeletonJson>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SkeletonJson managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SkeletonJson managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static SkeletonJson __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new SkeletonJson __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new SkeletonJson(native.ToPointer(), skipVTables);
             }
 
-            internal static SkeletonJson __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new SkeletonJson __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -21316,7 +26813,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static SkeletonJson __GetInstance(__IntPtr native)
+            internal static new SkeletonJson __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -21346,15 +26843,16 @@ namespace spine_cpp
             }
 
             protected SkeletonJson(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public SkeletonJson(global::spine_cpp.Spine.Atlas atlas)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonJson.__Internal));
                 __ownsNativeInstance = true;
@@ -21365,6 +26863,7 @@ namespace spine_cpp
             }
 
             public SkeletonJson(global::spine_cpp.Spine.AttachmentLoader attachmentLoader, bool ownsLoader)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonJson.__Internal));
                 __ownsNativeInstance = true;
@@ -21375,6 +26874,7 @@ namespace spine_cpp
             }
 
             public SkeletonJson(global::spine_cpp.Spine.SkeletonJson _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SkeletonJson.__Internal));
                 __ownsNativeInstance = true;
@@ -21386,14 +26886,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.SkeletonJson");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -21408,6 +26903,16 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public global::spine_cpp.Spine.SkeletonData ReadSkeletonDataFile(global::spine_cpp.Spine.String path)
+            {
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                var ___ret = __Internal.ReadSkeletonDataFile(__Instance, __arg0);
+                var __result0 = global::spine_cpp.Spine.SkeletonData.__GetOrCreateInstance(___ret, true);
+                return __result0;
             }
 
             public global::spine_cpp.Spine.SkeletonData ReadSkeletonData(string json)
@@ -21427,6 +26932,16 @@ namespace spine_cpp
                 return new global::spine_cpp.Spine.SkeletonJson(atlas);
             }
 
+            public global::spine_cpp.Spine.String Error
+            {
+                get
+                {
+                    var ___ret = __Internal.GetError(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+            }
+
             #region Virtual table interop
 
             // ~SkeletonJson()
@@ -21438,7 +26953,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -21486,8 +27001,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -21499,7 +27013,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -21515,10 +27029,10 @@ namespace spine_cpp
         /// <para>See SkeletonData::getDefaultSkin, Skeleton::getSkin, and</para>
         /// <para>http://esotericsoftware.com/spine-runtime-skins in the Spine Runtimes Guide.</para>
         /// </summary>
-        public unsafe partial class Skin : IDisposable
+        public unsafe partial class Skin : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 144)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.String.__Internal _name;
@@ -21526,8 +27040,20 @@ namespace spine_cpp
                 internal global::spine_cpp.Spine.Vector.__Internal _bones;
                 internal global::spine_cpp.Spine.Vector.__Internal _constraints;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Skin@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Skin@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAttachment@Skin@spine@@QEAAX_KAEBVString@2@PEAVAttachment@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetAttachment(__IntPtr __instance, ulong slotIndex, __IntPtr name, __IntPtr attachment);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAttachment@Skin@spine@@QEAAPEAVAttachment@2@_KAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetAttachment(__IntPtr __instance, ulong slotIndex, __IntPtr name);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?removeAttachment@Skin@spine@@QEAAX_KAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void RemoveAttachment(__IntPtr __instance, ulong slotIndex, __IntPtr name);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?addSkin@Skin@spine@@QEAAXPEAV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void AddSkin(__IntPtr __instance, __IntPtr other);
@@ -21535,14 +27061,17 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?copySkin@Skin@spine@@QEAAXPEAV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void CopySkin(__IntPtr __instance, __IntPtr other);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@Skin@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAttachments@Skin@spine@@QEAA?AVEntries@AttachmentMap@12@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void GetAttachments(__IntPtr __instance, __IntPtr @return);
             }
 
-            public unsafe partial class AttachmentMap : IDisposable
+            public unsafe partial class AttachmentMap : global::spine_cpp.Spine.SpineObject, IDisposable
             {
                 [StructLayout(LayoutKind.Sequential, Size = 40)]
-                public partial struct __Internal
+                public new partial struct __Internal
                 {
                     internal __IntPtr vfptr_SpineObject;
                     internal global::spine_cpp.Spine.Vector.__Internal _buckets;
@@ -21552,6 +27081,15 @@ namespace spine_cpp
 
                     [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0AttachmentMap@Skin@spine@@QEAA@AEBV012@@Z", CallingConvention = __CallingConvention.Cdecl)]
                     internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                    [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?put@AttachmentMap@Skin@spine@@QEAAX_KAEBVString@3@PEAVAttachment@3@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                    internal static extern void Put(__IntPtr __instance, ulong slotIndex, __IntPtr attachmentName, __IntPtr attachment);
+
+                    [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?get@AttachmentMap@Skin@spine@@QEAAPEAVAttachment@3@_KAEBVString@3@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                    internal static extern __IntPtr Get(__IntPtr __instance, ulong slotIndex, __IntPtr attachmentName);
+
+                    [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?remove@AttachmentMap@Skin@spine@@QEAAX_KAEBVString@3@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                    internal static extern void Remove(__IntPtr __instance, ulong slotIndex, __IntPtr attachmentName);
 
                     [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getEntries@AttachmentMap@Skin@spine@@QEAA?AVEntries@123@XZ", CallingConvention = __CallingConvention.Cdecl)]
                     internal static extern void GetEntries(__IntPtr __instance, __IntPtr @return);
@@ -21565,6 +27103,9 @@ namespace spine_cpp
                         internal ulong _slotIndex;
                         internal global::spine_cpp.Spine.String.__Internal _name;
                         internal __IntPtr _attachment;
+
+                        [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Entry@AttachmentMap@Skin@spine@@QEAA@_KAEBVString@3@PEAVAttachment@3@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                        internal static extern __IntPtr ctor(__IntPtr __instance, ulong slotIndex, __IntPtr name, __IntPtr attachment);
 
                         [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0Entry@AttachmentMap@Skin@spine@@QEAA@AEBU0123@@Z", CallingConvention = __CallingConvention.Cdecl)]
                         internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
@@ -21636,6 +27177,18 @@ namespace spine_cpp
                         __Instance = new __IntPtr(native);
                     }
 
+                    public Entry(ulong slotIndex, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.Attachment attachment)
+                    {
+                        __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skin.AttachmentMap.Entry.__Internal));
+                        __ownsNativeInstance = true;
+                        __RecordNativeToManagedMapping(__Instance, this);
+                        if (ReferenceEquals(name, null))
+                            throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                        var __arg1 = name.__Instance;
+                        var __arg2 = attachment is null ? __IntPtr.Zero : attachment.__Instance;
+                        __Internal.ctor(__Instance, slotIndex, __arg1, __arg2);
+                    }
+
                     public Entry(global::spine_cpp.Spine.Skin.AttachmentMap.Entry _0)
                     {
                         __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skin.AttachmentMap.Entry.__Internal));
@@ -21677,6 +27230,21 @@ namespace spine_cpp
                         set
                         {
                             ((__Internal*)__Instance)->_slotIndex = value;
+                        }
+                    }
+
+                    public global::spine_cpp.Spine.String Name
+                    {
+                        get
+                        {
+                            return global::spine_cpp.Spine.String.__CreateInstance(new __IntPtr(&((__Internal*)__Instance)->_name));
+                        }
+
+                        set
+                        {
+                            if (ReferenceEquals(value, null))
+                                throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
+                            ((__Internal*)__Instance)->_name = *(global::spine_cpp.Spine.String.__Internal*) value.__Instance;
                         }
                     }
 
@@ -21824,32 +27392,14 @@ namespace spine_cpp
                     }
                 }
 
-                public __IntPtr __Instance { get; protected set; }
-
-                internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Skin.AttachmentMap> NativeToManagedMap =
-                    new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Skin.AttachmentMap>();
-
-                internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Skin.AttachmentMap managed)
-                {
-                    NativeToManagedMap[native] = managed;
-                }
-
-                internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Skin.AttachmentMap managed)
-                {
-    
-                    return NativeToManagedMap.TryGetValue(native, out managed);
-                }
-
-                protected bool __ownsNativeInstance;
-
-                internal static AttachmentMap __CreateInstance(__IntPtr native, bool skipVTables = false)
+                internal static new AttachmentMap __CreateInstance(__IntPtr native, bool skipVTables = false)
                 {
                     if (native == __IntPtr.Zero)
                         return null;
                     return new AttachmentMap(native.ToPointer(), skipVTables);
                 }
 
-                internal static AttachmentMap __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+                internal static new AttachmentMap __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
                 {
                     if (native == __IntPtr.Zero)
                         return null;
@@ -21861,7 +27411,7 @@ namespace spine_cpp
                     return result;
                 }
 
-                internal static AttachmentMap __GetInstance(__IntPtr native)
+                internal static new AttachmentMap __GetInstance(__IntPtr native)
                 {
                     if (!__TryGetNativeToManagedMapping(native, out var managed))
                         throw new global::System.Exception("No managed instance was found");
@@ -21891,15 +27441,16 @@ namespace spine_cpp
                 }
 
                 protected AttachmentMap(void* native, bool skipVTables = false)
+                    : base((void*) native)
                 {
                     if (native == null)
                         return;
-                    __Instance = new __IntPtr(native);
                     if (!skipVTables)
                         SetupVTables(true);
                 }
 
                 protected AttachmentMap()
+                    : this((void*) null)
                 {
                     __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skin.AttachmentMap.__Internal));
                     __ownsNativeInstance = true;
@@ -21909,6 +27460,7 @@ namespace spine_cpp
                 }
 
                 public AttachmentMap(global::spine_cpp.Spine.Skin.AttachmentMap _0)
+                    : this((void*) null)
                 {
                     __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skin.AttachmentMap.__Internal));
                     __ownsNativeInstance = true;
@@ -21920,14 +27472,9 @@ namespace spine_cpp
                     SetupVTables(GetType().FullName == "spine_cpp.Spine.Skin.AttachmentMap");
                 }
 
-                public void Dispose()
-                {
-                    Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-                }
-
                 partial void DisposePartial(bool disposing);
 
-                internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+                internal protected override void Dispose(bool disposing, bool callNativeDtor )
                 {
                     if (__Instance == IntPtr.Zero)
                         return;
@@ -21942,6 +27489,33 @@ namespace spine_cpp
                     if (__ownsNativeInstance)
                         Marshal.FreeHGlobal(__Instance);
                     __Instance = IntPtr.Zero;
+                }
+
+                public void Put(ulong slotIndex, global::spine_cpp.Spine.String attachmentName, global::spine_cpp.Spine.Attachment attachment)
+                {
+                    if (ReferenceEquals(attachmentName, null))
+                        throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                    var __arg1 = attachmentName.__Instance;
+                    var __arg2 = attachment is null ? __IntPtr.Zero : attachment.__Instance;
+                    __Internal.Put(__Instance, slotIndex, __arg1, __arg2);
+                }
+
+                public global::spine_cpp.Spine.Attachment Get(ulong slotIndex, global::spine_cpp.Spine.String attachmentName)
+                {
+                    if (ReferenceEquals(attachmentName, null))
+                        throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                    var __arg1 = attachmentName.__Instance;
+                    var ___ret = __Internal.Get(__Instance, slotIndex, __arg1);
+                    var __result0 = global::spine_cpp.Spine.Attachment.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                public void Remove(ulong slotIndex, global::spine_cpp.Spine.String attachmentName)
+                {
+                    if (ReferenceEquals(attachmentName, null))
+                        throw new global::System.ArgumentNullException("attachmentName", "Cannot be null because it is a C++ reference (&).");
+                    var __arg1 = attachmentName.__Instance;
+                    __Internal.Remove(__Instance, slotIndex, __arg1);
                 }
 
                 public global::spine_cpp.Spine.Skin.AttachmentMap.Entries entries
@@ -21965,7 +27539,7 @@ namespace spine_cpp
                     __target.Dispose(disposing: true, callNativeDtor: true);
                 }
 
-                internal static class VTableLoader
+                internal static new class VTableLoader
                 {
                     private static volatile bool initialized;
                     private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -22013,8 +27587,7 @@ namespace spine_cpp
                     }
                 }
 
-                protected CppSharp.Runtime.VTables __vtables;
-                internal virtual CppSharp.Runtime.VTables __VTables
+                internal override CppSharp.Runtime.VTables __VTables
                 {
                     get {
                         if (__vtables.IsEmpty)
@@ -22026,7 +27599,7 @@ namespace spine_cpp
                         __vtables = value;
                     }
                 }
-                internal virtual void SetupVTables(bool destructorOnly = false)
+                internal override void SetupVTables(bool destructorOnly = false)
                 {
                     if (__VTables.IsTransient)
                         __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -22034,32 +27607,14 @@ namespace spine_cpp
                 #endregion
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Skin> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Skin>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Skin managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Skin managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Skin __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Skin __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Skin(native.ToPointer(), skipVTables);
             }
 
-            internal static Skin __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Skin __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -22071,7 +27626,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Skin __GetInstance(__IntPtr native)
+            internal static new Skin __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -22089,7 +27644,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.Skin.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.Skin.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -22101,15 +27656,29 @@ namespace spine_cpp
             }
 
             protected Skin(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public Skin(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skin.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.Skin");
+            }
+
             public Skin(global::spine_cpp.Spine.Skin _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Skin.__Internal));
                 __ownsNativeInstance = true;
@@ -22117,18 +27686,13 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Skin");
-            }
-
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
             }
 
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -22145,6 +27709,38 @@ namespace spine_cpp
                 __Instance = IntPtr.Zero;
             }
 
+            /// <summary>
+            /// <para>Adds an attachment to the skin for the specified slot index and name.</para>
+            /// <para>If the name already exists for the slot, the previous value is replaced.</para>
+            /// </summary>
+            public void SetAttachment(ulong slotIndex, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.Attachment attachment)
+            {
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var __arg2 = attachment is null ? __IntPtr.Zero : attachment.__Instance;
+                __Internal.SetAttachment(__Instance, slotIndex, __arg1, __arg2);
+            }
+
+            /// <summary>Returns the attachment for the specified slot index and name, or NULL.</summary>
+            public global::spine_cpp.Spine.Attachment GetAttachment(ulong slotIndex, global::spine_cpp.Spine.String name)
+            {
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                var ___ret = __Internal.GetAttachment(__Instance, slotIndex, __arg1);
+                var __result0 = global::spine_cpp.Spine.Attachment.__GetOrCreateInstance(___ret, true);
+                return __result0;
+            }
+
+            public void RemoveAttachment(ulong slotIndex, global::spine_cpp.Spine.String name)
+            {
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                __Internal.RemoveAttachment(__Instance, slotIndex, __arg1);
+            }
+
             /// <summary>Adds all attachments, bones, and constraints from the specified skin to this skin.</summary>
             public void AddSkin(global::spine_cpp.Spine.Skin other)
             {
@@ -22157,6 +27753,21 @@ namespace spine_cpp
             {
                 var __arg0 = other is null ? __IntPtr.Zero : other.__Instance;
                 __Internal.CopySkin(__Instance, __arg0);
+            }
+
+            public static explicit operator global::spine_cpp.Spine.Skin(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.Skin(name);
+            }
+
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
             }
 
             public global::spine_cpp.Spine.Skin.AttachmentMap.Entries Attachments
@@ -22180,7 +27791,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -22228,8 +27839,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -22241,7 +27851,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -22252,10 +27862,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class SlotData : IDisposable
+        public unsafe partial class SlotData : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 152)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal int _index;
@@ -22267,11 +27877,17 @@ namespace spine_cpp
                 internal global::spine_cpp.Spine.String.__Internal _attachmentName;
                 internal global::spine_cpp.Spine.BlendMode _blendMode;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SlotData@spine@@QEAA@HAEBVString@1@AEAVBoneData@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, int index, __IntPtr name, __IntPtr boneData);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0SlotData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getIndex@SlotData@spine@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int GetIndex(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getName@SlotData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetName(__IntPtr __instance);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getBoneData@SlotData@spine@@QEAAAEAVBoneData@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetBoneData(__IntPtr __instance);
@@ -22289,6 +27905,12 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setHasDarkColor@SlotData@spine@@QEAAX_N@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetHasDarkColor(__IntPtr __instance, bool inValue);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getAttachmentName@SlotData@spine@@QEAAAEBVString@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetAttachmentName(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?setAttachmentName@SlotData@spine@@QEAAXAEBVString@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetAttachmentName(__IntPtr __instance, __IntPtr inValue);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getBlendMode@SlotData@spine@@QEAA?AW4BlendMode@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern global::spine_cpp.Spine.BlendMode GetBlendMode(__IntPtr __instance);
 
@@ -22296,32 +27918,14 @@ namespace spine_cpp
                 internal static extern void SetBlendMode(__IntPtr __instance, global::spine_cpp.Spine.BlendMode inValue);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SlotData> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.SlotData>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.SlotData managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.SlotData managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static SlotData __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new SlotData __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new SlotData(native.ToPointer(), skipVTables);
             }
 
-            internal static SlotData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new SlotData __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -22333,7 +27937,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static SlotData __GetInstance(__IntPtr native)
+            internal static new SlotData __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -22363,15 +27967,32 @@ namespace spine_cpp
             }
 
             protected SlotData(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
+            public SlotData(int index, global::spine_cpp.Spine.String name, global::spine_cpp.Spine.BoneData boneData)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SlotData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = name.__Instance;
+                if (ReferenceEquals(boneData, null))
+                    throw new global::System.ArgumentNullException("boneData", "Cannot be null because it is a C++ reference (&).");
+                var __arg2 = boneData.__Instance;
+                __Internal.ctor(__Instance, index, __arg1, __arg2);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.SlotData");
+            }
+
             public SlotData(global::spine_cpp.Spine.SlotData _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.SlotData.__Internal));
                 __ownsNativeInstance = true;
@@ -22383,14 +28004,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.SlotData");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -22413,6 +28029,16 @@ namespace spine_cpp
                 {
                     var ___ret = __Internal.GetIndex(__Instance);
                     return ___ret;
+                }
+            }
+
+            public global::spine_cpp.Spine.String Name
+            {
+                get
+                {
+                    var ___ret = __Internal.GetName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
                 }
             }
 
@@ -22460,6 +28086,25 @@ namespace spine_cpp
                 }
             }
 
+            /// <summary>May be empty.</summary>
+            public global::spine_cpp.Spine.String AttachmentName
+            {
+                get
+                {
+                    var ___ret = __Internal.GetAttachmentName(__Instance);
+                    var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(___ret, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    if (ReferenceEquals(value, null))
+                        throw new global::System.ArgumentNullException("value", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = value.__Instance;
+                    __Internal.SetAttachmentName(__Instance, __arg0);
+                }
+            }
+
             public global::spine_cpp.Spine.BlendMode BlendMode
             {
                 get
@@ -22485,7 +28130,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -22533,8 +28178,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -22546,7 +28190,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -22557,10 +28201,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe abstract partial class TextureLoader : IDisposable
+        public unsafe abstract partial class TextureLoader : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 8)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
 
@@ -22571,32 +28215,14 @@ namespace spine_cpp
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.TextureLoader> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.TextureLoader>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.TextureLoader managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.TextureLoader managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static TextureLoader __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new TextureLoader __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new TextureLoaderInternal(native.ToPointer(), skipVTables);
             }
 
-            internal static TextureLoader __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new TextureLoader __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -22608,7 +28234,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static TextureLoader __GetInstance(__IntPtr native)
+            internal static new TextureLoader __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -22624,15 +28250,16 @@ namespace spine_cpp
             }
 
             protected TextureLoader(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             protected TextureLoader()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.TextureLoader.__Internal));
                 __ownsNativeInstance = true;
@@ -22642,6 +28269,7 @@ namespace spine_cpp
             }
 
             protected TextureLoader(global::spine_cpp.Spine.TextureLoader _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.TextureLoader.__Internal));
                 __ownsNativeInstance = true;
@@ -22653,14 +28281,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.TextureLoader");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -22671,6 +28294,8 @@ namespace spine_cpp
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
             }
+
+            public abstract void Load(global::spine_cpp.Spine.AtlasPage page, global::spine_cpp.Spine.String path);
 
             public abstract void Unload(__IntPtr texture);
 
@@ -22685,6 +28310,17 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // void load(AtlasPage &page, const String &path) = 0
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr___IntPtr _LoadDelegateInstance;
+
+            private static void _LoadDelegateHook(__IntPtr __instance, __IntPtr page, __IntPtr path)
+            {
+                var __target = global::spine_cpp.Spine.TextureLoader.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.AtlasPage.__GetOrCreateInstance(page, false, skipVTables: true);
+                var __result1 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                __target.Load(__result0, __result1);
+            }
+
             // void unload(void *texture) = 0
             private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr _UnloadDelegateInstance;
 
@@ -22694,12 +28330,12 @@ namespace spine_cpp
                 __target.Unload(texture);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -22707,9 +28343,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _LoadDelegateInstance += _LoadDelegateHook;
                     _UnloadDelegateInstance += _UnloadDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_UnloadDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_LoadDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_UnloadDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -22727,7 +28365,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 3, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[3];
                             }
                         }
@@ -22745,8 +28384,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -22758,7 +28396,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -22785,6 +28423,18 @@ namespace spine_cpp
             internal TextureLoaderInternal(void* native, bool skipVTables = false)
                 : base((void*) native)
             {
+            }
+
+            public override void Load(global::spine_cpp.Spine.AtlasPage page, global::spine_cpp.Spine.String path)
+            {
+                var ___LoadDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr___IntPtr>(0, 1);
+                if (ReferenceEquals(page, null))
+                    throw new global::System.ArgumentNullException("page", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = page.__Instance;
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = path.__Instance;
+                ___LoadDelegate(__Instance, __arg0, __arg1);
             }
 
             public override void Unload(__IntPtr texture)
@@ -22977,6 +28627,23 @@ namespace spine_cpp
                 ___UpdateDelegate(__Instance);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_TransformConstraint_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public virtual int Order
             {
                 get
@@ -23124,6 +28791,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.TransformConstraint.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void update()
             private static global::spine_cpp.Delegates.Action___IntPtr _UpdateDelegateInstance;
 
@@ -23167,7 +28846,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[5];
+                private static readonly IntPtr[] Thunks = new IntPtr[6];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -23175,15 +28854,17 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _UpdateDelegateInstance += _UpdateDelegateHook;
                     _IsActiveDelegateInstance += _IsActiveDelegateHook;
                     _SetActiveDelegateInstance += _SetActiveDelegateHook;
                     _GetOrderDelegateInstance += _GetOrderDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
-                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
-                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_GetOrderDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_UpdateDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_IsActiveDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_SetActiveDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(_GetOrderDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -23201,10 +28882,11 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 6, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][2] = Thunks[1];
-                                ManagedVTables[0][3] = Thunks[2];
-                                ManagedVTables[0][4] = Thunks[3];
-                                ManagedVTables[0][5] = Thunks[4];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
                                 VTables.Methods[0] = new Delegate[6];
                             }
                         }
@@ -23271,8 +28953,11 @@ namespace spine_cpp
                 internal byte _relative;
                 internal byte _local;
 
+                [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0TransformConstraintData@spine@@QEAA@AEBVString@1@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance, __IntPtr name);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "??0TransformConstraintData@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+                internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("DLLPlugin", EntryPoint = "?getTarget@TransformConstraintData@spine@@QEAAPEAVBoneData@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr GetTarget(__IntPtr __instance);
@@ -23404,7 +29089,7 @@ namespace spine_cpp
             private static void* __CopyValue(__Internal native)
             {
                 var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.TransformConstraintData.__Internal.cctor(ret, new __IntPtr(&native));
+                global::spine_cpp.Spine.TransformConstraintData.__Internal.cctor_1(ret, new __IntPtr(&native));
                 return ret.ToPointer();
             }
 
@@ -23424,6 +29109,19 @@ namespace spine_cpp
                     SetupVTables(true);
             }
 
+            public TransformConstraintData(global::spine_cpp.Spine.String name)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.TransformConstraintData.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(name, null))
+                    throw new global::System.ArgumentNullException("name", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = name.__Instance;
+                __Internal.ctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.TransformConstraintData");
+            }
+
             public TransformConstraintData(global::spine_cpp.Spine.TransformConstraintData _0)
                 : this((void*) null)
             {
@@ -23433,7 +29131,7 @@ namespace spine_cpp
                 if (ReferenceEquals(_0, null))
                     throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
                 var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
+                __Internal.cctor_1(__Instance, __arg0);
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.TransformConstraintData");
             }
 
@@ -23454,6 +29152,28 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public static explicit operator global::spine_cpp.Spine.TransformConstraintData(global::spine_cpp.Spine.String name)
+            {
+                return new global::spine_cpp.Spine.TransformConstraintData(name);
+            }
+
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_TransformConstraintData_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
             }
 
             public global::spine_cpp.Spine.BoneData Target
@@ -23679,12 +29399,24 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.TransformConstraintData.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[2];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -23692,7 +29424,9 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -23710,6 +29444,7 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 2, 0);
                                 ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
                                 VTables.Methods[0] = new Delegate[2];
                             }
                         }
@@ -23882,6 +29617,23 @@ namespace spine_cpp
                 __Internal.SetFrame(__Instance, frameIndex, time, mixRotate, mixX, mixY, mixScaleX, mixScaleY, mixShearY);
             }
 
+            public static global::spine_cpp.Spine.RTTI Rtti
+            {
+                get
+                {
+                    var __ptr = (global::spine_cpp.Spine.RTTI.__Internal*)global::spine_cpp.__Symbols.DLLPlugin._rtti_TransformConstraintTimeline_spine__2VRTTI_2_B;
+                    return global::spine_cpp.Spine.RTTI.__CreateInstance(new __IntPtr(__ptr));
+                }
+            }
+
+            public override global::spine_cpp.Spine.RTTI RTTI
+            {
+                get
+                {
+                    return base.RTTI;
+                }
+            }
+
             public int TransformConstraintIndex
             {
                 get
@@ -23907,6 +29659,18 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
+            // 
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr _GetRTTIDelegateInstance;
+
+            private static __IntPtr _GetRTTIDelegateHook(__IntPtr __instance)
+            {
+                var __target = global::spine_cpp.Spine.TransformConstraintTimeline.__GetInstance(__instance);
+                var ___ret = __target.RTTI;
+                if (ReferenceEquals(___ret, null))
+                    throw new global::System.ArgumentNullException("___ret", "Cannot be null because it is a C++ reference (&).");
+                return ___ret.__Instance;
+            }
+
             // void setBezier(size_t bezier, size_t frame, float value, float time1, float value1, float cx1, float cy1, float cx2, float cy2, float time2, float value2)
             private static global::spine_cpp.Delegates.Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float _SetBezierDelegateInstance;
 
@@ -23921,7 +29685,7 @@ namespace spine_cpp
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
                 private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[2];
+                private static readonly IntPtr[] Thunks = new IntPtr[3];
                 private static CppSharp.Runtime.VTables VTables;
                 private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
                     SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
@@ -23929,9 +29693,11 @@ namespace spine_cpp
                 static VTableLoader()
                 {
                     _dtorDelegateInstance += _dtorDelegateHook;
+                    _GetRTTIDelegateInstance += _GetRTTIDelegateHook;
                     _SetBezierDelegateInstance += _SetBezierDelegateHook;
                     Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_GetRTTIDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_SetBezierDelegateInstance);
                 }
 
                 public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
@@ -23949,7 +29715,8 @@ namespace spine_cpp
                                 ManagedVTablesDtorOnly[0][0] = Thunks[0];
                                 ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 5, 0);
                                 ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][4] = Thunks[1];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][4] = Thunks[2];
                                 VTables.Methods[0] = new Delegate[5];
                             }
                         }
@@ -23990,10 +29757,10 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial class Vertices : IDisposable
+        public unsafe partial class Vertices : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 72)]
-            public partial struct __Internal
+            public new partial struct __Internal
             {
                 internal __IntPtr vfptr_SpineObject;
                 internal global::spine_cpp.Spine.Vector.__Internal _bones;
@@ -24006,32 +29773,14 @@ namespace spine_cpp
                 internal static extern __IntPtr ctor(__IntPtr __instance);
             }
 
-            public __IntPtr __Instance { get; protected set; }
-
-            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Vertices> NativeToManagedMap =
-                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.Spine.Vertices>();
-
-            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.Spine.Vertices managed)
-            {
-                NativeToManagedMap[native] = managed;
-            }
-
-            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.Spine.Vertices managed)
-            {
-    
-                return NativeToManagedMap.TryGetValue(native, out managed);
-            }
-
-            protected bool __ownsNativeInstance;
-
-            internal static Vertices __CreateInstance(__IntPtr native, bool skipVTables = false)
+            internal static new Vertices __CreateInstance(__IntPtr native, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
                 return new Vertices(native.ToPointer(), skipVTables);
             }
 
-            internal static Vertices __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            internal static new Vertices __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
             {
                 if (native == __IntPtr.Zero)
                     return null;
@@ -24043,7 +29792,7 @@ namespace spine_cpp
                 return result;
             }
 
-            internal static Vertices __GetInstance(__IntPtr native)
+            internal static new Vertices __GetInstance(__IntPtr native)
             {
                 if (!__TryGetNativeToManagedMapping(native, out var managed))
                     throw new global::System.Exception("No managed instance was found");
@@ -24073,15 +29822,16 @@ namespace spine_cpp
             }
 
             protected Vertices(void* native, bool skipVTables = false)
+                : base((void*) native)
             {
                 if (native == null)
                     return;
-                __Instance = new __IntPtr(native);
                 if (!skipVTables)
                     SetupVTables(true);
             }
 
             public Vertices(global::spine_cpp.Spine.Vertices _0)
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Vertices.__Internal));
                 __ownsNativeInstance = true;
@@ -24094,6 +29844,7 @@ namespace spine_cpp
             }
 
             public Vertices()
+                : this((void*) null)
             {
                 __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Vertices.__Internal));
                 __ownsNativeInstance = true;
@@ -24102,14 +29853,9 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.Vertices");
             }
 
-            public void Dispose()
-            {
-                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
-            }
-
             partial void DisposePartial(bool disposing);
 
-            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
             {
                 if (__Instance == IntPtr.Zero)
                     return;
@@ -24137,7 +29883,7 @@ namespace spine_cpp
                 __target.Dispose(disposing: true, callNativeDtor: true);
             }
 
-            internal static class VTableLoader
+            internal static new class VTableLoader
             {
                 private static volatile bool initialized;
                 private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
@@ -24185,8 +29931,7 @@ namespace spine_cpp
                 }
             }
 
-            protected CppSharp.Runtime.VTables __vtables;
-            internal virtual CppSharp.Runtime.VTables __VTables
+            internal override CppSharp.Runtime.VTables __VTables
             {
                 get {
                     if (__vtables.IsEmpty)
@@ -24198,7 +29943,7 @@ namespace spine_cpp
                     __vtables = value;
                 }
             }
-            internal virtual void SetupVTables(bool destructorOnly = false)
+            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -24336,6 +30081,21 @@ namespace spine_cpp
         internal unsafe delegate void Action___IntPtr_int(__IntPtr __instance, int arg1);
 
         [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate __IntPtr Func___IntPtr___IntPtr_ulong_string8_int(__IntPtr __instance, ulong arg1, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string arg2, int arg3);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate __IntPtr Func___IntPtr___IntPtr___IntPtr_ulong_string8_int(__IntPtr __instance, __IntPtr arg1, ulong arg2, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string arg3, int arg4);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate void Action___IntPtr___IntPtr_string8_int(__IntPtr __instance, __IntPtr arg1, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string arg2, int arg3);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate sbyte* Func_sbytePtr___IntPtr___IntPtr_intPtr(__IntPtr __instance, __IntPtr arg1, int* arg2);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate void Action___IntPtr___IntPtr(__IntPtr __instance, __IntPtr arg1);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
         internal unsafe delegate __IntPtr Func___IntPtr___IntPtr(__IntPtr __instance);
 
         [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
@@ -24358,9 +30118,165 @@ namespace spine_cpp
         internal unsafe delegate void Action___IntPtr___IntPtr_ulong_ulong_floatPtr_ulong_ulong(__IntPtr __instance, __IntPtr arg1, ulong arg2, ulong arg3, float* arg4, ulong arg5, ulong arg6);
 
         [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
-        internal unsafe delegate void Action___IntPtr___IntPtr(__IntPtr __instance, __IntPtr arg1);
+        internal unsafe delegate float Func_float___IntPtr_float(__IntPtr __instance, float arg1);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate float Func_float___IntPtr_float_float_float(__IntPtr __instance, float arg1, float arg2, float arg3);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate void Action___IntPtr___IntPtr___IntPtr(__IntPtr __instance, __IntPtr arg1, __IntPtr arg2);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate __IntPtr Func___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr___IntPtr(__IntPtr __instance, __IntPtr arg1, __IntPtr arg2, __IntPtr arg3, __IntPtr arg4);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate __IntPtr Func___IntPtr___IntPtr___IntPtr___IntPtr(__IntPtr __instance, __IntPtr arg1, __IntPtr arg2);
 
         [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
         internal unsafe delegate void Action___IntPtr_ulong_ulong_float_float_float_float_float_float_float_float_float(__IntPtr __instance, ulong arg1, ulong arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9, float arg10, float arg11);
     }
 }
+namespace spine_cpp.__Symbols
+{
+    internal class DLLPlugin
+    {
+        public static IntPtr _Pi_MathUtil_spine__2MB { get; }
+        public static IntPtr _Pi_2_MathUtil_spine__2MB { get; }
+        public static IntPtr _Deg_Rad_MathUtil_spine__2MB { get; }
+        public static IntPtr _Rad_Deg_MathUtil_spine__2MB { get; }
+        public static IntPtr _rtti_AttachmentLoader_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_AtlasAttachmentLoader_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_Attachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_Timeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_AttachmentTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_Updatable_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_Bone_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_VertexAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_BoundingBoxAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ClippingAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_CurveTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_CurveTimeline1_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_CurveTimeline2_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_RGBATimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_RGBTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_AlphaTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_RGBA2Timeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_RGB2Timeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ConstraintData_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_DeformTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_DrawOrderTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_EventTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_IkConstraint_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_IkConstraintData_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_IkConstraintTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _JSON_FALSE_Json_spine__2HB { get; }
+        public static IntPtr _JSON_TRUE_Json_spine__2HB { get; }
+        public static IntPtr _JSON_NULL_Json_spine__2HB { get; }
+        public static IntPtr _JSON_NUMBER_Json_spine__2HB { get; }
+        public static IntPtr _JSON_STRING_Json_spine__2HB { get; }
+        public static IntPtr _JSON_ARRAY_Json_spine__2HB { get; }
+        public static IntPtr _JSON_OBJECT_Json_spine__2HB { get; }
+        public static IntPtr _rtti_MeshAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PathAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PathConstraint_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PathConstraintData_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PathConstraintMixTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PathConstraintPositionTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PathConstraintSpacingTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_PointAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_RegionAttachment_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_RotateTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_TranslateTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_TranslateXTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_TranslateYTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ScaleTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ScaleXTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ScaleYTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ShearTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ShearXTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_ShearYTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_TransformConstraint_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_TransformConstraintData_spine__2VRTTI_2_B { get; }
+        public static IntPtr _rtti_TransformConstraintTimeline_spine__2VRTTI_2_B { get; }
+        static DLLPlugin()
+        {
+            var path = "DLLPlugin";
+            var image = CppSharp.SymbolResolver.LoadImage(ref path);
+            if (image == IntPtr.Zero) throw new global::System.DllNotFoundException(path);
+            _Pi_MathUtil_spine__2MB = CppSharp.SymbolResolver.ResolveSymbol(image, "?Pi@MathUtil@spine@@2MB");
+            _Pi_2_MathUtil_spine__2MB = CppSharp.SymbolResolver.ResolveSymbol(image, "?Pi_2@MathUtil@spine@@2MB");
+            _Deg_Rad_MathUtil_spine__2MB = CppSharp.SymbolResolver.ResolveSymbol(image, "?Deg_Rad@MathUtil@spine@@2MB");
+            _Rad_Deg_MathUtil_spine__2MB = CppSharp.SymbolResolver.ResolveSymbol(image, "?Rad_Deg@MathUtil@spine@@2MB");
+            _rtti_AttachmentLoader_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@AttachmentLoader@spine@@2VRTTI@2@B");
+            _rtti_AtlasAttachmentLoader_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@AtlasAttachmentLoader@spine@@2VRTTI@2@B");
+            _rtti_Attachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@Attachment@spine@@2VRTTI@2@B");
+            _rtti_Timeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@Timeline@spine@@2VRTTI@2@B");
+            _rtti_AttachmentTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@AttachmentTimeline@spine@@2VRTTI@2@B");
+            _rtti_Updatable_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@Updatable@spine@@2VRTTI@2@B");
+            _rtti_Bone_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@Bone@spine@@2VRTTI@2@B");
+            _rtti_VertexAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@VertexAttachment@spine@@2VRTTI@2@B");
+            _rtti_BoundingBoxAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@BoundingBoxAttachment@spine@@2VRTTI@2@B");
+            _rtti_ClippingAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ClippingAttachment@spine@@2VRTTI@2@B");
+            _rtti_CurveTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@CurveTimeline@spine@@2VRTTI@2@B");
+            _rtti_CurveTimeline1_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@CurveTimeline1@spine@@2VRTTI@2@B");
+            _rtti_CurveTimeline2_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@CurveTimeline2@spine@@2VRTTI@2@B");
+            _rtti_RGBATimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@RGBATimeline@spine@@2VRTTI@2@B");
+            _rtti_RGBTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@RGBTimeline@spine@@2VRTTI@2@B");
+            _rtti_AlphaTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@AlphaTimeline@spine@@2VRTTI@2@B");
+            _rtti_RGBA2Timeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@RGBA2Timeline@spine@@2VRTTI@2@B");
+            _rtti_RGB2Timeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@RGB2Timeline@spine@@2VRTTI@2@B");
+            _rtti_ConstraintData_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ConstraintData@spine@@2VRTTI@2@B");
+            _rtti_DeformTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@DeformTimeline@spine@@2VRTTI@2@B");
+            _rtti_DrawOrderTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@DrawOrderTimeline@spine@@2VRTTI@2@B");
+            _rtti_EventTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@EventTimeline@spine@@2VRTTI@2@B");
+            _rtti_IkConstraint_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@IkConstraint@spine@@2VRTTI@2@B");
+            _rtti_IkConstraintData_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@IkConstraintData@spine@@2VRTTI@2@B");
+            _rtti_IkConstraintTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@IkConstraintTimeline@spine@@2VRTTI@2@B");
+            _JSON_FALSE_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_FALSE@Json@spine@@2HB");
+            _JSON_TRUE_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_TRUE@Json@spine@@2HB");
+            _JSON_NULL_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_NULL@Json@spine@@2HB");
+            _JSON_NUMBER_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_NUMBER@Json@spine@@2HB");
+            _JSON_STRING_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_STRING@Json@spine@@2HB");
+            _JSON_ARRAY_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_ARRAY@Json@spine@@2HB");
+            _JSON_OBJECT_Json_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?JSON_OBJECT@Json@spine@@2HB");
+            _rtti_MeshAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@MeshAttachment@spine@@2VRTTI@2@B");
+            _rtti_PathAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PathAttachment@spine@@2VRTTI@2@B");
+            _rtti_PathConstraint_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PathConstraint@spine@@2VRTTI@2@B");
+            _rtti_PathConstraintData_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PathConstraintData@spine@@2VRTTI@2@B");
+            _rtti_PathConstraintMixTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PathConstraintMixTimeline@spine@@2VRTTI@2@B");
+            _rtti_PathConstraintPositionTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PathConstraintPositionTimeline@spine@@2VRTTI@2@B");
+            _rtti_PathConstraintSpacingTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PathConstraintSpacingTimeline@spine@@2VRTTI@2@B");
+            _rtti_PointAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@PointAttachment@spine@@2VRTTI@2@B");
+            _rtti_RegionAttachment_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@RegionAttachment@spine@@2VRTTI@2@B");
+            _rtti_RotateTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@RotateTimeline@spine@@2VRTTI@2@B");
+            _rtti_TranslateTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TranslateTimeline@spine@@2VRTTI@2@B");
+            _rtti_TranslateXTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TranslateXTimeline@spine@@2VRTTI@2@B");
+            _rtti_TranslateYTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TranslateYTimeline@spine@@2VRTTI@2@B");
+            _rtti_ScaleTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ScaleTimeline@spine@@2VRTTI@2@B");
+            _rtti_ScaleXTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ScaleXTimeline@spine@@2VRTTI@2@B");
+            _rtti_ScaleYTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ScaleYTimeline@spine@@2VRTTI@2@B");
+            _rtti_ShearTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ShearTimeline@spine@@2VRTTI@2@B");
+            _rtti_ShearXTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ShearXTimeline@spine@@2VRTTI@2@B");
+            _rtti_ShearYTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@ShearYTimeline@spine@@2VRTTI@2@B");
+            _rtti_TransformConstraint_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraint@spine@@2VRTTI@2@B");
+            _rtti_TransformConstraintData_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraintData@spine@@2VRTTI@2@B");
+            _rtti_TransformConstraintTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraintTimeline@spine@@2VRTTI@2@B");
+        }
+    }
+}
+
+namespace spine_cpp.__Symbols
+{
+    internal class spine_cpp
+    {
+        public static IntPtr _ENTRIES_PathConstraintPositionTimeline_spine__2HB { get; }
+        static spine_cpp()
+        {
+            var path = "spine_cpp";
+            var image = CppSharp.SymbolResolver.LoadImage(ref path);
+            if (image == IntPtr.Zero) throw new global::System.DllNotFoundException(path);
+            _ENTRIES_PathConstraintPositionTimeline_spine__2HB = CppSharp.SymbolResolver.ResolveSymbol(image, "?ENTRIES@PathConstraintPositionTimeline@spine@@2HB");
+        }
+    }
+}
+
