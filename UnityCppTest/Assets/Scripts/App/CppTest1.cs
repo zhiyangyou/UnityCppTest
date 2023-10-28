@@ -37,21 +37,10 @@ namespace App
         private Proxy_Atlas _proxyAtlas = null;
         private Proxy_SkeletonData _proxySkeletonData = null;
 
-        private void Awake()
-        {
-            Utils.DLLLoader.OpenLibrary();
-            Bridge.InitPlugin();
-        }
-
-        unsafe void DestoryPointers()
-        {
-        }
-
         private void OnGUI()
         {
             if (GUI.Button(new Rect(100, 100, 100, 100), "Call Cpp"))
             {
-                DestoryPointers();
                 string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
                 string jsonContent = skeletonDataAsset.skeletonJSON.text;
                 _proxyAtlas = new Proxy_Atlas(atlasContent);
@@ -66,16 +55,7 @@ namespace App
             if (GUI.Button(new Rect(100, 300, 100, 100), "LoadSpineCppBySharp"))
             {
                 string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
-                
-                var atlas = new spine_cpp.Spine.Atlas(atlasContent, atlasContent.Length, "", null, true);
-                int a = 0;
             }
-        }
-
-        private void OnDestroy()
-        {
-            DestoryPointers();
-            Utils.DLLLoader.CloseLibrary();
         }
     }
 }

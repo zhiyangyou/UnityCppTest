@@ -52,7 +52,7 @@ class SpineCppLibrary : ILibrary
             {
                 var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
                 _outputDir = curDir.Parent.Parent.Parent.Parent.Parent.FullName +
-                             "\\UnityCppTest\\Assets\\Scripts\\App\\CppPlugin\\SpineCppProxy";
+                             "\\UnityCppTest\\Assets\\Scripts\\Spine\\Runtime\\spine-unity\\spine_cpp_bindings";
             }
 
             return _outputDir;
