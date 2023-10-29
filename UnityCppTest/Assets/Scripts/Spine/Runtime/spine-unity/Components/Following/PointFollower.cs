@@ -64,7 +64,7 @@ namespace Spine.Unity {
 		Bone bone;
 		bool valid;
 		public bool IsValid { get { return valid; } }
-
+		public bool IsCpp => false;
 		public void Initialize () {
 			valid = skeletonRenderer != null && skeletonRenderer.valid;
 			if (!valid)

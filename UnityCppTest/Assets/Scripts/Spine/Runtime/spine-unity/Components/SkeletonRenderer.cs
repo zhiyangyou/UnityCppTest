@@ -299,6 +299,8 @@ namespace Spine.Unity {
 
 		public SkeletonDataAsset SkeletonDataAsset { get { return skeletonDataAsset; } } // ISkeletonComponent
 
+		public bool IsCpp => false;
+		
 		#region Runtime Instantiation
 		public static T NewSpineGameObject<T> (SkeletonDataAsset skeletonDataAsset, bool quiet = false) where T : SkeletonRenderer {
 			return SkeletonRenderer.AddSpineComponent<T>(new GameObject("New Spine GameObject"), skeletonDataAsset, quiet);

@@ -213,6 +213,9 @@
     <ClCompile Include="unity_spinecpp_plugin.cpp">
       <Filter>源文件\unity-spinecpp-plugin</Filter>
     </ClCompile>
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\UnitySpineCppExtension.cpp">
+      <Filter>源文件\spine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

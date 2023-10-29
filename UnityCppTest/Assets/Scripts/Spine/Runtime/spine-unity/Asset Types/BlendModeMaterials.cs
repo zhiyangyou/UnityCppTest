@@ -32,7 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using SpineCpp = spine_cpp.Spine;
 namespace Spine.Unity {
 	[System.Serializable]
 	public class BlendModeMaterials {
@@ -143,6 +143,87 @@ namespace Spine.Unity {
 				}
 			}
 		}
+		
+		
+		public void ApplyMaterials_Cpp (SpineCpp.SkeletonData skeletonData) {
+			if (skeletonData == null) throw new ArgumentNullException("skeletonData");
+			if (!requiresBlendModeMaterials)
+				return;
+
+			List<SpineCpp.SkinEntry> skinEntries = new List<SpineCpp.SkinEntry>();
+			var slotsItems = skeletonData.Slots;
+			for (ulong slotIndex = 0, slotCount = skeletonData.Slots.Size; slotIndex < slotCount; slotIndex++) {
+				SpineCpp.SlotData slot = slotsItems[slotIndex];
+				if (slot.BlendMode == SpineCpp.BlendMode.BlendModeNormal) continue;
+				if (!applyAdditiveMaterial && slot.BlendMode == SpineCpp.BlendMode.BlendModeAdditive) continue;
+
+				List<ReplacementMaterial> replacementMaterials = null;
+				switch (slot.BlendMode) {
+					case SpineCpp.BlendMode.BlendModeMultiply:
+						replacementMaterials = multiplyMaterials;
+						break;
+					case SpineCpp.BlendMode.BlendModeScreen:
+						replacementMaterials = screenMaterials;
+						break;
+					case SpineCpp.BlendMode.BlendModeAdditive:
+						replacementMaterials = additiveMaterials;
+						break;
+				}
+				if (replacementMaterials == null)
+					continue;
+
+				skinEntries.Clear();
+				for (ulong i = 0; i < skeletonData.Skins.Size; i++)
+				{
+					SpineCpp.Skin skin = skeletonData.Skins[i];
+					skin.getAttachments(slotIndex, skinEntries);
+				}
+				
+				foreach (SpineCpp.SkinEntry entry in skinEntries) {
+					SpineCpp.Attachment renderableAttachment = entry.Attachment;
+					var className = renderableAttachment.RTTI.ClassName;
+					if (className == "MeshAttachment" || className == "RegionAttachment")
+					{
+						SpineCpp.TextureRegion region = null;
+						SpineCpp.Sequence sequence = null;
+						if (renderableAttachment is SpineCpp.MeshAttachment meshAtt1)
+						{
+							region = meshAtt1.Region;
+							sequence = meshAtt1.Sequence;
+						}
+						else if (renderableAttachment is SpineCpp.RegionAttachment regionAtt1)
+						{
+							region = regionAtt1.Region;
+							sequence = regionAtt1.Sequence;
+						}
+
+						if (region != null)
+						{
+							if (renderableAttachment is SpineCpp.MeshAttachment meshAtt2)
+							{
+								meshAtt2.Region = CloneAtlasRegionWithMaterial_Cpp(
+									(SpineCpp.AtlasRegion)meshAtt2.Region, replacementMaterials);
+							}
+							else if (renderableAttachment is SpineCpp.RegionAttachment regionAttachment2)
+							{
+								regionAttachment2.Region = CloneAtlasRegionWithMaterial_Cpp(
+									(SpineCpp.AtlasRegion)regionAttachment2.Region, replacementMaterials);
+							}
+						}
+						else
+						{
+							if (sequence != null) {
+								var regions = sequence.Regions;
+								for (ulong i = 0; i < regions.Size; ++i) {
+									regions[i] = CloneAtlasRegionWithMaterial_Cpp(
+										(SpineCpp.AtlasRegion)regions[i], replacementMaterials);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
 		protected AtlasRegion CloneAtlasRegionWithMaterial (AtlasRegion originalRegion, List<ReplacementMaterial> replacementMaterials) {
 			AtlasRegion newRegion = originalRegion.Clone();
@@ -158,6 +239,23 @@ namespace Spine.Unity {
 			AtlasPage newPage = originalPage.Clone();
 			newPage.rendererObject = material;
 			newRegion.page = newPage;
+			return newRegion;
+		}
+		
+		protected SpineCpp.AtlasRegion CloneAtlasRegionWithMaterial_Cpp (SpineCpp.AtlasRegion originalRegion, List<ReplacementMaterial> replacementMaterials) {
+			SpineCpp.AtlasRegion newRegion = originalRegion.Clone();
+			Material material = null;
+			foreach (ReplacementMaterial replacement in replacementMaterials) {
+				if (replacement.pageName == originalRegion.Page.Name.Buffer) {
+					material = replacement.material;
+					break;
+				}
+			}
+
+			SpineCpp.AtlasPage originalPage = originalRegion.Page;
+			SpineCpp.AtlasPage newPage = originalPage.Clone();
+			newPage.rendererObject = material;
+			newRegion.Page = newPage;
 			return newRegion;
 		}
 	}

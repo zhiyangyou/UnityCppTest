@@ -30,21 +30,32 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using UnityEngine;
-
+using SpineCpp = spine_cpp.Spine;
+using SpineCppTextureLoader_Load = System.Action<System.IntPtr,System.IntPtr>;
+using SpineCppTextureLoader_Unload = System.Action<System.IntPtr>;
 namespace Spine.Unity {
 	/// <summary>Loads and stores a Spine atlas and list of materials.</summary>
 	[CreateAssetMenu(fileName = "New Spine Atlas Asset", menuName = "Spine/Spine Atlas Asset")]
 	public class SpineAtlasAsset : AtlasAssetBase {
+		public bool isCpp = false;
 		public TextAsset atlasFile;
 		public Material[] materials;
 		public TextureLoader customTextureLoader;
 		protected Atlas atlas;
+		protected SpineCpp.Atlas atlas_Cpp;
+
+		public SpineCpp.UnitySpineCppTextureLoader UnitySpineCppTextureLoader => _unitySpineCppTextureLoader;
+		protected SpineCpp.UnitySpineCppTextureLoader _unitySpineCppTextureLoader = null;
+		protected SpineCppTextureLoader_Load _OnSpineCppTextureLoader_Load = null;
+		protected SpineCppTextureLoader_Unload _OnSpineCppTextureLoader_Unload = null;
 
 		public override bool IsLoaded { get { return this.atlas != null; } }
 
 		public override IEnumerable<Material> Materials { get { return materials; } }
 		public override int MaterialCount { get { return materials == null ? 0 : materials.Length; } }
+		public override bool IsCpp => isCpp;
 		public override Material PrimaryMaterial { get { return materials[0]; } }
 
 		#region Runtime Instantiation
@@ -66,8 +77,27 @@ namespace Spine.Unity {
 
 			if (initialize)
 				atlasAsset.GetAtlas();
-
+			
+			atlasAsset._OnSpineCppTextureLoader_Load = (IntPtr spineCpp_AtlasPage,IntPtr spineCpp_String) =>
+			{
+				2023年10月29日21:11:19
+			};
+			atlasAsset._OnSpineCppTextureLoader_Unload = (IntPtr spineCpp_Texture) =>
+			{
+				2023年10月29日21:11:21
+			};
+			
+			//注意把控 UnitySpineCppTextureLoader的生命周期!!
+			atlasAsset._unitySpineCppTextureLoader = CreateSpineCppTextureLoader(atlasAsset._OnSpineCppTextureLoader_Load,atlasAsset._OnSpineCppTextureLoader_Unload);
 			return atlasAsset;
+		}
+
+		public static SpineCpp.UnitySpineCppTextureLoader CreateSpineCppTextureLoader(SpineCppTextureLoader_Load load, SpineCppTextureLoader_Unload unload)
+		{
+			var ret = new SpineCpp.UnitySpineCppTextureLoader();
+			ret.SetLoadFuncPtr(Marshal.GetFunctionPointerForDelegate(load));
+			ret.SetUnloadFuncPtr(Marshal.GetFunctionPointerForDelegate(unload));
+			return ret;
 		}
 
 		/// <summary>
@@ -146,6 +176,10 @@ namespace Spine.Unity {
 
 		public override void Clear () {
 			atlas = null;
+			_unitySpineCppTextureLoader.Dispose();
+			_unitySpineCppTextureLoader = null;
+			_OnSpineCppTextureLoader_Load = null;
+			_OnSpineCppTextureLoader_Unload = null;
 		}
 
 		/// <returns>The atlas or null if it could not be loaded.</returns>
@@ -173,6 +207,38 @@ namespace Spine.Unity {
 				atlas = new Atlas(new StringReader(atlasFile.text), "", loader);
 				atlas.FlipV();
 				return atlas;
+			} catch (Exception ex) {
+				Debug.LogError("Error reading atlas file for atlas asset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, this);
+				return null;
+			}
+		}
+
+		public override SpineCpp.Atlas GetAtlas_Cpp(bool onlyMetaData = false)
+		{
+			if (atlasFile == null) {
+				Debug.LogError("Atlas file not set for atlas asset: " + name, this);
+				Clear();
+				return null;
+			}
+
+			if (!onlyMetaData && (materials == null || materials.Length == 0)) {
+				Debug.LogError("Materials not set for atlas asset: " + name, this);
+				Clear();
+				return null;
+			}
+
+			if (atlas_Cpp != null) return atlas_Cpp;
+
+			try {
+				TextureLoader loader;
+				if (!onlyMetaData)
+					loader = customTextureLoader == null ? new MaterialsTextureLoader(this) : customTextureLoader;
+				else
+					loader = new NoOpTextureLoader();
+				//TODO 注意把控 SpineCpp的生命周期!!
+				atlas_Cpp = new SpineCpp.Atlas(atlasFile.text,atlasFile.text.Length, "", loader,true);
+				atlas_Cpp.FlipV();
+				return atlas_Cpp;
 			} catch (Exception ex) {
 				Debug.LogError("Error reading atlas file for atlas asset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, this);
 				return null;

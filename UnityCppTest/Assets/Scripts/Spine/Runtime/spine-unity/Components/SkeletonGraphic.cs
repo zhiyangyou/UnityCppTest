@@ -119,7 +119,8 @@ namespace Spine.Unity {
 		public List<Transform> SeparatorParts { get { return separatorParts; } }
 		public bool updateSeparatorPartLocation = true;
 		public bool updateSeparatorPartScale = false;
-
+		public bool IsCpp => false;
+		
 		private bool wasUpdatedAfterInit = true;
 		private bool requiresInstructionUpate = true;
 		private Texture baseTexture = null;

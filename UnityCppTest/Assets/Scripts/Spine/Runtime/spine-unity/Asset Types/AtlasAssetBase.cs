@@ -31,9 +31,11 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-
+using SpineCpp = spine_cpp.Spine;
 namespace Spine.Unity {
-	public abstract class AtlasAssetBase : ScriptableObject {
+	public abstract class AtlasAssetBase : ScriptableObject
+	{
+		public abstract bool IsCpp { get;}
 		public abstract Material PrimaryMaterial { get; }
 		public abstract IEnumerable<Material> Materials { get; }
 		public abstract int MaterialCount { get; }
@@ -41,6 +43,7 @@ namespace Spine.Unity {
 		public abstract bool IsLoaded { get; }
 		public abstract void Clear ();
 		public abstract Atlas GetAtlas (bool onlyMetaData = false);
+		public abstract SpineCpp.Atlas GetAtlas_Cpp (bool onlyMetaData = false);
 
 #if SPINE_OPTIONAL_ON_DEMAND_LOADING
 		public enum LoadingMode {

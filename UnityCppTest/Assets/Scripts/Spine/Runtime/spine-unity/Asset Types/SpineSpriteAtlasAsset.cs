@@ -35,7 +35,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
-
+using SpineCpp = spine_cpp.Spine;
 #if UNITY_EDITOR
 using UnityEditor;
 using System.Reflection;
@@ -45,6 +45,7 @@ namespace Spine.Unity {
 	/// <summary>Loads and stores a Spine atlas and list of materials.</summary>
 	[CreateAssetMenu(fileName = "New Spine SpriteAtlas Asset", menuName = "Spine/Spine SpriteAtlas Asset")]
 	public class SpineSpriteAtlasAsset : AtlasAssetBase {
+		public bool isCpp = false;
 		public SpriteAtlas spriteAtlasFile;
 		public Material[] materials;
 		protected Atlas atlas;
@@ -61,6 +62,7 @@ namespace Spine.Unity {
 
 		public override IEnumerable<Material> Materials { get { return materials; } }
 		public override int MaterialCount { get { return materials == null ? 0 : materials.Length; } }
+		public override bool IsCpp => isCpp;
 		public override Material PrimaryMaterial { get { return materials[0]; } }
 
 #if UNITY_EDITOR
@@ -117,6 +119,11 @@ namespace Spine.Unity {
 				Debug.LogError("Error analyzing SpriteAtlas for SpineSpriteAtlasAsset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, this);
 				return null;
 			}
+		}
+
+		public override spine_cpp.Spine.Atlas GetAtlas_Cpp(bool onlyMetaData = false)
+		{
+			throw new NotImplementedException();
 		}
 
 		protected void AssignRegionsFromSavedRegions (Sprite[] sprites, Atlas usedAtlas) {

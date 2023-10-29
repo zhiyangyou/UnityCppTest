@@ -212,6 +212,7 @@
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TransformConstraintTimeline.cpp" />
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\TranslateTimeline.cpp" />
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Triangulator.cpp" />
+    <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\UnitySpineCppExtension.cpp" />
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Updatable.cpp" />
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\VertexAttachment.cpp" />
     <ClCompile Include="unity_spinecpp_plugin.cpp" />

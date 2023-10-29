@@ -33,8 +33,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace Spine.Unity {
+	using SpineCpp = spine_cpp.Spine;
+	
 	[CreateAssetMenu(menuName = "Spine/SkeletonData Modifiers/Blend Mode Materials", order = 200)]
 	public class BlendModeMaterialsAsset : SkeletonDataModifierAsset {
 		public Material multiplyMaterialTemplate;
@@ -45,6 +46,11 @@ namespace Spine.Unity {
 
 		public override void Apply (SkeletonData skeletonData) {
 			ApplyMaterials(skeletonData, multiplyMaterialTemplate, screenMaterialTemplate, additiveMaterialTemplate, applyAdditiveMaterial);
+		}
+
+		public override void Apply(SpineCpp.SkeletonData skeletonData)
+		{
+			ApplyMaterials_Cpp(skeletonData, multiplyMaterialTemplate, screenMaterialTemplate, additiveMaterialTemplate, applyAdditiveMaterial);
 		}
 
 		public static void ApplyMaterials (SkeletonData skeletonData, Material multiplyTemplate, Material screenTemplate, Material additiveTemplate, bool includeAdditiveSlots) {
@@ -89,13 +95,71 @@ namespace Spine.Unity {
 			//attachmentBuffer.Clear();
 		}
 
+		public static void ApplyMaterials_Cpp (SpineCpp.SkeletonData skeletonData, Material multiplyTemplate, Material screenTemplate, Material additiveTemplate, bool includeAdditiveSlots) {
+			if (skeletonData == null) throw new ArgumentNullException("skeletonData");
+
+			using (AtlasMaterialCache materialCache = new AtlasMaterialCache()) {
+				List<SpineCpp.SkinEntry> entryBuffer = new List<SpineCpp.SkinEntry>();
+				// SlotData[] slotsItems = skeletonData.Slots.Items;
+				SpineCpp.Vector<SpineCpp.SlotData> slotsItems = skeletonData.Slots;
+				for (ulong slotIndex = 0, slotCount = skeletonData.Slots.Size; slotIndex < slotCount; slotIndex++) {
+					SpineCpp.SlotData slot = slotsItems[slotIndex];
+					if (slot.BlendMode == SpineCpp.BlendMode.BlendModeNormal) continue;
+					if (!includeAdditiveSlots && slot.BlendMode == SpineCpp.BlendMode.BlendModeAdditive) continue;
+					entryBuffer.Clear();
+					for (ulong i = 0; i < skeletonData.Skins.Size; i++)
+					{
+						SpineCpp.Skin skin = skeletonData.Skins[i];
+						skin.getAttachments(slotIndex,entryBuffer);
+					}
+					
+					Material templateMaterial = null;
+					switch (slot.BlendMode) {
+						case SpineCpp.BlendMode.BlendModeMultiply:
+							templateMaterial = multiplyTemplate;
+							break;
+						case SpineCpp.BlendMode.BlendModeScreen:
+							templateMaterial = screenTemplate;
+							break;
+						case SpineCpp.BlendMode.BlendModeAdditive:
+							templateMaterial = additiveTemplate;
+							break;
+					}
+					if (templateMaterial == null) continue;
+
+					foreach (SpineCpp.SkinEntry entry in entryBuffer) {
+						//IHasTextureRegion  MeshAttachment 和 RegionAttachment 继承了IHasTextureRegion
+						var attClassName = entry.Attachment.RTTI.ClassName;
+						if ( attClassName == "MeshAttachment")
+						{
+							SpineCpp.MeshAttachment meshAttachment = entry.Attachment as SpineCpp.MeshAttachment;
+							meshAttachment.Region = materialCache.CloneAtlasRegionWithMaterial_Cpp((SpineCpp.AtlasRegion)meshAttachment.Region, templateMaterial);
+						}else if (attClassName == "RegionAttachment")
+						{
+							SpineCpp.RegionAttachment regionAttachment = entry.Attachment as SpineCpp.RegionAttachment;
+							regionAttachment.Region = materialCache.CloneAtlasRegionWithMaterial_Cpp((SpineCpp.AtlasRegion)regionAttachment.Region, templateMaterial);
+						}
+					}
+				}
+
+			}
+			//attachmentBuffer.Clear();
+		}
+
 		class AtlasMaterialCache : IDisposable {
 			readonly Dictionary<KeyValuePair<AtlasPage, Material>, AtlasPage> cache = new Dictionary<KeyValuePair<AtlasPage, Material>, AtlasPage>();
+			readonly Dictionary<KeyValuePair<SpineCpp.AtlasPage, Material>, SpineCpp.AtlasPage> cache_Cpp = new Dictionary<KeyValuePair<SpineCpp.AtlasPage, Material>, SpineCpp.AtlasPage>();
 
 			/// <summary>Creates a clone of an AtlasRegion that uses different Material settings, while retaining the original texture.</summary>
 			public AtlasRegion CloneAtlasRegionWithMaterial (AtlasRegion originalRegion, Material materialTemplate) {
 				AtlasRegion newRegion = originalRegion.Clone();
 				newRegion.page = GetAtlasPageWithMaterial(originalRegion.page, materialTemplate);
+				return newRegion;
+			}
+			
+			public SpineCpp.AtlasRegion CloneAtlasRegionWithMaterial_Cpp (SpineCpp.AtlasRegion originalRegion, Material materialTemplate) {
+				SpineCpp.AtlasRegion newRegion = originalRegion.Clone();
+				newRegion.Page = GetAtlasPageWithMaterial_Cpp(originalRegion.Page, materialTemplate);
 				return newRegion;
 			}
 
@@ -118,9 +182,30 @@ namespace Spine.Unity {
 
 				return newPage;
 			}
+			
+			SpineCpp.AtlasPage GetAtlasPageWithMaterial_Cpp (SpineCpp.AtlasPage originalPage, Material materialTemplate) {
+				if (originalPage == null) throw new ArgumentNullException("originalPage");
+
+				SpineCpp.AtlasPage newPage = null;
+				var key = new KeyValuePair<SpineCpp.AtlasPage, Material>(originalPage, materialTemplate);
+				cache_Cpp.TryGetValue(key, out newPage);
+
+				if (newPage == null) {
+					newPage = originalPage.Clone();
+					Material originalMaterial = originalPage.rendererObject as Material;
+					newPage.rendererObject = new Material(materialTemplate) {
+						name = originalMaterial.name + " " + materialTemplate.name,
+						mainTexture = originalMaterial.mainTexture
+					};
+					cache_Cpp.Add(key, newPage);
+				}
+
+				return newPage;
+			}
 
 			public void Dispose () {
 				cache.Clear();
+				cache_Cpp.Clear();
 			}
 		}
 

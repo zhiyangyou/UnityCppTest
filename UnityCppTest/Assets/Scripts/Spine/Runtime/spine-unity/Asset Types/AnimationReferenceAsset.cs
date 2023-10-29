@@ -68,5 +68,7 @@ namespace Spine.Unity {
 		public static implicit operator Animation (AnimationReferenceAsset asset) {
 			return asset.Animation;
 		}
+
+		public bool IsCpp => false;
 	}
 }

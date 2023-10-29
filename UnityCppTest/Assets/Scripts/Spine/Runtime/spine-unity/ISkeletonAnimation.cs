@@ -47,7 +47,10 @@ namespace Spine.Unity {
 	public delegate void ISkeletonAnimationDelegate (ISkeletonAnimation animated);
 	public delegate void UpdateBonesDelegate (ISkeletonAnimation animated);
 
-	public interface ISpineComponent { }
+	public interface ISpineComponent
+	{
+		bool IsCpp { get; }
+	}
 	public static class ISpineComponentExtensions {
 		public static bool IsNullOrDestroyed (this ISpineComponent component) {
 			if (component == null) return true;
@@ -79,6 +82,7 @@ namespace Spine.Unity {
 
 		/// <summary>Gets the Spine.Skeleton instance of the Spine Component. This is equivalent to SkeletonRenderer's .skeleton.</summary>
 		Skeleton Skeleton { get; }
+		
 	}
 
 	/// <summary>A Spine-Unity Component that uses a Spine.AnimationState to animate its skeleton.</summary>
