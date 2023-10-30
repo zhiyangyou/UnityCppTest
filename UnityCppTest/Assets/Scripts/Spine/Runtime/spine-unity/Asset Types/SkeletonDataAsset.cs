@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Assertions;
 using SpineCpp = spine_cpp.Spine;
 using CompatibilityProblemInfo = Spine.Unity.SkeletonDataCompatibility.CompatibilityProblemInfo;
 
@@ -108,10 +109,12 @@ namespace Spine.Unity {
 		/// <summary>Clears the loaded SkeletonData and AnimationStateData. Use this to force a reload for the next time GetSkeletonData is called.</summary>
 		public void Clear () {
 			skeletonData = null;
-			stateData = null;
-
+			skeletonData_Cpp?.Dispose();
 			skeletonData_Cpp = null;
+			
+			stateData_Cpp?.Dispose();
 			stateData_Cpp = null;
+			stateData = null;
 		}
 
 		public AnimationStateData GetAnimationStateData () {
@@ -119,6 +122,12 @@ namespace Spine.Unity {
 				return stateData;
 			GetSkeletonData(false);
 			return stateData;
+		}
+		public SpineCpp.AnimationStateData GetAnimationStateData_Cpp () {
+			if (stateData_Cpp != null)
+				return stateData_Cpp;
+			GetSkeletonData_Cpp(false);
+			return stateData_Cpp;
 		}
 
 		/// <summary>Loads, caches and returns the SkeletonData from the skeleton data file. Returns the cached SkeletonData after the first time it is called. Pass false to prevent direct errors from being logged.</summary>
@@ -132,44 +141,17 @@ namespace Spine.Unity {
 				Clear();
 				return null;
 			}
-
-			// Disabled to support attachmentless/skinless SkeletonData.
-			//			if (atlasAssets == null) {
-			//				atlasAssets = new AtlasAsset[0];
-			//				if (!quiet)
-			//					Debug.LogError("Atlas not set for SkeletonData asset: " + name, this);
-			//				Clear();
-			//				return null;
-			//			}
-			//			#if !SPINE_TK2D
-			//			if (atlasAssets.Length == 0) {
-			//				Clear();
-			//				return null;
-			//			}
-			//			#else
-			//			if (atlasAssets.Length == 0 && spriteCollection == null) {
-			//				Clear();
-			//				return null;
-			//			}
-			//			#endif
-
+			
 			if (skeletonData != null)
 				return skeletonData;
 
 			AttachmentLoader attachmentLoader = null;
-			SpineCpp.AttachmentLoader attachmentLoader_Cpp = null;
 			float skeletonDataScale;
 			Atlas[] atlasArray = this.GetAtlasArray();
-
+			
 #if !SPINE_TK2D
-			if (!useCpp)
-			{
-				attachmentLoader = (atlasArray.Length == 0) ? (AttachmentLoader)new RegionlessAttachmentLoader() : (AttachmentLoader)new AtlasAttachmentLoader(atlasArray);
-			}
-			else
-			{
-				attachmentLoader = null;//TODO cpp版本不用attachmentloader？
-			}
+	 
+			attachmentLoader = (atlasArray.Length == 0) ? (AttachmentLoader)new RegionlessAttachmentLoader() : (AttachmentLoader)new AtlasAttachmentLoader(atlasArray);
 			skeletonDataScale = scale;
 #else
 			if (spriteCollection != null) {
@@ -194,14 +176,7 @@ namespace Spine.Unity {
 					loadedSkeletonData = SkeletonDataAsset.ReadSkeletonData(skeletonJSON.bytes, attachmentLoader, skeletonDataScale);
 				else
 				{
-					if (useCpp)
-					{
-						loadedSkeletonData = SkeletonDataAsset.ReadSkeletonData_Cpp(skeletonJSON.text, attachmentLoader, skeletonDataScale);
-					}
-					else
-					{
-						loadedSkeletonData = SkeletonDataAsset.ReadSkeletonData(skeletonJSON.text, attachmentLoader, skeletonDataScale);
-					}
+					loadedSkeletonData = SkeletonDataAsset.ReadSkeletonData(skeletonJSON.text, attachmentLoader, skeletonDataScale);
 				}
 			} catch (Exception ex) {
 				if (!quiet)
@@ -257,29 +232,27 @@ namespace Spine.Unity {
 				return skeletonData_Cpp;
 			
 			float skeletonDataScale = scale;
-			// SpineCpp.Atlas[] atlasArray = this.GetAtlasArray();
+			List<SpineCpp.Atlas> atlasArray = this.GetAtlasArray_Cpp();
+			Assert.IsTrue(atlasArray.Count==1,"仅支持1个atlas");
+			//TODO 记得释放！
+			SpineCpp.AtlasAttachmentLoader attachmentLoader = (atlasArray.Count == 0) ? null : new SpineCpp.AtlasAttachmentLoader(atlasArray[0]);
+			SpineCpp.SpineCppUtils.DisposeList(atlasArray);
+			skeletonDataScale = scale;
 			
-			// attachmentLoader = (atlasArray.Length == 0) ? (AttachmentLoader)new RegionlessAttachmentLoader() : (AttachmentLoader)new AtlasAttachmentLoader(atlasArray);
-			// skeletonDataScale = scale;
- 
-
 			bool hasBinaryExtension = skeletonJSON.name.ToLower().Contains(".skel");
+			Assert.IsFalse(hasBinaryExtension,"目前仅支持json");
 			SpineCpp.SkeletonData loadedSkeletonData = null;
-			try {
-				if (hasBinaryExtension)
-				{
-					throw new NotImplementedException("SpineCpp 没有实现 二进制加载接口");
-				}
-				else
-				{
-					//TODO 暂时不理解这边的atlas为什么是多个！
-					SpineAtlasAsset atlasAsset = atlasAssets[0] as SpineAtlasAsset;
-					//TODO 注意把控 SpineCpp的生命周期!!
-					SpineCpp.Atlas atlasCpp = new SpineCpp.Atlas(atlasAsset.atlasFile.text,atlasAsset.atlasFile.text.Length,"",,true);
-					SpineCpp.SkeletonJson skJson = new SpineCpp.SkeletonJson(atlasCpp);//TODO 注意把控 SpineCpp的生命周期!!
-					skJson.SetScale(skeletonDataScale);
-					loadedSkeletonData = skJson.ReadSkeletonData(skeletonJSON.text);
-				}
+			try
+			{
+				//TODO 暂时不理解这边的atlas为什么是多个！
+				SpineAtlasAsset atlasAsset = atlasAssets[0] as SpineAtlasAsset;
+				//TODO 注意把控 SpineCpp的生命周期!!
+				 
+				SpineCpp.SkeletonJson skJson = new SpineCpp.SkeletonJson(attachmentLoader,false);//TODO 注意把控 SpineCpp的生命周期!!
+				skJson.SetScale(skeletonDataScale);
+				loadedSkeletonData = skJson.ReadSkeletonData(skeletonJSON.text);
+				attachmentLoader?.Dispose();
+				skJson.Dispose();
 			} catch (Exception ex) {
 				if (!quiet)
 					Debug.LogError("Error reading skeleton JSON file for SkeletonData asset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, skeletonJSON);
@@ -330,7 +303,35 @@ namespace Spine.Unity {
 		internal void InitializeWithDataCpp (spine_cpp.Spine.SkeletonData sd) {
 			this.skeletonData_Cpp = sd;
 			this.stateData_Cpp = new spine_cpp.Spine.AnimationStateData(skeletonData_Cpp);
-			FillStateData();
+			FillStateData_Cpp();
+		}
+
+		public void FillStateData_Cpp (bool quiet = false) {
+			if (stateData_Cpp != null) {
+				stateData_Cpp.DefaultMix = defaultMix;
+
+				for (int i = 0, n = fromAnimation.Length; i < n; i++) {
+					using SpineCpp.String fromAnimationName = SpineCpp.SpineCppUtils.CreateSpineString(fromAnimation[i]);
+					using SpineCpp.String toAnimationName = SpineCpp.SpineCppUtils.CreateSpineString(toAnimation[i]);
+					if (fromAnimationName.Length == 0 || toAnimationName.Length == 0)
+						continue;
+#if UNITY_EDITOR
+					if (skeletonData_Cpp.FindAnimation(fromAnimationName) == null) {
+						if (!quiet) Debug.LogError(
+							string.Format("Custom Mix Durations: Animation '{0}' not found, was it renamed?",
+								fromAnimationName.Buffer), this);
+						continue;
+					}
+					if (skeletonData_Cpp.FindAnimation(toAnimationName) == null) {
+						if (!quiet) Debug.LogError(
+							string.Format("Custom Mix Durations: Animation '{0}' not found, was it renamed?",
+								toAnimationName.Buffer), this);
+						continue;
+					}
+#endif
+					stateData_Cpp.SetMix(fromAnimationName, toAnimationName, duration[i]);
+				}
+			}
 		}
 
 		public void FillStateData (bool quiet = false) {
@@ -373,7 +374,7 @@ namespace Spine.Unity {
 			return returnList.ToArray();
 		}
 		
-		internal SpineCpp.Atlas[] GetAtlasArray_Cpp () {
+		internal List<SpineCpp.Atlas> GetAtlasArray_Cpp () {
 			List<SpineCpp.Atlas> returnList = new System.Collections.Generic.List<SpineCpp.Atlas>(atlasAssets.Length);
 			for (int i = 0; i < atlasAssets.Length; i++) {
 				AtlasAssetBase aa = atlasAssets[i];
@@ -382,8 +383,10 @@ namespace Spine.Unity {
 				if (a == null) continue;
 				returnList.Add(a);
 			}
-			return returnList.ToArray();
+			return returnList;
 		}
+
+	
 
 		internal static SkeletonData ReadSkeletonData (byte[] bytes, AttachmentLoader attachmentLoader, float scale) {
 			using (MemoryStream input = new MemoryStream(bytes)) {
@@ -396,15 +399,6 @@ namespace Spine.Unity {
 
 		internal static SkeletonData ReadSkeletonData (string text, AttachmentLoader attachmentLoader, float scale) {
 			StringReader input = new StringReader(text);
-			SkeletonJson json = new SkeletonJson(attachmentLoader) {
-				Scale = scale
-			};
-			return json.ReadSkeletonData(input);
-		}
-		internal static SkeletonData ReadSkeletonData_Cpp (string text, SpineCpp.AttachmentLoader attachmentLoader, float scale)
-		{
-			SpineCpp.SkeletonJson js = new SpineCpp.SkeletonJson();//TODO 注意把控 SpineCpp的生命周期!!
-			2023年10月29日14:39:03  处理Atlas的逻辑
 			SkeletonJson json = new SkeletonJson(attachmentLoader) {
 				Scale = scale
 			};

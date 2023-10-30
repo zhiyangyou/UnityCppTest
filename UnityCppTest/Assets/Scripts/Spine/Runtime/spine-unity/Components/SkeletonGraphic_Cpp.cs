@@ -37,16 +37,13 @@
 
 #define SPINE_OPTIONAL_ON_DEMAND_LOADING
 
+using System;
 using System.Collections.Generic;
-using spine_cpp.Spine;
 using UnityEngine;
 using UnityEngine.UI;
-
+using SpineCpp = spine_cpp.Spine;
 namespace Spine.Unity
 {
-    using Skin = spine_cpp.Spine.Skin;
-    using Slot = spine_cpp.Spine.Slot;
-
 #if NEW_PREFAB_SYSTEM
     [ExecuteAlways]
 #else
@@ -65,6 +62,8 @@ namespace Spine.Unity
         {
             get { return skeletonDataAsset; }
         }
+
+        public Skeleton Skeleton => throw new NotImplementedException("SkeletonGraphic_Cpp 尚未实现 Skeleton接口");
 
         public Material additiveMaterial;
         public Material multiplyMaterial;
@@ -150,7 +149,7 @@ namespace Spine.Unity
 
         /// <summary>Slots that determine where the render is split. This is used by components such as SkeletonRenderSeparator so that the skeleton can be rendered by two separate renderers on different GameObjects.</summary>
         [System.NonSerialized]
-        public readonly List<spine_cpp.Spine.Slot> separatorSlots = new List<spine_cpp.Spine.Slot>();
+        public readonly List<SpineCpp.Slot> separatorSlots = new();
 
         public bool enableSeparatorSlots = false;
         [SerializeField] protected List<Transform> separatorParts = new List<Transform>();
@@ -167,10 +166,7 @@ namespace Spine.Unity
         private bool requiresInstructionUpate = true;
         private Texture baseTexture = null;
 
-        static spine_cpp.Spine.String Convert2SpineString(string str)
-        {
-            return new spine_cpp.Spine.String(str, true, false);
-        }
+
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
@@ -186,7 +182,7 @@ namespace Spine.Unity
                 {
                     Clear();
                 }
-                else if (skeletonDataAsset.GetSkeletonData_Cpp(true) != skeleton.Data)
+                else if (skeletonDataAsset.GetSkeletonData_Cpp(true) != skeletonCpp.Data)
                 {
                     Clear();
                     Initialize(true);
@@ -207,13 +203,14 @@ namespace Spine.Unity
 
                     if (!string.IsNullOrEmpty(initialSkinName))
                     {
-                        Skin skin = skeleton.Data.FindSkin(Convert2SpineString(initialSkinName));
+                        using SpineCpp.String cppStr = SpineCpp.SpineCppUtils.CreateSpineString(initialSkinName);
+                        SpineCpp.Skin skin = skeletonCpp.Data.FindSkin(cppStr);
                         if (skin != null)
                         {
-                            if (skin == skeleton.Data.DefaultSkin)
-                                skeleton.SetSkin(Convert2SpineString(initialSkinName));
+                            if (skin == skeletonCpp.Data.DefaultSkin)
+                                skeletonCpp.SetSkin(cppStr);
                             else
-                                skeleton.SetSkin(skin.Name);
+                                skeletonCpp.SetSkin(skin.Name);
                         }
                     }
                 }
@@ -466,7 +463,8 @@ namespace Spine.Unity
 
             if (updateMode == UpdateMode.OnlyAnimationStatus)
             {
-                state.ApplyEventTimelinesOnly(skeleton, issueEvents: false);
+                NotSupportUpdateMode(UpdateMode.OnlyEventTimelines);
+                //_state_Cpp.ApplyEventTimelinesOnly(skeleton, issueEvents: false);
                 return;
             }
 
@@ -498,7 +496,7 @@ namespace Spine.Unity
         protected void UpdateAnimationStatus(float deltaTime)
         {
             deltaTime *= timeScale;
-            state.Update(deltaTime);
+            _state_Cpp.Update(deltaTime);
         }
 
         protected void ApplyAnimation()
@@ -507,24 +505,30 @@ namespace Spine.Unity
                 BeforeApply(this);
 
             if (updateMode != UpdateMode.OnlyEventTimelines)
-                state.Apply(skeleton);
+                _state_Cpp.Apply(skeletonCpp);
             else
-                state.ApplyEventTimelinesOnly(skeleton, issueEvents: true);
-
+            {
+                NotSupportUpdateMode(UpdateMode.OnlyEventTimelines);
+                //_state_Cpp.ApplyEventTimelinesOnly(skeleton, issueEvents: true);
+            }
             AfterAnimationApplied();
         }
 
+        private void NotSupportUpdateMode( UpdateMode mode  )
+        {
+            throw new NotImplementedException($"spine_cpp 没有 UpdateMode的特性！！！ 不支持UpdateMode.{mode.ToString()} ");
+        }
         public void AfterAnimationApplied()
         {
             if (UpdateLocal != null)
                 UpdateLocal(this);
 
-            skeleton.UpdateWorldTransform();
+            skeletonCpp.UpdateWorldTransform();
 
             if (UpdateWorld != null)
             {
                 UpdateWorld(this);
-                skeleton.UpdateWorldTransform();
+                skeletonCpp.UpdateWorldTransform();
             }
 
             if (UpdateComplete != null)
@@ -576,7 +580,7 @@ namespace Spine.Unity
                 string slotName = separatorSlotNames[i];
                 if (slotName == "")
                     continue;
-                Slot slot = skeleton.FindSlot(new spine_cpp.Spine.String(slotName, false, true));
+                SpineCpp.Slot slot = skeletonCpp.FindSlot(new SpineCpp.String(slotName, false, true));
                 if (slot != null)
                 {
                     separatorSlots.Add(slot);
@@ -596,35 +600,35 @@ namespace Spine.Unity
 
         #region API
 
-        protected spine_cpp.Spine.Skeleton skeleton;
+        protected SpineCpp.Skeleton skeletonCpp;
 
-        public spine_cpp.Spine.Skeleton Skeleton
+        public SpineCpp.Skeleton SkeletonCpp
         {
             get
             {
                 Initialize(false);
                 requiresInstructionUpate = true;
-                return skeleton;
+                return skeletonCpp;
             }
             set
             {
                 requiresInstructionUpate = true;
-                skeleton = value;
+                skeletonCpp = value;
             }
         }
 
-        public SkeletonData SkeletonData
+        public SpineCpp.SkeletonData SkeletonData
         {
             get
             {
                 Initialize(false);
-                return skeleton == null ? null : skeleton.Data;
+                return skeletonCpp == null ? null : skeletonCpp.Data;
             }
         }
 
         public bool IsValid
         {
-            get { return skeleton != null; }
+            get { return skeletonCpp != null; }
         }
 
         public delegate void SkeletonRendererDelegate(SkeletonGraphic_Cpp skeletonGraphic);
@@ -644,17 +648,17 @@ namespace Spine.Unity
         /// from where you can issue such preparation calls.</summary>
         public event SkeletonRendererDelegate OnMeshAndMaterialsUpdated;
 
-        protected Spine.AnimationState state;
+        protected SpineCpp.AnimationState _state_Cpp;
 
-        public Spine.AnimationState AnimationState
+        public SpineCpp.AnimationState AnimationState_Cpp
         {
             get
             {
                 Initialize(false);
-                return state;
+                return _state_Cpp;
             }
         }
-
+        
         [SerializeField] protected Spine.Unity.MeshGenerator meshGenerator = new MeshGenerator();
 
         public Spine.Unity.MeshGenerator MeshGenerator
@@ -820,6 +824,8 @@ namespace Spine.Unity
         }
 
         [SerializeField] protected bool unscaledTime;
+        
+        AnimationState IAnimationStateComponent.AnimationState => throw new NotImplementedException("Cpp版本不包含");
 
         public bool UnscaledTime
         {
@@ -832,7 +838,10 @@ namespace Spine.Unity
 
         public void Clear()
         {
-            skeleton = null;
+            _state_Cpp?.Dispose();
+            _state_Cpp = null;
+            skeletonCpp?.Dispose();
+            skeletonCpp = null;
             canvasRenderer.Clear();
 
             for (int i = 0; i < canvasRenderers.Count; ++i)
@@ -873,12 +882,12 @@ namespace Spine.Unity
                 return;
 #endif
             if (this.skeletonDataAsset == null) return;
-            SkeletonData skeletonData = this.skeletonDataAsset.GetSkeletonData(false);
+            SpineCpp.SkeletonData skeletonData = this.skeletonDataAsset.GetSkeletonData_Cpp(false);
             if (skeletonData == null) return;
 
             if (skeletonDataAsset.atlasAssets.Length <= 0 || skeletonDataAsset.atlasAssets[0].MaterialCount <= 0) return;
 
-            this.skeleton = new Skeleton(skeletonData)
+            this.skeletonCpp = new SpineCpp.Skeleton(skeletonData)
             {
                 ScaleX = this.initialFlipX ? -1 : 1,
                 ScaleY = this.initialFlipY ? -1 : 1
@@ -890,28 +899,35 @@ namespace Spine.Unity
 
             // Set the initial Skin and Animation
             if (!string.IsNullOrEmpty(initialSkinName))
-                skeleton.SetSkin(initialSkinName);
+            {
+                using SpineCpp.String cppStr = SpineCpp.SpineCppUtils.CreateSpineString(initialSkinName);
+                skeletonCpp.SetSkin(cppStr);
+            }
 
             separatorSlots.Clear();
             for (int i = 0; i < separatorSlotNames.Length; i++)
-                separatorSlots.Add(skeleton.FindSlot(separatorSlotNames[i]));
+            {
+                using SpineCpp.String cppStr = SpineCpp.SpineCppUtils.CreateSpineString(separatorSlotNames[i]);
+                separatorSlots.Add(skeletonCpp.FindSlot(cppStr));
+            }
             if (OnRebuild != null)
                 OnRebuild(this);
 
             wasUpdatedAfterInit = false;
-            this.state = new Spine.AnimationState(skeletonDataAsset.GetAnimationStateData());
-            if (state == null)
+            this._state_Cpp = new SpineCpp.AnimationState(skeletonDataAsset.GetAnimationStateData_Cpp());
+            if (_state_Cpp == null)
             {
                 Clear();
                 return;
             }
 
+            using SpineCpp.String cppStartingAnimation = SpineCpp.SpineCppUtils.CreateSpineString(startingAnimation);
             if (!string.IsNullOrEmpty(startingAnimation))
             {
-                Spine.Animation animationObject = skeletonDataAsset.GetSkeletonData(false).FindAnimation(startingAnimation);
+                SpineCpp.Animation animationObject = skeletonDataAsset.GetSkeletonData_Cpp(false).FindAnimation(cppStartingAnimation);
                 if (animationObject != null)
                 {
-                    state.SetAnimation(0, animationObject, startingLoop);
+                    _state_Cpp.SetAnimation(0, animationObject, startingLoop);
 #if UNITY_EDITOR
                     if (!Application.isPlaying)
                         Update(0f);
@@ -928,14 +944,14 @@ namespace Spine.Unity
             requiresInstructionUpate = false;
             if (!this.allowMultipleCanvasRenderers)
             {
-                MeshGenerator.GenerateSingleSubmeshInstruction(currentInstructions, skeleton, null);
+                MeshGenerator.GenerateSingleSubmeshInstruction(currentInstructions, skeletonCpp, null);
                 if (canvasRenderers.Count > 0)
                     DisableUnusedCanvasRenderers(usedCount: 0, isInRebuild: isInRebuild);
                 usedRenderersCount = 0;
             }
             else
             {
-                MeshGenerator.GenerateSkeletonRendererInstruction(currentInstructions, skeleton, null,
+                MeshGenerator.GenerateSkeletonRendererInstruction(currentInstructions, skeletonCpp, null,
                     enableSeparatorSlots ? separatorSlots : null,
                     enableSeparatorSlots ? separatorSlots.Count > 0 : false,
                     false);
@@ -961,7 +977,7 @@ namespace Spine.Unity
         public void UpdateMeshToInstructions()
         {
             if (!this.IsValid || currentInstructions.rawVertexCount < 0) return;
-            skeleton.SetColor(this.color);
+            skeletonCpp.SetColor(this.color);
 
             if (!this.allowMultipleCanvasRenderers)
             {
@@ -981,7 +997,7 @@ namespace Spine.Unity
         {
             if (!IsValid)
                 return false;
-            return MeshGenerator.RequiresMultipleSubmeshesByDrawOrder(skeleton);
+            return MeshGenerator.RequiresMultipleSubmeshesByDrawOrder(skeletonCpp);
         }
 
         #endregion

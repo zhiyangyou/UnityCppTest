@@ -78,13 +78,50 @@ namespace Spine.Unity {
 			if (initialize)
 				atlasAsset.GetAtlas();
 			
-			atlasAsset._OnSpineCppTextureLoader_Load = (IntPtr spineCpp_AtlasPage,IntPtr spineCpp_String) =>
+			atlasAsset._OnSpineCppTextureLoader_Load = (IntPtr spineCpp_AtlasPage, IntPtr spineCpp_String) =>
 			{
-				2023年10月29日21:11:19
+#if UNITY_EDITOR
+				if (BuildUtilities.IsInSkeletonAssetBuildPreProcessing ||
+				    BuildUtilities.IsInSkeletonAssetBuildPostProcessing)
+					return;
+#endif
+				using (SpineCpp.String cppStr = new SpineCpp.String(spineCpp_String))
+				{
+					using (SpineCpp.AtlasPage atlasPage = SpineCpp.AtlasPage.__GetOrCreateInstance(spineCpp_AtlasPage, true))
+					{
+						string name = Path.GetFileNameWithoutExtension(cppStr.Buffer);
+						Material material = null;
+						foreach (Material other in atlasAsset.materials) {
+							if (other.mainTexture == null) {
+								Debug.LogError("Material is missing texture: " + other.name, other);
+								return;
+							}
+							string textureName = other.mainTexture.name;
+							if (textureName == name ||
+							    (atlasAsset.OnDemandTextureLoader != null &&
+							     textureName == atlasAsset.OnDemandTextureLoader.GetPlaceholderTextureName(name))
+							   ) {
+								material = other;
+								break;
+							}
+						}
+						if (material == null) {
+							Debug.LogError("Material with texture name \"" + name + "\" not found for atlas asset: " + atlasAsset.name, atlasAsset);
+							return;
+						}
+						atlasPage.rendererObject = material;
+
+						// Very old atlas files expected the texture's actual size to be used at runtime.
+						if (atlasPage.Width == 0 || atlasPage.Height == 0) {
+							atlasPage.Width = material.mainTexture.width;
+							atlasPage.Height = material.mainTexture.height;
+						}		
+					}
+				}
 			};
 			atlasAsset._OnSpineCppTextureLoader_Unload = (IntPtr spineCpp_Texture) =>
 			{
-				2023年10月29日21:11:21
+				 
 			};
 			
 			//注意把控 UnitySpineCppTextureLoader的生命周期!!
@@ -236,7 +273,7 @@ namespace Spine.Unity {
 				else
 					loader = new NoOpTextureLoader();
 				//TODO 注意把控 SpineCpp的生命周期!!
-				atlas_Cpp = new SpineCpp.Atlas(atlasFile.text,atlasFile.text.Length, "", loader,true);
+				atlas_Cpp = new SpineCpp.Atlas(atlasFile.text,atlasFile.text.Length, "", this._unitySpineCppTextureLoader,true);
 				atlas_Cpp.FlipV();
 				return atlas_Cpp;
 			} catch (Exception ex) {

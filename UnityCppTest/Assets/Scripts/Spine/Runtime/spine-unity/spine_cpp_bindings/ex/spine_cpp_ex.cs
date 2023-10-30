@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpineCpp = spine_cpp.Spine;
 
 namespace spine_cpp
 {
@@ -7,11 +8,21 @@ namespace spine_cpp
     {
         public static class SpineCppUtils
         {
-            static spine_cpp.Spine.String Convert2SpineString(string str)
+            public static void DisposeList<T>(List<T> list) where T : IDisposable
             {
-                return new spine_cpp.Spine.String(str, true, false);
+                foreach (var disposable in list)
+                {
+                    disposable.Dispose();
+                }
+                list.Clear();
+            }
+
+            public static SpineCpp.String CreateSpineString(string str)
+            {
+                return new SpineCpp.String(str, true, false);
             }
         }
+
         public unsafe partial class Skin
         {
             public void getAttachments(ulong slotIndex, List<spine_cpp.Spine.SkinEntry> listEntries)
@@ -75,7 +86,7 @@ namespace spine_cpp
                 atlasRegion.Index = Index;
                 atlasRegion.X = X;
                 atlasRegion.Y = Y;
-                
+
                 //浅克隆
                 atlasRegion.Splits = Splits;
                 atlasRegion.Pads = Pads;

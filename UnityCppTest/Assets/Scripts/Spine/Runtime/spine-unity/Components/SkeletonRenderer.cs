@@ -286,6 +286,9 @@ namespace Spine.Unity {
 				return skeleton;
 			}
 		}
+
+		public spine_cpp.Spine.Skeleton SkeletonCpp { get; }
+
 		#endregion
 
 		public delegate void SkeletonRendererDelegate (SkeletonRenderer skeletonRenderer);

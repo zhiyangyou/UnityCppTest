@@ -26,7 +26,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THE
  * SPINE RUNTIMES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
-
+using SpineCpp = spine_cpp.Spine;
 namespace Spine.Unity {
 	public enum UpdateMode {
 		Nothing = 0,
@@ -82,6 +82,7 @@ namespace Spine.Unity {
 
 		/// <summary>Gets the Spine.Skeleton instance of the Spine Component. This is equivalent to SkeletonRenderer's .skeleton.</summary>
 		Skeleton Skeleton { get; }
+		SpineCpp.Skeleton SkeletonCpp { get; }
 		
 	}
 
@@ -89,6 +90,7 @@ namespace Spine.Unity {
 	public interface IAnimationStateComponent : ISpineComponent {
 		/// <summary>Gets the Spine.AnimationState of the animated Spine Component. This is equivalent to SkeletonAnimation.state.</summary>
 		AnimationState AnimationState { get; }
+		SpineCpp.AnimationState AnimationState_Cpp { get; }
 		/// <summary>If enabled, AnimationState time is advanced by Unscaled Game Time
 		/// (<c>Time.unscaledDeltaTime</c> instead of the default Game Time(<c>Time.deltaTime</c>).
 		/// to animate independent of game <c>Time.timeScale</c>.

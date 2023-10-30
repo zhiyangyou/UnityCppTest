@@ -37,6 +37,7 @@
 
 #define SPINE_OPTIONAL_ON_DEMAND_LOADING
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -477,6 +478,9 @@ namespace Spine.Unity {
 				skeleton = value;
 			}
 		}
+
+		public spine_cpp.Spine.Skeleton SkeletonCpp { get; }
+
 		public SkeletonData SkeletonData {
 			get {
 				Initialize(false);
@@ -509,6 +513,8 @@ namespace Spine.Unity {
 				return state;
 			}
 		}
+
+		public spine_cpp.Spine.AnimationState AnimationState_Cpp => throw new NotImplementedException("C#版本不包含Cpp");
 
 		[SerializeField] protected Spine.Unity.MeshGenerator meshGenerator = new MeshGenerator();
 		public Spine.Unity.MeshGenerator MeshGenerator { get { return this.meshGenerator; } }

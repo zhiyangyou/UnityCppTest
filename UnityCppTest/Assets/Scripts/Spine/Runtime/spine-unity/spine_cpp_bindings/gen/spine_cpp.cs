@@ -974,6 +974,9 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0String@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr other);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0String@spine@@QEAA@PEAX@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor_1(__IntPtr __instance, __IntPtr pOther);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?own@String@spine@@QEAAXAEBV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void Own(__IntPtr __instance, __IntPtr other);
 
@@ -1108,6 +1111,16 @@ namespace spine_cpp
                 SetupVTables(GetType().FullName == "spine_cpp.Spine.String");
             }
 
+            public String(__IntPtr pOther)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.String.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor_1(__Instance, pOther);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.String");
+            }
+
             partial void DisposePartial(bool disposing);
 
             internal protected override void Dispose(bool disposing, bool callNativeDtor )
@@ -1183,6 +1196,11 @@ namespace spine_cpp
                 var __arg0 = needle.__Instance;
                 var ___ret = __Internal.StartsWith(__Instance, __arg0);
                 return ___ret;
+            }
+
+            public static implicit operator global::spine_cpp.Spine.String(__IntPtr pOther)
+            {
+                return new global::spine_cpp.Spine.String(pOther);
             }
 
             public static bool operator ==(global::spine_cpp.Spine.String a, global::spine_cpp.Spine.String b)

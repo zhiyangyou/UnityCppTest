@@ -14,6 +14,7 @@ extern "C" __declspec(dllexport) void c__N_spine_S_SpineObject_SpineObject___1__
 extern "C" __declspec(dllexport) void c__N_spine_S_String_String(void* __instance) { ::new (__instance) spine::String(); }
 extern "C" __declspec(dllexport) void c__N_spine_S_String_String__1C_b_b(void* __instance, const char* chars, bool own, bool tofree) { ::new (__instance) spine::String(chars, own, tofree); }
 extern "C" __declspec(dllexport) void c__N_spine_S_String_String___1__N_spine_S_String(void* __instance, const spine::String& other) { ::new (__instance) spine::String(other); }
+extern "C" __declspec(dllexport) void c__N_spine_S_String_String__v(void* __instance, void* pOther) { ::new (__instance) spine::String(pOther); }
 unsigned long long (spine::String::*_4)() const = &spine::String::length;
 bool (spine::String::*_5)() const = &spine::String::isEmpty;
 const char* (spine::String::*_6)() const = &spine::String::buffer;
