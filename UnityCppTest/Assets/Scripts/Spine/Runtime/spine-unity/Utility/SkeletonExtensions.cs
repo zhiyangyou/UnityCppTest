@@ -41,11 +41,7 @@ namespace Spine.Unity {
 		public static Color GetColorTintBlack (this Slot s) { return new Color(s.R2, s.G2, s.B2, 1f); }
 
 		public static void SetColor (this SpineCpp.Skeleton skeleton, Color color) {
-			2023年10月30日23:16:31  spineCpp 添加颜色的API 2023年10月30日23:16:43
-			skeleton.A = color.a;
-			skeleton.R = color.r;
-			skeleton.G = color.g;
-			skeleton.B = color.b;
+			skeleton.SetColor(color.r, color.g, color.b, color.a);
 		}
 		
 		public static void SetColor (this Skeleton skeleton, Color color) {

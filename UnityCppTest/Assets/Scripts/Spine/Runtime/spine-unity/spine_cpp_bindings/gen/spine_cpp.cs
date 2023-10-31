@@ -31110,6 +31110,9 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?getBounds@Skeleton@spine@@QEAAXAEAM000AEAV?$Vector@M@2@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void GetBounds(__IntPtr __instance, float* outX, float* outY, float* outWidth, float* outHeight, __IntPtr outVertexBuffer);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?setColor@Skeleton@spine@@QEAAXMMMM@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetColor(__IntPtr __instance, float r, float g, float b, float a);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?setPosition@Skeleton@spine@@QEAAXMM@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void SetPosition(__IntPtr __instance, float x, float y);
 
@@ -31446,6 +31449,11 @@ namespace spine_cpp
                         }
                     }
                 }
+            }
+
+            public void SetColor(float r, float g, float b, float a)
+            {
+                __Internal.SetColor(__Instance, r, g, b, a);
             }
 
             public void SetPosition(float x, float y)

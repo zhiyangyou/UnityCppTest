@@ -31,6 +31,7 @@
 #define NEW_PREFAB_SYSTEM
 #endif
 
+using System;
 using UnityEngine;
 
 namespace Spine.Unity {
@@ -58,6 +59,8 @@ namespace Spine.Unity {
 				return this.state;
 			}
 		}
+
+		public spine_cpp.Spine.AnimationState AnimationState_Cpp => throw new NotImplementedException("SkeletonAnimation 没有实现C++的AnimationState_Cpp");
 		private bool wasUpdatedAfterInit = true;
 		#endregion
 
