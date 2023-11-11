@@ -307,6 +307,11 @@ namespace System
 
 namespace System
 {
+	struct ISpanFormattable;
+}
+
+namespace System
+{
 	struct IConvertible;
 }
 
@@ -695,6 +700,23 @@ namespace System
 		IFormattable& operator=(IFormattable&& other);
 		bool operator==(const IFormattable& other) const;
 		bool operator!=(const IFormattable& other) const;
+	};
+}
+
+namespace System
+{
+	struct ISpanFormattable : virtual System::Object
+	{
+		ISpanFormattable(decltype(nullptr));
+		ISpanFormattable(Plugin::InternalUse, int32_t handle);
+		ISpanFormattable(const ISpanFormattable& other);
+		ISpanFormattable(ISpanFormattable&& other);
+		virtual ~ISpanFormattable();
+		ISpanFormattable& operator=(const ISpanFormattable& other);
+		ISpanFormattable& operator=(decltype(nullptr));
+		ISpanFormattable& operator=(ISpanFormattable&& other);
+		bool operator==(const ISpanFormattable& other) const;
+		bool operator!=(const ISpanFormattable& other) const;
 	};
 }
 
