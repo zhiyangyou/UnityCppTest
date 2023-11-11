@@ -1,7 +1,3 @@
 [submodule "CppPlugin/DLLPlugin/spine-runtimes"]
 	path = CppPlugin/DLLPlugin/spine-runtimes
 	url = https://github.com/EsotericSoftware/spine-runtimes.git
-[submodule "UnityNativeScripting"]
-	path = UnityNativeScripting
-	url = ../UnityNativeScripting.git
-	branch = master

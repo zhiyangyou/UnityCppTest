@@ -338,7 +338,22 @@ namespace System
 
 namespace UnityEngine
 {
+	struct Vector4;
+}
+
+namespace UnityEngine
+{
 	struct Vector3;
+}
+
+namespace UnityEngine
+{
+	struct Color32;
+}
+
+namespace UnityEngine
+{
+	struct Vector2;
 }
 
 namespace UnityEngine
@@ -389,6 +404,11 @@ namespace System
 namespace UnityEngine
 {
 	struct GameObject;
+}
+
+namespace UnityEngine
+{
+	struct Mesh;
 }
 
 namespace UnityEngine
@@ -510,7 +530,22 @@ namespace System
 
 namespace System
 {
+	template<> struct IEquatable_1<UnityEngine::Color32>;
+}
+
+namespace System
+{
+	template<> struct IEquatable_1<UnityEngine::Vector4>;
+}
+
+namespace System
+{
 	template<> struct IEquatable_1<UnityEngine::Vector3>;
+}
+
+namespace System
+{
+	template<> struct IEquatable_1<UnityEngine::Vector2>;
 }
 
 namespace System
@@ -597,7 +632,10 @@ namespace System
 		
 		/*BEGIN UNBOXING METHOD DECLARATIONS*/
 		explicit operator System::Decimal();
+		explicit operator UnityEngine::Vector4();
 		explicit operator UnityEngine::Vector3();
+		explicit operator UnityEngine::Color32();
+		explicit operator UnityEngine::Vector2();
 		explicit operator UnityEngine::PrimitiveType();
 		explicit operator System::Boolean();
 		explicit operator System::SByte();
@@ -977,6 +1015,40 @@ namespace System
 
 namespace System
 {
+	template<> struct IEquatable_1<UnityEngine::Color32> : virtual System::Object
+	{
+		IEquatable_1(decltype(nullptr));
+		IEquatable_1(Plugin::InternalUse, int32_t handle);
+		IEquatable_1(const IEquatable_1<UnityEngine::Color32>& other);
+		IEquatable_1(IEquatable_1<UnityEngine::Color32>&& other);
+		virtual ~IEquatable_1();
+		IEquatable_1<UnityEngine::Color32>& operator=(const IEquatable_1<UnityEngine::Color32>& other);
+		IEquatable_1<UnityEngine::Color32>& operator=(decltype(nullptr));
+		IEquatable_1<UnityEngine::Color32>& operator=(IEquatable_1<UnityEngine::Color32>&& other);
+		bool operator==(const IEquatable_1<UnityEngine::Color32>& other) const;
+		bool operator!=(const IEquatable_1<UnityEngine::Color32>& other) const;
+	};
+}
+
+namespace System
+{
+	template<> struct IEquatable_1<UnityEngine::Vector4> : virtual System::Object
+	{
+		IEquatable_1(decltype(nullptr));
+		IEquatable_1(Plugin::InternalUse, int32_t handle);
+		IEquatable_1(const IEquatable_1<UnityEngine::Vector4>& other);
+		IEquatable_1(IEquatable_1<UnityEngine::Vector4>&& other);
+		virtual ~IEquatable_1();
+		IEquatable_1<UnityEngine::Vector4>& operator=(const IEquatable_1<UnityEngine::Vector4>& other);
+		IEquatable_1<UnityEngine::Vector4>& operator=(decltype(nullptr));
+		IEquatable_1<UnityEngine::Vector4>& operator=(IEquatable_1<UnityEngine::Vector4>&& other);
+		bool operator==(const IEquatable_1<UnityEngine::Vector4>& other) const;
+		bool operator!=(const IEquatable_1<UnityEngine::Vector4>& other) const;
+	};
+}
+
+namespace System
+{
 	template<> struct IEquatable_1<UnityEngine::Vector3> : virtual System::Object
 	{
 		IEquatable_1(decltype(nullptr));
@@ -989,6 +1061,23 @@ namespace System
 		IEquatable_1<UnityEngine::Vector3>& operator=(IEquatable_1<UnityEngine::Vector3>&& other);
 		bool operator==(const IEquatable_1<UnityEngine::Vector3>& other) const;
 		bool operator!=(const IEquatable_1<UnityEngine::Vector3>& other) const;
+	};
+}
+
+namespace System
+{
+	template<> struct IEquatable_1<UnityEngine::Vector2> : virtual System::Object
+	{
+		IEquatable_1(decltype(nullptr));
+		IEquatable_1(Plugin::InternalUse, int32_t handle);
+		IEquatable_1(const IEquatable_1<UnityEngine::Vector2>& other);
+		IEquatable_1(IEquatable_1<UnityEngine::Vector2>&& other);
+		virtual ~IEquatable_1();
+		IEquatable_1<UnityEngine::Vector2>& operator=(const IEquatable_1<UnityEngine::Vector2>& other);
+		IEquatable_1<UnityEngine::Vector2>& operator=(decltype(nullptr));
+		IEquatable_1<UnityEngine::Vector2>& operator=(IEquatable_1<UnityEngine::Vector2>&& other);
+		bool operator==(const IEquatable_1<UnityEngine::Vector2>& other) const;
+		bool operator!=(const IEquatable_1<UnityEngine::Vector2>& other) const;
 	};
 }
 
@@ -1266,6 +1355,24 @@ namespace System
 
 namespace UnityEngine
 {
+	struct Vector4
+	{
+		Vector4();
+		Vector4(System::Single x, System::Single y, System::Single z, System::Single w);
+		System::Single x;
+		System::Single y;
+		System::Single z;
+		System::Single w;
+		virtual UnityEngine::Vector4 operator+(UnityEngine::Vector4& a);
+		explicit operator System::ValueType();
+		explicit operator System::Object();
+		explicit operator System::IFormattable();
+		explicit operator System::IEquatable_1<UnityEngine::Vector4>();
+	};
+}
+
+namespace UnityEngine
+{
 	struct Vector3
 	{
 		Vector3();
@@ -1278,6 +1385,43 @@ namespace UnityEngine
 		explicit operator System::Object();
 		explicit operator System::IFormattable();
 		explicit operator System::IEquatable_1<UnityEngine::Vector3>();
+	};
+}
+
+namespace UnityEngine
+{
+	struct Color32 : Plugin::ManagedType
+	{
+		Color32(decltype(nullptr));
+		Color32(Plugin::InternalUse, int32_t handle);
+		Color32(const Color32& other);
+		Color32(Color32&& other);
+		virtual ~Color32();
+		Color32& operator=(const Color32& other);
+		Color32& operator=(decltype(nullptr));
+		Color32& operator=(Color32&& other);
+		bool operator==(const Color32& other) const;
+		bool operator!=(const Color32& other) const;
+		Color32(System::Byte r, System::Byte g, System::Byte b, System::Byte a);
+		explicit operator System::ValueType();
+		explicit operator System::Object();
+		explicit operator System::IFormattable();
+	};
+}
+
+namespace UnityEngine
+{
+	struct Vector2
+	{
+		Vector2();
+		Vector2(System::Single x, System::Single y);
+		System::Single x;
+		System::Single y;
+		virtual UnityEngine::Vector2 operator+(UnityEngine::Vector2& a);
+		explicit operator System::ValueType();
+		explicit operator System::Object();
+		explicit operator System::IFormattable();
+		explicit operator System::IEquatable_1<UnityEngine::Vector2>();
 	};
 }
 
@@ -1421,6 +1565,24 @@ namespace UnityEngine
 		bool operator!=(const GameObject& other) const;
 		template<typename MT0> MT0 AddComponent();
 		static UnityEngine::GameObject CreatePrimitive(UnityEngine::PrimitiveType type);
+	};
+}
+
+namespace UnityEngine
+{
+	struct Mesh : virtual UnityEngine::Object
+	{
+		Mesh(decltype(nullptr));
+		Mesh(Plugin::InternalUse, int32_t handle);
+		Mesh(const Mesh& other);
+		Mesh(Mesh&& other);
+		virtual ~Mesh();
+		Mesh& operator=(const Mesh& other);
+		Mesh& operator=(decltype(nullptr));
+		Mesh& operator=(Mesh&& other);
+		bool operator==(const Mesh& other) const;
+		bool operator!=(const Mesh& other) const;
+		Mesh();
 	};
 }
 

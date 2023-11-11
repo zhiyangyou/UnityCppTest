@@ -216,6 +216,18 @@
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\UnitySpineCppExtension.cpp">
       <Filter>源文件\spine</Filter>
     </ClCompile>
+    <ClCompile Include="Bindings.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\MeshGenerator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SpineMesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -223,6 +235,24 @@
   <ItemGroup>
     <ClInclude Include="unity_spinecpp_plugin.h">
       <Filter>源文件\unity-spinecpp-plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="Bindings.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\MeshGenerator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\DoubleBuffered.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SpineCppAdapterCore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SpineMesh.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

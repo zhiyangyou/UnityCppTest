@@ -46,10 +46,22 @@ namespace Plugin
 	int32_t (*SystemDecimalConstructorSystemUInt64)(uint64_t value);
 	int32_t (*BoxDecimal)(int32_t valHandle);
 	int32_t (*UnboxDecimal)(int32_t valHandle);
+	UnityEngine::Vector4 (*UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingle)(float x, float y, float z, float w);
+	UnityEngine::Vector4 (*UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4)(UnityEngine::Vector4& a, UnityEngine::Vector4& b);
+	int32_t (*BoxVector4)(UnityEngine::Vector4& val);
+	UnityEngine::Vector4 (*UnboxVector4)(int32_t valHandle);
 	UnityEngine::Vector3 (*UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingle)(float x, float y, float z);
 	UnityEngine::Vector3 (*UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3)(UnityEngine::Vector3& a, UnityEngine::Vector3& b);
 	int32_t (*BoxVector3)(UnityEngine::Vector3& val);
 	UnityEngine::Vector3 (*UnboxVector3)(int32_t valHandle);
+	void (*ReleaseUnityEngineColor32)(int32_t handle);
+	int32_t (*UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByte)(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+	int32_t (*BoxColor32)(int32_t valHandle);
+	int32_t (*UnboxColor32)(int32_t valHandle);
+	UnityEngine::Vector2 (*UnityEngineVector2ConstructorSystemSingle_SystemSingle)(float x, float y);
+	UnityEngine::Vector2 (*UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2)(UnityEngine::Vector2& a, UnityEngine::Vector2& b);
+	int32_t (*BoxVector2)(UnityEngine::Vector2& val);
+	UnityEngine::Vector2 (*UnboxVector2)(int32_t valHandle);
 	int32_t (*UnityEngineObjectPropertyGetName)(int32_t thisHandle);
 	void (*UnityEngineObjectPropertySetName)(int32_t thisHandle, int32_t valueHandle);
 	int32_t (*UnityEngineComponentPropertyGetTransform)(int32_t thisHandle);
@@ -59,6 +71,7 @@ namespace Plugin
 	int32_t (*SystemCollectionsIEnumeratorMethodMoveNext)(int32_t thisHandle);
 	int32_t (*UnityEngineGameObjectMethodAddComponentMyGameBaseBallScript)(int32_t thisHandle);
 	int32_t (*UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType)(UnityEngine::PrimitiveType type);
+	int32_t (*UnityEngineMeshConstructor)();
 	void (*UnityEngineDebugMethodLogSystemObject)(int32_t messageHandle);
 	int32_t (*UnityEngineMonoBehaviourPropertyGetTransform)(int32_t thisHandle);
 	int32_t (*SystemExceptionConstructorSystemString)(int32_t messageHandle);
@@ -876,6 +889,31 @@ namespace Plugin
 			if (numRemain == 0)
 			{
 				ReleaseSystemDecimal(handle);
+			}
+		}
+	}
+	
+	int32_t RefCountsLenUnityEngineColor32;
+	int32_t* RefCountsUnityEngineColor32;
+	
+	void ReferenceManagedUnityEngineColor32(int32_t handle)
+	{
+		assert(handle >= 0 && handle < RefCountsLenUnityEngineColor32);
+		if (handle != 0)
+		{
+			RefCountsUnityEngineColor32[handle]++;
+		}
+	}
+	
+	void DereferenceManagedUnityEngineColor32(int32_t handle)
+	{
+		assert(handle >= 0 && handle < RefCountsLenUnityEngineColor32);
+		if (handle != 0)
+		{
+			int32_t numRemain = --RefCountsUnityEngineColor32[handle];
+			if (numRemain == 0)
+			{
+				ReleaseUnityEngineColor32(handle);
 			}
 		}
 	}
@@ -2565,6 +2603,168 @@ namespace System
 
 namespace System
 {
+	IEquatable_1<UnityEngine::Color32>::IEquatable_1(decltype(nullptr))
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Color32>::IEquatable_1(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Color32>::IEquatable_1(const IEquatable_1<UnityEngine::Color32>& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Color32>::IEquatable_1(IEquatable_1<UnityEngine::Color32>&& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	IEquatable_1<UnityEngine::Color32>::~IEquatable_1<UnityEngine::Color32>()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Color32>& IEquatable_1<UnityEngine::Color32>::operator=(const IEquatable_1<UnityEngine::Color32>& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Color32>& IEquatable_1<UnityEngine::Color32>::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Color32>& IEquatable_1<UnityEngine::Color32>::operator=(IEquatable_1<UnityEngine::Color32>&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool IEquatable_1<UnityEngine::Color32>::operator==(const IEquatable_1<UnityEngine::Color32>& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool IEquatable_1<UnityEngine::Color32>::operator!=(const IEquatable_1<UnityEngine::Color32>& other) const
+	{
+		return Handle != other.Handle;
+	}
+}
+
+namespace System
+{
+	IEquatable_1<UnityEngine::Vector4>::IEquatable_1(decltype(nullptr))
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>::IEquatable_1(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>::IEquatable_1(const IEquatable_1<UnityEngine::Vector4>& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>::IEquatable_1(IEquatable_1<UnityEngine::Vector4>&& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>::~IEquatable_1<UnityEngine::Vector4>()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>& IEquatable_1<UnityEngine::Vector4>::operator=(const IEquatable_1<UnityEngine::Vector4>& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>& IEquatable_1<UnityEngine::Vector4>::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Vector4>& IEquatable_1<UnityEngine::Vector4>::operator=(IEquatable_1<UnityEngine::Vector4>&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool IEquatable_1<UnityEngine::Vector4>::operator==(const IEquatable_1<UnityEngine::Vector4>& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool IEquatable_1<UnityEngine::Vector4>::operator!=(const IEquatable_1<UnityEngine::Vector4>& other) const
+	{
+		return Handle != other.Handle;
+	}
+}
+
+namespace System
+{
 	IEquatable_1<UnityEngine::Vector3>::IEquatable_1(decltype(nullptr))
 	{
 	}
@@ -2639,6 +2839,87 @@ namespace System
 	}
 	
 	bool IEquatable_1<UnityEngine::Vector3>::operator!=(const IEquatable_1<UnityEngine::Vector3>& other) const
+	{
+		return Handle != other.Handle;
+	}
+}
+
+namespace System
+{
+	IEquatable_1<UnityEngine::Vector2>::IEquatable_1(decltype(nullptr))
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>::IEquatable_1(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>::IEquatable_1(const IEquatable_1<UnityEngine::Vector2>& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>::IEquatable_1(IEquatable_1<UnityEngine::Vector2>&& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>::~IEquatable_1<UnityEngine::Vector2>()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>& IEquatable_1<UnityEngine::Vector2>::operator=(const IEquatable_1<UnityEngine::Vector2>& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>& IEquatable_1<UnityEngine::Vector2>::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Vector2>& IEquatable_1<UnityEngine::Vector2>::operator=(IEquatable_1<UnityEngine::Vector2>&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool IEquatable_1<UnityEngine::Vector2>::operator==(const IEquatable_1<UnityEngine::Vector2>& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool IEquatable_1<UnityEngine::Vector2>::operator!=(const IEquatable_1<UnityEngine::Vector2>& other) const
 	{
 		return Handle != other.Handle;
 	}
@@ -4079,6 +4360,127 @@ namespace System
 
 namespace UnityEngine
 {
+	Vector4::Vector4()
+	{
+	}
+	
+	UnityEngine::Vector4::Vector4(System::Single x, System::Single y, System::Single z, System::Single w)
+	{
+		auto returnValue = Plugin::UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingle(x, y, z, w);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		*this = returnValue;
+	}
+	
+	UnityEngine::Vector4 UnityEngine::Vector4::operator+(UnityEngine::Vector4& a)
+	{
+		auto returnValue = Plugin::UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4(*this, a);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	UnityEngine::Vector4::operator System::ValueType()
+	{
+		int32_t handle = Plugin::BoxVector4(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::ValueType(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Vector4::operator System::Object()
+	{
+		int32_t handle = Plugin::BoxVector4(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Object(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Vector4::operator System::IFormattable()
+	{
+		int32_t handle = Plugin::BoxVector4(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IFormattable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Vector4::operator System::IEquatable_1<UnityEngine::Vector4>()
+	{
+		int32_t handle = Plugin::BoxVector4(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IEquatable_1<UnityEngine::Vector4>(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+}
+
+namespace System
+{
+	System::Object::operator UnityEngine::Vector4()
+	{
+		UnityEngine::Vector4 returnVal(Plugin::UnboxVector4(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
 	Vector3::Vector3()
 	{
 	}
@@ -4187,6 +4589,295 @@ namespace System
 	System::Object::operator UnityEngine::Vector3()
 	{
 		UnityEngine::Vector3 returnVal(Plugin::UnboxVector3(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
+	Color32::Color32(decltype(nullptr))
+	{
+	}
+	
+	Color32::Color32(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedUnityEngineColor32(Handle);
+		}
+	}
+	
+	Color32::Color32(const Color32& other)
+		: Color32(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	Color32::Color32(Color32&& other)
+		: Color32(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	Color32::~Color32()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineColor32(Handle);
+			Handle = 0;
+		}
+	}
+	
+	Color32& Color32::operator=(const Color32& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineColor32(Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedUnityEngineColor32(Handle);
+		}
+		return *this;
+	}
+	
+	Color32& Color32::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineColor32(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	Color32& Color32::operator=(Color32&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineColor32(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool Color32::operator==(const Color32& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool Color32::operator!=(const Color32& other) const
+	{
+		return Handle != other.Handle;
+	}
+	
+	UnityEngine::Color32::Color32(System::Byte r, System::Byte g, System::Byte b, System::Byte a)
+	{
+		auto returnValue = Plugin::UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByte(r, g, b, a);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		Handle = returnValue;
+		if (returnValue)
+		{
+			Plugin::ReferenceManagedUnityEngineColor32(Handle);
+		}
+	}
+	
+	UnityEngine::Color32::operator System::ValueType()
+	{
+		int32_t handle = Plugin::BoxColor32(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::ValueType(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Color32::operator System::Object()
+	{
+		int32_t handle = Plugin::BoxColor32(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Object(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Color32::operator System::IFormattable()
+	{
+		int32_t handle = Plugin::BoxColor32(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IFormattable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+}
+
+namespace System
+{
+	System::Object::operator UnityEngine::Color32()
+	{
+		UnityEngine::Color32 returnVal(Plugin::InternalUse::Only, Plugin::UnboxColor32(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
+	Vector2::Vector2()
+	{
+	}
+	
+	UnityEngine::Vector2::Vector2(System::Single x, System::Single y)
+	{
+		auto returnValue = Plugin::UnityEngineVector2ConstructorSystemSingle_SystemSingle(x, y);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		*this = returnValue;
+	}
+	
+	UnityEngine::Vector2 UnityEngine::Vector2::operator+(UnityEngine::Vector2& a)
+	{
+		auto returnValue = Plugin::UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2(*this, a);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	UnityEngine::Vector2::operator System::ValueType()
+	{
+		int32_t handle = Plugin::BoxVector2(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::ValueType(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Vector2::operator System::Object()
+	{
+		int32_t handle = Plugin::BoxVector2(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Object(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Vector2::operator System::IFormattable()
+	{
+		int32_t handle = Plugin::BoxVector2(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IFormattable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Vector2::operator System::IEquatable_1<UnityEngine::Vector2>()
+	{
+		int32_t handle = Plugin::BoxVector2(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IEquatable_1<UnityEngine::Vector2>(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+}
+
+namespace System
+{
+	System::Object::operator UnityEngine::Vector2()
+	{
+		UnityEngine::Vector2 returnVal(Plugin::UnboxVector2(Handle));
 		if (Plugin::unhandledCsharpException)
 		{
 			System::Exception* ex = Plugin::unhandledCsharpException;
@@ -4902,6 +5593,107 @@ namespace UnityEngine
 			delete ex;
 		}
 		return UnityEngine::GameObject(Plugin::InternalUse::Only, returnValue);
+	}
+}
+
+namespace UnityEngine
+{
+	Mesh::Mesh(decltype(nullptr))
+		: UnityEngine::Object(nullptr)
+	{
+	}
+	
+	Mesh::Mesh(Plugin::InternalUse, int32_t handle)
+		: UnityEngine::Object(nullptr)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	Mesh::Mesh(const Mesh& other)
+		: Mesh(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	Mesh::Mesh(Mesh&& other)
+		: Mesh(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	Mesh::~Mesh()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	Mesh& Mesh::operator=(const Mesh& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	Mesh& Mesh::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	Mesh& Mesh::operator=(Mesh&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool Mesh::operator==(const Mesh& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool Mesh::operator!=(const Mesh& other) const
+	{
+		return Handle != other.Handle;
+	}
+	
+	UnityEngine::Mesh::Mesh()
+		: UnityEngine::Object(nullptr)
+	{
+		auto returnValue = Plugin::UnityEngineMeshConstructor();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		Handle = returnValue;
+		if (returnValue)
+		{
+			Plugin::ReferenceManagedClass(returnValue);
+		}
 	}
 }
 
@@ -6294,6 +7086,14 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::BoxDecimal);
 	Plugin::UnboxDecimal = *(int32_t (**)(int32_t valHandle))curMemory;
 	curMemory += sizeof(Plugin::UnboxDecimal);
+	Plugin::UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingle = *(UnityEngine::Vector4 (**)(float x, float y, float z, float w))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingle);
+	Plugin::UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4 = *(UnityEngine::Vector4 (**)(UnityEngine::Vector4& a, UnityEngine::Vector4& b))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4);
+	Plugin::BoxVector4 = *(int32_t (**)(UnityEngine::Vector4& val))curMemory;
+	curMemory += sizeof(Plugin::BoxVector4);
+	Plugin::UnboxVector4 = *(UnityEngine::Vector4 (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxVector4);
 	Plugin::UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingle = *(UnityEngine::Vector3 (**)(float x, float y, float z))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingle);
 	Plugin::UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3 = *(UnityEngine::Vector3 (**)(UnityEngine::Vector3& a, UnityEngine::Vector3& b))curMemory;
@@ -6302,6 +7102,22 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::BoxVector3);
 	Plugin::UnboxVector3 = *(UnityEngine::Vector3 (**)(int32_t valHandle))curMemory;
 	curMemory += sizeof(Plugin::UnboxVector3);
+	Plugin::ReleaseUnityEngineColor32 = *(void (**)(int32_t handle))curMemory;
+	curMemory += sizeof(Plugin::ReleaseUnityEngineColor32);
+	Plugin::UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByte = *(int32_t (**)(uint8_t r, uint8_t g, uint8_t b, uint8_t a))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByte);
+	Plugin::BoxColor32 = *(int32_t (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::BoxColor32);
+	Plugin::UnboxColor32 = *(int32_t (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxColor32);
+	Plugin::UnityEngineVector2ConstructorSystemSingle_SystemSingle = *(UnityEngine::Vector2 (**)(float x, float y))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineVector2ConstructorSystemSingle_SystemSingle);
+	Plugin::UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2 = *(UnityEngine::Vector2 (**)(UnityEngine::Vector2& a, UnityEngine::Vector2& b))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2);
+	Plugin::BoxVector2 = *(int32_t (**)(UnityEngine::Vector2& val))curMemory;
+	curMemory += sizeof(Plugin::BoxVector2);
+	Plugin::UnboxVector2 = *(UnityEngine::Vector2 (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxVector2);
 	Plugin::UnityEngineObjectPropertyGetName = *(int32_t (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineObjectPropertyGetName);
 	Plugin::UnityEngineObjectPropertySetName = *(void (**)(int32_t thisHandle, int32_t valueHandle))curMemory;
@@ -6320,6 +7136,8 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::UnityEngineGameObjectMethodAddComponentMyGameBaseBallScript);
 	Plugin::UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType = *(int32_t (**)(UnityEngine::PrimitiveType type))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType);
+	Plugin::UnityEngineMeshConstructor = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshConstructor);
 	Plugin::UnityEngineDebugMethodLogSystemObject = *(void (**)(int32_t messageHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineDebugMethodLogSystemObject);
 	Plugin::UnityEngineMonoBehaviourPropertyGetTransform = *(int32_t (**)(int32_t thisHandle))curMemory;
@@ -6395,6 +7213,10 @@ DLLEXPORT void Init(
 	Plugin::RefCountsSystemDecimal = (int32_t*)curMemory;
 	curMemory += 1000 * sizeof(int32_t);
 	Plugin::RefCountsLenSystemDecimal = 1000;
+	
+	Plugin::RefCountsUnityEngineColor32 = (int32_t*)curMemory;
+	curMemory += 1000 * sizeof(int32_t);
+	Plugin::RefCountsLenUnityEngineColor32 = 1000;
 	
 	Plugin::BaseBallScriptFreeListSize = 1000;
 	Plugin::BaseBallScriptFreeList = (MyGame::BaseBallScript**)curMemory;

@@ -453,6 +453,14 @@ namespace NativeScript
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int UnboxDecimalDelegateType(int valHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector4 UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingleDelegateType(float x, float y, float z, float w);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector4 UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4DelegateType(ref UnityEngine.Vector4 a, ref UnityEngine.Vector4 b);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxVector4DelegateType(ref UnityEngine.Vector4 val);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector4 UnboxVector4DelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.Vector3 UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingleDelegateType(float x, float y, float z);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.Vector3 UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3DelegateType(ref UnityEngine.Vector3 a, ref UnityEngine.Vector3 b);
@@ -460,6 +468,22 @@ namespace NativeScript
 		delegate int BoxVector3DelegateType(ref UnityEngine.Vector3 val);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.Vector3 UnboxVector3DelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate void ReleaseUnityEngineColor32DelegateType(int handle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByteDelegateType(byte r, byte g, byte b, byte a);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxColor32DelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int UnboxColor32DelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector2 UnityEngineVector2ConstructorSystemSingle_SystemSingleDelegateType(float x, float y);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector2 UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2DelegateType(ref UnityEngine.Vector2 a, ref UnityEngine.Vector2 b);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxVector2DelegateType(ref UnityEngine.Vector2 val);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector2 UnboxVector2DelegateType(int valHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int UnityEngineObjectPropertyGetNameDelegateType(int thisHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -478,6 +502,8 @@ namespace NativeScript
 		delegate int UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegateType(int thisHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegateType(UnityEngine.PrimitiveType type);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int UnityEngineMeshConstructorDelegateType();
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate void UnityEngineDebugMethodLogSystemObjectDelegateType(int messageHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -573,10 +599,22 @@ namespace NativeScript
 		static readonly SystemDecimalConstructorSystemUInt64DelegateType SystemDecimalConstructorSystemUInt64Delegate = new SystemDecimalConstructorSystemUInt64DelegateType(SystemDecimalConstructorSystemUInt64);
 		static readonly BoxDecimalDelegateType BoxDecimalDelegate = new BoxDecimalDelegateType(BoxDecimal);
 		static readonly UnboxDecimalDelegateType UnboxDecimalDelegate = new UnboxDecimalDelegateType(UnboxDecimal);
+		static readonly UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingleDelegateType UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingleDelegate = new UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingleDelegateType(UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingle);
+		static readonly UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4DelegateType UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4Delegate = new UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4DelegateType(UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4);
+		static readonly BoxVector4DelegateType BoxVector4Delegate = new BoxVector4DelegateType(BoxVector4);
+		static readonly UnboxVector4DelegateType UnboxVector4Delegate = new UnboxVector4DelegateType(UnboxVector4);
 		static readonly UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingleDelegateType UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingleDelegate = new UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingleDelegateType(UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingle);
 		static readonly UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3DelegateType UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3Delegate = new UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3DelegateType(UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3);
 		static readonly BoxVector3DelegateType BoxVector3Delegate = new BoxVector3DelegateType(BoxVector3);
 		static readonly UnboxVector3DelegateType UnboxVector3Delegate = new UnboxVector3DelegateType(UnboxVector3);
+		static readonly ReleaseUnityEngineColor32DelegateType ReleaseUnityEngineColor32Delegate = new ReleaseUnityEngineColor32DelegateType(ReleaseUnityEngineColor32);
+		static readonly UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByteDelegateType UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByteDelegate = new UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByteDelegateType(UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByte);
+		static readonly BoxColor32DelegateType BoxColor32Delegate = new BoxColor32DelegateType(BoxColor32);
+		static readonly UnboxColor32DelegateType UnboxColor32Delegate = new UnboxColor32DelegateType(UnboxColor32);
+		static readonly UnityEngineVector2ConstructorSystemSingle_SystemSingleDelegateType UnityEngineVector2ConstructorSystemSingle_SystemSingleDelegate = new UnityEngineVector2ConstructorSystemSingle_SystemSingleDelegateType(UnityEngineVector2ConstructorSystemSingle_SystemSingle);
+		static readonly UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2DelegateType UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2Delegate = new UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2DelegateType(UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2);
+		static readonly BoxVector2DelegateType BoxVector2Delegate = new BoxVector2DelegateType(BoxVector2);
+		static readonly UnboxVector2DelegateType UnboxVector2Delegate = new UnboxVector2DelegateType(UnboxVector2);
 		static readonly UnityEngineObjectPropertyGetNameDelegateType UnityEngineObjectPropertyGetNameDelegate = new UnityEngineObjectPropertyGetNameDelegateType(UnityEngineObjectPropertyGetName);
 		static readonly UnityEngineObjectPropertySetNameDelegateType UnityEngineObjectPropertySetNameDelegate = new UnityEngineObjectPropertySetNameDelegateType(UnityEngineObjectPropertySetName);
 		static readonly UnityEngineComponentPropertyGetTransformDelegateType UnityEngineComponentPropertyGetTransformDelegate = new UnityEngineComponentPropertyGetTransformDelegateType(UnityEngineComponentPropertyGetTransform);
@@ -586,6 +624,7 @@ namespace NativeScript
 		static readonly SystemCollectionsIEnumeratorMethodMoveNextDelegateType SystemCollectionsIEnumeratorMethodMoveNextDelegate = new SystemCollectionsIEnumeratorMethodMoveNextDelegateType(SystemCollectionsIEnumeratorMethodMoveNext);
 		static readonly UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegateType UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegate = new UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegateType(UnityEngineGameObjectMethodAddComponentMyGameBaseBallScript);
 		static readonly UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegateType UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegate = new UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegateType(UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType);
+		static readonly UnityEngineMeshConstructorDelegateType UnityEngineMeshConstructorDelegate = new UnityEngineMeshConstructorDelegateType(UnityEngineMeshConstructor);
 		static readonly UnityEngineDebugMethodLogSystemObjectDelegateType UnityEngineDebugMethodLogSystemObjectDelegate = new UnityEngineDebugMethodLogSystemObjectDelegateType(UnityEngineDebugMethodLogSystemObject);
 		static readonly UnityEngineMonoBehaviourPropertyGetTransformDelegateType UnityEngineMonoBehaviourPropertyGetTransformDelegate = new UnityEngineMonoBehaviourPropertyGetTransformDelegateType(UnityEngineMonoBehaviourPropertyGetTransform);
 		static readonly SystemExceptionConstructorSystemStringDelegateType SystemExceptionConstructorSystemStringDelegate = new SystemExceptionConstructorSystemStringDelegateType(SystemExceptionConstructorSystemString);
@@ -632,6 +671,7 @@ namespace NativeScript
 			/*BEGIN STORE INIT CALLS*/
 			NativeScript.Bindings.ObjectStore.Init(1000);
 			NativeScript.Bindings.StructStore<System.Decimal>.Init(1000);
+			NativeScript.Bindings.StructStore<UnityEngine.Color32>.Init(1000);
 			/*END STORE INIT CALLS*/
 
 			// Allocate unmanaged memory
@@ -764,6 +804,14 @@ namespace NativeScript
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxDecimalDelegate));
 			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingleDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxVector4Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxVector4Delegate));
+			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingleDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineVector3Methodop_AdditionUnityEngineVector3_UnityEngineVector3Delegate));
@@ -771,6 +819,22 @@ namespace NativeScript
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxVector3Delegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxVector3Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(ReleaseUnityEngineColor32Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByteDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxColor32Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxColor32Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineVector2ConstructorSystemSingle_SystemSingleDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxVector2Delegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxVector2Delegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineObjectPropertyGetNameDelegate));
 			curMemory += IntPtr.Size;
@@ -789,6 +853,8 @@ namespace NativeScript
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineMeshConstructorDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineDebugMethodLogSystemObjectDelegate));
 			curMemory += IntPtr.Size;
@@ -1097,6 +1163,95 @@ namespace NativeScript
 			}
 		}
 		
+		[MonoPInvokeCallback(typeof(UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingleDelegateType))]
+		static UnityEngine.Vector4 UnityEngineVector4ConstructorSystemSingle_SystemSingle_SystemSingle_SystemSingle(float x, float y, float z, float w)
+		{
+			try
+			{
+				var returnValue = new UnityEngine.Vector4(x, y, z, w);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector4);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector4);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4DelegateType))]
+		static UnityEngine.Vector4 UnityEngineVector4Methodop_AdditionUnityEngineVector4_UnityEngineVector4(ref UnityEngine.Vector4 a, ref UnityEngine.Vector4 b)
+		{
+			try
+			{
+				var returnValue = a + b;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector4);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector4);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(BoxVector4DelegateType))]
+		static int BoxVector4(ref UnityEngine.Vector4 val)
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxVector4DelegateType))]
+		static UnityEngine.Vector4 UnboxVector4(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = (UnityEngine.Vector4)val;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector4);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector4);
+			}
+		}
+		
 		[MonoPInvokeCallback(typeof(UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingleDelegateType))]
 		static UnityEngine.Vector3 UnityEngineVector3ConstructorSystemSingle_SystemSingle_SystemSingle(float x, float y, float z)
 		{
@@ -1183,6 +1338,185 @@ namespace NativeScript
 				UnityEngine.Debug.LogException(ex);
 				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
 				return default(UnityEngine.Vector3);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(ReleaseUnityEngineColor32DelegateType))]
+		static void ReleaseUnityEngineColor32(int handle)
+		{
+			try
+			{
+				if (handle != 0)
+			{
+				NativeScript.Bindings.StructStore<UnityEngine.Color32>.Remove(handle);
+			}
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByteDelegateType))]
+		static int UnityEngineColor32ConstructorSystemByte_SystemByte_SystemByte_SystemByte(byte r, byte g, byte b, byte a)
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.StructStore<UnityEngine.Color32>.Store(new UnityEngine.Color32(r, g, b, a));
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(BoxColor32DelegateType))]
+		static int BoxColor32(int valHandle)
+		{
+			try
+			{
+				var val = (UnityEngine.Color32)NativeScript.Bindings.StructStore<UnityEngine.Color32>.Get(valHandle);
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxColor32DelegateType))]
+		static int UnboxColor32(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = NativeScript.Bindings.StructStore<UnityEngine.Color32>.Store((UnityEngine.Color32)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineVector2ConstructorSystemSingle_SystemSingleDelegateType))]
+		static UnityEngine.Vector2 UnityEngineVector2ConstructorSystemSingle_SystemSingle(float x, float y)
+		{
+			try
+			{
+				var returnValue = new UnityEngine.Vector2(x, y);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector2);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector2);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2DelegateType))]
+		static UnityEngine.Vector2 UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2(ref UnityEngine.Vector2 a, ref UnityEngine.Vector2 b)
+		{
+			try
+			{
+				var returnValue = a + b;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector2);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector2);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(BoxVector2DelegateType))]
+		static int BoxVector2(ref UnityEngine.Vector2 val)
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxVector2DelegateType))]
+		static UnityEngine.Vector2 UnboxVector2(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = (UnityEngine.Vector2)val;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector2);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector2);
 			}
 		}
 		
@@ -1372,6 +1706,28 @@ namespace NativeScript
 			{
 				var returnValue = UnityEngine.GameObject.CreatePrimitive(type);
 				return NativeScript.Bindings.ObjectStore.GetHandle(returnValue);
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineMeshConstructorDelegateType))]
+		static int UnityEngineMeshConstructor()
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.ObjectStore.Store(new UnityEngine.Mesh());
+				return returnValue;
 			}
 			catch (System.NullReferenceException ex)
 			{

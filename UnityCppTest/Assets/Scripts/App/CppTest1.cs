@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using App.Utils;
 using Spine.Unity;
+using Unity.Collections;
 using UnityEngine;
 
 namespace App
@@ -32,6 +33,7 @@ namespace App
 
     public class CppTest1 : MonoBehaviour
     {
+        private UnityEngine.Mesh _mesh;
         [SerializeField] public SkeletonDataAsset skeletonDataAsset;
 
         private Proxy_Atlas _proxyAtlas = null;
@@ -39,6 +41,12 @@ namespace App
 
         private void OnGUI()
         {
+            _mesh = new Mesh();
+           
+            
+            // _mesh.SetIndexBufferData(,,,,);
+            // _mesh.SetVertexBufferData();
+            // _mesh.SetUVs(,,,);
             if (GUI.Button(new Rect(100, 100, 100, 100), "Call Cpp"))
             {
                 string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;

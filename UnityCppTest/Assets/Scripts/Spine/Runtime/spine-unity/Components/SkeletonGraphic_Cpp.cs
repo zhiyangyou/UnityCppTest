@@ -944,15 +944,21 @@ namespace Spine.Unity
             requiresInstructionUpate = false;
             if (!this.allowMultipleCanvasRenderers)
             {
-                MeshGenerator.GenerateSingleSubmeshInstruction(currentInstructions, skeletonCpp, null);
+                // MeshGenerator.GenerateSingleSubmeshInstruction(currentInstructions, skeletonCpp, null);//TODO 为了避免报错，暂时修改
+                MeshGenerator.GenerateSingleSubmeshInstruction(currentInstructions, new Skeleton(new SkeletonData()), null);
                 if (canvasRenderers.Count > 0)
                     DisableUnusedCanvasRenderers(usedCount: 0, isInRebuild: isInRebuild);
                 usedRenderersCount = 0;
             }
             else
             {
-                MeshGenerator.GenerateSkeletonRendererInstruction(currentInstructions, skeletonCpp, null,
-                    enableSeparatorSlots ? separatorSlots : null,
+                //TODO 为了避免报错，暂时修改
+                // MeshGenerator.GenerateSkeletonRendererInstruction(currentInstructions, skeletonCpp, null,
+                //     enableSeparatorSlots ? separatorSlots : null,
+                //     enableSeparatorSlots ? separatorSlots.Count > 0 : false,
+                //     false);
+                MeshGenerator.GenerateSkeletonRendererInstruction(currentInstructions, new Skeleton(new SkeletonData()), null,
+                      null,
                     enableSeparatorSlots ? separatorSlots.Count > 0 : false,
                     false);
 
@@ -997,7 +1003,8 @@ namespace Spine.Unity
         {
             if (!IsValid)
                 return false;
-            return MeshGenerator.RequiresMultipleSubmeshesByDrawOrder(skeletonCpp);
+            // return MeshGenerator.RequiresMultipleSubmeshesByDrawOrder(skeletonCpp);////TODO 为了避免报错，暂时修改s
+            return MeshGenerator.RequiresMultipleSubmeshesByDrawOrder(new Skeleton(new SkeletonData()));
         }
 
         #endregion
