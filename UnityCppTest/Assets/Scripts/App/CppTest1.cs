@@ -42,6 +42,8 @@ namespace App
         private void OnGUI()
         {
             _mesh = new Mesh();
+            _mesh.MarkDynamic();
+            _mesh.hideFlags
            
             
             // _mesh.SetIndexBufferData(,,,,);

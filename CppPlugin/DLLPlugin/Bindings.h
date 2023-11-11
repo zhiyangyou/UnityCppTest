@@ -300,6 +300,11 @@ namespace System
 /*END TEMPLATE DECLARATIONS*/
 
 /*BEGIN TYPE DECLARATIONS*/
+namespace UnityEngine
+{
+	struct HideFlags;
+}
+
 namespace System
 {
 	struct IFormattable;
@@ -359,6 +364,11 @@ namespace UnityEngine
 namespace UnityEngine
 {
 	struct Object;
+}
+
+namespace App
+{
+	struct ObjectCreateProxy;
 }
 
 namespace UnityEngine
@@ -631,6 +641,7 @@ namespace System
 		virtual void ThrowReferenceToThis();
 		
 		/*BEGIN UNBOXING METHOD DECLARATIONS*/
+		explicit operator UnityEngine::HideFlags();
 		explicit operator System::Decimal();
 		explicit operator UnityEngine::Vector4();
 		explicit operator UnityEngine::Vector3();
@@ -724,6 +735,33 @@ namespace Plugin
 }
 
 /*BEGIN TYPE DEFINITIONS*/
+namespace UnityEngine
+{
+	struct HideFlags
+	{
+		int32_t Value;
+		static const UnityEngine::HideFlags None;
+		static const UnityEngine::HideFlags HideInHierarchy;
+		static const UnityEngine::HideFlags HideInInspector;
+		static const UnityEngine::HideFlags DontSaveInEditor;
+		static const UnityEngine::HideFlags NotEditable;
+		static const UnityEngine::HideFlags DontSaveInBuild;
+		static const UnityEngine::HideFlags DontUnloadUnusedAsset;
+		static const UnityEngine::HideFlags DontSave;
+		static const UnityEngine::HideFlags HideAndDontSave;
+		explicit HideFlags(int32_t value);
+		explicit operator int32_t() const;
+		bool operator==(HideFlags other);
+		bool operator!=(HideFlags other);
+		explicit operator System::Enum();
+		explicit operator System::ValueType();
+		explicit operator System::Object();
+		explicit operator System::IFormattable();
+		explicit operator System::IComparable();
+		explicit operator System::IConvertible();
+	};
+}
+
 namespace System
 {
 	struct IFormattable : virtual System::Object
@@ -1441,6 +1479,27 @@ namespace UnityEngine
 		bool operator!=(const Object& other) const;
 		System::String GetName();
 		void SetName(System::String& value);
+		UnityEngine::HideFlags GetHideFlags();
+		void SetHideFlags(UnityEngine::HideFlags value);
+	};
+}
+
+namespace App
+{
+	struct ObjectCreateProxy : virtual System::Object
+	{
+		ObjectCreateProxy(decltype(nullptr));
+		ObjectCreateProxy(Plugin::InternalUse, int32_t handle);
+		ObjectCreateProxy(const ObjectCreateProxy& other);
+		ObjectCreateProxy(ObjectCreateProxy&& other);
+		virtual ~ObjectCreateProxy();
+		ObjectCreateProxy& operator=(const ObjectCreateProxy& other);
+		ObjectCreateProxy& operator=(decltype(nullptr));
+		ObjectCreateProxy& operator=(ObjectCreateProxy&& other);
+		bool operator==(const ObjectCreateProxy& other) const;
+		bool operator!=(const ObjectCreateProxy& other) const;
+		static UnityEngine::Mesh CreateMesh();
+		static UnityEngine::GameObject CreateGo();
 	};
 }
 
@@ -1583,6 +1642,7 @@ namespace UnityEngine
 		bool operator==(const Mesh& other) const;
 		bool operator!=(const Mesh& other) const;
 		Mesh();
+		virtual void MarkDynamic();
 	};
 }
 

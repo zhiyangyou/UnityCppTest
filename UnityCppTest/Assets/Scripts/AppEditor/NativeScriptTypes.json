@@ -3,6 +3,9 @@
 	],
 	"Types": [
 		{
+			"Name": " UnityEngine.HideFlags"
+		},
+		{
 			"Name": " System.IFormattable"
 		},
 		{
@@ -275,6 +278,24 @@
 					"Name": "name",
 					"Get": {},
 					"Set": {}
+				},
+				{
+					"Name": "hideFlags",
+					"Get": {},
+					"Set": {}
+				}
+			]
+		},
+		{
+			"Name": "App.ObjectCreateProxy",
+			"Methods": [
+				{
+					"Name": "CreateMesh",
+					"ParamTypes": []
+				},
+				{
+					"Name": "CreateGo",
+					"ParamTypes": []
 				}
 			]
 		},
@@ -357,7 +378,10 @@
 			],
 			
 			"Methods": [
-				
+				{
+					"Name": "MarkDynamic",
+					"ParamTypes": []
+				}
 			]
 		},
 		{

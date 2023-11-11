@@ -443,6 +443,10 @@ namespace NativeScript
 		
 		/*BEGIN DELEGATE TYPES*/
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxHideFlagsDelegateType(UnityEngine.HideFlags val);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.HideFlags UnboxHideFlagsDelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate void ReleaseSystemDecimalDelegateType(int handle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int SystemDecimalConstructorSystemDoubleDelegateType(double value);
@@ -489,6 +493,14 @@ namespace NativeScript
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate void UnityEngineObjectPropertySetNameDelegateType(int thisHandle, int valueHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.HideFlags UnityEngineObjectPropertyGetHideFlagsDelegateType(int thisHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate void UnityEngineObjectPropertySetHideFlagsDelegateType(int thisHandle, UnityEngine.HideFlags value);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int AppObjectCreateProxyMethodCreateMeshDelegateType();
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int AppObjectCreateProxyMethodCreateGoDelegateType();
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int UnityEngineComponentPropertyGetTransformDelegateType(int thisHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.Vector3 UnityEngineTransformPropertyGetPositionDelegateType(int thisHandle);
@@ -504,6 +516,8 @@ namespace NativeScript
 		delegate int UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegateType(UnityEngine.PrimitiveType type);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int UnityEngineMeshConstructorDelegateType();
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate void UnityEngineMeshMethodMarkDynamicDelegateType(int thisHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate void UnityEngineDebugMethodLogSystemObjectDelegateType(int messageHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -594,6 +608,8 @@ namespace NativeScript
 		
 		// Generated delegates
 		/*BEGIN CSHARP DELEGATES*/
+		static readonly BoxHideFlagsDelegateType BoxHideFlagsDelegate = new BoxHideFlagsDelegateType(BoxHideFlags);
+		static readonly UnboxHideFlagsDelegateType UnboxHideFlagsDelegate = new UnboxHideFlagsDelegateType(UnboxHideFlags);
 		static readonly ReleaseSystemDecimalDelegateType ReleaseSystemDecimalDelegate = new ReleaseSystemDecimalDelegateType(ReleaseSystemDecimal);
 		static readonly SystemDecimalConstructorSystemDoubleDelegateType SystemDecimalConstructorSystemDoubleDelegate = new SystemDecimalConstructorSystemDoubleDelegateType(SystemDecimalConstructorSystemDouble);
 		static readonly SystemDecimalConstructorSystemUInt64DelegateType SystemDecimalConstructorSystemUInt64Delegate = new SystemDecimalConstructorSystemUInt64DelegateType(SystemDecimalConstructorSystemUInt64);
@@ -617,6 +633,10 @@ namespace NativeScript
 		static readonly UnboxVector2DelegateType UnboxVector2Delegate = new UnboxVector2DelegateType(UnboxVector2);
 		static readonly UnityEngineObjectPropertyGetNameDelegateType UnityEngineObjectPropertyGetNameDelegate = new UnityEngineObjectPropertyGetNameDelegateType(UnityEngineObjectPropertyGetName);
 		static readonly UnityEngineObjectPropertySetNameDelegateType UnityEngineObjectPropertySetNameDelegate = new UnityEngineObjectPropertySetNameDelegateType(UnityEngineObjectPropertySetName);
+		static readonly UnityEngineObjectPropertyGetHideFlagsDelegateType UnityEngineObjectPropertyGetHideFlagsDelegate = new UnityEngineObjectPropertyGetHideFlagsDelegateType(UnityEngineObjectPropertyGetHideFlags);
+		static readonly UnityEngineObjectPropertySetHideFlagsDelegateType UnityEngineObjectPropertySetHideFlagsDelegate = new UnityEngineObjectPropertySetHideFlagsDelegateType(UnityEngineObjectPropertySetHideFlags);
+		static readonly AppObjectCreateProxyMethodCreateMeshDelegateType AppObjectCreateProxyMethodCreateMeshDelegate = new AppObjectCreateProxyMethodCreateMeshDelegateType(AppObjectCreateProxyMethodCreateMesh);
+		static readonly AppObjectCreateProxyMethodCreateGoDelegateType AppObjectCreateProxyMethodCreateGoDelegate = new AppObjectCreateProxyMethodCreateGoDelegateType(AppObjectCreateProxyMethodCreateGo);
 		static readonly UnityEngineComponentPropertyGetTransformDelegateType UnityEngineComponentPropertyGetTransformDelegate = new UnityEngineComponentPropertyGetTransformDelegateType(UnityEngineComponentPropertyGetTransform);
 		static readonly UnityEngineTransformPropertyGetPositionDelegateType UnityEngineTransformPropertyGetPositionDelegate = new UnityEngineTransformPropertyGetPositionDelegateType(UnityEngineTransformPropertyGetPosition);
 		static readonly UnityEngineTransformPropertySetPositionDelegateType UnityEngineTransformPropertySetPositionDelegate = new UnityEngineTransformPropertySetPositionDelegateType(UnityEngineTransformPropertySetPosition);
@@ -625,6 +645,7 @@ namespace NativeScript
 		static readonly UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegateType UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegate = new UnityEngineGameObjectMethodAddComponentMyGameBaseBallScriptDelegateType(UnityEngineGameObjectMethodAddComponentMyGameBaseBallScript);
 		static readonly UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegateType UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegate = new UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegateType(UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType);
 		static readonly UnityEngineMeshConstructorDelegateType UnityEngineMeshConstructorDelegate = new UnityEngineMeshConstructorDelegateType(UnityEngineMeshConstructor);
+		static readonly UnityEngineMeshMethodMarkDynamicDelegateType UnityEngineMeshMethodMarkDynamicDelegate = new UnityEngineMeshMethodMarkDynamicDelegateType(UnityEngineMeshMethodMarkDynamic);
 		static readonly UnityEngineDebugMethodLogSystemObjectDelegateType UnityEngineDebugMethodLogSystemObjectDelegate = new UnityEngineDebugMethodLogSystemObjectDelegateType(UnityEngineDebugMethodLogSystemObject);
 		static readonly UnityEngineMonoBehaviourPropertyGetTransformDelegateType UnityEngineMonoBehaviourPropertyGetTransformDelegate = new UnityEngineMonoBehaviourPropertyGetTransformDelegateType(UnityEngineMonoBehaviourPropertyGetTransform);
 		static readonly SystemExceptionConstructorSystemStringDelegateType SystemExceptionConstructorSystemStringDelegate = new SystemExceptionConstructorSystemStringDelegateType(SystemExceptionConstructorSystemString);
@@ -794,7 +815,11 @@ namespace NativeScript
 			/*BEGIN INIT CALL*/
 			Marshal.WriteInt32(memory, curMemory, 1000); // max managed objects
 			curMemory += sizeof(int);
- 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(ReleaseSystemDecimalDelegate));
+ 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxHideFlagsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxHideFlagsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(ReleaseSystemDecimalDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(SystemDecimalConstructorSystemDoubleDelegate));
 			curMemory += IntPtr.Size;
@@ -840,6 +865,14 @@ namespace NativeScript
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineObjectPropertySetNameDelegate));
 			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineObjectPropertyGetHideFlagsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineObjectPropertySetHideFlagsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(AppObjectCreateProxyMethodCreateMeshDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(AppObjectCreateProxyMethodCreateGoDelegate));
+			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineComponentPropertyGetTransformDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineTransformPropertyGetPositionDelegate));
@@ -855,6 +888,8 @@ namespace NativeScript
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveTypeDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineMeshConstructorDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineMeshMethodMarkDynamicDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineDebugMethodLogSystemObjectDelegate));
 			curMemory += IntPtr.Size;
@@ -1051,6 +1086,51 @@ namespace NativeScript
 		}
 
 		/*BEGIN FUNCTIONS*/
+		[MonoPInvokeCallback(typeof(BoxHideFlagsDelegateType))]
+		static int BoxHideFlags(UnityEngine.HideFlags val)
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxHideFlagsDelegateType))]
+		static UnityEngine.HideFlags UnboxHideFlags(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = (UnityEngine.HideFlags)val;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.HideFlags);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.HideFlags);
+			}
+		}
+		
 		[MonoPInvokeCallback(typeof(ReleaseSystemDecimalDelegateType))]
 		static void ReleaseSystemDecimal(int handle)
 		{
@@ -1564,6 +1644,93 @@ namespace NativeScript
 			}
 		}
 		
+		[MonoPInvokeCallback(typeof(UnityEngineObjectPropertyGetHideFlagsDelegateType))]
+		static UnityEngine.HideFlags UnityEngineObjectPropertyGetHideFlags(int thisHandle)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Object)NativeScript.Bindings.ObjectStore.Get(thisHandle);
+				var returnValue = thiz.hideFlags;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.HideFlags);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.HideFlags);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineObjectPropertySetHideFlagsDelegateType))]
+		static void UnityEngineObjectPropertySetHideFlags(int thisHandle, UnityEngine.HideFlags value)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Object)NativeScript.Bindings.ObjectStore.Get(thisHandle);
+				thiz.hideFlags = value;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(AppObjectCreateProxyMethodCreateMeshDelegateType))]
+		static int AppObjectCreateProxyMethodCreateMesh()
+		{
+			try
+			{
+				var returnValue = App.ObjectCreateProxy.CreateMesh();
+				return NativeScript.Bindings.ObjectStore.GetHandle(returnValue);
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(AppObjectCreateProxyMethodCreateGoDelegateType))]
+		static int AppObjectCreateProxyMethodCreateGo()
+		{
+			try
+			{
+				var returnValue = App.ObjectCreateProxy.CreateGo();
+				return NativeScript.Bindings.ObjectStore.GetHandle(returnValue);
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
 		[MonoPInvokeCallback(typeof(UnityEngineComponentPropertyGetTransformDelegateType))]
 		static int UnityEngineComponentPropertyGetTransform(int thisHandle)
 		{
@@ -1740,6 +1907,26 @@ namespace NativeScript
 				UnityEngine.Debug.LogException(ex);
 				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
 				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineMeshMethodMarkDynamicDelegateType))]
+		static void UnityEngineMeshMethodMarkDynamic(int thisHandle)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Mesh)NativeScript.Bindings.ObjectStore.Get(thisHandle);
+				thiz.MarkDynamic();
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
 			}
 		}
 		

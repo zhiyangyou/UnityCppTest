@@ -41,6 +41,8 @@ namespace Plugin
 	int32_t (*EnumerableGetEnumerator)(int32_t handle);
 	
 	/*BEGIN FUNCTION POINTERS*/
+	int32_t (*BoxHideFlags)(UnityEngine::HideFlags val);
+	UnityEngine::HideFlags (*UnboxHideFlags)(int32_t valHandle);
 	void (*ReleaseSystemDecimal)(int32_t handle);
 	int32_t (*SystemDecimalConstructorSystemDouble)(double value);
 	int32_t (*SystemDecimalConstructorSystemUInt64)(uint64_t value);
@@ -64,6 +66,10 @@ namespace Plugin
 	UnityEngine::Vector2 (*UnboxVector2)(int32_t valHandle);
 	int32_t (*UnityEngineObjectPropertyGetName)(int32_t thisHandle);
 	void (*UnityEngineObjectPropertySetName)(int32_t thisHandle, int32_t valueHandle);
+	UnityEngine::HideFlags (*UnityEngineObjectPropertyGetHideFlags)(int32_t thisHandle);
+	void (*UnityEngineObjectPropertySetHideFlags)(int32_t thisHandle, UnityEngine::HideFlags value);
+	int32_t (*AppObjectCreateProxyMethodCreateMesh)();
+	int32_t (*AppObjectCreateProxyMethodCreateGo)();
 	int32_t (*UnityEngineComponentPropertyGetTransform)(int32_t thisHandle);
 	UnityEngine::Vector3 (*UnityEngineTransformPropertyGetPosition)(int32_t thisHandle);
 	void (*UnityEngineTransformPropertySetPosition)(int32_t thisHandle, UnityEngine::Vector3& value);
@@ -72,6 +78,7 @@ namespace Plugin
 	int32_t (*UnityEngineGameObjectMethodAddComponentMyGameBaseBallScript)(int32_t thisHandle);
 	int32_t (*UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType)(UnityEngine::PrimitiveType type);
 	int32_t (*UnityEngineMeshConstructor)();
+	void (*UnityEngineMeshMethodMarkDynamic)(int32_t thisHandle);
 	void (*UnityEngineDebugMethodLogSystemObject)(int32_t messageHandle);
 	int32_t (*UnityEngineMonoBehaviourPropertyGetTransform)(int32_t thisHandle);
 	int32_t (*SystemExceptionConstructorSystemString)(int32_t messageHandle);
@@ -1224,6 +1231,163 @@ namespace System
 }
 
 /*BEGIN METHOD DEFINITIONS*/
+namespace UnityEngine
+{
+	HideFlags::HideFlags(int32_t value)
+		: Value(value)
+	{
+	}
+	
+	UnityEngine::HideFlags::operator int32_t() const
+	{
+		return Value;
+	}
+	
+	bool UnityEngine::HideFlags::operator==(HideFlags other)
+	{
+		return Value == other.Value;
+	}
+	
+	bool UnityEngine::HideFlags::operator!=(HideFlags other)
+	{
+		return Value != other.Value;
+	}
+	
+	UnityEngine::HideFlags::operator System::Enum()
+	{
+		int32_t handle = Plugin::BoxHideFlags(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Enum(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::HideFlags::operator System::ValueType()
+	{
+		int32_t handle = Plugin::BoxHideFlags(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::ValueType(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::HideFlags::operator System::Object()
+	{
+		int32_t handle = Plugin::BoxHideFlags(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Object(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::HideFlags::operator System::IFormattable()
+	{
+		int32_t handle = Plugin::BoxHideFlags(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IFormattable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::HideFlags::operator System::IComparable()
+	{
+		int32_t handle = Plugin::BoxHideFlags(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IComparable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::HideFlags::operator System::IConvertible()
+	{
+		int32_t handle = Plugin::BoxHideFlags(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IConvertible(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+}
+const UnityEngine::HideFlags UnityEngine::HideFlags::None(0);
+const UnityEngine::HideFlags UnityEngine::HideFlags::HideInHierarchy(1);
+const UnityEngine::HideFlags UnityEngine::HideFlags::HideInInspector(2);
+const UnityEngine::HideFlags UnityEngine::HideFlags::DontSaveInEditor(4);
+const UnityEngine::HideFlags UnityEngine::HideFlags::NotEditable(8);
+const UnityEngine::HideFlags UnityEngine::HideFlags::DontSaveInBuild(16);
+const UnityEngine::HideFlags UnityEngine::HideFlags::DontUnloadUnusedAsset(32);
+const UnityEngine::HideFlags UnityEngine::HideFlags::DontSave(52);
+const UnityEngine::HideFlags UnityEngine::HideFlags::HideAndDontSave(61);
+
+namespace System
+{
+	System::Object::operator UnityEngine::HideFlags()
+	{
+		UnityEngine::HideFlags returnVal(Plugin::UnboxHideFlags(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
 namespace System
 {
 	IFormattable::IFormattable(decltype(nullptr))
@@ -4993,6 +5157,138 @@ namespace UnityEngine
 			delete ex;
 		}
 	}
+	
+	UnityEngine::HideFlags UnityEngine::Object::GetHideFlags()
+	{
+		auto returnValue = Plugin::UnityEngineObjectPropertyGetHideFlags(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void UnityEngine::Object::SetHideFlags(UnityEngine::HideFlags value)
+	{
+		Plugin::UnityEngineObjectPropertySetHideFlags(Handle, value);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+}
+
+namespace App
+{
+	ObjectCreateProxy::ObjectCreateProxy(decltype(nullptr))
+	{
+	}
+	
+	ObjectCreateProxy::ObjectCreateProxy(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	ObjectCreateProxy::ObjectCreateProxy(const ObjectCreateProxy& other)
+		: ObjectCreateProxy(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	ObjectCreateProxy::ObjectCreateProxy(ObjectCreateProxy&& other)
+		: ObjectCreateProxy(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	ObjectCreateProxy::~ObjectCreateProxy()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	ObjectCreateProxy& ObjectCreateProxy::operator=(const ObjectCreateProxy& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	ObjectCreateProxy& ObjectCreateProxy::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	ObjectCreateProxy& ObjectCreateProxy::operator=(ObjectCreateProxy&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool ObjectCreateProxy::operator==(const ObjectCreateProxy& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool ObjectCreateProxy::operator!=(const ObjectCreateProxy& other) const
+	{
+		return Handle != other.Handle;
+	}
+	
+	UnityEngine::Mesh App::ObjectCreateProxy::CreateMesh()
+	{
+		auto returnValue = Plugin::AppObjectCreateProxyMethodCreateMesh();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return UnityEngine::Mesh(Plugin::InternalUse::Only, returnValue);
+	}
+	
+	UnityEngine::GameObject App::ObjectCreateProxy::CreateGo()
+	{
+		auto returnValue = Plugin::AppObjectCreateProxyMethodCreateGo();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return UnityEngine::GameObject(Plugin::InternalUse::Only, returnValue);
+	}
 }
 
 namespace UnityEngine
@@ -5693,6 +5989,18 @@ namespace UnityEngine
 		if (returnValue)
 		{
 			Plugin::ReferenceManagedClass(returnValue);
+		}
+	}
+	
+	void UnityEngine::Mesh::MarkDynamic()
+	{
+		Plugin::UnityEngineMeshMethodMarkDynamic(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
 		}
 	}
 }
@@ -7076,6 +7384,10 @@ DLLEXPORT void Init(
 	int32_t maxManagedObjects = *(int32_t*)curMemory;
 	curMemory += sizeof(int32_t);
 	/*BEGIN INIT BODY PARAMETER READS*/
+	Plugin::BoxHideFlags = *(int32_t (**)(UnityEngine::HideFlags val))curMemory;
+	curMemory += sizeof(Plugin::BoxHideFlags);
+	Plugin::UnboxHideFlags = *(UnityEngine::HideFlags (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxHideFlags);
 	Plugin::ReleaseSystemDecimal = *(void (**)(int32_t handle))curMemory;
 	curMemory += sizeof(Plugin::ReleaseSystemDecimal);
 	Plugin::SystemDecimalConstructorSystemDouble = *(int32_t (**)(double value))curMemory;
@@ -7122,6 +7434,14 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::UnityEngineObjectPropertyGetName);
 	Plugin::UnityEngineObjectPropertySetName = *(void (**)(int32_t thisHandle, int32_t valueHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineObjectPropertySetName);
+	Plugin::UnityEngineObjectPropertyGetHideFlags = *(UnityEngine::HideFlags (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineObjectPropertyGetHideFlags);
+	Plugin::UnityEngineObjectPropertySetHideFlags = *(void (**)(int32_t thisHandle, UnityEngine::HideFlags value))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineObjectPropertySetHideFlags);
+	Plugin::AppObjectCreateProxyMethodCreateMesh = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodCreateMesh);
+	Plugin::AppObjectCreateProxyMethodCreateGo = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodCreateGo);
 	Plugin::UnityEngineComponentPropertyGetTransform = *(int32_t (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineComponentPropertyGetTransform);
 	Plugin::UnityEngineTransformPropertyGetPosition = *(UnityEngine::Vector3 (**)(int32_t thisHandle))curMemory;
@@ -7138,6 +7458,8 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType);
 	Plugin::UnityEngineMeshConstructor = *(int32_t (**)())curMemory;
 	curMemory += sizeof(Plugin::UnityEngineMeshConstructor);
+	Plugin::UnityEngineMeshMethodMarkDynamic = *(void (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshMethodMarkDynamic);
 	Plugin::UnityEngineDebugMethodLogSystemObject = *(void (**)(int32_t messageHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineDebugMethodLogSystemObject);
 	Plugin::UnityEngineMonoBehaviourPropertyGetTransform = *(int32_t (**)(int32_t thisHandle))curMemory;
