@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace App
 {
-    public class ObjectCreateProxy
+    public static class ObjectCreateProxy
     {
         public static Mesh CreateMesh()
         {
@@ -12,6 +14,12 @@ namespace App
         public static GameObject CreateGo()
         {
             return new GameObject();
+        }
+
+        public static IntPtr GetStringCStr(string str)
+        {
+            // return IntPtr.Zero;
+            return Marshal.StringToHGlobalAnsi(str);
         }
     }
 }

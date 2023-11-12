@@ -218,6 +218,9 @@
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\Updatable.cpp" />
     <ClCompile Include="spine-runtimes\spine-cpp\spine-cpp\src\spine\VertexAttachment.cpp" />
     <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\MeshGenerator.cpp" />
+    <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\MeshRendererBuffers.cpp" />
+    <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SkeletonRendererInstruction.cpp" />
+    <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SpineCppAdapterCore.cpp" />
     <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SpineMesh.cpp" />
     <ClCompile Include="unity_spinecpp_plugin.cpp" />
   </ItemGroup>
@@ -229,6 +232,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\DoubleBuffered.h" />
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\MeshGenerator.h" />
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\MeshRendererBuffers.h" />
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SkeletonRendererInstruction.h" />
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SpineCppAdapterCore.h" />
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SpineMesh.h" />
     <ClInclude Include="unity_spinecpp_plugin.h" />

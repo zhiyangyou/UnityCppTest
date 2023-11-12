@@ -41,11 +41,18 @@ namespace App
 
         private void OnGUI()
         {
+            // UnityEngine.Material mat = new Material();
             _mesh = new Mesh();
+            _mesh.Clear();
             _mesh.MarkDynamic();
-            _mesh.hideFlags
-           
-            
+            System.String str;
+            // UnityEngine.Object.Destroy();
+            // UnityEngine.Object.DestroyImmediate();
+            // UnityEngine.Application.isPlaying;
+
+            // _mesh.hideFlags
+
+
             // _mesh.SetIndexBufferData(,,,,);
             // _mesh.SetVertexBufferData();
             // _mesh.SetUVs(,,,);

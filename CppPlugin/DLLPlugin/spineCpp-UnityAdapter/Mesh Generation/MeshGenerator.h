@@ -12,7 +12,7 @@
 #include "unity_spinecpp_plugin.h"
 namespace SpineUnity {
 
-	class MeshGenerator {
+	SP_API class MeshGenerator {
 		struct Settings {
 			bool useClipping;
 			float zSpacing;
@@ -72,7 +72,7 @@ namespace SpineUnity {
 			return  (*submeshes)[submeshIndex]->size();
 		}
 	public:
-		static void GenerateSingleSubmeshInstruction(); 2023年11月11日22:18:33 搬运 SpineMesh.cs
+		static void GenerateSingleSubmeshInstruction();  
 
 	};
 

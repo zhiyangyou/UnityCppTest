@@ -368,7 +368,16 @@ namespace UnityEngine
 
 namespace App
 {
-	struct ObjectCreateProxy;
+	namespace ObjectCreateProxy
+	{
+	}
+}
+
+namespace App
+{
+	namespace UnityUtils
+	{
+	}
 }
 
 namespace UnityEngine
@@ -378,7 +387,17 @@ namespace UnityEngine
 
 namespace UnityEngine
 {
+	struct Application;
+}
+
+namespace UnityEngine
+{
 	struct Transform;
+}
+
+namespace UnityEngine
+{
+	struct Material;
 }
 
 namespace System
@@ -1481,26 +1500,29 @@ namespace UnityEngine
 		void SetName(System::String& value);
 		UnityEngine::HideFlags GetHideFlags();
 		void SetHideFlags(UnityEngine::HideFlags value);
+		static void Destroy(UnityEngine::Object& obj);
+		static void Destroy(UnityEngine::Object& obj, System::Single t);
+		static void DestroyImmediate(UnityEngine::Object& obj);
+		static void DestroyImmediate(UnityEngine::Object& obj, System::Boolean allowDestroyingAssets);
 	};
 }
 
 namespace App
 {
-	struct ObjectCreateProxy : virtual System::Object
+	namespace ObjectCreateProxy
 	{
-		ObjectCreateProxy(decltype(nullptr));
-		ObjectCreateProxy(Plugin::InternalUse, int32_t handle);
-		ObjectCreateProxy(const ObjectCreateProxy& other);
-		ObjectCreateProxy(ObjectCreateProxy&& other);
-		virtual ~ObjectCreateProxy();
-		ObjectCreateProxy& operator=(const ObjectCreateProxy& other);
-		ObjectCreateProxy& operator=(decltype(nullptr));
-		ObjectCreateProxy& operator=(ObjectCreateProxy&& other);
-		bool operator==(const ObjectCreateProxy& other) const;
-		bool operator!=(const ObjectCreateProxy& other) const;
-		static UnityEngine::Mesh CreateMesh();
-		static UnityEngine::GameObject CreateGo();
-	};
+		UnityEngine::Mesh CreateMesh();
+		void* GetStringCStr(System::String& str);
+		UnityEngine::GameObject CreateGo();
+	}
+}
+
+namespace App
+{
+	namespace UnityUtils
+	{
+		System::Boolean IsUnityEditor();
+	}
 }
 
 namespace UnityEngine
@@ -1523,6 +1545,25 @@ namespace UnityEngine
 
 namespace UnityEngine
 {
+	struct Application : virtual System::Object
+	{
+		Application(decltype(nullptr));
+		Application(Plugin::InternalUse, int32_t handle);
+		Application(const Application& other);
+		Application(Application&& other);
+		virtual ~Application();
+		Application& operator=(const Application& other);
+		Application& operator=(decltype(nullptr));
+		Application& operator=(Application&& other);
+		bool operator==(const Application& other) const;
+		bool operator!=(const Application& other) const;
+		static System::Boolean GetIsPlaying();
+		static System::Boolean GetIsEditor();
+	};
+}
+
+namespace UnityEngine
+{
 	struct Transform : virtual UnityEngine::Component, virtual System::Collections::IEnumerable
 	{
 		Transform(decltype(nullptr));
@@ -1537,6 +1578,23 @@ namespace UnityEngine
 		bool operator!=(const Transform& other) const;
 		UnityEngine::Vector3 GetPosition();
 		void SetPosition(UnityEngine::Vector3& value);
+	};
+}
+
+namespace UnityEngine
+{
+	struct Material : virtual UnityEngine::Object
+	{
+		Material(decltype(nullptr));
+		Material(Plugin::InternalUse, int32_t handle);
+		Material(const Material& other);
+		Material(Material&& other);
+		virtual ~Material();
+		Material& operator=(const Material& other);
+		Material& operator=(decltype(nullptr));
+		Material& operator=(Material&& other);
+		bool operator==(const Material& other) const;
+		bool operator!=(const Material& other) const;
 	};
 }
 
@@ -1643,6 +1701,7 @@ namespace UnityEngine
 		bool operator!=(const Mesh& other) const;
 		Mesh();
 		virtual void MarkDynamic();
+		virtual void Clear();
 	};
 }
 

@@ -11,6 +11,8 @@
 #include "Bindings.h"
 #include "Game.h"
 
+#include <string>
+
 using namespace System;
 using namespace UnityEngine;
 

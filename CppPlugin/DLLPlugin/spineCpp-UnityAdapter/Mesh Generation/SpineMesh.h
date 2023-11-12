@@ -1,18 +1,43 @@
 ﻿#pragma once
 
 #include <memory>
+#include <string>
 
 #include "Bindings.h"
 #include <spine/Skeleton.h>
+#include "SpineCppAdapterCore.h"
+
 namespace SpineUnity {
-	class SpineMesh
+	SP_API class SpineMesh
 	{
 	public:
 		static UnityEngine::Mesh NewSkeletonMesh();
 	};
 
-	struct SubmeshInstruction
+	SP_API struct SubmeshInstruction
 	{
-		2023年11月12日00:04:15  开始移植该结构体！
+	public:
+		SubmeshInstruction(): material(nullptr)
+		{
+		}
+
+		Ref<spine::Skeleton>skeleton;
+		int startSlot;
+		int endSlot;
+		UnityEngine::Material material ;
+		bool forceSeparate;
+		int preActiveClippingSlotSource;
+
+		int rawTriangleCount;
+		int rawVertexCount;
+		int rawFirstVertexIndex;
+		bool hasClipping;
+
+		bool hasPMAAdditiveSlot;
+
+		int SlotCount() { return endSlot - startSlot; }
+
+		Ref<std::string >ToString();
+		static SubmeshInstruction Default() { return { }; }
 	};
 }

@@ -16,6 +16,316 @@ namespace spine_cpp
 {
     namespace Spine
     {
+        public unsafe partial class DefaultSpineExtension : global::spine_cpp.Spine.SpineExtension, IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 8)]
+            public new partial struct __Internal
+            {
+                internal __IntPtr vfptr_SpineExtension;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0DefaultSpineExtension@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0DefaultSpineExtension@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            internal static new DefaultSpineExtension __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new DefaultSpineExtension(native.ToPointer(), skipVTables);
+            }
+
+            internal static new DefaultSpineExtension __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (DefaultSpineExtension)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static new DefaultSpineExtension __GetInstance(__IntPtr native)
+            {
+                if (!__TryGetNativeToManagedMapping(native, out var managed))
+                    throw new global::System.Exception("No managed instance was found");
+                var result = (DefaultSpineExtension)managed;
+                if (result.__ownsNativeInstance)
+                    result.SetupVTables();
+                return result;
+            }
+
+            internal static DefaultSpineExtension __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new DefaultSpineExtension(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.Spine.DefaultSpineExtension.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private DefaultSpineExtension(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected DefaultSpineExtension(void* native, bool skipVTables = false)
+                : base((void*) native)
+            {
+                if (native == null)
+                    return;
+                if (!skipVTables)
+                    SetupVTables(true);
+            }
+
+            public DefaultSpineExtension()
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.DefaultSpineExtension.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.DefaultSpineExtension");
+            }
+
+            public DefaultSpineExtension(global::spine_cpp.Spine.DefaultSpineExtension _0)
+                : this((void*) null)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.DefaultSpineExtension.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+                SetupVTables(GetType().FullName == "spine_cpp.Spine.DefaultSpineExtension");
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected override void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                {
+                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
+                    ___dtorDelegate(__Instance, 0);
+                }
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public override __IntPtr Alloc(ulong size, string file, int line)
+            {
+                var ___AllocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 1);
+                var ___ret = ___AllocDelegate(__Instance, size, file, line);
+                return ___ret;
+            }
+
+            public override __IntPtr Calloc(ulong size, string file, int line)
+            {
+                var ___CallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 2);
+                var ___ret = ___CallocDelegate(__Instance, size, file, line);
+                return ___ret;
+            }
+
+            public override __IntPtr Realloc(__IntPtr ptr, ulong size, string file, int line)
+            {
+                var ___ReallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int>(0, 3);
+                var ___ret = ___ReallocDelegate(__Instance, ptr, size, file, line);
+                return ___ret;
+            }
+
+            public override void Free(__IntPtr mem, string file, int line)
+            {
+                var ___FreeDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int>(0, 4);
+                ___FreeDelegate(__Instance, mem, file, line);
+            }
+
+            public override sbyte* _readFile(global::spine_cpp.Spine.String path, ref int length)
+            {
+                var ____readFileDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr>(0, 5);
+                if (ReferenceEquals(path, null))
+                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = path.__Instance;
+                fixed (int* __length1 = &length)
+                {
+                    var __arg1 = __length1;
+                    var ___ret = ____readFileDelegate(__Instance, __arg0, __arg1);
+                    return ___ret;
+                }
+            }
+
+            #region Virtual table interop
+
+            // virtual ~DefaultSpineExtension()
+            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                __target.Dispose(disposing: true, callNativeDtor: true);
+            }
+
+            // void *_alloc(size_t size, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _AllocDelegateInstance;
+
+            private static __IntPtr _AllocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Alloc(size, file, line);
+                return ___ret;
+            }
+
+            // void *_calloc(size_t size, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _CallocDelegateInstance;
+
+            private static __IntPtr _CallocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Calloc(size, file, line);
+                return ___ret;
+            }
+
+            // void *_realloc(void *ptr, size_t size, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int _ReallocDelegateInstance;
+
+            private static __IntPtr _ReallocDelegateHook(__IntPtr __instance, __IntPtr ptr, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var ___ret = __target.Realloc(ptr, size, file, line);
+                return ___ret;
+            }
+
+            // void _free(void *mem, const char *file, int line) override
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int _FreeDelegateInstance;
+
+            private static void _FreeDelegateHook(__IntPtr __instance, __IntPtr mem, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                __target.Free(mem, file, line);
+            }
+
+            // char *_readFile(const String &path, int *length) override
+            private static global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr __readFileDelegateInstance;
+
+            private static sbyte* __readFileDelegateHook(__IntPtr __instance, __IntPtr path, int* length)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
+                var ___ret = __target._readFile(__result0, ref *length);
+                return ___ret;
+            }
+
+            // void _beforeFree(void *ptr)
+            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr _BeforeFreeDelegateInstance;
+
+            private static void _BeforeFreeDelegateHook(__IntPtr __instance, __IntPtr ptr)
+            {
+                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
+                __target.BeforeFree(ptr);
+            }
+
+            internal static new class VTableLoader
+            {
+                private static volatile bool initialized;
+                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+                private static readonly IntPtr[] Thunks = new IntPtr[7];
+                private static CppSharp.Runtime.VTables VTables;
+                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+                
+                static VTableLoader()
+                {
+                    _dtorDelegateInstance += _dtorDelegateHook;
+                    _AllocDelegateInstance += _AllocDelegateHook;
+                    _CallocDelegateInstance += _CallocDelegateHook;
+                    _ReallocDelegateInstance += _ReallocDelegateHook;
+                    _FreeDelegateInstance += _FreeDelegateHook;
+                    __readFileDelegateInstance += __readFileDelegateHook;
+                    _BeforeFreeDelegateInstance += _BeforeFreeDelegateHook;
+                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_AllocDelegateInstance);
+                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CallocDelegateInstance);
+                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ReallocDelegateInstance);
+                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_FreeDelegateInstance);
+                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(__readFileDelegateInstance);
+                    Thunks[6] = Marshal.GetFunctionPointerForDelegate(_BeforeFreeDelegateInstance);
+                }
+
+                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+                {
+                    if (!initialized)
+                    {
+                        lock (ManagedVTables)
+                        {
+                            if (!initialized)
+                            {
+                                initialized = true;
+                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                                VTables.Methods = new Delegate[1][];
+                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
+                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
+                                ManagedVTables[0][0] = Thunks[0];
+                                ManagedVTables[0][1] = Thunks[1];
+                                ManagedVTables[0][2] = Thunks[2];
+                                ManagedVTables[0][3] = Thunks[3];
+                                ManagedVTables[0][4] = Thunks[4];
+                                ManagedVTables[0][5] = Thunks[5];
+                                ManagedVTables[0][6] = Thunks[6];
+                                VTables.Methods[0] = new Delegate[7];
+                            }
+                        }
+                    }
+
+                    if (destructorOnly)
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                    }
+                    else
+                    {
+                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                    }
+                    return VTables;
+                }
+            }
+
+            internal override CppSharp.Runtime.VTables __VTables
+            {
+                get {
+                    if (__vtables.IsEmpty)
+                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                    return __vtables;
+                }
+
+                set {
+                    __vtables = value;
+                }
+            }
+            internal override void SetupVTables(bool destructorOnly = false)
+            {
+                if (__VTables.IsTransient)
+                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+            }
+            #endregion
+        }
+
         public unsafe abstract partial class SpineExtension : IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 8)]
@@ -337,316 +647,6 @@ namespace spine_cpp
                 }
             }
             internal virtual void SetupVTables(bool destructorOnly = false)
-            {
-                if (__VTables.IsTransient)
-                    __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
-            }
-            #endregion
-        }
-
-        public unsafe partial class DefaultSpineExtension : global::spine_cpp.Spine.SpineExtension, IDisposable
-        {
-            [StructLayout(LayoutKind.Sequential, Size = 8)]
-            public new partial struct __Internal
-            {
-                internal __IntPtr vfptr_SpineExtension;
-
-                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0DefaultSpineExtension@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr ctor(__IntPtr __instance);
-
-                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0DefaultSpineExtension@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
-            }
-
-            internal static new DefaultSpineExtension __CreateInstance(__IntPtr native, bool skipVTables = false)
-            {
-                if (native == __IntPtr.Zero)
-                    return null;
-                return new DefaultSpineExtension(native.ToPointer(), skipVTables);
-            }
-
-            internal static new DefaultSpineExtension __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
-            {
-                if (native == __IntPtr.Zero)
-                    return null;
-                if (__TryGetNativeToManagedMapping(native, out var managed))
-                    return (DefaultSpineExtension)managed;
-                var result = __CreateInstance(native, skipVTables);
-                if (saveInstance)
-                    __RecordNativeToManagedMapping(native, result);
-                return result;
-            }
-
-            internal static new DefaultSpineExtension __GetInstance(__IntPtr native)
-            {
-                if (!__TryGetNativeToManagedMapping(native, out var managed))
-                    throw new global::System.Exception("No managed instance was found");
-                var result = (DefaultSpineExtension)managed;
-                if (result.__ownsNativeInstance)
-                    result.SetupVTables();
-                return result;
-            }
-
-            internal static DefaultSpineExtension __CreateInstance(__Internal native, bool skipVTables = false)
-            {
-                return new DefaultSpineExtension(native, skipVTables);
-            }
-
-            private static void* __CopyValue(__Internal native)
-            {
-                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-                global::spine_cpp.Spine.DefaultSpineExtension.__Internal.cctor(ret, new __IntPtr(&native));
-                return ret.ToPointer();
-            }
-
-            private DefaultSpineExtension(__Internal native, bool skipVTables = false)
-                : this(__CopyValue(native), skipVTables)
-            {
-                __ownsNativeInstance = true;
-                __RecordNativeToManagedMapping(__Instance, this);
-            }
-
-            protected DefaultSpineExtension(void* native, bool skipVTables = false)
-                : base((void*) native)
-            {
-                if (native == null)
-                    return;
-                if (!skipVTables)
-                    SetupVTables(true);
-            }
-
-            public DefaultSpineExtension()
-                : this((void*) null)
-            {
-                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.DefaultSpineExtension.__Internal));
-                __ownsNativeInstance = true;
-                __RecordNativeToManagedMapping(__Instance, this);
-                __Internal.ctor(__Instance);
-                SetupVTables(GetType().FullName == "spine_cpp.Spine.DefaultSpineExtension");
-            }
-
-            public DefaultSpineExtension(global::spine_cpp.Spine.DefaultSpineExtension _0)
-                : this((void*) null)
-            {
-                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.DefaultSpineExtension.__Internal));
-                __ownsNativeInstance = true;
-                __RecordNativeToManagedMapping(__Instance, this);
-                if (ReferenceEquals(_0, null))
-                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
-                var __arg0 = _0.__Instance;
-                __Internal.cctor(__Instance, __arg0);
-                SetupVTables(GetType().FullName == "spine_cpp.Spine.DefaultSpineExtension");
-            }
-
-            partial void DisposePartial(bool disposing);
-
-            internal protected override void Dispose(bool disposing, bool callNativeDtor )
-            {
-                if (__Instance == IntPtr.Zero)
-                    return;
-                NativeToManagedMap.TryRemove(__Instance, out _);
-                *(IntPtr*)(__Instance + 0) = __VTables.Tables[0];
-                DisposePartial(disposing);
-                if (callNativeDtor)
-                {
-                    var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0);
-                    ___dtorDelegate(__Instance, 0);
-                }
-                if (__ownsNativeInstance)
-                    Marshal.FreeHGlobal(__Instance);
-                __Instance = IntPtr.Zero;
-            }
-
-            public override __IntPtr Alloc(ulong size, string file, int line)
-            {
-                var ___AllocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 1);
-                var ___ret = ___AllocDelegate(__Instance, size, file, line);
-                return ___ret;
-            }
-
-            public override __IntPtr Calloc(ulong size, string file, int line)
-            {
-                var ___CallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int>(0, 2);
-                var ___ret = ___CallocDelegate(__Instance, size, file, line);
-                return ___ret;
-            }
-
-            public override __IntPtr Realloc(__IntPtr ptr, ulong size, string file, int line)
-            {
-                var ___ReallocDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int>(0, 3);
-                var ___ret = ___ReallocDelegate(__Instance, ptr, size, file, line);
-                return ___ret;
-            }
-
-            public override void Free(__IntPtr mem, string file, int line)
-            {
-                var ___FreeDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int>(0, 4);
-                ___FreeDelegate(__Instance, mem, file, line);
-            }
-
-            public override sbyte* _readFile(global::spine_cpp.Spine.String path, ref int length)
-            {
-                var ____readFileDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr>(0, 5);
-                if (ReferenceEquals(path, null))
-                    throw new global::System.ArgumentNullException("path", "Cannot be null because it is a C++ reference (&).");
-                var __arg0 = path.__Instance;
-                fixed (int* __length1 = &length)
-                {
-                    var __arg1 = __length1;
-                    var ___ret = ____readFileDelegate(__Instance, __arg0, __arg1);
-                    return ___ret;
-                }
-            }
-
-            #region Virtual table interop
-
-            // virtual ~DefaultSpineExtension()
-            private static global::spine_cpp.Delegates.Action___IntPtr_int _dtorDelegateInstance;
-
-            private static void _dtorDelegateHook(__IntPtr __instance, int delete)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                __target.Dispose(disposing: true, callNativeDtor: true);
-            }
-
-            // void *_alloc(size_t size, const char *file, int line) override
-            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _AllocDelegateInstance;
-
-            private static __IntPtr _AllocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                var ___ret = __target.Alloc(size, file, line);
-                return ___ret;
-            }
-
-            // void *_calloc(size_t size, const char *file, int line) override
-            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr_ulong_string8_int _CallocDelegateInstance;
-
-            private static __IntPtr _CallocDelegateHook(__IntPtr __instance, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                var ___ret = __target.Calloc(size, file, line);
-                return ___ret;
-            }
-
-            // void *_realloc(void *ptr, size_t size, const char *file, int line) override
-            private static global::spine_cpp.Delegates.Func___IntPtr___IntPtr___IntPtr_ulong_string8_int _ReallocDelegateInstance;
-
-            private static __IntPtr _ReallocDelegateHook(__IntPtr __instance, __IntPtr ptr, ulong size, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                var ___ret = __target.Realloc(ptr, size, file, line);
-                return ___ret;
-            }
-
-            // void _free(void *mem, const char *file, int line) override
-            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr_string8_int _FreeDelegateInstance;
-
-            private static void _FreeDelegateHook(__IntPtr __instance, __IntPtr mem, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(CppSharp.Runtime.UTF8Marshaller))] string file, int line)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                __target.Free(mem, file, line);
-            }
-
-            // char *_readFile(const String &path, int *length) override
-            private static global::spine_cpp.Delegates.Func_sbytePtr___IntPtr___IntPtr_intPtr __readFileDelegateInstance;
-
-            private static sbyte* __readFileDelegateHook(__IntPtr __instance, __IntPtr path, int* length)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                var __result0 = global::spine_cpp.Spine.String.__GetOrCreateInstance(path, false, skipVTables: true);
-                var ___ret = __target._readFile(__result0, ref *length);
-                return ___ret;
-            }
-
-            // void _beforeFree(void *ptr)
-            private static global::spine_cpp.Delegates.Action___IntPtr___IntPtr _BeforeFreeDelegateInstance;
-
-            private static void _BeforeFreeDelegateHook(__IntPtr __instance, __IntPtr ptr)
-            {
-                var __target = global::spine_cpp.Spine.DefaultSpineExtension.__GetInstance(__instance);
-                __target.BeforeFree(ptr);
-            }
-
-            internal static new class VTableLoader
-            {
-                private static volatile bool initialized;
-                private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
-                private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
-                private static readonly IntPtr[] Thunks = new IntPtr[7];
-                private static CppSharp.Runtime.VTables VTables;
-                private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
-                    SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
-                
-                static VTableLoader()
-                {
-                    _dtorDelegateInstance += _dtorDelegateHook;
-                    _AllocDelegateInstance += _AllocDelegateHook;
-                    _CallocDelegateInstance += _CallocDelegateHook;
-                    _ReallocDelegateInstance += _ReallocDelegateHook;
-                    _FreeDelegateInstance += _FreeDelegateHook;
-                    __readFileDelegateInstance += __readFileDelegateHook;
-                    _BeforeFreeDelegateInstance += _BeforeFreeDelegateHook;
-                    Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
-                    Thunks[1] = Marshal.GetFunctionPointerForDelegate(_AllocDelegateInstance);
-                    Thunks[2] = Marshal.GetFunctionPointerForDelegate(_CallocDelegateInstance);
-                    Thunks[3] = Marshal.GetFunctionPointerForDelegate(_ReallocDelegateInstance);
-                    Thunks[4] = Marshal.GetFunctionPointerForDelegate(_FreeDelegateInstance);
-                    Thunks[5] = Marshal.GetFunctionPointerForDelegate(__readFileDelegateInstance);
-                    Thunks[6] = Marshal.GetFunctionPointerForDelegate(_BeforeFreeDelegateInstance);
-                }
-
-                public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
-                {
-                    if (!initialized)
-                    {
-                        lock (ManagedVTables)
-                        {
-                            if (!initialized)
-                            {
-                                initialized = true;
-                                VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
-                                VTables.Methods = new Delegate[1][];
-                                ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
-                                ManagedVTablesDtorOnly[0][0] = Thunks[0];
-                                ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 7, 0);
-                                ManagedVTables[0][0] = Thunks[0];
-                                ManagedVTables[0][1] = Thunks[1];
-                                ManagedVTables[0][2] = Thunks[2];
-                                ManagedVTables[0][3] = Thunks[3];
-                                ManagedVTables[0][4] = Thunks[4];
-                                ManagedVTables[0][5] = Thunks[5];
-                                ManagedVTables[0][6] = Thunks[6];
-                                VTables.Methods[0] = new Delegate[7];
-                            }
-                        }
-                    }
-
-                    if (destructorOnly)
-                    {
-                        *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
-                    }
-                    else
-                    {
-                        *(IntPtr**)(instance + 0) = ManagedVTables[0];
-                    }
-                    return VTables;
-                }
-            }
-
-            internal override CppSharp.Runtime.VTables __VTables
-            {
-                get {
-                    if (__vtables.IsEmpty)
-                        __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
-                    return __vtables;
-                }
-
-                set {
-                    __vtables = value;
-                }
-            }
-            internal override void SetupVTables(bool destructorOnly = false)
             {
                 if (__VTables.IsTransient)
                     __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
@@ -2947,6 +2947,48 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?voidPBuffer@?$Vector@_N@spine@@QEAAPEAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr VoidPBufferc__N_spine_S_Vector__b(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctorc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctorc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, __IntPtr inVector);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?clear@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Clearc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?setSize@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAX_KAEBUSubmeshInstruction@SpineUnity@@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetSizec__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, ulong newSize, __IntPtr defaultValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?ensureCapacity@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAX_K@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void EnsureCapacityc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, ulong newCapacity);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?add@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAXAEBUSubmeshInstruction@SpineUnity@@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Addc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?addAll@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAXAEAV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void AddAllc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?clearAndAddAll@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAXAEAV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void ClearAndAddAllc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, __IntPtr inValue);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?removeAt@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAX_K@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void RemoveAtc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, ulong inIndex);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??A?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAAEAUSubmeshInstruction@SpineUnity@@_K@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr OperatorSubscriptc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance, ulong inIndex);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?getCapacity@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEBA_KXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern ulong GetCapacityc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?size@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEBA_KXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern ulong Sizec__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?buffer@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAPEAUSubmeshInstruction@SpineUnity@@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr Bufferc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?voidPBuffer@?$Vector@USubmeshInstruction@SpineUnity@@@spine@@QEAAPEAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr VoidPBufferc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__IntPtr __instance);
             }
         }
 
@@ -3345,7 +3387,16 @@ namespace spine_cpp
                     SetupVTables(GetType().FullName == "spine_cpp.Spine.Vector");
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Vector.__Internal));
+                    __ownsNativeInstance = true;
+                    __RecordNativeToManagedMapping(__Instance, this);
+                    global::spine_cpp.Spine.Vector.__Internal.ctorc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
+                    SetupVTables(GetType().FullName == "spine_cpp.Spine.Vector");
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             public Vector(global::spine_cpp.Spine.Vector<T> inVector)
@@ -3808,7 +3859,19 @@ namespace spine_cpp
                     SetupVTables(GetType().FullName == "spine_cpp.Spine.Vector");
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.Spine.Vector.__Internal));
+                    __ownsNativeInstance = true;
+                    __RecordNativeToManagedMapping(__Instance, this);
+                    if (ReferenceEquals(inVector, null))
+                        throw new global::System.ArgumentNullException("inVector", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = inVector.__Instance;
+                    global::spine_cpp.Spine.Vector.__Internal.cctorc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, __arg0);
+                    SetupVTables(GetType().FullName == "spine_cpp.Spine.Vector");
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             partial void DisposePartial(bool disposing);
@@ -4051,7 +4114,13 @@ namespace spine_cpp
                         ___dtorDelegate(__Instance, 0);
                         return;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                    if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                    {
+                        var ___dtorDelegate = __VTables.GetMethodDelegate<global::spine_cpp.Delegates.Action___IntPtr_int>(0, 0, 40);
+                        ___dtorDelegate(__Instance, 0);
+                        return;
+                    }
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
                 }
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
@@ -4251,7 +4320,12 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.Clearc__N_spine_S_Vector__b(__Instance);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    global::spine_cpp.Spine.Vector.__Internal.Clearc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             public void EnsureCapacity(ulong newCapacity)
@@ -4447,7 +4521,12 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.EnsureCapacityc__N_spine_S_Vector__b(__Instance, newCapacity);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    global::spine_cpp.Spine.Vector.__Internal.EnsureCapacityc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, newCapacity);
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             public void AddAll(global::spine_cpp.Spine.Vector<T> inValue)
@@ -4757,7 +4836,15 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.AddAllc__N_spine_S_Vector__b(__Instance, __arg0);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    if (ReferenceEquals(inValue, null))
+                        throw new global::System.ArgumentNullException("inValue", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = inValue.__Instance;
+                    global::spine_cpp.Spine.Vector.__Internal.AddAllc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, __arg0);
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             public void ClearAndAddAll(global::spine_cpp.Spine.Vector<T> inValue)
@@ -5067,7 +5154,15 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.ClearAndAddAllc__N_spine_S_Vector__b(__Instance, __arg0);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    if (ReferenceEquals(inValue, null))
+                        throw new global::System.ArgumentNullException("inValue", "Cannot be null because it is a C++ reference (&).");
+                    var __arg0 = inValue.__Instance;
+                    global::spine_cpp.Spine.Vector.__Internal.ClearAndAddAllc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, __arg0);
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             public void RemoveAt(ulong inIndex)
@@ -5263,7 +5358,12 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.RemoveAtc__N_spine_S_Vector__b(__Instance, inIndex);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                {
+                    global::spine_cpp.Spine.Vector.__Internal.RemoveAtc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, inIndex);
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
             }
 
             public T this[ulong inIndex]
@@ -5520,7 +5620,13 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.OperatorSubscriptc__N_spine_S_Vector__b(__Instance, inIndex);
                         return (T) (object) *___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                    if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                    {
+                        var ___ret = global::spine_cpp.Spine.Vector.__Internal.OperatorSubscriptc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, inIndex);
+                        var __result0 = global::spine_cpp.SpineUnity.SubmeshInstruction.__GetOrCreateInstance(___ret, false);
+                        return (T) (object) __result0;
+                    }
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
                 }
 
                 set
@@ -5726,7 +5832,14 @@ namespace spine_cpp
                         *global::spine_cpp.Spine.Vector.__Internal.OperatorSubscriptc__N_spine_S_Vector__b(__Instance, inIndex) = (bool) (object) value;
                         return;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                    if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                    {
+                        if (ReferenceEquals(value, null))
+                            throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
+                        global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal.cctor(global::spine_cpp.Spine.Vector.__Internal.OperatorSubscriptc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, inIndex), ((global::spine_cpp.SpineUnity.SubmeshInstruction) (object) value).__Instance);
+                        return;
+                    }
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
                 }
             }
 
@@ -5925,7 +6038,12 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.GetCapacityc__N_spine_S_Vector__b(__Instance);
                         return ___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                    if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                    {
+                        var ___ret = global::spine_cpp.Spine.Vector.__Internal.GetCapacityc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
+                        return ___ret;
+                    }
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
                 }
             }
 
@@ -6124,7 +6242,12 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.Sizec__N_spine_S_Vector__b(__Instance);
                         return ___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                    if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                    {
+                        var ___ret = global::spine_cpp.Spine.Vector.__Internal.Sizec__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
+                        return ___ret;
+                    }
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
                 }
             }
 
@@ -6323,7 +6446,12 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.VoidPBufferc__N_spine_S_Vector__b(__Instance);
                         return ___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>.");
+                    if (__T.IsAssignableFrom(typeof(global::spine_cpp.SpineUnity.SubmeshInstruction)))
+                    {
+                        var ___ret = global::spine_cpp.Spine.Vector.__Internal.VoidPBufferc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
+                        return ___ret;
+                    }
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
                 }
             }
 
@@ -8004,6 +8132,131 @@ namespace spine_cpp
 
     namespace Spine
     {
+        public unsafe partial struct Color32
+        {
+            [StructLayout(LayoutKind.Explicit, Size = 4)]
+            public partial struct __Internal
+            {
+                [FieldOffset(0)]
+                internal byte r;
+
+                [FieldOffset(1)]
+                internal byte g;
+
+                [FieldOffset(2)]
+                internal byte b;
+
+                [FieldOffset(3)]
+                internal byte a;
+
+                [FieldOffset(0)]
+                internal uint rgba;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0Color32@spine@@QEAA@AEBT01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            private Color32.__Internal __instance;
+            internal ref Color32.__Internal __Instance => ref __instance;
+
+            internal static Color32 __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                return new Color32(native.ToPointer(), skipVTables);
+            }
+
+            internal static Color32 __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new Color32(native, skipVTables);
+            }
+
+            private Color32(__Internal native, bool skipVTables = false)
+                : this()
+            {
+                __instance = native;
+            }
+
+            private Color32(void* native, bool skipVTables = false) : this()
+            {
+                __instance = *(global::spine_cpp.Spine.Color32.__Internal*) native;
+            }
+
+            public Color32(global::spine_cpp.Spine.Color32 _0)
+                : this()
+            {
+                var ____arg0 = _0.__Instance;
+                var __arg0 = new __IntPtr(&____arg0);
+                fixed (__Internal* __instancePtr = &__instance)
+                {
+                    __Internal.cctor(new __IntPtr(__instancePtr), __arg0);
+                }
+            }
+
+            public byte R
+            {
+                get
+                {
+                    return __instance.r;
+                }
+
+                set
+                {
+                    __instance.r = value;
+                }
+            }
+
+            public byte G
+            {
+                get
+                {
+                    return __instance.g;
+                }
+
+                set
+                {
+                    __instance.g = value;
+                }
+            }
+
+            public byte B
+            {
+                get
+                {
+                    return __instance.b;
+                }
+
+                set
+                {
+                    __instance.b = value;
+                }
+            }
+
+            public byte A
+            {
+                get
+                {
+                    return __instance.a;
+                }
+
+                set
+                {
+                    __instance.a = value;
+                }
+            }
+
+            public uint Rgba
+            {
+                get
+                {
+                    return __instance.rgba;
+                }
+
+                set
+                {
+                    __instance.rgba = value;
+                }
+            }
+        }
+
         public unsafe partial class Color : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 24)]
@@ -37632,6 +37885,1100 @@ namespace spine_cpp
         }
     }
 
+    namespace SpineUnity
+    {
+        public unsafe partial class SpineMesh : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 1)]
+            public partial struct __Internal
+            {
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SpineMesh@SpineUnity@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SpineMesh> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SpineMesh>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.SpineUnity.SpineMesh managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.SpineUnity.SpineMesh managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static SpineMesh __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new SpineMesh(native.ToPointer(), skipVTables);
+            }
+
+            internal static SpineMesh __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (SpineMesh)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static SpineMesh __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new SpineMesh(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                *(__Internal*) ret = native;
+                return ret.ToPointer();
+            }
+
+            private SpineMesh(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected SpineMesh(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public SpineMesh()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SpineMesh.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            public SpineMesh(global::spine_cpp.SpineUnity.SpineMesh _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SpineMesh.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                *((global::spine_cpp.SpineUnity.SpineMesh.__Internal*) __Instance) = *((global::spine_cpp.SpineUnity.SpineMesh.__Internal*) _0.__Instance);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+        }
+
+        public unsafe partial class SubmeshInstruction : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 80)]
+            public partial struct __Internal
+            {
+                internal global::Std.SharedPtr.__Internal skeleton;
+                internal int startSlot;
+                internal int endSlot;
+                internal global::spine_cpp.UnityEngine.Material.__Internal material;
+                internal byte forceSeparate;
+                internal int preActiveClippingSlotSource;
+                internal int rawTriangleCount;
+                internal int rawVertexCount;
+                internal int rawFirstVertexIndex;
+                internal byte hasClipping;
+                internal byte hasPMAAdditiveSlot;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SubmeshInstruction@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SubmeshInstruction@SpineUnity@@QEAA@AEBU01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??1SubmeshInstruction@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void dtor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?SlotCount@SubmeshInstruction@SpineUnity@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int SlotCount(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Default@SubmeshInstruction@SpineUnity@@SA?AU12@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Default(__IntPtr @return);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SubmeshInstruction> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SubmeshInstruction>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.SpineUnity.SubmeshInstruction managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.SpineUnity.SubmeshInstruction managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static SubmeshInstruction __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new SubmeshInstruction(native.ToPointer(), skipVTables);
+            }
+
+            internal static SubmeshInstruction __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (SubmeshInstruction)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static SubmeshInstruction __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new SubmeshInstruction(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private SubmeshInstruction(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected SubmeshInstruction(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public SubmeshInstruction()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+            }
+
+            public SubmeshInstruction(global::spine_cpp.SpineUnity.SubmeshInstruction _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                    __Internal.dtor(__Instance);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public int StartSlot
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->startSlot;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->startSlot = value;
+                }
+            }
+
+            public int EndSlot
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->endSlot;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->endSlot = value;
+                }
+            }
+
+            public bool ForceSeparate
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->forceSeparate != 0;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->forceSeparate = (byte) (value ? 1 : 0);
+                }
+            }
+
+            public int PreActiveClippingSlotSource
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->preActiveClippingSlotSource;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->preActiveClippingSlotSource = value;
+                }
+            }
+
+            public int RawTriangleCount
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->rawTriangleCount;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->rawTriangleCount = value;
+                }
+            }
+
+            public int RawVertexCount
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->rawVertexCount;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->rawVertexCount = value;
+                }
+            }
+
+            public int RawFirstVertexIndex
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->rawFirstVertexIndex;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->rawFirstVertexIndex = value;
+                }
+            }
+
+            public bool HasClipping
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->hasClipping != 0;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->hasClipping = (byte) (value ? 1 : 0);
+                }
+            }
+
+            public bool HasPMAAdditiveSlot
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->hasPMAAdditiveSlot != 0;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->hasPMAAdditiveSlot = (byte) (value ? 1 : 0);
+                }
+            }
+
+            public int SlotCount
+            {
+                get
+                {
+                    var ___ret = __Internal.SlotCount(__Instance);
+                    return ___ret;
+                }
+            }
+
+            public static global::spine_cpp.SpineUnity.SubmeshInstruction Default
+            {
+                get
+                {
+                    var ___ret = new global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal();
+                    __Internal.Default(new IntPtr(&___ret));
+                    var _____ret = global::spine_cpp.SpineUnity.SubmeshInstruction.__CreateInstance(___ret);
+                    global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal.dtor(new __IntPtr(&___ret));
+                    return _____ret;
+                }
+            }
+        }
+    }
+
+    namespace SpineUnity
+    {
+        public unsafe partial class SkeletonRendererInstruction : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 40)]
+            public partial struct __Internal
+            {
+                internal global::Std.SharedPtr.__Internal submeshInstructions;
+                internal byte immutableTriangles;
+                internal byte hasActiveClipping;
+                internal int rawVertexCount;
+                internal global::Std.SharedPtr.__Internal attachments;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SkeletonRendererInstruction@SpineUnity@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SkeletonRendererInstruction@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??1SkeletonRendererInstruction@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void dtor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Clear@SkeletonRendererInstruction@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Clear(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?DoDispose@SkeletonRendererInstruction@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void DoDispose(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?SetWithSubset@SkeletonRendererInstruction@SpineUnity@@QEAAXAEAV?$Vector@USubmeshInstruction@SpineUnity@@@spine@@HH@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void SetWithSubset(__IntPtr __instance, __IntPtr instructions, int startSubmesh, int endSubmesh);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Set@SkeletonRendererInstruction@SpineUnity@@QEAAXAEAV12@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Set(__IntPtr __instance, __IntPtr other);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?GeometryNotEqual@SkeletonRendererInstruction@SpineUnity@@SA_NAEAV12@0@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool GeometryNotEqual(__IntPtr a, __IntPtr b);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SkeletonRendererInstruction> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SkeletonRendererInstruction>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.SpineUnity.SkeletonRendererInstruction managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.SpineUnity.SkeletonRendererInstruction managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static SkeletonRendererInstruction __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new SkeletonRendererInstruction(native.ToPointer(), skipVTables);
+            }
+
+            internal static SkeletonRendererInstruction __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (SkeletonRendererInstruction)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static SkeletonRendererInstruction __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new SkeletonRendererInstruction(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.SpineUnity.SkeletonRendererInstruction.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private SkeletonRendererInstruction(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected SkeletonRendererInstruction(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public SkeletonRendererInstruction(global::spine_cpp.SpineUnity.SkeletonRendererInstruction _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SkeletonRendererInstruction.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+            }
+
+            public SkeletonRendererInstruction()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SkeletonRendererInstruction.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                    __Internal.dtor(__Instance);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public void Clear()
+            {
+                __Internal.Clear(__Instance);
+            }
+
+            public void DoDispose()
+            {
+                __Internal.DoDispose(__Instance);
+            }
+
+            public void SetWithSubset(global::spine_cpp.Spine.Vector<global::spine_cpp.SpineUnity.SubmeshInstruction> instructions, int startSubmesh, int endSubmesh)
+            {
+                if (ReferenceEquals(instructions, null))
+                    throw new global::System.ArgumentNullException("instructions", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = instructions.__Instance;
+                __Internal.SetWithSubset(__Instance, __arg0, startSubmesh, endSubmesh);
+            }
+
+            public void Set(global::spine_cpp.SpineUnity.SkeletonRendererInstruction other)
+            {
+                if (ReferenceEquals(other, null))
+                    throw new global::System.ArgumentNullException("other", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = other.__Instance;
+                __Internal.Set(__Instance, __arg0);
+            }
+
+            public static bool GeometryNotEqual(global::spine_cpp.SpineUnity.SkeletonRendererInstruction a, global::spine_cpp.SpineUnity.SkeletonRendererInstruction b)
+            {
+                if (ReferenceEquals(a, null))
+                    throw new global::System.ArgumentNullException("a", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = a.__Instance;
+                if (ReferenceEquals(b, null))
+                    throw new global::System.ArgumentNullException("b", "Cannot be null because it is a C++ reference (&).");
+                var __arg1 = b.__Instance;
+                var ___ret = __Internal.GeometryNotEqual(__arg0, __arg1);
+                return ___ret;
+            }
+
+            public bool ImmutableTriangles
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->immutableTriangles != 0;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->immutableTriangles = (byte) (value ? 1 : 0);
+                }
+            }
+
+            public bool HasActiveClipping
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->hasActiveClipping != 0;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->hasActiveClipping = (byte) (value ? 1 : 0);
+                }
+            }
+
+            public int RawVertexCount
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->rawVertexCount;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->rawVertexCount = value;
+                }
+            }
+        }
+    }
+
+    namespace SpineUnity
+    {
+        public unsafe partial class SmartMesh : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 56)]
+            public partial struct __Internal
+            {
+                internal global::spine_cpp.UnityEngine.Mesh.__Internal mesh;
+                internal global::Std.SharedPtr.__Internal instructionUsed;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SmartMesh@SpineUnity@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SmartMesh@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??1SmartMesh@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void dtor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Clear@SmartMesh@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Clear(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?DoDispose@SmartMesh@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void DoDispose(__IntPtr __instance);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SmartMesh> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.SmartMesh>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.SpineUnity.SmartMesh managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.SpineUnity.SmartMesh managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static SmartMesh __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new SmartMesh(native.ToPointer(), skipVTables);
+            }
+
+            internal static SmartMesh __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (SmartMesh)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static SmartMesh __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new SmartMesh(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.SpineUnity.SmartMesh.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private SmartMesh(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected SmartMesh(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public SmartMesh(global::spine_cpp.SpineUnity.SmartMesh _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SmartMesh.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+            }
+
+            public SmartMesh()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.SmartMesh.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                    __Internal.dtor(__Instance);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public void Clear()
+            {
+                __Internal.Clear(__Instance);
+            }
+
+            public void DoDispose()
+            {
+                __Internal.DoDispose(__Instance);
+            }
+        }
+
+        public unsafe partial class MeshRendererBuffers : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 48)]
+            public partial struct __Internal
+            {
+                internal global::Std.SharedPtr.__Internal doubleBufferedMesh;
+                internal global::Std.SharedPtr.__Internal submeshMaterials;
+                internal global::Std.SharedPtr.__Internal sharedMaterials;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0MeshRendererBuffers@SpineUnity@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0MeshRendererBuffers@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??1MeshRendererBuffers@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void dtor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Initialize@MeshRendererBuffers@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Initialize(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?MaterialsChangedInLastUpdate@MeshRendererBuffers@SpineUnity@@QEAA_NXZ", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool MaterialsChangedInLastUpdate(__IntPtr __instance);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.MeshRendererBuffers> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.MeshRendererBuffers>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.SpineUnity.MeshRendererBuffers managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.SpineUnity.MeshRendererBuffers managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static MeshRendererBuffers __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new MeshRendererBuffers(native.ToPointer(), skipVTables);
+            }
+
+            internal static MeshRendererBuffers __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (MeshRendererBuffers)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static MeshRendererBuffers __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new MeshRendererBuffers(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                global::spine_cpp.SpineUnity.MeshRendererBuffers.__Internal.cctor(ret, new __IntPtr(&native));
+                return ret.ToPointer();
+            }
+
+            private MeshRendererBuffers(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected MeshRendererBuffers(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public MeshRendererBuffers(global::spine_cpp.SpineUnity.MeshRendererBuffers _0)
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.MeshRendererBuffers.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                if (ReferenceEquals(_0, null))
+                    throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = _0.__Instance;
+                __Internal.cctor(__Instance, __arg0);
+            }
+
+            public MeshRendererBuffers()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.MeshRendererBuffers.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                    __Internal.dtor(__Instance);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public void Initialize()
+            {
+                __Internal.Initialize(__Instance);
+            }
+
+            public bool MaterialsChangedInLastUpdate
+            {
+                get
+                {
+                    var ___ret = __Internal.MaterialsChangedInLastUpdate(__Instance);
+                    return ___ret;
+                }
+            }
+        }
+    }
+
+    namespace SpineUnity
+    {
+        namespace DoubleBuffered
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 40)]
+            public unsafe partial struct __Internalc__N_SpineUnity_S_DoubleBuffered____N_SpineUnity_S_SmartMesh
+            {
+                internal global::Std.SharedPtr.__Internal a;
+                internal global::Std.SharedPtr.__Internal b;
+                internal byte usingA;
+            }
+        }
+    }
+
+    namespace SpineUnity
+    {
+        public unsafe partial class MeshGenerator : IDisposable
+        {
+            [StructLayout(LayoutKind.Sequential, Size = 240)]
+            public partial struct __Internal
+            {
+                internal float BoundsMinDefault;
+                internal float BoundsMaxDefault;
+                internal global::Std.SharedPtr.__Internal vertexBuffer;
+                internal global::Std.SharedPtr.__Internal uvBuffer;
+                internal global::Std.SharedPtr.__Internal colorBuffer;
+                internal global::Std.SharedPtr.__Internal submeshes;
+                internal global::spine_cpp.UnityEngine.Vector2.__Internal meshBoundsMin;
+                internal global::spine_cpp.UnityEngine.Vector2.__Internal meshBoundsMax;
+                internal float meshBoundsThickness;
+                internal int submeshIndex;
+                internal global::Std.SharedPtr.__Internal clipper;
+                internal global::Std.SharedPtr.__Internal tempVerts;
+                internal global::Std.SharedPtr.__Internal regionTriangles;
+                internal global::Std.SharedPtr.__Internal normals;
+                internal global::Std.SharedPtr.__Internal tangents;
+                internal global::Std.SharedPtr.__Internal tempTanBuffer;
+                internal global::Std.SharedPtr.__Internal uv2;
+                internal global::Std.SharedPtr.__Internal uv3;
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0MeshGenerator@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr ctor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??1MeshGenerator@SpineUnity@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void dtor(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?SubmeshIndexCount@MeshGenerator@SpineUnity@@QEAAHH@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int SubmeshIndexCount(__IntPtr __instance, int submeshIndex);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?GenerateSingleSubmeshInstruction@MeshGenerator@SpineUnity@@SAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void GenerateSingleSubmeshInstruction();
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?VertexCount@MeshGenerator@SpineUnity@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int VertexCount(__IntPtr __instance);
+            }
+
+            public __IntPtr __Instance { get; protected set; }
+
+            internal static readonly new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.MeshGenerator> NativeToManagedMap =
+                new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::spine_cpp.SpineUnity.MeshGenerator>();
+
+            internal static void __RecordNativeToManagedMapping(IntPtr native, global::spine_cpp.SpineUnity.MeshGenerator managed)
+            {
+                NativeToManagedMap[native] = managed;
+            }
+
+            internal static bool __TryGetNativeToManagedMapping(IntPtr native, out global::spine_cpp.SpineUnity.MeshGenerator managed)
+            {
+    
+                return NativeToManagedMap.TryGetValue(native, out managed);
+            }
+
+            protected bool __ownsNativeInstance;
+
+            internal static MeshGenerator __CreateInstance(__IntPtr native, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                return new MeshGenerator(native.ToPointer(), skipVTables);
+            }
+
+            internal static MeshGenerator __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+            {
+                if (native == __IntPtr.Zero)
+                    return null;
+                if (__TryGetNativeToManagedMapping(native, out var managed))
+                    return (MeshGenerator)managed;
+                var result = __CreateInstance(native, skipVTables);
+                if (saveInstance)
+                    __RecordNativeToManagedMapping(native, result);
+                return result;
+            }
+
+            internal static MeshGenerator __CreateInstance(__Internal native, bool skipVTables = false)
+            {
+                return new MeshGenerator(native, skipVTables);
+            }
+
+            private static void* __CopyValue(__Internal native)
+            {
+                var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+                *(__Internal*) ret = native;
+                return ret.ToPointer();
+            }
+
+            private MeshGenerator(__Internal native, bool skipVTables = false)
+                : this(__CopyValue(native), skipVTables)
+            {
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+            }
+
+            protected MeshGenerator(void* native, bool skipVTables = false)
+            {
+                if (native == null)
+                    return;
+                __Instance = new __IntPtr(native);
+            }
+
+            public MeshGenerator()
+            {
+                __Instance = Marshal.AllocHGlobal(sizeof(global::spine_cpp.SpineUnity.MeshGenerator.__Internal));
+                __ownsNativeInstance = true;
+                __RecordNativeToManagedMapping(__Instance, this);
+                __Internal.ctor(__Instance);
+            }
+
+            public void Dispose()
+            {
+                Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            }
+
+            partial void DisposePartial(bool disposing);
+
+            internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+            {
+                if (__Instance == IntPtr.Zero)
+                    return;
+                NativeToManagedMap.TryRemove(__Instance, out _);
+                DisposePartial(disposing);
+                if (callNativeDtor)
+                    __Internal.dtor(__Instance);
+                if (__ownsNativeInstance)
+                    Marshal.FreeHGlobal(__Instance);
+                __Instance = IntPtr.Zero;
+            }
+
+            public int SubmeshIndexCount(int submeshIndex)
+            {
+                var ___ret = __Internal.SubmeshIndexCount(__Instance, submeshIndex);
+                return ___ret;
+            }
+
+            public static void GenerateSingleSubmeshInstruction()
+            {
+                __Internal.GenerateSingleSubmeshInstruction();
+            }
+
+            public float BoundsMinDefault
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->BoundsMinDefault;
+                }
+            }
+
+            public float BoundsMaxDefault
+            {
+                get
+                {
+                    return ((__Internal*)__Instance)->BoundsMaxDefault;
+                }
+            }
+
+            public int VertexCount
+            {
+                get
+                {
+                    var ___ret = __Internal.VertexCount(__Instance);
+                    return ___ret;
+                }
+            }
+        }
+    }
+
+    public unsafe partial class unity_spinecpp_plugin
+    {
+        public partial struct __Internal
+        {
+        }
+
+        public static __IntPtr CSDebugLog
+        {
+            get
+            {
+                var __ptr = (__IntPtr*)global::spine_cpp.__Symbols.spine_cpp._CSDebugLog__3P6AXPEBD_ZEA;
+                var __ptr0 = *(__IntPtr*)(*__ptr);
+                return (__IntPtr)Marshal.GetDelegateForFunctionPointer(__ptr0, typeof(__IntPtr));
+            }
+
+            set
+            {
+                var __ptr = (__IntPtr*)global::spine_cpp.__Symbols.spine_cpp._CSDebugLog__3P6AXPEBD_ZEA;
+                *__ptr = value == null ? global::System.IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(value);
+            }
+        }
+    }
+
     namespace Delegates
     {
         [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
@@ -37752,6 +39099,7 @@ namespace spine_cpp.__Symbols
         public static IntPtr _rtti_TransformConstraint_spine__2VRTTI_2_B { get; }
         public static IntPtr _rtti_TransformConstraintData_spine__2VRTTI_2_B { get; }
         public static IntPtr _rtti_TransformConstraintTimeline_spine__2VRTTI_2_B { get; }
+        public static IntPtr _CSDebugLog__3P6AXPEBD_ZEA { get; }
         static spine_cpp()
         {
             var path = "spine_cpp";
@@ -37812,6 +39160,7 @@ namespace spine_cpp.__Symbols
             _rtti_TransformConstraint_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraint@spine@@2VRTTI@2@B");
             _rtti_TransformConstraintData_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraintData@spine@@2VRTTI@2@B");
             _rtti_TransformConstraintTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraintTimeline@spine@@2VRTTI@2@B");
+            _CSDebugLog__3P6AXPEBD_ZEA = CppSharp.SymbolResolver.ResolveSymbol(image, "?CSDebugLog@@3P6AXPEBD@ZEA");
         }
     }
 }

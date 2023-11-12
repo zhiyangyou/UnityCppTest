@@ -68,9 +68,17 @@ namespace Plugin
 	void (*UnityEngineObjectPropertySetName)(int32_t thisHandle, int32_t valueHandle);
 	UnityEngine::HideFlags (*UnityEngineObjectPropertyGetHideFlags)(int32_t thisHandle);
 	void (*UnityEngineObjectPropertySetHideFlags)(int32_t thisHandle, UnityEngine::HideFlags value);
+	void (*UnityEngineObjectMethodDestroyUnityEngineObject)(int32_t objHandle);
+	void (*UnityEngineObjectMethodDestroyUnityEngineObject_SystemSingle)(int32_t objHandle, float t);
+	void (*UnityEngineObjectMethodDestroyImmediateUnityEngineObject)(int32_t objHandle);
+	void (*UnityEngineObjectMethodDestroyImmediateUnityEngineObject_SystemBoolean)(int32_t objHandle, uint32_t allowDestroyingAssets);
 	int32_t (*AppObjectCreateProxyMethodCreateMesh)();
+	void* (*AppObjectCreateProxyMethodGetStringCStrSystemString)(int32_t strHandle);
 	int32_t (*AppObjectCreateProxyMethodCreateGo)();
+	int32_t (*AppUnityUtilsMethodIsUnityEditor)();
 	int32_t (*UnityEngineComponentPropertyGetTransform)(int32_t thisHandle);
+	int32_t (*UnityEngineApplicationPropertyGetIsPlaying)();
+	int32_t (*UnityEngineApplicationPropertyGetIsEditor)();
 	UnityEngine::Vector3 (*UnityEngineTransformPropertyGetPosition)(int32_t thisHandle);
 	void (*UnityEngineTransformPropertySetPosition)(int32_t thisHandle, UnityEngine::Vector3& value);
 	int32_t (*SystemCollectionsIEnumeratorPropertyGetCurrent)(int32_t thisHandle);
@@ -79,6 +87,7 @@ namespace Plugin
 	int32_t (*UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType)(UnityEngine::PrimitiveType type);
 	int32_t (*UnityEngineMeshConstructor)();
 	void (*UnityEngineMeshMethodMarkDynamic)(int32_t thisHandle);
+	void (*UnityEngineMeshMethodClear)(int32_t thisHandle);
 	void (*UnityEngineDebugMethodLogSystemObject)(int32_t messageHandle);
 	int32_t (*UnityEngineMonoBehaviourPropertyGetTransform)(int32_t thisHandle);
 	int32_t (*SystemExceptionConstructorSystemString)(int32_t messageHandle);
@@ -5182,88 +5191,58 @@ namespace UnityEngine
 			delete ex;
 		}
 	}
+	
+	void UnityEngine::Object::Destroy(UnityEngine::Object& obj)
+	{
+		Plugin::UnityEngineObjectMethodDestroyUnityEngineObject(obj.Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	void UnityEngine::Object::Destroy(UnityEngine::Object& obj, System::Single t)
+	{
+		Plugin::UnityEngineObjectMethodDestroyUnityEngineObject_SystemSingle(obj.Handle, t);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	void UnityEngine::Object::DestroyImmediate(UnityEngine::Object& obj)
+	{
+		Plugin::UnityEngineObjectMethodDestroyImmediateUnityEngineObject(obj.Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	void UnityEngine::Object::DestroyImmediate(UnityEngine::Object& obj, System::Boolean allowDestroyingAssets)
+	{
+		Plugin::UnityEngineObjectMethodDestroyImmediateUnityEngineObject_SystemBoolean(obj.Handle, allowDestroyingAssets);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
 }
 
 namespace App
 {
-	ObjectCreateProxy::ObjectCreateProxy(decltype(nullptr))
-	{
-	}
-	
-	ObjectCreateProxy::ObjectCreateProxy(Plugin::InternalUse, int32_t handle)
-	{
-		Handle = handle;
-		if (handle)
-		{
-			Plugin::ReferenceManagedClass(handle);
-		}
-	}
-	
-	ObjectCreateProxy::ObjectCreateProxy(const ObjectCreateProxy& other)
-		: ObjectCreateProxy(Plugin::InternalUse::Only, other.Handle)
-	{
-	}
-	
-	ObjectCreateProxy::ObjectCreateProxy(ObjectCreateProxy&& other)
-		: ObjectCreateProxy(Plugin::InternalUse::Only, other.Handle)
-	{
-		other.Handle = 0;
-	}
-	
-	ObjectCreateProxy::~ObjectCreateProxy()
-	{
-		if (Handle)
-		{
-			Plugin::DereferenceManagedClass(Handle);
-			Handle = 0;
-		}
-	}
-	
-	ObjectCreateProxy& ObjectCreateProxy::operator=(const ObjectCreateProxy& other)
-	{
-		if (this->Handle)
-		{
-			Plugin::DereferenceManagedClass(this->Handle);
-		}
-		this->Handle = other.Handle;
-		if (this->Handle)
-		{
-			Plugin::ReferenceManagedClass(this->Handle);
-		}
-		return *this;
-	}
-	
-	ObjectCreateProxy& ObjectCreateProxy::operator=(decltype(nullptr))
-	{
-		if (Handle)
-		{
-			Plugin::DereferenceManagedClass(Handle);
-			Handle = 0;
-		}
-		return *this;
-	}
-	
-	ObjectCreateProxy& ObjectCreateProxy::operator=(ObjectCreateProxy&& other)
-	{
-		if (Handle)
-		{
-			Plugin::DereferenceManagedClass(Handle);
-		}
-		Handle = other.Handle;
-		other.Handle = 0;
-		return *this;
-	}
-	
-	bool ObjectCreateProxy::operator==(const ObjectCreateProxy& other) const
-	{
-		return Handle == other.Handle;
-	}
-	
-	bool ObjectCreateProxy::operator!=(const ObjectCreateProxy& other) const
-	{
-		return Handle != other.Handle;
-	}
-	
 	UnityEngine::Mesh App::ObjectCreateProxy::CreateMesh()
 	{
 		auto returnValue = Plugin::AppObjectCreateProxyMethodCreateMesh();
@@ -5277,6 +5256,19 @@ namespace App
 		return UnityEngine::Mesh(Plugin::InternalUse::Only, returnValue);
 	}
 	
+	void* App::ObjectCreateProxy::GetStringCStr(System::String& str)
+	{
+		auto returnValue = Plugin::AppObjectCreateProxyMethodGetStringCStrSystemString(str.Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
 	UnityEngine::GameObject App::ObjectCreateProxy::CreateGo()
 	{
 		auto returnValue = Plugin::AppObjectCreateProxyMethodCreateGo();
@@ -5288,6 +5280,22 @@ namespace App
 			delete ex;
 		}
 		return UnityEngine::GameObject(Plugin::InternalUse::Only, returnValue);
+	}
+}
+
+namespace App
+{
+	System::Boolean App::UnityUtils::IsUnityEditor()
+	{
+		auto returnValue = Plugin::AppUnityUtilsMethodIsUnityEditor();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
 	}
 }
 
@@ -5384,6 +5392,113 @@ namespace UnityEngine
 			delete ex;
 		}
 		return UnityEngine::Transform(Plugin::InternalUse::Only, returnValue);
+	}
+}
+
+namespace UnityEngine
+{
+	Application::Application(decltype(nullptr))
+	{
+	}
+	
+	Application::Application(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	Application::Application(const Application& other)
+		: Application(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	Application::Application(Application&& other)
+		: Application(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	Application::~Application()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	Application& Application::operator=(const Application& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	Application& Application::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	Application& Application::operator=(Application&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool Application::operator==(const Application& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool Application::operator!=(const Application& other) const
+	{
+		return Handle != other.Handle;
+	}
+	
+	System::Boolean UnityEngine::Application::GetIsPlaying()
+	{
+		auto returnValue = Plugin::UnityEngineApplicationPropertyGetIsPlaying();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	System::Boolean UnityEngine::Application::GetIsEditor()
+	{
+		auto returnValue = Plugin::UnityEngineApplicationPropertyGetIsEditor();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
 	}
 }
 
@@ -5496,6 +5611,89 @@ namespace UnityEngine
 			ex->ThrowReferenceToThis();
 			delete ex;
 		}
+	}
+}
+
+namespace UnityEngine
+{
+	Material::Material(decltype(nullptr))
+		: UnityEngine::Object(nullptr)
+	{
+	}
+	
+	Material::Material(Plugin::InternalUse, int32_t handle)
+		: UnityEngine::Object(nullptr)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	Material::Material(const Material& other)
+		: Material(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	Material::Material(Material&& other)
+		: Material(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	Material::~Material()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	Material& Material::operator=(const Material& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	Material& Material::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	Material& Material::operator=(Material&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool Material::operator==(const Material& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool Material::operator!=(const Material& other) const
+	{
+		return Handle != other.Handle;
 	}
 }
 
@@ -5995,6 +6193,18 @@ namespace UnityEngine
 	void UnityEngine::Mesh::MarkDynamic()
 	{
 		Plugin::UnityEngineMeshMethodMarkDynamic(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	void UnityEngine::Mesh::Clear()
+	{
+		Plugin::UnityEngineMeshMethodClear(Handle);
 		if (Plugin::unhandledCsharpException)
 		{
 			System::Exception* ex = Plugin::unhandledCsharpException;
@@ -7438,12 +7648,28 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::UnityEngineObjectPropertyGetHideFlags);
 	Plugin::UnityEngineObjectPropertySetHideFlags = *(void (**)(int32_t thisHandle, UnityEngine::HideFlags value))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineObjectPropertySetHideFlags);
+	Plugin::UnityEngineObjectMethodDestroyUnityEngineObject = *(void (**)(int32_t objHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineObjectMethodDestroyUnityEngineObject);
+	Plugin::UnityEngineObjectMethodDestroyUnityEngineObject_SystemSingle = *(void (**)(int32_t objHandle, float t))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineObjectMethodDestroyUnityEngineObject_SystemSingle);
+	Plugin::UnityEngineObjectMethodDestroyImmediateUnityEngineObject = *(void (**)(int32_t objHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineObjectMethodDestroyImmediateUnityEngineObject);
+	Plugin::UnityEngineObjectMethodDestroyImmediateUnityEngineObject_SystemBoolean = *(void (**)(int32_t objHandle, uint32_t allowDestroyingAssets))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineObjectMethodDestroyImmediateUnityEngineObject_SystemBoolean);
 	Plugin::AppObjectCreateProxyMethodCreateMesh = *(int32_t (**)())curMemory;
 	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodCreateMesh);
+	Plugin::AppObjectCreateProxyMethodGetStringCStrSystemString = *(void* (**)(int32_t strHandle))curMemory;
+	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodGetStringCStrSystemString);
 	Plugin::AppObjectCreateProxyMethodCreateGo = *(int32_t (**)())curMemory;
 	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodCreateGo);
+	Plugin::AppUnityUtilsMethodIsUnityEditor = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::AppUnityUtilsMethodIsUnityEditor);
 	Plugin::UnityEngineComponentPropertyGetTransform = *(int32_t (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineComponentPropertyGetTransform);
+	Plugin::UnityEngineApplicationPropertyGetIsPlaying = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::UnityEngineApplicationPropertyGetIsPlaying);
+	Plugin::UnityEngineApplicationPropertyGetIsEditor = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::UnityEngineApplicationPropertyGetIsEditor);
 	Plugin::UnityEngineTransformPropertyGetPosition = *(UnityEngine::Vector3 (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineTransformPropertyGetPosition);
 	Plugin::UnityEngineTransformPropertySetPosition = *(void (**)(int32_t thisHandle, UnityEngine::Vector3& value))curMemory;
@@ -7460,6 +7686,8 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::UnityEngineMeshConstructor);
 	Plugin::UnityEngineMeshMethodMarkDynamic = *(void (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineMeshMethodMarkDynamic);
+	Plugin::UnityEngineMeshMethodClear = *(void (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshMethodClear);
 	Plugin::UnityEngineDebugMethodLogSystemObject = *(void (**)(int32_t messageHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineDebugMethodLogSystemObject);
 	Plugin::UnityEngineMonoBehaviourPropertyGetTransform = *(int32_t (**)(int32_t thisHandle))curMemory;

@@ -34,8 +34,23 @@ public class DllPluginTypeMap : TypeMap
 
 class SpineCppLibrary : ILibrary
 {
-    private string _spineIncludeDir = "";
+    private string _rootIncludeDir = "";
+    private string RootIncludeDir
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_rootIncludeDir))
+            {
+                var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+                _rootIncludeDir = curDir.Parent.Parent.Parent.Parent.Parent.FullName +
+                                  "\\CppPlugin\\DLLPlugin";
+            }
 
+            return _rootIncludeDir;
+        }
+    }
+    
+    private string _spineIncludeDir = "";
     private string SpineIncludeDir
     {
         get
@@ -48,6 +63,23 @@ class SpineCppLibrary : ILibrary
             }
 
             return _spineIncludeDir;
+        }
+    }
+    
+    private string _spineAdapterIncludeDir = "";
+
+    private string SpineAdapterIncludeDir
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_spineAdapterIncludeDir))
+            {
+                var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+                _spineAdapterIncludeDir = curDir.Parent.Parent.Parent.Parent.Parent.FullName +
+                                          "\\CppPlugin\\DLLPlugin\\spineCpp-UnityAdapter\\Mesh Generation";
+            }
+
+            return _spineAdapterIncludeDir;
         }
     }
 
@@ -109,12 +141,23 @@ class SpineCppLibrary : ILibrary
         
         ctx.IgnoreHeadersWithName("ContainerUtil"); //生成报错
         ctx.IgnoreHeadersWithName("MathUtil"); //生成报错
+        
             
+        // ctx.IgnoreClassField();
         //这几个会导致生成泛型的重复，暂时不知道怎么结局
         ctx.IgnoreClassMethodWithName("Vector","add");
         ctx.IgnoreClassMethodWithName("Vector","setSize");
         ctx.IgnoreClassMethodWithName("Vector","buffer");
-       
+        
+        ctx.IgnoreHeadersWithName("Bindings");
+        
+        ctx.IgnoreClassField("SubmeshInstruction","material");
+        ctx.IgnoreClassField("MeshGenerator","meshBoundsMin");
+        ctx.IgnoreClassField("MeshGenerator","meshBoundsMax");
+        
+        
+        
+        
         // ctx.IgnoreClassWithName("SpineExtension");
         // ctx.IgnoreClassWithName("DefaultSpineExtension");
         // ctx.IgnoreClassWithName("SpineObject");
@@ -162,10 +205,22 @@ class SpineCppLibrary : ILibrary
         options.GeneratorKind = GeneratorKind.CSharp;
         options.OutputDir = CSharpCodeOutputDir;
         var module = options.AddModule("spine_cpp");
+        
+        module.IncludeDirs.Add(RootIncludeDir);
+        
         module.IncludeDirs.Add(SpineIncludeDir);
         module.Headers.Add("spine/spine.h");
         module.Headers.Add("spine/dll.h");
         module.Defines.Add("_WIN32");
+        
+        module.IncludeDirs.Add(SpineAdapterIncludeDir);
+        module.Headers.Add("SpineMesh.h");
+        module.Headers.Add("SpineCppAdapterCore.h");
+        module.Headers.Add("SkeletonRendererInstruction.h");
+        module.Headers.Add("MeshRendererBuffers.h");
+        module.Headers.Add("MeshGenerator.h");
+        
+
         // module.Defines.Add("CS_CONSTRAINT");
         
         // module.Defines.Add("CPPSHARP");//防止重复生成的泛型

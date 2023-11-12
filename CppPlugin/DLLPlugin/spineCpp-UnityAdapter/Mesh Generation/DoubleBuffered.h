@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-
+#include "SpineCppAdapterCore.h"
 namespace SpineUnity {
 
 	template<typename T>
@@ -18,11 +18,11 @@ namespace SpineUnity {
 		DoubleBuffered(const DoubleBuffered&) = delete;
 		DoubleBuffered(const DoubleBuffered&&) = delete;
 
-		public std::shared_ptr<T> GetCurrent() {
+		std::shared_ptr<T> GetCurrent() {
 			return usingA ? a : b;
 		}
 
-		public std::shared_ptr<T> GetNext() {
+		std::shared_ptr<T> GetNext() {
 			usingA = !usingA;
 			return usingA ? a : b;
 		}

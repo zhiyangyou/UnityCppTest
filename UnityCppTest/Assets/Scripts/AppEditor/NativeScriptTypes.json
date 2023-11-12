@@ -284,6 +284,24 @@
 					"Get": {},
 					"Set": {}
 				}
+			],
+			"Methods":[
+				{
+					"Name": "Destroy",
+					"ParamTypes": ["UnityEngine.Object"]
+				},
+				{
+					"Name": "Destroy",
+					"ParamTypes": ["UnityEngine.Object","System.Single"]
+				},
+				{
+					"Name": "DestroyImmediate",
+					"ParamTypes": ["UnityEngine.Object"]
+				},
+				{
+					"Name": "DestroyImmediate",
+					"ParamTypes": ["UnityEngine.Object","System.Boolean"]
+				}
 			]
 		},
 		{
@@ -294,7 +312,22 @@
 					"ParamTypes": []
 				},
 				{
+					"Name": "GetStringCStr",
+					"ParamTypes": [
+						"System.String"
+					]
+				},
+				{
 					"Name": "CreateGo",
+					"ParamTypes": []
+				}
+			]
+		},
+		{
+			"Name": "App.UnityUtils",
+			"Methods": [
+				{
+					"Name": "IsUnityEditor",
 					"ParamTypes": []
 				}
 			]
@@ -304,6 +337,19 @@
 			"Properties": [
 				{
 					"Name": "transform",
+					"Get": {}
+				}
+			]
+		},
+		{
+			"Name": "UnityEngine.Application",
+			"Properties": [
+				{
+					"Name": "isPlaying",
+					"Get": {}
+				},
+				{
+					"Name": "isEditor",
 					"Get": {}
 				}
 			]
@@ -320,6 +366,11 @@
 						]
 					}
 				}
+			]
+		},
+		{
+			"Name": "UnityEngine.Material",
+			"Properties": [
 			]
 		},
 		{
@@ -380,6 +431,10 @@
 			"Methods": [
 				{
 					"Name": "MarkDynamic",
+					"ParamTypes": []
+				},
+				{
+					"Name": "Clear",
 					"ParamTypes": []
 				}
 			]
