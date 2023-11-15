@@ -15,6 +15,8 @@ namespace SpineUnity
 	{
 	public:
 		UnityEngine::Mesh mesh = SpineMesh::NewSkeletonMesh();
+
+		int32_t GetMesh();
 		Ref<SkeletonRendererInstruction> instructionUsed = CreateRef<SkeletonRendererInstruction>();
 		void Clear();
 		void DoDispose();

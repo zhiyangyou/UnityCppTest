@@ -38,8 +38,10 @@ namespace Plugin
 		int32_t Handle;
 		
 		ManagedType();
+		virtual ~ManagedType() {}
 		ManagedType(decltype(nullptr));
 		ManagedType(InternalUse, int32_t handle);
+		virtual void testFunc() {}
 	};
 	
 	template <typename TElement> struct ArrayElementProxy1_1;
@@ -658,6 +660,7 @@ namespace System
 		bool operator==(decltype(nullptr)) const;
 		bool operator!=(decltype(nullptr)) const;
 		virtual void ThrowReferenceToThis();
+		virtual void testFuncObj(){}
 		
 		/*BEGIN UNBOXING METHOD DECLARATIONS*/
 		explicit operator UnityEngine::HideFlags();

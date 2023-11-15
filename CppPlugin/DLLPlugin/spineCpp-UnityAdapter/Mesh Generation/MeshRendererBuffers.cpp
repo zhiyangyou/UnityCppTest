@@ -2,6 +2,14 @@
 
 namespace SpineUnity
 {
+	
+	
+
+	int32_t SmartMesh::GetMesh()
+	{
+		return mesh.Handle;
+	}
+
 	void SmartMesh::Clear()
 	{
 		mesh.Clear();

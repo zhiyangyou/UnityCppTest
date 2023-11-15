@@ -7,6 +7,7 @@
 #include <spine/Skeleton.h>
 #include "SpineCppAdapterCore.h"
 
+//完成
 namespace SpineUnity {
 	SP_API class SpineMesh
 	{

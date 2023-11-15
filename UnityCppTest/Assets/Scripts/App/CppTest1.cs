@@ -41,6 +41,11 @@ namespace App
 
         private void OnGUI()
         {
+            //使用这个来装换Unity的对象Handle
+            // spine_cpp.SpineUnity.SmartMesh smartMesh =null;
+            // var meshHandle = smartMesh.Mesh;
+            // UnityEngine. (ObjectStore.Get(meshHandle) as UnityEngine.Mesh);
+
             // UnityEngine.Material mat = new Material();
             _mesh = new Mesh();
             _mesh.Clear();

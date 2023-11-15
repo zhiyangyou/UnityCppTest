@@ -3396,7 +3396,7 @@ namespace spine_cpp
                     SetupVTables(GetType().FullName == "spine_cpp.Spine.Vector");
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             public Vector(global::spine_cpp.Spine.Vector<T> inVector)
@@ -3871,7 +3871,7 @@ namespace spine_cpp
                     SetupVTables(GetType().FullName == "spine_cpp.Spine.Vector");
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             partial void DisposePartial(bool disposing);
@@ -4120,7 +4120,7 @@ namespace spine_cpp
                         ___dtorDelegate(__Instance, 0);
                         return;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
                 }
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
@@ -4325,7 +4325,7 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.Clearc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             public void EnsureCapacity(ulong newCapacity)
@@ -4526,7 +4526,7 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.EnsureCapacityc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, newCapacity);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             public void AddAll(global::spine_cpp.Spine.Vector<T> inValue)
@@ -4844,7 +4844,7 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.AddAllc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, __arg0);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             public void ClearAndAddAll(global::spine_cpp.Spine.Vector<T> inValue)
@@ -5162,7 +5162,7 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.ClearAndAddAllc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, __arg0);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             public void RemoveAt(ulong inIndex)
@@ -5363,7 +5363,7 @@ namespace spine_cpp
                     global::spine_cpp.Spine.Vector.__Internal.RemoveAtc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, inIndex);
                     return;
                 }
-                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
             }
 
             public T this[ulong inIndex]
@@ -5626,7 +5626,7 @@ namespace spine_cpp
                         var __result0 = global::spine_cpp.SpineUnity.SubmeshInstruction.__GetOrCreateInstance(___ret, false);
                         return (T) (object) __result0;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
                 }
 
                 set
@@ -5839,7 +5839,7 @@ namespace spine_cpp
                         global::spine_cpp.SpineUnity.SubmeshInstruction.__Internal.cctor(global::spine_cpp.Spine.Vector.__Internal.OperatorSubscriptc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance, inIndex), ((global::spine_cpp.SpineUnity.SubmeshInstruction) (object) value).__Instance);
                         return;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
                 }
             }
 
@@ -6043,7 +6043,7 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.GetCapacityc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
                         return ___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
                 }
             }
 
@@ -6247,7 +6247,7 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.Sizec__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
                         return ___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
                 }
             }
 
@@ -6451,7 +6451,7 @@ namespace spine_cpp
                         var ___ret = global::spine_cpp.Spine.Vector.__Internal.VoidPBufferc__N_spine_S_Vector____N_SpineUnity_S_SubmeshInstruction(__Instance);
                         return ___ret;
                     }
-                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>, <global::spine_cpp.Spine.Color32>.");
+                    throw new ArgumentOutOfRangeException("T", string.Join(", ", new[] { typeof(T).FullName }), "global::spine_cpp.Spine.Vector<T> maps a C++ template class and therefore it only supports a limited set of types and their subclasses: <long>, <float>, <global::spine_cpp.Spine.BoneData>, <global::spine_cpp.Spine.SlotData>, <global::spine_cpp.Spine.Skin>, <global::spine_cpp.Spine.Vector<global::spine_cpp.Spine.SkinEntry>>, <global::spine_cpp.Spine.SkinEntry>, <global::spine_cpp.Spine.ConstraintData>, <global::spine_cpp.Spine.String>, <global::spine_cpp.Spine.Attachment>, <global::spine_cpp.Spine.EventData>, <global::spine_cpp.Spine.Animation>, <global::spine_cpp.Spine.Timeline>, <global::spine_cpp.Spine.Event>, <global::spine_cpp.Spine.IkConstraintData>, <global::spine_cpp.Spine.TransformConstraintData>, <global::spine_cpp.Spine.PathConstraintData>, <CppSharp.Runtime.Pointer<sbyte>>, <global::spine_cpp.Spine.Bone>, <global::spine_cpp.Spine.Slot>, <global::spine_cpp.Spine.IkConstraint>, <global::spine_cpp.Spine.TransformConstraint>, <global::spine_cpp.Spine.PathConstraint>, <global::spine_cpp.Spine.Updatable>, <int>, <global::spine_cpp.Spine.TrackEntry>, <global::spine_cpp.Spine.EventQueueEntry>, <global::spine_cpp.Spine.AtlasPage>, <global::spine_cpp.Spine.AtlasRegion>, <global::spine_cpp.Spine.TextureRegion>, <ushort>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <global::spine_cpp.Spine.LinkedMesh>, <global::spine_cpp.Spine.Polygon>, <global::spine_cpp.Spine.BoundingBoxAttachment>, <global::spine_cpp.Spine.Vector<float>>, <global::spine_cpp.Spine.Vector<int>>, <bool>, <global::spine_cpp.SpineUnity.SubmeshInstruction>.");
                 }
             }
 
@@ -8132,131 +8132,6 @@ namespace spine_cpp
 
     namespace Spine
     {
-        public unsafe partial struct Color32
-        {
-            [StructLayout(LayoutKind.Explicit, Size = 4)]
-            public partial struct __Internal
-            {
-                [FieldOffset(0)]
-                internal byte r;
-
-                [FieldOffset(1)]
-                internal byte g;
-
-                [FieldOffset(2)]
-                internal byte b;
-
-                [FieldOffset(3)]
-                internal byte a;
-
-                [FieldOffset(0)]
-                internal uint rgba;
-
-                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0Color32@spine@@QEAA@AEBT01@@Z", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
-            }
-
-            private Color32.__Internal __instance;
-            internal ref Color32.__Internal __Instance => ref __instance;
-
-            internal static Color32 __CreateInstance(__IntPtr native, bool skipVTables = false)
-            {
-                return new Color32(native.ToPointer(), skipVTables);
-            }
-
-            internal static Color32 __CreateInstance(__Internal native, bool skipVTables = false)
-            {
-                return new Color32(native, skipVTables);
-            }
-
-            private Color32(__Internal native, bool skipVTables = false)
-                : this()
-            {
-                __instance = native;
-            }
-
-            private Color32(void* native, bool skipVTables = false) : this()
-            {
-                __instance = *(global::spine_cpp.Spine.Color32.__Internal*) native;
-            }
-
-            public Color32(global::spine_cpp.Spine.Color32 _0)
-                : this()
-            {
-                var ____arg0 = _0.__Instance;
-                var __arg0 = new __IntPtr(&____arg0);
-                fixed (__Internal* __instancePtr = &__instance)
-                {
-                    __Internal.cctor(new __IntPtr(__instancePtr), __arg0);
-                }
-            }
-
-            public byte R
-            {
-                get
-                {
-                    return __instance.r;
-                }
-
-                set
-                {
-                    __instance.r = value;
-                }
-            }
-
-            public byte G
-            {
-                get
-                {
-                    return __instance.g;
-                }
-
-                set
-                {
-                    __instance.g = value;
-                }
-            }
-
-            public byte B
-            {
-                get
-                {
-                    return __instance.b;
-                }
-
-                set
-                {
-                    __instance.b = value;
-                }
-            }
-
-            public byte A
-            {
-                get
-                {
-                    return __instance.a;
-                }
-
-                set
-                {
-                    __instance.a = value;
-                }
-            }
-
-            public uint Rgba
-            {
-                get
-                {
-                    return __instance.rgba;
-                }
-
-                set
-                {
-                    __instance.rgba = value;
-                }
-            }
-        }
-
         public unsafe partial class Color : global::spine_cpp.Spine.SpineObject, IDisposable
         {
             [StructLayout(LayoutKind.Sequential, Size = 24)]
@@ -38001,7 +37876,7 @@ namespace spine_cpp
                 internal global::Std.SharedPtr.__Internal skeleton;
                 internal int startSlot;
                 internal int endSlot;
-                internal global::spine_cpp.UnityEngine.Material.__Internal material;
+//                internal global::spine_cpp.UnityEngine.Material.__Internal material; //comment by 'SpineCppGenBindings' program
                 internal byte forceSeparate;
                 internal int preActiveClippingSlotSource;
                 internal int rawTriangleCount;
@@ -38495,7 +38370,7 @@ namespace spine_cpp
             [StructLayout(LayoutKind.Sequential, Size = 56)]
             public partial struct __Internal
             {
-                internal global::spine_cpp.UnityEngine.Mesh.__Internal mesh;
+//                internal global::spine_cpp.UnityEngine.Mesh.__Internal mesh; //comment by 'SpineCppGenBindings' program
                 internal global::Std.SharedPtr.__Internal instructionUsed;
 
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0SmartMesh@SpineUnity@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
@@ -38512,6 +38387,9 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?DoDispose@SmartMesh@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void DoDispose(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?GetMesh@SmartMesh@SpineUnity@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int GetMesh(__IntPtr __instance);
             }
 
             public __IntPtr __Instance { get; protected set; }
@@ -38624,6 +38502,15 @@ namespace spine_cpp
             public void DoDispose()
             {
                 __Internal.DoDispose(__Instance);
+            }
+
+            public int Mesh
+            {
+                get
+                {
+                    var ___ret = __Internal.GetMesh(__Instance);
+                    return ___ret;
+                }
             }
         }
 
@@ -38798,8 +38685,8 @@ namespace spine_cpp
                 internal global::Std.SharedPtr.__Internal uvBuffer;
                 internal global::Std.SharedPtr.__Internal colorBuffer;
                 internal global::Std.SharedPtr.__Internal submeshes;
-                internal global::spine_cpp.UnityEngine.Vector2.__Internal meshBoundsMin;
-                internal global::spine_cpp.UnityEngine.Vector2.__Internal meshBoundsMax;
+//                internal global::spine_cpp.UnityEngine.Vector2.__Internal meshBoundsMin; //comment by 'SpineCppGenBindings' program
+//                internal global::spine_cpp.UnityEngine.Vector2.__Internal meshBoundsMax; //comment by 'SpineCppGenBindings' program
                 internal float meshBoundsThickness;
                 internal int submeshIndex;
                 internal global::Std.SharedPtr.__Internal clipper;
@@ -38956,29 +38843,6 @@ namespace spine_cpp
         }
     }
 
-    public unsafe partial class unity_spinecpp_plugin
-    {
-        public partial struct __Internal
-        {
-        }
-
-        public static __IntPtr CSDebugLog
-        {
-            get
-            {
-                var __ptr = (__IntPtr*)global::spine_cpp.__Symbols.spine_cpp._CSDebugLog__3P6AXPEBD_ZEA;
-                var __ptr0 = *(__IntPtr*)(*__ptr);
-                return (__IntPtr)Marshal.GetDelegateForFunctionPointer(__ptr0, typeof(__IntPtr));
-            }
-
-            set
-            {
-                var __ptr = (__IntPtr*)global::spine_cpp.__Symbols.spine_cpp._CSDebugLog__3P6AXPEBD_ZEA;
-                *__ptr = value == null ? global::System.IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(value);
-            }
-        }
-    }
-
     namespace Delegates
     {
         [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
@@ -39099,7 +38963,6 @@ namespace spine_cpp.__Symbols
         public static IntPtr _rtti_TransformConstraint_spine__2VRTTI_2_B { get; }
         public static IntPtr _rtti_TransformConstraintData_spine__2VRTTI_2_B { get; }
         public static IntPtr _rtti_TransformConstraintTimeline_spine__2VRTTI_2_B { get; }
-        public static IntPtr _CSDebugLog__3P6AXPEBD_ZEA { get; }
         static spine_cpp()
         {
             var path = "spine_cpp";
@@ -39160,7 +39023,6 @@ namespace spine_cpp.__Symbols
             _rtti_TransformConstraint_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraint@spine@@2VRTTI@2@B");
             _rtti_TransformConstraintData_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraintData@spine@@2VRTTI@2@B");
             _rtti_TransformConstraintTimeline_spine__2VRTTI_2_B = CppSharp.SymbolResolver.ResolveSymbol(image, "?rtti@TransformConstraintTimeline@spine@@2VRTTI@2@B");
-            _CSDebugLog__3P6AXPEBD_ZEA = CppSharp.SymbolResolver.ResolveSymbol(image, "?CSDebugLog@@3P6AXPEBD@ZEA");
         }
     }
 }

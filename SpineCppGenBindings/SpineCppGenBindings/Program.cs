@@ -17,7 +17,6 @@ using Type = CppSharp.AST.Type;
 
 namespace SpineCppGenBindings;
 
-
 public class DllPluginTypeMap : TypeMap
 {
     public override bool IsIgnored
@@ -31,10 +30,10 @@ public class DllPluginTypeMap : TypeMap
     }
 }
 
-
-class SpineCppLibrary : ILibrary
+public class SpineCppLibrary : ILibrary
 {
     private string _rootIncludeDir = "";
+
     private string RootIncludeDir
     {
         get
@@ -49,8 +48,9 @@ class SpineCppLibrary : ILibrary
             return _rootIncludeDir;
         }
     }
-    
+
     private string _spineIncludeDir = "";
+
     private string SpineIncludeDir
     {
         get
@@ -65,7 +65,7 @@ class SpineCppLibrary : ILibrary
             return _spineIncludeDir;
         }
     }
-    
+
     private string _spineAdapterIncludeDir = "";
 
     private string SpineAdapterIncludeDir
@@ -117,9 +117,9 @@ class SpineCppLibrary : ILibrary
         }
     }
 
-    private string _outputDir = "";
+    public static string _outputDir = "";
 
-    private string CSharpCodeOutputDir
+    public static string CSharpCodeOutputDir
     {
         get
         {
@@ -136,28 +136,29 @@ class SpineCppLibrary : ILibrary
 
     public void Preprocess(Driver driver, ASTContext ctx)
     {
-        
-        ctx.IgnoreClassField("","");
-        
         ctx.IgnoreHeadersWithName("ContainerUtil"); //生成报错
         ctx.IgnoreHeadersWithName("MathUtil"); //生成报错
-        
-            
+        ctx.IgnoreHeadersWithName("unity_spinecpp_plugin"); //生成报错
+
+
         // ctx.IgnoreClassField();
         //这几个会导致生成泛型的重复，暂时不知道怎么结局
-        ctx.IgnoreClassMethodWithName("Vector","add");
-        ctx.IgnoreClassMethodWithName("Vector","setSize");
-        ctx.IgnoreClassMethodWithName("Vector","buffer");
-        
-        ctx.IgnoreHeadersWithName("Bindings");
-        
-        ctx.IgnoreClassField("SubmeshInstruction","material");
-        ctx.IgnoreClassField("MeshGenerator","meshBoundsMin");
-        ctx.IgnoreClassField("MeshGenerator","meshBoundsMax");
-        
-        
-        
-        
+        ctx.IgnoreClassMethodWithName("Vector", "add");
+        ctx.IgnoreClassMethodWithName("Vector", "setSize");
+        ctx.IgnoreClassMethodWithName("Vector", "buffer");
+
+
+        ctx.IgnoreClassField("SubmeshInstruction", "material");
+        ctx.IgnoreClassField("SmartMesh", "mesh");
+        ctx.IgnoreClassField("MeshGenerator", "meshBoundsMin");
+        ctx.IgnoreClassField("MeshGenerator", "meshBoundsMax");
+
+        ctx.IgnoreHeadersWithName("Bindings"); // 2023年11月12日23:00:36  因为C#--->C++的绑定代码生成都是struct，struct默认都是不带虚函数表的，所以导致CppSharp生成会报错！
+        // ctx.IgnoreClassField();
+
+        ctx.IgnoreClassWithName("Color32");
+
+
         // ctx.IgnoreClassWithName("SpineExtension");
         // ctx.IgnoreClassWithName("DefaultSpineExtension");
         // ctx.IgnoreClassWithName("SpineObject");
@@ -182,6 +183,18 @@ class SpineCppLibrary : ILibrary
 
     public void Postprocess(Driver driver, ASTContext ctx)
     {
+        Console.WriteLine("post process...");
+        // driver.Generator.OnUnitGenerated = OnUnitGenerated;
+    }
+
+    private void OnUnitGenerated(GeneratorOutput obj)
+    {
+        // Console.WriteLine($"OnUnitGenerated GeneratorOutput post process...{obj.Outputs.Count}");
+        // foreach (var codeGenerator in obj.Outputs)
+        // {
+        //     Console.WriteLine($"codeGenerator  ");
+        //     
+        // }
     }
 
     private void CleanFiles()
@@ -196,37 +209,37 @@ class SpineCppLibrary : ILibrary
     public void Setup(Driver driver)
     {
         CleanFiles();
-    
-    
+
+
         var options = driver.Options;
-        
+
         options.GenerateClassTemplates = true;
         // options.GenerationOutputMode = GenerationOutputMode.FilePerUnit;//生成多个文件
         options.GeneratorKind = GeneratorKind.CSharp;
         options.OutputDir = CSharpCodeOutputDir;
         var module = options.AddModule("spine_cpp");
-        
+
         module.IncludeDirs.Add(RootIncludeDir);
-        
+
         module.IncludeDirs.Add(SpineIncludeDir);
         module.Headers.Add("spine/spine.h");
         module.Headers.Add("spine/dll.h");
         module.Defines.Add("_WIN32");
-        
+
         module.IncludeDirs.Add(SpineAdapterIncludeDir);
         module.Headers.Add("SpineMesh.h");
         module.Headers.Add("SpineCppAdapterCore.h");
         module.Headers.Add("SkeletonRendererInstruction.h");
         module.Headers.Add("MeshRendererBuffers.h");
         module.Headers.Add("MeshGenerator.h");
-        
+
 
         // module.Defines.Add("CS_CONSTRAINT");
-        
+
         // module.Defines.Add("CPPSHARP");//防止重复生成的泛型
         // module.LibraryName = "DLLPlugin";
-        
-        
+
+
         // module.LibraryDirs.Add(SpineDllDir);
         // module.Libraries.Add("DLLPlugin.dll");
 
@@ -249,8 +262,45 @@ class SpineCppLibrary : ILibrary
 
 static class Program
 {
+    static void PostProcessFileContent()
+    {
+        List<string> commentLines = new List<string>()
+        {
+            "::spine_cpp.UnityEngine.",
+        };
+        var dirInfo = new DirectoryInfo(SpineCppLibrary.CSharpCodeOutputDir);
+        foreach (var fileInfo in dirInfo.GetFiles())
+        {
+            if (fileInfo.FullName.EndsWith(".cs"))
+            {
+                var lines = File.ReadLines(fileInfo.FullName).ToList();
+                var hasChanged = false;
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    var contentLine = lines[i];
+                    foreach (var commentLine in commentLines)
+                    {
+                        if (contentLine.Contains(commentLine))
+                        {
+                            var newContentLine = "//" + contentLine + " //comment by 'SpineCppGenBindings' program";
+                            lines[i] = newContentLine;
+                            hasChanged = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (hasChanged)
+                {
+                    File.WriteAllLines(fileInfo.FullName, lines);
+                }
+            }
+        }
+    }
+
     static void Main()
     {
         ConsoleDriver.Run(new SpineCppLibrary());
+        PostProcessFileContent();
     }
 }
