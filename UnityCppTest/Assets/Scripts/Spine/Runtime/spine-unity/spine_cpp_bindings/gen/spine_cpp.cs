@@ -38535,9 +38535,24 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Initialize@MeshRendererBuffers@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern void Initialize(__IntPtr __instance);
 
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?UpdateSharedMaterials@MeshRendererBuffers@SpineUnity@@QEAAXAEAV?$Vector@USubmeshInstruction@SpineUnity@@@spine@@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void UpdateSharedMaterials(__IntPtr __instance, __IntPtr instructions);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?Clear@MeshRendererBuffers@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void Clear(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?DoDispose@MeshRendererBuffers@SpineUnity@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void DoDispose(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?GetUpdatedSharedMaterialsArray_Handles@MeshRendererBuffers@SpineUnity@@QEAA?AV?$Vector@H@spine@@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern void GetUpdatedSharedMaterialsArrayHandles(__IntPtr __instance, __IntPtr @return);
+
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?MaterialsChangedInLastUpdate@MeshRendererBuffers@SpineUnity@@QEAA_NXZ", CallingConvention = __CallingConvention.Cdecl)]
                 [return: MarshalAs(UnmanagedType.I1)]
                 internal static extern bool MaterialsChangedInLastUpdate(__IntPtr __instance);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?GetNextMesh_CSharp@MeshRendererBuffers@SpineUnity@@QEAAAEAVSmartMesh@2@XZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern __IntPtr GetNextMeshCSharp(__IntPtr __instance);
             }
 
             public __IntPtr __Instance { get; protected set; }
@@ -38647,12 +38662,54 @@ namespace spine_cpp
                 __Internal.Initialize(__Instance);
             }
 
+            public void UpdateSharedMaterials(global::spine_cpp.Spine.Vector<global::spine_cpp.SpineUnity.SubmeshInstruction> instructions)
+            {
+                if (ReferenceEquals(instructions, null))
+                    throw new global::System.ArgumentNullException("instructions", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = instructions.__Instance;
+                __Internal.UpdateSharedMaterials(__Instance, __arg0);
+            }
+
+            public void Clear()
+            {
+                __Internal.Clear(__Instance);
+            }
+
+            public void DoDispose()
+            {
+                __Internal.DoDispose(__Instance);
+            }
+
+            public global::spine_cpp.Spine.Vector<int> UpdatedSharedMaterialsArrayHandles
+            {
+                get
+                {
+                    var ___ret = new global::spine_cpp.Spine.Vector.__Internal();
+                    __Internal.GetUpdatedSharedMaterialsArrayHandles(__Instance, new IntPtr(&___ret));
+                    var _____ret = global::spine_cpp.Spine.Vector<int>.__CreateInstance(___ret);
+                    var __vtables = new IntPtr[] { *(__IntPtr*) (new __IntPtr(&___ret) + 0) };
+                    var __slot = *(__IntPtr*) (__vtables[0] + 0 * sizeof(__IntPtr));
+                    Marshal.GetDelegateForFunctionPointer<global::spine_cpp.Delegates.Action___IntPtr_int>(__slot)(new __IntPtr(&___ret), 0);
+                    return _____ret;
+                }
+            }
+
             public bool MaterialsChangedInLastUpdate
             {
                 get
                 {
                     var ___ret = __Internal.MaterialsChangedInLastUpdate(__Instance);
                     return ___ret;
+                }
+            }
+
+            public global::spine_cpp.SpineUnity.SmartMesh NextMeshCSharp
+            {
+                get
+                {
+                    var ___ret = __Internal.GetNextMeshCSharp(__Instance);
+                    var __result0 = global::spine_cpp.SpineUnity.SmartMesh.__GetOrCreateInstance(___ret, false);
+                    return __result0;
                 }
             }
         }

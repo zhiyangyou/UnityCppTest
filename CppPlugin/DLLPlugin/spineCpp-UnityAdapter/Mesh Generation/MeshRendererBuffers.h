@@ -11,7 +11,7 @@
 namespace SpineUnity
 {
 
-	SP_API class SmartMesh 
+	SP_API class SmartMesh
 	{
 	public:
 		UnityEngine::Mesh mesh = SpineMesh::NewSkeletonMesh();
@@ -32,7 +32,14 @@ namespace SpineUnity
 	public:
 		void Initialize();
 		Ref<spine::Vector<UnityEngine::Material>> GetUpdatedSharedMaterialsArray();
-		bool MaterialsChangedInLastUpdate();// 2023年11月12日15:43:33  处理这个方法的实现
+		spine::Vector<int32_t> GetUpdatedSharedMaterialsArray_Handles();
+		bool MaterialsChangedInLastUpdate();
+		void UpdateSharedMaterials(spine::Vector<SubmeshInstruction>& instructions);
+		SmartMesh& GetNextMesh_CSharp();
+		Ref<SmartMesh> GetNextMesh2();
+		void Clear();
+
+		void DoDispose();
 	};
 
 }

@@ -105,7 +105,6 @@ namespace SpineUnity
 		for (int i = 0; i < submeshCountB; i++) {
 			SubmeshInstruction& submeshA = (*(a.submeshInstructions))[i];
 			SubmeshInstruction& submeshB = (*(b.submeshInstructions))[i];
-
 			if (!(
 				submeshA.rawVertexCount == submeshB.rawVertexCount &&
 				submeshA.startSlot == submeshB.startSlot &&

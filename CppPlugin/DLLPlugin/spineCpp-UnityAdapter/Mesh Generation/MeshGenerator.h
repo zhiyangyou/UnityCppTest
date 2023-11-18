@@ -8,6 +8,7 @@
 #include <spine/SkeletonClipping.h>
 
 #include "Bindings.h"
+#include "SkeletonRendererInstruction.h"
 #include "SpineCppAdapterCore.h"
 #include "unity_spinecpp_plugin.h"
 namespace SpineUnity {
@@ -72,7 +73,23 @@ namespace SpineUnity {
 			return  (*submeshes)[submeshIndex]->size();
 		}
 	public:
-		static void GenerateSingleSubmeshInstruction();  
+		//Step 1 : Generate Instructions
+		static void GenerateSingleSubmeshInstruction(SkeletonRendererInstruction& instructionOutput, spine::Skeleton& skeleton, UnityEngine::Material& material);
+		static bool RequiresMultipleSubmeshesByDrawOrder(spine::Skeleton& skeleton);
+		static void GenerateSkeletonRendererInstruction(SkeletonRendererInstruction& instructionOutput,
+			spine::Skeleton* skeleton,
+			spine::HashMap<spine::Slot*, UnityEngine::Material>* customSlotMaterials,
+			spine::Vector<spine::Slot*>* separatorSlots,
+			bool generateMeshOverride,
+			bool immutableTriangles = false);
+		static void TryReplaceMaterials(
+			spine::Vector<SubmeshInstruction>* workingSubmeshInstructions,
+			spine::HashMap<UnityEngine::Material, UnityEngine::Material>* customMaterialOverride);
+	public:
+		// Step 2 : Populate vertex data and triangle index buffers.
+
+	public:
+		// Step 3 : Transfer vertex and triangle data to UnityEngine.Mesh
 
 	};
 

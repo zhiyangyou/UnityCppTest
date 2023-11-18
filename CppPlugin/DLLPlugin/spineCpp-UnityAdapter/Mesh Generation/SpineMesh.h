@@ -18,27 +18,25 @@ namespace SpineUnity {
 	SP_API struct SubmeshInstruction
 	{
 	public:
-		SubmeshInstruction(): material(nullptr)
+		SubmeshInstruction() : material(nullptr)
 		{
 		}
-
-		Ref<spine::Skeleton>skeleton;
+	public:
+		spine::Skeleton* skeleton;
 		int startSlot;
 		int endSlot;
-		UnityEngine::Material material ;
+		UnityEngine::Material material;
 		bool forceSeparate;
 		int preActiveClippingSlotSource;
-
 		int rawTriangleCount;
 		int rawVertexCount;
 		int rawFirstVertexIndex;
 		bool hasClipping;
-
 		bool hasPMAAdditiveSlot;
-
+	public:
 		int SlotCount() { return endSlot - startSlot; }
-
 		Ref<std::string >ToString();
+	public:
 		static SubmeshInstruction Default() { return { }; }
 	};
 }
