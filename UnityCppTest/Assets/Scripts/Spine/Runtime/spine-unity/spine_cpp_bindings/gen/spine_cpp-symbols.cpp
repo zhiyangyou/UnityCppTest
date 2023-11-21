@@ -727,30 +727,31 @@ extern "C" __declspec(dllexport) void c__N_spine_S_TextureRegion_TextureRegion(v
 extern "C" __declspec(dllexport) void c__N_spine_S_TextureRegion_TextureRegion___1__N_spine_S_TextureRegion(void* __instance, const spine::TextureRegion& _0) { ::new (__instance) spine::TextureRegion(_0); }
 class spine::TextureRegion& (spine::TextureRegion::*_164)(const class spine::TextureRegion&) = &spine::TextureRegion::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_AtlasPage_AtlasPage___1__N_spine_S_String(void* __instance, const spine::String& inName) { ::new (__instance) spine::AtlasPage(inName); }
+int (spine::AtlasPage::*_165)() = &spine::AtlasPage::ConvertTexture2Handle;
 extern "C" __declspec(dllexport) void c__N_spine_S_AtlasPage_AtlasPage___1__N_spine_S_AtlasPage(void* __instance, const spine::AtlasPage& _0) { ::new (__instance) spine::AtlasPage(_0); }
-class spine::AtlasPage& (spine::AtlasPage::*_165)(class spine::AtlasPage&&) = &spine::AtlasPage::operator=;
+class spine::AtlasPage& (spine::AtlasPage::*_166)(class spine::AtlasPage&&) = &spine::AtlasPage::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_AtlasRegion_AtlasRegion___1__N_spine_S_AtlasRegion(void* __instance, const spine::AtlasRegion& _0) { ::new (__instance) spine::AtlasRegion(_0); }
-class spine::AtlasRegion& (spine::AtlasRegion::*_166)(class spine::AtlasRegion&&) = &spine::AtlasRegion::operator=;
+class spine::AtlasRegion& (spine::AtlasRegion::*_167)(class spine::AtlasRegion&&) = &spine::AtlasRegion::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_AtlasRegion_AtlasRegion(void* __instance) { ::new (__instance) spine::AtlasRegion(); }
 extern "C" __declspec(dllexport) void c__N_spine_S_Atlas_Atlas___1__N_spine_S_Atlas(void* __instance, const spine::Atlas& _0) { ::new (__instance) spine::Atlas(_0); }
-class spine::Atlas& (spine::Atlas::*_167)(const class spine::Atlas&) = &spine::Atlas::operator=;
+class spine::Atlas& (spine::Atlas::*_168)(const class spine::Atlas&) = &spine::Atlas::operator=;
 class c__N_spine_S_AttachmentLoader_AttachmentLoader___1__N_spine_S_AttachmentLoaderAttachmentLoader : public spine::AttachmentLoader { public: c__N_spine_S_AttachmentLoader_AttachmentLoader___1__N_spine_S_AttachmentLoaderAttachmentLoader(const spine::AttachmentLoader& _0): spine::AttachmentLoader(_0) {}; spine::RegionAttachment* newRegionAttachment(spine::Skin&, const spine::String&, const spine::String&, spine::Sequence*) { return {}; } spine::MeshAttachment* newMeshAttachment(spine::Skin&, const spine::String&, const spine::String&, spine::Sequence*) { return {}; } spine::BoundingBoxAttachment* newBoundingBoxAttachment(spine::Skin&, const spine::String&) { return {}; } spine::PathAttachment* newPathAttachment(spine::Skin&, const spine::String&) { return {}; } spine::PointAttachment* newPointAttachment(spine::Skin&, const spine::String&) { return {}; } spine::ClippingAttachment* newClippingAttachment(spine::Skin&, const spine::String&) { return {}; } void configureAttachment(spine::Attachment*) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_AttachmentLoader_AttachmentLoader___1__N_spine_S_AttachmentLoader(void* __instance, const spine::AttachmentLoader& _0) { ::new (__instance) c__N_spine_S_AttachmentLoader_AttachmentLoader___1__N_spine_S_AttachmentLoaderAttachmentLoader(_0); }
-class spine::AttachmentLoader& (spine::AttachmentLoader::*_168)(const class spine::AttachmentLoader&) = &spine::AttachmentLoader::operator=;
+class spine::AttachmentLoader& (spine::AttachmentLoader::*_169)(const class spine::AttachmentLoader&) = &spine::AttachmentLoader::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_AtlasAttachmentLoader_AtlasAttachmentLoader___1__N_spine_S_AtlasAttachmentLoader(void* __instance, const spine::AtlasAttachmentLoader& _0) { ::new (__instance) spine::AtlasAttachmentLoader(_0); }
-class spine::AtlasAttachmentLoader& (spine::AtlasAttachmentLoader::*_169)(class spine::AtlasAttachmentLoader&&) = &spine::AtlasAttachmentLoader::operator=;
+class spine::AtlasAttachmentLoader& (spine::AtlasAttachmentLoader::*_170)(class spine::AtlasAttachmentLoader&&) = &spine::AtlasAttachmentLoader::operator=;
 class c__N_spine_S_Attachment_Attachment___1__N_spine_S_AttachmentAttachment : public spine::Attachment { public: c__N_spine_S_Attachment_Attachment___1__N_spine_S_AttachmentAttachment(const spine::Attachment& _0): spine::Attachment(_0) {}; spine::Attachment* copy() { return {}; }  };
 extern "C" __declspec(dllexport) void c__N_spine_S_Attachment_Attachment___1__N_spine_S_Attachment(void* __instance, const spine::Attachment& _0) { ::new (__instance) c__N_spine_S_Attachment_Attachment___1__N_spine_S_AttachmentAttachment(_0); }
 class c__N_spine_S_Timeline_Timeline___1__N_spine_S_TimelineTimeline : public spine::Timeline { public: c__N_spine_S_Timeline_Timeline___1__N_spine_S_TimelineTimeline(const spine::Timeline& _0): spine::Timeline(_0) {}; void apply(spine::Skeleton&, float, float, spine::Vector<spine::Event*>*, float, spine::MixBlend, spine::MixDirection) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_Timeline_Timeline___1__N_spine_S_Timeline(void* __instance, const spine::Timeline& _0) { ::new (__instance) c__N_spine_S_Timeline_Timeline___1__N_spine_S_TimelineTimeline(_0); }
-class spine::Timeline& (spine::Timeline::*_170)(const class spine::Timeline&) = &spine::Timeline::operator=;
-int (spine::AttachmentTimeline::*_171)() = &spine::AttachmentTimeline::getSlotIndex;
-void (spine::AttachmentTimeline::*_172)(int) = &spine::AttachmentTimeline::setSlotIndex;
+class spine::Timeline& (spine::Timeline::*_171)(const class spine::Timeline&) = &spine::Timeline::operator=;
+int (spine::AttachmentTimeline::*_172)() = &spine::AttachmentTimeline::getSlotIndex;
+void (spine::AttachmentTimeline::*_173)(int) = &spine::AttachmentTimeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_AttachmentTimeline_AttachmentTimeline___1__N_spine_S_AttachmentTimeline(void* __instance, const spine::AttachmentTimeline& _0) { ::new (__instance) spine::AttachmentTimeline(_0); }
-class spine::AttachmentTimeline& (spine::AttachmentTimeline::*_173)(const class spine::AttachmentTimeline&) = &spine::AttachmentTimeline::operator=;
+class spine::AttachmentTimeline& (spine::AttachmentTimeline::*_174)(const class spine::AttachmentTimeline&) = &spine::AttachmentTimeline::operator=;
 class c__N_spine_S_Updatable_Updatable___1__N_spine_S_UpdatableUpdatable : public spine::Updatable { public: c__N_spine_S_Updatable_Updatable___1__N_spine_S_UpdatableUpdatable(const spine::Updatable& _0): spine::Updatable(_0) {}; void update() {} bool isActive() { return {}; } void setActive(bool) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_Updatable_Updatable___1__N_spine_S_Updatable(void* __instance, const spine::Updatable& _0) { ::new (__instance) c__N_spine_S_Updatable_Updatable___1__N_spine_S_UpdatableUpdatable(_0); }
-class spine::Updatable& (spine::Updatable::*_174)(const class spine::Updatable&) = &spine::Updatable::operator=;
+class spine::Updatable& (spine::Updatable::*_175)(const class spine::Updatable&) = &spine::Updatable::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Bone_Bone___1__N_spine_S_Bone(void* __instance, const spine::Bone& _0) { ::new (__instance) spine::Bone(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_BoneData_BoneData___1__N_spine_S_BoneData(void* __instance, const spine::BoneData& _0) { ::new (__instance) spine::BoneData(_0); }
 class c__N_spine_S_VertexAttachment_VertexAttachment___1__N_spine_S_VertexAttachmentVertexAttachment : public spine::VertexAttachment { public: c__N_spine_S_VertexAttachment_VertexAttachment___1__N_spine_S_VertexAttachmentVertexAttachment(const spine::VertexAttachment& _0): spine::VertexAttachment(_0) {}; spine::Attachment* copy() { return {}; }  };
@@ -759,188 +760,188 @@ extern "C" __declspec(dllexport) void c__N_spine_S_BoundingBoxAttachment_Boundin
 extern "C" __declspec(dllexport) void c__N_spine_S_ClippingAttachment_ClippingAttachment___1__N_spine_S_ClippingAttachment(void* __instance, const spine::ClippingAttachment& _0) { ::new (__instance) spine::ClippingAttachment(_0); }
 class c__N_spine_S_CurveTimeline_CurveTimeline___1__N_spine_S_CurveTimelineCurveTimeline : public spine::CurveTimeline { public: c__N_spine_S_CurveTimeline_CurveTimeline___1__N_spine_S_CurveTimelineCurveTimeline(const spine::CurveTimeline& _0): spine::CurveTimeline(_0) {}; void apply(spine::Skeleton&, float, float, spine::Vector<spine::Event*>*, float, spine::MixBlend, spine::MixDirection) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_CurveTimeline_CurveTimeline___1__N_spine_S_CurveTimeline(void* __instance, const spine::CurveTimeline& _0) { ::new (__instance) c__N_spine_S_CurveTimeline_CurveTimeline___1__N_spine_S_CurveTimelineCurveTimeline(_0); }
-class spine::CurveTimeline& (spine::CurveTimeline::*_175)(const class spine::CurveTimeline&) = &spine::CurveTimeline::operator=;
+class spine::CurveTimeline& (spine::CurveTimeline::*_176)(const class spine::CurveTimeline&) = &spine::CurveTimeline::operator=;
 class c__N_spine_S_CurveTimeline1_CurveTimeline1___1__N_spine_S_CurveTimeline1CurveTimeline1 : public spine::CurveTimeline1 { public: c__N_spine_S_CurveTimeline1_CurveTimeline1___1__N_spine_S_CurveTimeline1CurveTimeline1(const spine::CurveTimeline1& _0): spine::CurveTimeline1(_0) {}; void apply(spine::Skeleton&, float, float, spine::Vector<spine::Event*>*, float, spine::MixBlend, spine::MixDirection) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_CurveTimeline1_CurveTimeline1___1__N_spine_S_CurveTimeline1(void* __instance, const spine::CurveTimeline1& _0) { ::new (__instance) c__N_spine_S_CurveTimeline1_CurveTimeline1___1__N_spine_S_CurveTimeline1CurveTimeline1(_0); }
-class spine::CurveTimeline1& (spine::CurveTimeline1::*_176)(const class spine::CurveTimeline1&) = &spine::CurveTimeline1::operator=;
+class spine::CurveTimeline1& (spine::CurveTimeline1::*_177)(const class spine::CurveTimeline1&) = &spine::CurveTimeline1::operator=;
 class c__N_spine_S_CurveTimeline2_CurveTimeline2___1__N_spine_S_CurveTimeline2CurveTimeline2 : public spine::CurveTimeline2 { public: c__N_spine_S_CurveTimeline2_CurveTimeline2___1__N_spine_S_CurveTimeline2CurveTimeline2(const spine::CurveTimeline2& _0): spine::CurveTimeline2(_0) {}; void apply(spine::Skeleton&, float, float, spine::Vector<spine::Event*>*, float, spine::MixBlend, spine::MixDirection) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_CurveTimeline2_CurveTimeline2___1__N_spine_S_CurveTimeline2(void* __instance, const spine::CurveTimeline2& _0) { ::new (__instance) c__N_spine_S_CurveTimeline2_CurveTimeline2___1__N_spine_S_CurveTimeline2CurveTimeline2(_0); }
-class spine::CurveTimeline2& (spine::CurveTimeline2::*_177)(const class spine::CurveTimeline2&) = &spine::CurveTimeline2::operator=;
-int (spine::RGBATimeline::*_178)() = &spine::RGBATimeline::getSlotIndex;
-void (spine::RGBATimeline::*_179)(int) = &spine::RGBATimeline::setSlotIndex;
+class spine::CurveTimeline2& (spine::CurveTimeline2::*_178)(const class spine::CurveTimeline2&) = &spine::CurveTimeline2::operator=;
+int (spine::RGBATimeline::*_179)() = &spine::RGBATimeline::getSlotIndex;
+void (spine::RGBATimeline::*_180)(int) = &spine::RGBATimeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_RGBATimeline_RGBATimeline___1__N_spine_S_RGBATimeline(void* __instance, const spine::RGBATimeline& _0) { ::new (__instance) spine::RGBATimeline(_0); }
-class spine::RGBATimeline& (spine::RGBATimeline::*_180)(const class spine::RGBATimeline&) = &spine::RGBATimeline::operator=;
-int (spine::RGBTimeline::*_181)() = &spine::RGBTimeline::getSlotIndex;
-void (spine::RGBTimeline::*_182)(int) = &spine::RGBTimeline::setSlotIndex;
+class spine::RGBATimeline& (spine::RGBATimeline::*_181)(const class spine::RGBATimeline&) = &spine::RGBATimeline::operator=;
+int (spine::RGBTimeline::*_182)() = &spine::RGBTimeline::getSlotIndex;
+void (spine::RGBTimeline::*_183)(int) = &spine::RGBTimeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_RGBTimeline_RGBTimeline___1__N_spine_S_RGBTimeline(void* __instance, const spine::RGBTimeline& _0) { ::new (__instance) spine::RGBTimeline(_0); }
-class spine::RGBTimeline& (spine::RGBTimeline::*_183)(const class spine::RGBTimeline&) = &spine::RGBTimeline::operator=;
-int (spine::AlphaTimeline::*_184)() = &spine::AlphaTimeline::getSlotIndex;
-void (spine::AlphaTimeline::*_185)(int) = &spine::AlphaTimeline::setSlotIndex;
+class spine::RGBTimeline& (spine::RGBTimeline::*_184)(const class spine::RGBTimeline&) = &spine::RGBTimeline::operator=;
+int (spine::AlphaTimeline::*_185)() = &spine::AlphaTimeline::getSlotIndex;
+void (spine::AlphaTimeline::*_186)(int) = &spine::AlphaTimeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_AlphaTimeline_AlphaTimeline___1__N_spine_S_AlphaTimeline(void* __instance, const spine::AlphaTimeline& _0) { ::new (__instance) spine::AlphaTimeline(_0); }
-class spine::AlphaTimeline& (spine::AlphaTimeline::*_186)(const class spine::AlphaTimeline&) = &spine::AlphaTimeline::operator=;
-int (spine::RGBA2Timeline::*_187)() = &spine::RGBA2Timeline::getSlotIndex;
-void (spine::RGBA2Timeline::*_188)(int) = &spine::RGBA2Timeline::setSlotIndex;
+class spine::AlphaTimeline& (spine::AlphaTimeline::*_187)(const class spine::AlphaTimeline&) = &spine::AlphaTimeline::operator=;
+int (spine::RGBA2Timeline::*_188)() = &spine::RGBA2Timeline::getSlotIndex;
+void (spine::RGBA2Timeline::*_189)(int) = &spine::RGBA2Timeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_RGBA2Timeline_RGBA2Timeline___1__N_spine_S_RGBA2Timeline(void* __instance, const spine::RGBA2Timeline& _0) { ::new (__instance) spine::RGBA2Timeline(_0); }
-class spine::RGBA2Timeline& (spine::RGBA2Timeline::*_189)(const class spine::RGBA2Timeline&) = &spine::RGBA2Timeline::operator=;
-int (spine::RGB2Timeline::*_190)() = &spine::RGB2Timeline::getSlotIndex;
-void (spine::RGB2Timeline::*_191)(int) = &spine::RGB2Timeline::setSlotIndex;
+class spine::RGBA2Timeline& (spine::RGBA2Timeline::*_190)(const class spine::RGBA2Timeline&) = &spine::RGBA2Timeline::operator=;
+int (spine::RGB2Timeline::*_191)() = &spine::RGB2Timeline::getSlotIndex;
+void (spine::RGB2Timeline::*_192)(int) = &spine::RGB2Timeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_RGB2Timeline_RGB2Timeline___1__N_spine_S_RGB2Timeline(void* __instance, const spine::RGB2Timeline& _0) { ::new (__instance) spine::RGB2Timeline(_0); }
-class spine::RGB2Timeline& (spine::RGB2Timeline::*_192)(const class spine::RGB2Timeline&) = &spine::RGB2Timeline::operator=;
+class spine::RGB2Timeline& (spine::RGB2Timeline::*_193)(const class spine::RGB2Timeline&) = &spine::RGB2Timeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_ConstraintData_ConstraintData___1__N_spine_S_ConstraintData(void* __instance, const spine::ConstraintData& _0) { ::new (__instance) spine::ConstraintData(_0); }
-int (spine::DeformTimeline::*_193)() = &spine::DeformTimeline::getSlotIndex;
-void (spine::DeformTimeline::*_194)(int) = &spine::DeformTimeline::setSlotIndex;
+int (spine::DeformTimeline::*_194)() = &spine::DeformTimeline::getSlotIndex;
+void (spine::DeformTimeline::*_195)(int) = &spine::DeformTimeline::setSlotIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_DeformTimeline_DeformTimeline___1__N_spine_S_DeformTimeline(void* __instance, const spine::DeformTimeline& _0) { ::new (__instance) spine::DeformTimeline(_0); }
-class spine::DeformTimeline& (spine::DeformTimeline::*_195)(class spine::DeformTimeline&&) = &spine::DeformTimeline::operator=;
+class spine::DeformTimeline& (spine::DeformTimeline::*_196)(class spine::DeformTimeline&&) = &spine::DeformTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_DrawOrderTimeline_DrawOrderTimeline___1__N_spine_S_DrawOrderTimeline(void* __instance, const spine::DrawOrderTimeline& _0) { ::new (__instance) spine::DrawOrderTimeline(_0); }
-class spine::DrawOrderTimeline& (spine::DrawOrderTimeline::*_196)(class spine::DrawOrderTimeline&&) = &spine::DrawOrderTimeline::operator=;
+class spine::DrawOrderTimeline& (spine::DrawOrderTimeline::*_197)(class spine::DrawOrderTimeline&&) = &spine::DrawOrderTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Event_Event___1__N_spine_S_Event(void* __instance, const spine::Event& _0) { ::new (__instance) spine::Event(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_EventData_EventData___1__N_spine_S_EventData(void* __instance, const spine::EventData& _0) { ::new (__instance) spine::EventData(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_EventTimeline_EventTimeline___1__N_spine_S_EventTimeline(void* __instance, const spine::EventTimeline& _0) { ::new (__instance) spine::EventTimeline(_0); }
-class spine::EventTimeline& (spine::EventTimeline::*_197)(const class spine::EventTimeline&) = &spine::EventTimeline::operator=;
+class spine::EventTimeline& (spine::EventTimeline::*_198)(const class spine::EventTimeline&) = &spine::EventTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_IkConstraint_IkConstraint___1__N_spine_S_IkConstraint(void* __instance, const spine::IkConstraint& _0) { ::new (__instance) spine::IkConstraint(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_IkConstraintData_IkConstraintData___1__N_spine_S_IkConstraintData(void* __instance, const spine::IkConstraintData& _0) { ::new (__instance) spine::IkConstraintData(_0); }
-int (spine::IkConstraintTimeline::*_198)() = &spine::IkConstraintTimeline::getIkConstraintIndex;
-void (spine::IkConstraintTimeline::*_199)(int) = &spine::IkConstraintTimeline::setIkConstraintIndex;
+int (spine::IkConstraintTimeline::*_199)() = &spine::IkConstraintTimeline::getIkConstraintIndex;
+void (spine::IkConstraintTimeline::*_200)(int) = &spine::IkConstraintTimeline::setIkConstraintIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_IkConstraintTimeline_IkConstraintTimeline___1__N_spine_S_IkConstraintTimeline(void* __instance, const spine::IkConstraintTimeline& _0) { ::new (__instance) spine::IkConstraintTimeline(_0); }
-class spine::IkConstraintTimeline& (spine::IkConstraintTimeline::*_200)(class spine::IkConstraintTimeline&&) = &spine::IkConstraintTimeline::operator=;
+class spine::IkConstraintTimeline& (spine::IkConstraintTimeline::*_201)(class spine::IkConstraintTimeline&&) = &spine::IkConstraintTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Json_Json___1__N_spine_S_Json(void* __instance, const spine::Json& _0) { ::new (__instance) spine::Json(_0); }
-class spine::Json& (spine::Json::*_201)(const class spine::Json&) = &spine::Json::operator=;
+class spine::Json& (spine::Json::*_202)(const class spine::Json&) = &spine::Json::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_LinkedMesh_LinkedMesh___1__N_spine_S_LinkedMesh(void* __instance, const spine::LinkedMesh& _0) { ::new (__instance) spine::LinkedMesh(_0); }
-class spine::LinkedMesh& (spine::LinkedMesh::*_202)(class spine::LinkedMesh&&) = &spine::LinkedMesh::operator=;
-int (spine::Sequence::*_203)() = &spine::Sequence::getId;
-void (spine::Sequence::*_204)(int) = &spine::Sequence::setId;
-int (spine::Sequence::*_205)() = &spine::Sequence::getStart;
-void (spine::Sequence::*_206)(int) = &spine::Sequence::setStart;
-int (spine::Sequence::*_207)() = &spine::Sequence::getDigits;
-void (spine::Sequence::*_208)(int) = &spine::Sequence::setDigits;
-int (spine::Sequence::*_209)() = &spine::Sequence::getSetupIndex;
-void (spine::Sequence::*_210)(int) = &spine::Sequence::setSetupIndex;
-spine::Vector<class spine::TextureRegion*>& (spine::Sequence::*_211)() = &spine::Sequence::getRegions;
+class spine::LinkedMesh& (spine::LinkedMesh::*_203)(class spine::LinkedMesh&&) = &spine::LinkedMesh::operator=;
+int (spine::Sequence::*_204)() = &spine::Sequence::getId;
+void (spine::Sequence::*_205)(int) = &spine::Sequence::setId;
+int (spine::Sequence::*_206)() = &spine::Sequence::getStart;
+void (spine::Sequence::*_207)(int) = &spine::Sequence::setStart;
+int (spine::Sequence::*_208)() = &spine::Sequence::getDigits;
+void (spine::Sequence::*_209)(int) = &spine::Sequence::setDigits;
+int (spine::Sequence::*_210)() = &spine::Sequence::getSetupIndex;
+void (spine::Sequence::*_211)(int) = &spine::Sequence::setSetupIndex;
+spine::Vector<class spine::TextureRegion*>& (spine::Sequence::*_212)() = &spine::Sequence::getRegions;
 extern "C" __declspec(dllexport) void c__N_spine_S_Sequence_Sequence___1__N_spine_S_Sequence(void* __instance, const spine::Sequence& _0) { ::new (__instance) spine::Sequence(_0); }
-class spine::Sequence& (spine::Sequence::*_212)(const class spine::Sequence&) = &spine::Sequence::operator=;
+class spine::Sequence& (spine::Sequence::*_213)(const class spine::Sequence&) = &spine::Sequence::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_MeshAttachment_MeshAttachment___1__N_spine_S_MeshAttachment(void* __instance, const spine::MeshAttachment& _0) { ::new (__instance) spine::MeshAttachment(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_PathAttachment_PathAttachment___1__N_spine_S_PathAttachment(void* __instance, const spine::PathAttachment& _0) { ::new (__instance) spine::PathAttachment(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_PathConstraint_PathConstraint___1__N_spine_S_PathConstraint(void* __instance, const spine::PathConstraint& _0) { ::new (__instance) spine::PathConstraint(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_PathConstraintData_PathConstraintData___1__N_spine_S_PathConstraintData(void* __instance, const spine::PathConstraintData& _0) { ::new (__instance) spine::PathConstraintData(_0); }
-int (spine::PathConstraintMixTimeline::*_213)() = &spine::PathConstraintMixTimeline::getPathConstraintIndex;
-void (spine::PathConstraintMixTimeline::*_214)(int) = &spine::PathConstraintMixTimeline::setPathConstraintIndex;
+int (spine::PathConstraintMixTimeline::*_214)() = &spine::PathConstraintMixTimeline::getPathConstraintIndex;
+void (spine::PathConstraintMixTimeline::*_215)(int) = &spine::PathConstraintMixTimeline::setPathConstraintIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_PathConstraintMixTimeline_PathConstraintMixTimeline___1__N_spine_S_PathConstraintMixTimeline(void* __instance, const spine::PathConstraintMixTimeline& _0) { ::new (__instance) spine::PathConstraintMixTimeline(_0); }
-class spine::PathConstraintMixTimeline& (spine::PathConstraintMixTimeline::*_215)(class spine::PathConstraintMixTimeline&&) = &spine::PathConstraintMixTimeline::operator=;
-int (spine::PathConstraintPositionTimeline::*_216)() = &spine::PathConstraintPositionTimeline::getPathConstraintIndex;
-void (spine::PathConstraintPositionTimeline::*_217)(int) = &spine::PathConstraintPositionTimeline::setPathConstraintIndex;
+class spine::PathConstraintMixTimeline& (spine::PathConstraintMixTimeline::*_216)(class spine::PathConstraintMixTimeline&&) = &spine::PathConstraintMixTimeline::operator=;
+int (spine::PathConstraintPositionTimeline::*_217)() = &spine::PathConstraintPositionTimeline::getPathConstraintIndex;
+void (spine::PathConstraintPositionTimeline::*_218)(int) = &spine::PathConstraintPositionTimeline::setPathConstraintIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_PathConstraintPositionTimeline_PathConstraintPositionTimeline___1__N_spine_S_PathConstraintPositionTimeline(void* __instance, const spine::PathConstraintPositionTimeline& _0) { ::new (__instance) spine::PathConstraintPositionTimeline(_0); }
-class spine::PathConstraintPositionTimeline& (spine::PathConstraintPositionTimeline::*_218)(const class spine::PathConstraintPositionTimeline&) = &spine::PathConstraintPositionTimeline::operator=;
-int (spine::PathConstraintSpacingTimeline::*_219)() = &spine::PathConstraintSpacingTimeline::getPathConstraintIndex;
-void (spine::PathConstraintSpacingTimeline::*_220)(int) = &spine::PathConstraintSpacingTimeline::setPathConstraintIndex;
+class spine::PathConstraintPositionTimeline& (spine::PathConstraintPositionTimeline::*_219)(const class spine::PathConstraintPositionTimeline&) = &spine::PathConstraintPositionTimeline::operator=;
+int (spine::PathConstraintSpacingTimeline::*_220)() = &spine::PathConstraintSpacingTimeline::getPathConstraintIndex;
+void (spine::PathConstraintSpacingTimeline::*_221)(int) = &spine::PathConstraintSpacingTimeline::setPathConstraintIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_PathConstraintSpacingTimeline_PathConstraintSpacingTimeline___1__N_spine_S_PathConstraintSpacingTimeline(void* __instance, const spine::PathConstraintSpacingTimeline& _0) { ::new (__instance) spine::PathConstraintSpacingTimeline(_0); }
-class spine::PathConstraintSpacingTimeline& (spine::PathConstraintSpacingTimeline::*_221)(class spine::PathConstraintSpacingTimeline&&) = &spine::PathConstraintSpacingTimeline::operator=;
+class spine::PathConstraintSpacingTimeline& (spine::PathConstraintSpacingTimeline::*_222)(class spine::PathConstraintSpacingTimeline&&) = &spine::PathConstraintSpacingTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_PointAttachment_PointAttachment___1__N_spine_S_PointAttachment(void* __instance, const spine::PointAttachment& _0) { ::new (__instance) spine::PointAttachment(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_RegionAttachment_RegionAttachment___1__N_spine_S_RegionAttachment(void* __instance, const spine::RegionAttachment& _0) { ::new (__instance) spine::RegionAttachment(_0); }
-int (spine::RotateTimeline::*_222)() = &spine::RotateTimeline::getBoneIndex;
-void (spine::RotateTimeline::*_223)(int) = &spine::RotateTimeline::setBoneIndex;
+int (spine::RotateTimeline::*_223)() = &spine::RotateTimeline::getBoneIndex;
+void (spine::RotateTimeline::*_224)(int) = &spine::RotateTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_RotateTimeline_RotateTimeline___1__N_spine_S_RotateTimeline(void* __instance, const spine::RotateTimeline& _0) { ::new (__instance) spine::RotateTimeline(_0); }
-class spine::RotateTimeline& (spine::RotateTimeline::*_224)(class spine::RotateTimeline&&) = &spine::RotateTimeline::operator=;
-int (spine::TranslateTimeline::*_225)() = &spine::TranslateTimeline::getBoneIndex;
-void (spine::TranslateTimeline::*_226)(int) = &spine::TranslateTimeline::setBoneIndex;
+class spine::RotateTimeline& (spine::RotateTimeline::*_225)(class spine::RotateTimeline&&) = &spine::RotateTimeline::operator=;
+int (spine::TranslateTimeline::*_226)() = &spine::TranslateTimeline::getBoneIndex;
+void (spine::TranslateTimeline::*_227)(int) = &spine::TranslateTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_TranslateTimeline_TranslateTimeline___1__N_spine_S_TranslateTimeline(void* __instance, const spine::TranslateTimeline& _0) { ::new (__instance) spine::TranslateTimeline(_0); }
-class spine::TranslateTimeline& (spine::TranslateTimeline::*_227)(const class spine::TranslateTimeline&) = &spine::TranslateTimeline::operator=;
-int (spine::TranslateXTimeline::*_228)() = &spine::TranslateXTimeline::getBoneIndex;
-void (spine::TranslateXTimeline::*_229)(int) = &spine::TranslateXTimeline::setBoneIndex;
+class spine::TranslateTimeline& (spine::TranslateTimeline::*_228)(const class spine::TranslateTimeline&) = &spine::TranslateTimeline::operator=;
+int (spine::TranslateXTimeline::*_229)() = &spine::TranslateXTimeline::getBoneIndex;
+void (spine::TranslateXTimeline::*_230)(int) = &spine::TranslateXTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_TranslateXTimeline_TranslateXTimeline___1__N_spine_S_TranslateXTimeline(void* __instance, const spine::TranslateXTimeline& _0) { ::new (__instance) spine::TranslateXTimeline(_0); }
-class spine::TranslateXTimeline& (spine::TranslateXTimeline::*_230)(const class spine::TranslateXTimeline&) = &spine::TranslateXTimeline::operator=;
-int (spine::TranslateYTimeline::*_231)() = &spine::TranslateYTimeline::getBoneIndex;
-void (spine::TranslateYTimeline::*_232)(int) = &spine::TranslateYTimeline::setBoneIndex;
+class spine::TranslateXTimeline& (spine::TranslateXTimeline::*_231)(const class spine::TranslateXTimeline&) = &spine::TranslateXTimeline::operator=;
+int (spine::TranslateYTimeline::*_232)() = &spine::TranslateYTimeline::getBoneIndex;
+void (spine::TranslateYTimeline::*_233)(int) = &spine::TranslateYTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_TranslateYTimeline_TranslateYTimeline___1__N_spine_S_TranslateYTimeline(void* __instance, const spine::TranslateYTimeline& _0) { ::new (__instance) spine::TranslateYTimeline(_0); }
-class spine::TranslateYTimeline& (spine::TranslateYTimeline::*_233)(const class spine::TranslateYTimeline&) = &spine::TranslateYTimeline::operator=;
-int (spine::ScaleTimeline::*_234)() = &spine::ScaleTimeline::getBoneIndex;
-void (spine::ScaleTimeline::*_235)(int) = &spine::ScaleTimeline::setBoneIndex;
+class spine::TranslateYTimeline& (spine::TranslateYTimeline::*_234)(const class spine::TranslateYTimeline&) = &spine::TranslateYTimeline::operator=;
+int (spine::ScaleTimeline::*_235)() = &spine::ScaleTimeline::getBoneIndex;
+void (spine::ScaleTimeline::*_236)(int) = &spine::ScaleTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_ScaleTimeline_ScaleTimeline___1__N_spine_S_ScaleTimeline(void* __instance, const spine::ScaleTimeline& _0) { ::new (__instance) spine::ScaleTimeline(_0); }
-class spine::ScaleTimeline& (spine::ScaleTimeline::*_236)(const class spine::ScaleTimeline&) = &spine::ScaleTimeline::operator=;
-int (spine::ScaleXTimeline::*_237)() = &spine::ScaleXTimeline::getBoneIndex;
-void (spine::ScaleXTimeline::*_238)(int) = &spine::ScaleXTimeline::setBoneIndex;
+class spine::ScaleTimeline& (spine::ScaleTimeline::*_237)(const class spine::ScaleTimeline&) = &spine::ScaleTimeline::operator=;
+int (spine::ScaleXTimeline::*_238)() = &spine::ScaleXTimeline::getBoneIndex;
+void (spine::ScaleXTimeline::*_239)(int) = &spine::ScaleXTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_ScaleXTimeline_ScaleXTimeline___1__N_spine_S_ScaleXTimeline(void* __instance, const spine::ScaleXTimeline& _0) { ::new (__instance) spine::ScaleXTimeline(_0); }
-class spine::ScaleXTimeline& (spine::ScaleXTimeline::*_239)(const class spine::ScaleXTimeline&) = &spine::ScaleXTimeline::operator=;
-int (spine::ScaleYTimeline::*_240)() = &spine::ScaleYTimeline::getBoneIndex;
-void (spine::ScaleYTimeline::*_241)(int) = &spine::ScaleYTimeline::setBoneIndex;
+class spine::ScaleXTimeline& (spine::ScaleXTimeline::*_240)(const class spine::ScaleXTimeline&) = &spine::ScaleXTimeline::operator=;
+int (spine::ScaleYTimeline::*_241)() = &spine::ScaleYTimeline::getBoneIndex;
+void (spine::ScaleYTimeline::*_242)(int) = &spine::ScaleYTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_ScaleYTimeline_ScaleYTimeline___1__N_spine_S_ScaleYTimeline(void* __instance, const spine::ScaleYTimeline& _0) { ::new (__instance) spine::ScaleYTimeline(_0); }
-class spine::ScaleYTimeline& (spine::ScaleYTimeline::*_242)(const class spine::ScaleYTimeline&) = &spine::ScaleYTimeline::operator=;
-int (spine::ShearTimeline::*_243)() = &spine::ShearTimeline::getBoneIndex;
-void (spine::ShearTimeline::*_244)(int) = &spine::ShearTimeline::setBoneIndex;
+class spine::ScaleYTimeline& (spine::ScaleYTimeline::*_243)(const class spine::ScaleYTimeline&) = &spine::ScaleYTimeline::operator=;
+int (spine::ShearTimeline::*_244)() = &spine::ShearTimeline::getBoneIndex;
+void (spine::ShearTimeline::*_245)(int) = &spine::ShearTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_ShearTimeline_ShearTimeline___1__N_spine_S_ShearTimeline(void* __instance, const spine::ShearTimeline& _0) { ::new (__instance) spine::ShearTimeline(_0); }
-class spine::ShearTimeline& (spine::ShearTimeline::*_245)(const class spine::ShearTimeline&) = &spine::ShearTimeline::operator=;
-int (spine::ShearXTimeline::*_246)() = &spine::ShearXTimeline::getBoneIndex;
-void (spine::ShearXTimeline::*_247)(int) = &spine::ShearXTimeline::setBoneIndex;
+class spine::ShearTimeline& (spine::ShearTimeline::*_246)(const class spine::ShearTimeline&) = &spine::ShearTimeline::operator=;
+int (spine::ShearXTimeline::*_247)() = &spine::ShearXTimeline::getBoneIndex;
+void (spine::ShearXTimeline::*_248)(int) = &spine::ShearXTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_ShearXTimeline_ShearXTimeline___1__N_spine_S_ShearXTimeline(void* __instance, const spine::ShearXTimeline& _0) { ::new (__instance) spine::ShearXTimeline(_0); }
-class spine::ShearXTimeline& (spine::ShearXTimeline::*_248)(const class spine::ShearXTimeline&) = &spine::ShearXTimeline::operator=;
-int (spine::ShearYTimeline::*_249)() = &spine::ShearYTimeline::getBoneIndex;
-void (spine::ShearYTimeline::*_250)(int) = &spine::ShearYTimeline::setBoneIndex;
+class spine::ShearXTimeline& (spine::ShearXTimeline::*_249)(const class spine::ShearXTimeline&) = &spine::ShearXTimeline::operator=;
+int (spine::ShearYTimeline::*_250)() = &spine::ShearYTimeline::getBoneIndex;
+void (spine::ShearYTimeline::*_251)(int) = &spine::ShearYTimeline::setBoneIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_ShearYTimeline_ShearYTimeline___1__N_spine_S_ShearYTimeline(void* __instance, const spine::ShearYTimeline& _0) { ::new (__instance) spine::ShearYTimeline(_0); }
-class spine::ShearYTimeline& (spine::ShearYTimeline::*_251)(const class spine::ShearYTimeline&) = &spine::ShearYTimeline::operator=;
+class spine::ShearYTimeline& (spine::ShearYTimeline::*_252)(const class spine::ShearYTimeline&) = &spine::ShearYTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Skeleton_Skeleton___1__N_spine_S_Skeleton(void* __instance, const spine::Skeleton& _0) { ::new (__instance) spine::Skeleton(_0); }
-class spine::Skeleton& (spine::Skeleton::*_252)(const class spine::Skeleton&) = &spine::Skeleton::operator=;
-void (spine::SkeletonBinary::*_253)(float) = &spine::SkeletonBinary::setScale;
-class spine::String& (spine::SkeletonBinary::*_254)() = &spine::SkeletonBinary::getError;
+class spine::Skeleton& (spine::Skeleton::*_253)(const class spine::Skeleton&) = &spine::Skeleton::operator=;
+void (spine::SkeletonBinary::*_254)(float) = &spine::SkeletonBinary::setScale;
+class spine::String& (spine::SkeletonBinary::*_255)() = &spine::SkeletonBinary::getError;
 extern "C" __declspec(dllexport) void c__N_spine_S_SkeletonBinary_SkeletonBinary___1__N_spine_S_SkeletonBinary(void* __instance, const spine::SkeletonBinary& _0) { ::new (__instance) spine::SkeletonBinary(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_SkeletonBounds_SkeletonBounds___1__N_spine_S_SkeletonBounds(void* __instance, const spine::SkeletonBounds& _0) { ::new (__instance) spine::SkeletonBounds(_0); }
-class spine::SkeletonBounds& (spine::SkeletonBounds::*_255)(const class spine::SkeletonBounds&) = &spine::SkeletonBounds::operator=;
+class spine::SkeletonBounds& (spine::SkeletonBounds::*_256)(const class spine::SkeletonBounds&) = &spine::SkeletonBounds::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Polygon_Polygon(void* __instance) { ::new (__instance) spine::Polygon(); }
 extern "C" __declspec(dllexport) void c__N_spine_S_Polygon_Polygon___1__N_spine_S_Polygon(void* __instance, const spine::Polygon& _0) { ::new (__instance) spine::Polygon(_0); }
-class spine::Polygon& (spine::Polygon::*_256)(class spine::Polygon&&) = &spine::Polygon::operator=;
+class spine::Polygon& (spine::Polygon::*_257)(class spine::Polygon&&) = &spine::Polygon::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Triangulator_Triangulator___1__N_spine_S_Triangulator(void* __instance, const spine::Triangulator& _0) { ::new (__instance) spine::Triangulator(_0); }
-class spine::Triangulator& (spine::Triangulator::*_257)(const class spine::Triangulator&) = &spine::Triangulator::operator=;
+class spine::Triangulator& (spine::Triangulator::*_258)(const class spine::Triangulator&) = &spine::Triangulator::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Triangulator_Triangulator(void* __instance) { ::new (__instance) spine::Triangulator(); }
 extern "C" __declspec(dllexport) void c__N_spine_S_SkeletonClipping_SkeletonClipping___1__N_spine_S_SkeletonClipping(void* __instance, const spine::SkeletonClipping& _0) { ::new (__instance) spine::SkeletonClipping(_0); }
-class spine::SkeletonClipping& (spine::SkeletonClipping::*_258)(class spine::SkeletonClipping&&) = &spine::SkeletonClipping::operator=;
+class spine::SkeletonClipping& (spine::SkeletonClipping::*_259)(class spine::SkeletonClipping&&) = &spine::SkeletonClipping::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_SkeletonData_SkeletonData___1__N_spine_S_SkeletonData(void* __instance, const spine::SkeletonData& _0) { ::new (__instance) spine::SkeletonData(_0); }
-class spine::SkeletonData& (spine::SkeletonData::*_259)(const class spine::SkeletonData&) = &spine::SkeletonData::operator=;
-void (spine::SkeletonJson::*_260)(float) = &spine::SkeletonJson::setScale;
-class spine::String& (spine::SkeletonJson::*_261)() = &spine::SkeletonJson::getError;
+class spine::SkeletonData& (spine::SkeletonData::*_260)(const class spine::SkeletonData&) = &spine::SkeletonData::operator=;
+void (spine::SkeletonJson::*_261)(float) = &spine::SkeletonJson::setScale;
+class spine::String& (spine::SkeletonJson::*_262)() = &spine::SkeletonJson::getError;
 extern "C" __declspec(dllexport) void c__N_spine_S_SkeletonJson_SkeletonJson___1__N_spine_S_SkeletonJson(void* __instance, const spine::SkeletonJson& _0) { ::new (__instance) spine::SkeletonJson(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_SkinEntry_SkinEntry_k___1__N_spine_S_String____N_spine_S_Attachment(void* __instance, unsigned long long slotIndex, const spine::String& name, spine::Attachment* attachment) { ::new (__instance) spine::SkinEntry(slotIndex, name, attachment); }
 extern "C" __declspec(dllexport) void c__N_spine_S_SkinEntry_SkinEntry___1__N_spine_S_SkinEntry(void* __instance, const spine::SkinEntry& _0) { ::new (__instance) spine::SkinEntry(_0); }
-struct spine::SkinEntry& (spine::SkinEntry::*_262)(struct spine::SkinEntry&&) = &spine::SkinEntry::operator=;
+struct spine::SkinEntry& (spine::SkinEntry::*_263)(struct spine::SkinEntry&&) = &spine::SkinEntry::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_SkinEntry__SkinEntry(spine::SkinEntry*__instance) { __instance->~SkinEntry(); }
-bool (spine::SkinEntries::*_263)() = &spine::SkinEntries::hasNext;
-struct spine::SkinEntry& (spine::SkinEntries::*_264)() = &spine::SkinEntries::next;
+bool (spine::SkinEntries::*_264)() = &spine::SkinEntries::hasNext;
+struct spine::SkinEntry& (spine::SkinEntries::*_265)() = &spine::SkinEntries::next;
 extern "C" __declspec(dllexport) void c__N_spine_S_SkinEntries_SkinEntries_____N_spine_S_Vector____N_spine_S_Vector____N_spine_S_SkinEntry(void* __instance, spine::Vector<spine::Vector<spine::SkinEntry>>& buckets) { ::new (__instance) spine::SkinEntries(buckets); }
 extern "C" __declspec(dllexport) void c__N_spine_S_Skin_S_AttachmentMap_AttachmentMap___1__N_spine_S_Skin_S_AttachmentMap(void* __instance, const spine::Skin::AttachmentMap& _0) { ::new (__instance) spine::Skin::AttachmentMap(_0); }
-class spine::Skin::AttachmentMap& (spine::Skin::AttachmentMap::*_265)(class spine::Skin::AttachmentMap&&) = &spine::Skin::AttachmentMap::operator=;
+class spine::Skin::AttachmentMap& (spine::Skin::AttachmentMap::*_266)(class spine::Skin::AttachmentMap&&) = &spine::Skin::AttachmentMap::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Skin_Skin___1__N_spine_S_Skin(void* __instance, const spine::Skin& _0) { ::new (__instance) spine::Skin(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_SlotData_SlotData___1__N_spine_S_SlotData(void* __instance, const spine::SlotData& _0) { ::new (__instance) spine::SlotData(_0); }
 class c__N_spine_S_TextureLoader_TextureLoader___1__N_spine_S_TextureLoaderTextureLoader : public spine::TextureLoader { public: c__N_spine_S_TextureLoader_TextureLoader___1__N_spine_S_TextureLoaderTextureLoader(const spine::TextureLoader& _0): spine::TextureLoader(_0) {}; void load(spine::AtlasPage&, const spine::String&) {} void unload(void*) {}  };
 extern "C" __declspec(dllexport) void c__N_spine_S_TextureLoader_TextureLoader___1__N_spine_S_TextureLoader(void* __instance, const spine::TextureLoader& _0) { ::new (__instance) c__N_spine_S_TextureLoader_TextureLoader___1__N_spine_S_TextureLoaderTextureLoader(_0); }
-class spine::TextureLoader& (spine::TextureLoader::*_266)(const class spine::TextureLoader&) = &spine::TextureLoader::operator=;
+class spine::TextureLoader& (spine::TextureLoader::*_267)(const class spine::TextureLoader&) = &spine::TextureLoader::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_TransformConstraint_TransformConstraint___1__N_spine_S_TransformConstraint(void* __instance, const spine::TransformConstraint& _0) { ::new (__instance) spine::TransformConstraint(_0); }
 extern "C" __declspec(dllexport) void c__N_spine_S_TransformConstraintData_TransformConstraintData___1__N_spine_S_TransformConstraintData(void* __instance, const spine::TransformConstraintData& _0) { ::new (__instance) spine::TransformConstraintData(_0); }
-int (spine::TransformConstraintTimeline::*_267)() = &spine::TransformConstraintTimeline::getTransformConstraintIndex;
-void (spine::TransformConstraintTimeline::*_268)(int) = &spine::TransformConstraintTimeline::setTransformConstraintIndex;
+int (spine::TransformConstraintTimeline::*_268)() = &spine::TransformConstraintTimeline::getTransformConstraintIndex;
+void (spine::TransformConstraintTimeline::*_269)(int) = &spine::TransformConstraintTimeline::setTransformConstraintIndex;
 extern "C" __declspec(dllexport) void c__N_spine_S_TransformConstraintTimeline_TransformConstraintTimeline___1__N_spine_S_TransformConstraintTimeline(void* __instance, const spine::TransformConstraintTimeline& _0) { ::new (__instance) spine::TransformConstraintTimeline(_0); }
-class spine::TransformConstraintTimeline& (spine::TransformConstraintTimeline::*_269)(class spine::TransformConstraintTimeline&&) = &spine::TransformConstraintTimeline::operator=;
+class spine::TransformConstraintTimeline& (spine::TransformConstraintTimeline::*_270)(class spine::TransformConstraintTimeline&&) = &spine::TransformConstraintTimeline::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Vertices_Vertices___1__N_spine_S_Vertices(void* __instance, const spine::Vertices& _0) { ::new (__instance) spine::Vertices(_0); }
-class spine::Vertices& (spine::Vertices::*_270)(class spine::Vertices&&) = &spine::Vertices::operator=;
+class spine::Vertices& (spine::Vertices::*_271)(class spine::Vertices&&) = &spine::Vertices::operator=;
 extern "C" __declspec(dllexport) void c__N_spine_S_Vertices_Vertices(void* __instance) { ::new (__instance) spine::Vertices(); }
 extern "C" __declspec(dllexport) void c__N_spine_S_UnitySpineCppTextureLoader_UnitySpineCppTextureLoader(void* __instance) { ::new (__instance) spine::UnitySpineCppTextureLoader(); }
 extern "C" __declspec(dllexport) void c__N_spine_S_UnitySpineCppTextureLoader_UnitySpineCppTextureLoader___1__N_spine_S_UnitySpineCppTextureLoader(void* __instance, const spine::UnitySpineCppTextureLoader& _0) { ::new (__instance) spine::UnitySpineCppTextureLoader(_0); }
-class spine::UnitySpineCppTextureLoader& (spine::UnitySpineCppTextureLoader::*_271)(const class spine::UnitySpineCppTextureLoader&) = &spine::UnitySpineCppTextureLoader::operator=;
-class SpineUnity::SpineMesh& (SpineUnity::SpineMesh::*_272)(class SpineUnity::SpineMesh&&) = &SpineUnity::SpineMesh::operator=;
+class spine::UnitySpineCppTextureLoader& (spine::UnitySpineCppTextureLoader::*_272)(const class spine::UnitySpineCppTextureLoader&) = &spine::UnitySpineCppTextureLoader::operator=;
+class SpineUnity::SpineMesh& (SpineUnity::SpineMesh::*_273)(class SpineUnity::SpineMesh&&) = &SpineUnity::SpineMesh::operator=;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SubmeshInstruction_SubmeshInstruction(void* __instance) { ::new (__instance) SpineUnity::SubmeshInstruction(); }
-int (SpineUnity::SubmeshInstruction::*_273)() = &SpineUnity::SubmeshInstruction::SlotCount;
-struct SpineUnity::SubmeshInstruction (*_274)() = &SpineUnity::SubmeshInstruction::Default;
+int (SpineUnity::SubmeshInstruction::*_274)() = &SpineUnity::SubmeshInstruction::SlotCount;
+struct SpineUnity::SubmeshInstruction (*_275)() = &SpineUnity::SubmeshInstruction::Default;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SubmeshInstruction_SubmeshInstruction___1__N_SpineUnity_S_SubmeshInstruction(void* __instance, const SpineUnity::SubmeshInstruction& _0) { ::new (__instance) SpineUnity::SubmeshInstruction(_0); }
-struct SpineUnity::SubmeshInstruction& (SpineUnity::SubmeshInstruction::*_275)(struct SpineUnity::SubmeshInstruction&&) = &SpineUnity::SubmeshInstruction::operator=;
+struct SpineUnity::SubmeshInstruction& (SpineUnity::SubmeshInstruction::*_276)(struct SpineUnity::SubmeshInstruction&&) = &SpineUnity::SubmeshInstruction::operator=;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SubmeshInstruction__SubmeshInstruction(SpineUnity::SubmeshInstruction*__instance) { __instance->~SubmeshInstruction(); }
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SkeletonRendererInstruction_SkeletonRendererInstruction___1__N_SpineUnity_S_SkeletonRendererInstruction(void* __instance, const SpineUnity::SkeletonRendererInstruction& _0) { ::new (__instance) SpineUnity::SkeletonRendererInstruction(_0); }
-class SpineUnity::SkeletonRendererInstruction& (SpineUnity::SkeletonRendererInstruction::*_276)(class SpineUnity::SkeletonRendererInstruction&&) = &SpineUnity::SkeletonRendererInstruction::operator=;
+class SpineUnity::SkeletonRendererInstruction& (SpineUnity::SkeletonRendererInstruction::*_277)(class SpineUnity::SkeletonRendererInstruction&&) = &SpineUnity::SkeletonRendererInstruction::operator=;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SkeletonRendererInstruction__SkeletonRendererInstruction(SpineUnity::SkeletonRendererInstruction*__instance) { __instance->~SkeletonRendererInstruction(); }
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SkeletonRendererInstruction_SkeletonRendererInstruction(void* __instance) { ::new (__instance) SpineUnity::SkeletonRendererInstruction(); }
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SmartMesh_SmartMesh___1__N_SpineUnity_S_SmartMesh(void* __instance, const SpineUnity::SmartMesh& _0) { ::new (__instance) SpineUnity::SmartMesh(_0); }
-class SpineUnity::SmartMesh& (SpineUnity::SmartMesh::*_277)(class SpineUnity::SmartMesh&&) = &SpineUnity::SmartMesh::operator=;
+class SpineUnity::SmartMesh& (SpineUnity::SmartMesh::*_278)(class SpineUnity::SmartMesh&&) = &SpineUnity::SmartMesh::operator=;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SmartMesh__SmartMesh(SpineUnity::SmartMesh*__instance) { __instance->~SmartMesh(); }
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_SmartMesh_SmartMesh(void* __instance) { ::new (__instance) SpineUnity::SmartMesh(); }
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_MeshRendererBuffers_MeshRendererBuffers___1__N_SpineUnity_S_MeshRendererBuffers(void* __instance, const SpineUnity::MeshRendererBuffers& _0) { ::new (__instance) SpineUnity::MeshRendererBuffers(_0); }
-class SpineUnity::MeshRendererBuffers& (SpineUnity::MeshRendererBuffers::*_278)(class SpineUnity::MeshRendererBuffers&&) = &SpineUnity::MeshRendererBuffers::operator=;
+class SpineUnity::MeshRendererBuffers& (SpineUnity::MeshRendererBuffers::*_279)(class SpineUnity::MeshRendererBuffers&&) = &SpineUnity::MeshRendererBuffers::operator=;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_MeshRendererBuffers__MeshRendererBuffers(SpineUnity::MeshRendererBuffers*__instance) { __instance->~MeshRendererBuffers(); }
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_MeshRendererBuffers_MeshRendererBuffers(void* __instance) { ::new (__instance) SpineUnity::MeshRendererBuffers(); }
-int (SpineUnity::MeshGenerator::*_279)() = &SpineUnity::MeshGenerator::VertexCount;
-int (SpineUnity::MeshGenerator::*_280)(int) = &SpineUnity::MeshGenerator::SubmeshIndexCount;
+int (SpineUnity::MeshGenerator::*_280)() = &SpineUnity::MeshGenerator::VertexCount;
+int (SpineUnity::MeshGenerator::*_281)(int) = &SpineUnity::MeshGenerator::SubmeshIndexCount;
 extern "C" __declspec(dllexport) void c__N_SpineUnity_S_MeshGenerator__MeshGenerator(SpineUnity::MeshGenerator*__instance) { __instance->~MeshGenerator(); }

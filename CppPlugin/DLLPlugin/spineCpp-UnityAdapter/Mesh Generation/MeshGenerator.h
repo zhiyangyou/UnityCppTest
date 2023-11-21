@@ -2,6 +2,8 @@
 #include <limits>
 #include <memory>
 #include <vector>
+#include <initializer_list>
+#include <glm/glm.hpp> 
 
 #include <spine/Vector.h>
 #include <spine/Color.h>
@@ -11,6 +13,7 @@
 #include "SkeletonRendererInstruction.h"
 #include "SpineCppAdapterCore.h"
 #include "unity_spinecpp_plugin.h"
+
 namespace SpineUnity {
 
 	SP_API class MeshGenerator {
@@ -36,28 +39,27 @@ namespace SpineUnity {
 		MeshGenerator(const MeshGenerator&) = delete;
 		MeshGenerator(const MeshGenerator&&) = delete;
 	private:
-
-		Ref<spine::Vector<UnityEngine::Vector3>> vertexBuffer = CreateRef<spine::Vector<UnityEngine::Vector3>>();
-		Ref<spine::Vector<UnityEngine::Vector2>> uvBuffer = CreateRef<spine::Vector<UnityEngine::Vector2>>();
+		Ref<spine::Vector<glm::vec3>> vertexBuffer = CreateRef<spine::Vector<glm::vec3>>();
+		Ref<spine::Vector<glm::vec2>> uvBuffer = CreateRef<spine::Vector<glm::vec2>>();
 		Ref<spine::Vector<spine::Color32>> colorBuffer = CreateRef<spine::Vector<spine::Color32>>();
 		Ref<spine::Vector<Ref< spine::Vector<int>>>> submeshes = CreateRef<spine::Vector<Ref< spine::Vector<int>>>>();
 
-		UnityEngine::Vector2 meshBoundsMin;
-		UnityEngine::Vector2 meshBoundsMax;
+		glm::vec2 meshBoundsMin;
+		glm::vec2 meshBoundsMax;
 		float meshBoundsThickness = 0;
 		int submeshIndex = 0;
 
 
 		Ref <spine::SkeletonClipping> clipper = CreateRef<spine::SkeletonClipping>();
-		Ref <std::vector<float>>tempVerts = CreateRef<std::vector<float>>();
-		Ref <std::vector<int>>regionTriangles = CreateRef<std::vector<int>>(std::initializer_list<int>{0, 1, 2, 2, 3, 0 });
+		Ref <spine::Vector<float>>tempVerts = CreateRef<spine::Vector<float>>();
+		Ref <spine::Vector<unsigned short>>regionTriangles = CreateRef<spine::Vector<unsigned short>>(std::initializer_list<unsigned short>{0, 1, 2, 2, 3, 0 });
 
-		Ref<std::vector<UnityEngine::Vector3>> normals = CreateRef<std::vector<UnityEngine::Vector3>>();
-		Ref<std::vector<UnityEngine::Vector4>> tangents = CreateRef<std::vector<UnityEngine::Vector4>>();
-		Ref<std::vector<UnityEngine::Vector2>> tempTanBuffer = CreateRef<std::vector<UnityEngine::Vector2>>();
+		Ref<spine::Vector<glm::vec3>> normals = CreateRef<spine::Vector<glm::vec3>>();
+		Ref<spine::Vector<glm::vec4>> tangents = CreateRef<spine::Vector<glm::vec4>>();
+		Ref<spine::Vector<glm::vec2>> tempTanBuffer = CreateRef<spine::Vector<glm::vec2>>();
 
-		Ref<spine::Vector<UnityEngine::Vector2>> uv2 = CreateRef<spine::Vector<UnityEngine::Vector2>>();
-		Ref<spine::Vector<UnityEngine::Vector2>> uv3 = CreateRef<spine::Vector<UnityEngine::Vector2>>();
+		Ref<spine::Vector<glm::vec2>> uv2 = CreateRef<spine::Vector<glm::vec2>>();
+		Ref<spine::Vector<glm::vec2>> uv3 = CreateRef<spine::Vector<glm::vec2>>();
 
 	public:
 		inline int VertexCount() {
@@ -87,7 +89,11 @@ namespace SpineUnity {
 			spine::HashMap<UnityEngine::Material, UnityEngine::Material>* customMaterialOverride);
 	public:
 		// Step 2 : Populate vertex data and triangle index buffers.
-
+		void Begin();
+		void AddSubmesh(SubmeshInstruction& instruction, bool updateTriangles = true);
+		void BuildMesh(SkeletonRendererInstruction& instruction, bool updateTriangles);
+		void BuildMeshWithArrays(SkeletonRendererInstruction& instruction, bool updateTriangles);
+		void ScaleVertexData(float scale);
 	public:
 		// Step 3 : Transfer vertex and triangle data to UnityEngine.Mesh
 

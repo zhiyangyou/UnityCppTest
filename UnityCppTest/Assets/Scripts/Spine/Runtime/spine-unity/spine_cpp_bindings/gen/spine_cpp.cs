@@ -11676,6 +11676,9 @@ namespace spine_cpp
 
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "??0AtlasPage@spine@@QEAA@AEBV01@@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern __IntPtr cctor_1(__IntPtr __instance, __IntPtr _0);
+
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?ConvertTexture2Handle@AtlasPage@spine@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
+                internal static extern int ConvertTexture2Handle(__IntPtr __instance);
             }
 
             internal static new AtlasPage __CreateInstance(__IntPtr native, bool skipVTables = false)
@@ -11942,6 +11945,15 @@ namespace spine_cpp
                 set
                 {
                     ((__Internal*)__Instance)->texture = (__IntPtr) value;
+                }
+            }
+
+            public int ConvertTexture2Handle
+            {
+                get
+                {
+                    var ___ret = __Internal.ConvertTexture2Handle(__Instance);
+                    return ___ret;
                 }
             }
 
@@ -37870,10 +37882,10 @@ namespace spine_cpp
 
         public unsafe partial class SubmeshInstruction : IDisposable
         {
-            [StructLayout(LayoutKind.Sequential, Size = 80)]
+            [StructLayout(LayoutKind.Sequential, Size = 72)]
             public partial struct __Internal
             {
-                internal global::Std.SharedPtr.__Internal skeleton;
+                internal __IntPtr skeleton;
                 internal int startSlot;
                 internal int endSlot;
 //                internal global::spine_cpp.UnityEngine.Material.__Internal material; //comment by 'SpineCppGenBindings' program
@@ -38001,6 +38013,20 @@ namespace spine_cpp
                 if (__ownsNativeInstance)
                     Marshal.FreeHGlobal(__Instance);
                 __Instance = IntPtr.Zero;
+            }
+
+            public global::spine_cpp.Spine.Skeleton Skeleton
+            {
+                get
+                {
+                    var __result0 = global::spine_cpp.Spine.Skeleton.__GetOrCreateInstance(((__Internal*)__Instance)->skeleton, true);
+                    return __result0;
+                }
+
+                set
+                {
+                    ((__Internal*)__Instance)->skeleton = value is null ? __IntPtr.Zero : value.__Instance;
+                }
             }
 
             public int StartSlot
@@ -38764,8 +38790,9 @@ namespace spine_cpp
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?SubmeshIndexCount@MeshGenerator@SpineUnity@@QEAAHH@Z", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int SubmeshIndexCount(__IntPtr __instance, int submeshIndex);
 
-                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?GenerateSingleSubmeshInstruction@MeshGenerator@SpineUnity@@SAXXZ", CallingConvention = __CallingConvention.Cdecl)]
-                internal static extern void GenerateSingleSubmeshInstruction();
+                [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?RequiresMultipleSubmeshesByDrawOrder@MeshGenerator@SpineUnity@@SA_NAEAVSkeleton@spine@@@Z", CallingConvention = __CallingConvention.Cdecl)]
+                [return: MarshalAs(UnmanagedType.I1)]
+                internal static extern bool RequiresMultipleSubmeshesByDrawOrder(__IntPtr skeleton);
 
                 [SuppressUnmanagedCodeSecurity, DllImport("spine_cpp", EntryPoint = "?VertexCount@MeshGenerator@SpineUnity@@QEAAHXZ", CallingConvention = __CallingConvention.Cdecl)]
                 internal static extern int VertexCount(__IntPtr __instance);
@@ -38868,9 +38895,13 @@ namespace spine_cpp
                 return ___ret;
             }
 
-            public static void GenerateSingleSubmeshInstruction()
+            public static bool RequiresMultipleSubmeshesByDrawOrder(global::spine_cpp.Spine.Skeleton skeleton)
             {
-                __Internal.GenerateSingleSubmeshInstruction();
+                if (ReferenceEquals(skeleton, null))
+                    throw new global::System.ArgumentNullException("skeleton", "Cannot be null because it is a C++ reference (&).");
+                var __arg0 = skeleton.__Instance;
+                var ___ret = __Internal.RequiresMultipleSubmeshesByDrawOrder(__arg0);
+                return ___ret;
             }
 
             public float BoundsMinDefault
