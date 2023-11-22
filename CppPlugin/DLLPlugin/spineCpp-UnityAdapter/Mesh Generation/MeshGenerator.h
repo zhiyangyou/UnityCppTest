@@ -94,6 +94,7 @@ namespace SpineUnity {
 		void BuildMesh(SkeletonRendererInstruction& instruction, bool updateTriangles);
 		void BuildMeshWithArrays(SkeletonRendererInstruction& instruction, bool updateTriangles);
 		void ScaleVertexData(float scale);
+		void AddAttachmentTintBlack(float r2, float g2, float b2, float a, int vertexCount);
 	public:
 		// Step 3 : Transfer vertex and triangle data to UnityEngine.Mesh
 

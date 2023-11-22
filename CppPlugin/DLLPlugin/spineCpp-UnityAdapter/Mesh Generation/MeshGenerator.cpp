@@ -405,7 +405,7 @@ namespace SpineUnity {
 		Skeleton* skeleton = instruction.skeleton;
 		Vector<Slot*>& drawOrderItems = skeleton->getDrawOrder();
 
-		Color32 color = Color32::default();
+		Color32 color = Color32::DefaultV();
 		float skeletonA = skeleton->getColor().a;
 		float skeletonR = skeleton->getColor().r;
 		float skeletonG = skeleton->getColor().g;
@@ -491,149 +491,456 @@ namespace SpineUnity {
 				// If not any renderable attachment.
 				clipper->clipEnd(*slot);
 				continue;
-			}
-		}
-		2023年11月21日23:47:27  工作断点
-		float tintBlackAlpha = 1.0f;
-		if (pmaVertexColors) {
-			float colorA = skeletonA * slot.A * c.a;
-			color.a = (byte)(colorA * 255);
-			color.r = (byte)(skeletonR * slot.R * c.r * color.a);
-			color.g = (byte)(skeletonG * slot.G * c.g * color.a);
-			color.b = (byte)(skeletonB * slot.B * c.b * color.a);
-			if (slot.Data.BlendMode == BlendMode.Additive) {
-				if (canvasGroupTintBlack)
-					tintBlackAlpha = 0;
-				else
-					color.a = 0;
-			}
-			else if (canvasGroupTintBlack) { // other blend modes
-				tintBlackAlpha = colorA;
-			}
-		}
-		else {
-			color.a = (byte)(skeletonA * slot.A * c.a * 255);
-			color.r = (byte)(skeletonR * slot.R * c.r * 255);
-			color.g = (byte)(skeletonG * slot.G * c.g * 255);
-			color.b = (byte)(skeletonB * slot.B * c.b * 255);
-		}
 
-		if (useClipping && clipper.IsClipping) {
-			clipper.ClipTriangles(workingVerts, attachmentVertexCount << 1, attachmentTriangleIndices, attachmentIndexCount, uvs);
-			workingVerts = clipper.ClippedVertices.Items;
-			attachmentVertexCount = clipper.ClippedVertices.Count >> 1;
-			attachmentTriangleIndices = clipper.ClippedTriangles.Items;
-			attachmentIndexCount = clipper.ClippedTriangles.Count;
-			uvs = clipper.ClippedUVs.Items;
-		}
-
-		// Actually add slot/attachment data into buffers.
-		if (attachmentVertexCount != 0 && attachmentIndexCount != 0) {
-			if (tintBlack) {
-				float r2 = slot.R2;
-				float g2 = slot.G2;
-				float b2 = slot.B2;
-				if (pmaVertexColors) {
-					float alpha = skeletonA * slot.A * c.a;
-					r2 *= alpha;
-					g2 *= alpha;
-					b2 *= alpha;
+			}
+			float tintBlackAlpha = 1.0f;
+			if (pmaVertexColors) {
+				float colorA = skeletonA * slot->getColor().a * c.a;
+				color.a = (uint8_t)(colorA * 255.0f);
+				color.r = (uint8_t)(skeletonR * slot->getColor().r * c.r * color.a);
+				color.g = (uint8_t)(skeletonG * slot->getColor().g * c.g * color.a);
+				color.b = (uint8_t)(skeletonB * slot->getColor().b * c.b * color.a);
+				if (slot->getData().getBlendMode() == BlendMode::BlendMode_Additive) {
+					if (canvasGroupTintBlack)
+						tintBlackAlpha = 0;
+					else
+						color.a = 0;
 				}
-				AddAttachmentTintBlack(r2, g2, b2, tintBlackAlpha, attachmentVertexCount);
-			}
-
-			//AddAttachment(workingVerts, uvs, color, attachmentTriangleIndices, attachmentVertexCount, attachmentIndexCount, ref meshBoundsMin, ref meshBoundsMax, z);
-			int ovc = vertexBuffer.Count;
-			// Add data to vertex buffers
-			{
-				int newVertexCount = ovc + attachmentVertexCount;
-				int oldArraySize = vertexBuffer.Items.Length;
-				if (newVertexCount > oldArraySize) {
-					int newArraySize = (int)(oldArraySize * 1.3f);
-					if (newArraySize < newVertexCount) newArraySize = newVertexCount;
-					Array.Resize(ref vertexBuffer.Items, newArraySize);
-					Array.Resize(ref uvBuffer.Items, newArraySize);
-					Array.Resize(ref colorBuffer.Items, newArraySize);
-				}
-				vertexBuffer.Count = uvBuffer.Count = colorBuffer.Count = newVertexCount;
-			}
-
-			Vector3[] vbi = vertexBuffer.Items;
-			Vector2[] ubi = uvBuffer.Items;
-			Color32[] cbi = colorBuffer.Items;
-			if (ovc == 0) {
-				for (int i = 0; i < attachmentVertexCount; i++) {
-					int vi = ovc + i;
-					int i2 = i << 1; // i * 2
-					float x = workingVerts[i2];
-					float y = workingVerts[i2 + 1];
-
-					vbi[vi].x = x;
-					vbi[vi].y = y;
-					vbi[vi].z = z;
-					ubi[vi].x = uvs[i2];
-					ubi[vi].y = uvs[i2 + 1];
-					cbi[vi] = color;
-
-					// Calculate bounds.
-					if (x < meshBoundsMin.x) meshBoundsMin.x = x;
-					if (x > meshBoundsMax.x) meshBoundsMax.x = x;
-					if (y < meshBoundsMin.y) meshBoundsMin.y = y;
-					if (y > meshBoundsMax.y) meshBoundsMax.y = y;
+				else if (canvasGroupTintBlack) { // other blend modes
+					tintBlackAlpha = colorA;
 				}
 			}
 			else {
-				for (int i = 0; i < attachmentVertexCount; i++) {
-					int vi = ovc + i;
-					int i2 = i << 1; // i * 2
-					float x = workingVerts[i2];
-					float y = workingVerts[i2 + 1];
+				color.a = (uint8_t)(skeletonA * slot->getColor().a * c.a * 255.0f);
+				color.r = (uint8_t)(skeletonR * slot->getColor().r * c.r * 255.0f);
+				color.g = (uint8_t)(skeletonG * slot->getColor().g * c.g * 255.0f);
+				color.b = (uint8_t)(skeletonB * slot->getColor().b * c.b * 255.0f);
+			}
 
-					vbi[vi].x = x;
-					vbi[vi].y = y;
-					vbi[vi].z = z;
-					ubi[vi].x = uvs[i2];
-					ubi[vi].y = uvs[i2 + 1];
-					cbi[vi] = color;
+			if (useClipping && clipper->isClipping()) {
+				clipper->clipTriangles(*workingVerts, *attachmentTriangleIndices, *uvs, 2);
+				workingVerts.reset(&(clipper->getClippedVertices()));
+				attachmentVertexCount = clipper->getClippedVertices().size() >> 1;
+				attachmentTriangleIndices.reset(&(clipper->getClippedTriangles()));
+				attachmentIndexCount = clipper->getClippedTriangles().size();
+				uvs = &(clipper->getClippedUVs());
+			}
 
-					// Calculate bounds.
-					if (x < meshBoundsMin.x) meshBoundsMin.x = x;
-					else if (x > meshBoundsMax.x) meshBoundsMax.x = x;
-					if (y < meshBoundsMin.y) meshBoundsMin.y = y;
-					else if (y > meshBoundsMax.y) meshBoundsMax.y = y;
+			// Actually add slot/attachment data into buffers.
+			if (attachmentVertexCount != 0 && attachmentIndexCount != 0) {
+				if (tintBlack) {
+					float r2 = slot->getDarkColor().r;
+					float g2 = slot->getDarkColor().g;
+					float b2 = slot->getDarkColor().b;
+					if (pmaVertexColors) {
+						float alpha = skeletonA * slot->getColor().a * c.a;
+						r2 *= alpha;
+						g2 *= alpha;
+						b2 *= alpha;
+					}
+					AddAttachmentTintBlack(r2, g2, b2, tintBlackAlpha, attachmentVertexCount);
+				}
+
+				//AddAttachment(workingVerts, uvs, color, attachmentTriangleIndices, attachmentVertexCount, attachmentIndexCount, ref meshBoundsMin, ref meshBoundsMax, z);
+				int ovc = vertexBuffer->size();
+				// Add data to vertex buffers
+				{
+					int newVertexCount = ovc + attachmentVertexCount;
+					int oldArraySize = vertexBuffer->size();
+					if (newVertexCount > oldArraySize)
+					{
+						int newArraySize = (int)(oldArraySize * 1.3f);
+						if (newArraySize < newVertexCount)
+						{
+							newArraySize = newVertexCount;
+						}
+						vertexBuffer->setSizeDirectlyAndEnsureCapcity(newArraySize);
+						uvBuffer->setSizeDirectlyAndEnsureCapcity(newArraySize);
+						colorBuffer->setSizeDirectlyAndEnsureCapcity(newArraySize);
+					}
+					vertexBuffer->setSizeDirectly(newVertexCount);
+					uvBuffer->setSizeDirectly(newVertexCount);
+					colorBuffer->setSizeDirectly(newVertexCount);
+
+				}
+
+				glm::vec3* vbi = vertexBuffer->buffer();
+				glm::vec2* ubi = uvBuffer->buffer();
+				spine::Color32* cbi = colorBuffer->buffer();
+				if (ovc == 0) {
+					for (int i = 0; i < attachmentVertexCount; i++) {
+						int vi = ovc + i;
+						int i2 = i << 1; // i * 2
+						float x = (*workingVerts)[i2];
+						float y = (*workingVerts)[i2 + 1];
+
+						vbi[vi].x = x;
+						vbi[vi].y = y;
+						vbi[vi].z = z;
+						ubi[vi].x = (*uvs)[i2];
+						ubi[vi].y = (*uvs)[i2 + 1];
+						cbi[vi] = color;
+
+						// Calculate bounds.
+						if (x < meshBoundsMin.x) meshBoundsMin.x = x;
+						if (x > meshBoundsMax.x) meshBoundsMax.x = x;
+						if (y < meshBoundsMin.y) meshBoundsMin.y = y;
+						if (y > meshBoundsMax.y) meshBoundsMax.y = y;
+					}
+				}
+				else {
+					for (int i = 0; i < attachmentVertexCount; i++) {
+						int vi = ovc + i;
+						int i2 = i << 1; // i * 2
+						float x = (*workingVerts)[i2];
+						float y = (*workingVerts)[i2 + 1];
+
+						vbi[vi].x = x;
+						vbi[vi].y = y;
+						vbi[vi].z = z;
+						ubi[vi].x = (*uvs)[i2];
+						ubi[vi].y = (*uvs)[i2 + 1];
+						cbi[vi] = color;
+
+						// Calculate bounds.
+						if (x < meshBoundsMin.x) meshBoundsMin.x = x;
+						else if (x > meshBoundsMax.x) meshBoundsMax.x = x;
+						if (y < meshBoundsMin.y) meshBoundsMin.y = y;
+						else if (y > meshBoundsMax.y) meshBoundsMax.y = y;
+					}
+				}
+
+
+				// Add data to triangle buffer
+				if (updateTriangles) {
+					int oldTriangleCount = submesh->size();
+					{ //submesh.Resize(oldTriangleCount + attachmentIndexCount);
+						int newTriangleCount = oldTriangleCount + attachmentIndexCount;
+						if (newTriangleCount > submesh->size()) {
+							submesh->setSizeDirectlyAndEnsureCapcity(newTriangleCount);
+						}
+						submesh->setSizeDirectly(newTriangleCount);
+					}
+					//int[] submeshItems = submesh.Items;
+					for (int i = 0; i < attachmentIndexCount; i++)
+						(*submesh)[oldTriangleCount + i] = (*attachmentTriangleIndices)[i] + ovc;
 				}
 			}
 
+			clipper->clipEnd(*slot);
+		}
+		clipper->clipEnd();
 
-			// Add data to triangle buffer
-			if (updateTriangles) {
-				int oldTriangleCount = submesh.Count;
-				{ //submesh.Resize(oldTriangleCount + attachmentIndexCount);
-					int newTriangleCount = oldTriangleCount + attachmentIndexCount;
-					if (newTriangleCount > submesh.Items.Length) Array.Resize(ref submesh.Items, newTriangleCount);
-					submesh.Count = newTriangleCount;
+		this->meshBoundsMin = meshBoundsMin;
+		this->meshBoundsMax = meshBoundsMax;
+		meshBoundsThickness = instruction.endSlot * zSpacing;
+
+		// Trim or zero submesh triangles.
+		//int[] currentSubmeshItems = submesh.Items;
+		for (int i = submesh->size(), n = submesh->size(); i < n; i++)
+		{
+			(*submesh)[i] = 0;
+		}
+		submeshIndex++; // Next AddSubmesh will use a new submeshIndex value.
+
+	}
+
+	void MeshGenerator::BuildMesh(SkeletonRendererInstruction& instruction, bool updateTriangles)
+	{
+		for (int i = 0, n = instruction.submeshInstructions->size(); i < n; i++)
+			this->AddSubmesh((*instruction.submeshInstructions)[i], updateTriangles);
+	}
+
+	void MeshGenerator::BuildMeshWithArrays(SkeletonRendererInstruction& instruction, bool updateTriangles)
+	{
+		using namespace  spine;
+		Settings settings = this->settings();
+		bool canvasGroupTintBlack = settings.tintBlack && settings.canvasGroupTintBlack;
+		int totalVertexCount = instruction.rawVertexCount;
+
+		// Add data to vertex buffers
+		{
+			if (totalVertexCount > vertexBuffer.Items.Length) { // Manual ExposedList.Resize()
+				Array.Resize(ref vertexBuffer.Items, totalVertexCount);
+				Array.Resize(ref uvBuffer.Items, totalVertexCount);
+				Array.Resize(ref colorBuffer.Items, totalVertexCount);
+			}
+			vertexBuffer.Count = uvBuffer.Count = colorBuffer.Count = totalVertexCount;
+		}
+
+		// Populate Verts
+		Color32 color = default(Color32);
+
+		int vertexIndex = 0;
+		float[] tempVerts = this.tempVerts;
+		Vector2 bmin = this.meshBoundsMin;
+		Vector2 bmax = this.meshBoundsMax;
+
+		Vector3[] vbi = vertexBuffer.Items;
+		Vector2[] ubi = uvBuffer.Items;
+		Color32[] cbi = colorBuffer.Items;
+		int lastSlotIndex = 0;
+
+		// drawOrder[endSlot] is excluded
+		for (int si = 0, n = instruction.submeshInstructions.Count; si < n; si++) {
+			SubmeshInstruction submesh = instruction.submeshInstructions.Items[si];
+			Skeleton skeleton = submesh.skeleton;
+			Slot[] drawOrderItems = skeleton.DrawOrder.Items;
+			float a = skeleton.A, r = skeleton.R, g = skeleton.G, b = skeleton.B;
+
+			int endSlot = submesh.endSlot;
+			int startSlot = submesh.startSlot;
+			lastSlotIndex = endSlot;
+
+			if (settings.tintBlack) {
+				Vector2 rg, b2;
+				int vi = vertexIndex;
+				b2.y = 1f;
+
+				{
+					if (uv2 == null) {
+						uv2 = new ExposedList<Vector2>();
+						uv3 = new ExposedList<Vector2>();
+					}
+					if (totalVertexCount > uv2.Items.Length) { // Manual ExposedList.Resize()
+						Array.Resize(ref uv2.Items, totalVertexCount);
+						Array.Resize(ref uv3.Items, totalVertexCount);
+					}
+					uv2.Count = uv3.Count = totalVertexCount;
 				}
-				int[] submeshItems = submesh.Items;
-				for (int i = 0; i < attachmentIndexCount; i++)
-					submeshItems[oldTriangleCount + i] = attachmentTriangleIndices[i] + ovc;
+
+				Vector2[] uv2i = uv2.Items;
+				Vector2[] uv3i = uv3.Items;
+
+				for (int slotIndex = startSlot; slotIndex < endSlot; slotIndex++) {
+					Slot slot = drawOrderItems[slotIndex];
+					if (!slot.Bone.Active) continue;
+					Attachment attachment = slot.Attachment;
+
+					rg.x = slot.R2; //r
+					rg.y = slot.G2; //g
+					b2.x = slot.B2; //b
+					b2.y = 1.0f;
+
+					RegionAttachment regionAttachment = attachment as RegionAttachment;
+					if (regionAttachment != null) {
+						if (settings.pmaVertexColors) {
+							float alpha = a * slot.A * regionAttachment.A;
+							rg.x *= alpha;
+							rg.y *= alpha;
+							b2.x *= alpha;
+							b2.y = slot.Data.BlendMode == BlendMode.Additive ? 0 : alpha;
+						}
+						uv2i[vi] = rg; uv2i[vi + 1] = rg; uv2i[vi + 2] = rg; uv2i[vi + 3] = rg;
+						uv3i[vi] = b2; uv3i[vi + 1] = b2; uv3i[vi + 2] = b2; uv3i[vi + 3] = b2;
+						vi += 4;
+					}
+					else { //} if (settings.renderMeshes) {
+						MeshAttachment meshAttachment = attachment as MeshAttachment;
+						if (meshAttachment != null) {
+							if (settings.pmaVertexColors) {
+								float alpha = a * slot.A * meshAttachment.A;
+								rg.x *= alpha;
+								rg.y *= alpha;
+								b2.x *= alpha;
+								b2.y = slot.Data.BlendMode == BlendMode.Additive ? 0 : alpha;
+							}
+							int verticesArrayLength = meshAttachment.WorldVerticesLength;
+							for (int iii = 0; iii < verticesArrayLength; iii += 2) {
+								uv2i[vi] = rg;
+								uv3i[vi] = b2;
+								vi++;
+							}
+						}
+					}
+				}
+			}
+
+			for (int slotIndex = startSlot; slotIndex < endSlot; slotIndex++) {
+				Slot slot = drawOrderItems[slotIndex];
+				if (!slot.Bone.Active) continue;
+				Attachment attachment = slot.Attachment;
+				float z = slotIndex * settings.zSpacing;
+
+				RegionAttachment regionAttachment = attachment as RegionAttachment;
+				if (regionAttachment != null) {
+					regionAttachment.ComputeWorldVertices(slot, tempVerts, 0);
+
+					float x1 = tempVerts[RegionAttachment.BLX], y1 = tempVerts[RegionAttachment.BLY];
+					float x2 = tempVerts[RegionAttachment.ULX], y2 = tempVerts[RegionAttachment.ULY];
+					float x3 = tempVerts[RegionAttachment.URX], y3 = tempVerts[RegionAttachment.URY];
+					float x4 = tempVerts[RegionAttachment.BRX], y4 = tempVerts[RegionAttachment.BRY];
+					vbi[vertexIndex].x = x1; vbi[vertexIndex].y = y1; vbi[vertexIndex].z = z;
+					vbi[vertexIndex + 1].x = x4; vbi[vertexIndex + 1].y = y4; vbi[vertexIndex + 1].z = z;
+					vbi[vertexIndex + 2].x = x2; vbi[vertexIndex + 2].y = y2; vbi[vertexIndex + 2].z = z;
+					vbi[vertexIndex + 3].x = x3; vbi[vertexIndex + 3].y = y3; vbi[vertexIndex + 3].z = z;
+
+					if (settings.pmaVertexColors) {
+						color.a = (byte)(a * slot.A * regionAttachment.A * 255);
+						color.r = (byte)(r * slot.R * regionAttachment.R * color.a);
+						color.g = (byte)(g * slot.G * regionAttachment.G * color.a);
+						color.b = (byte)(b * slot.B * regionAttachment.B * color.a);
+						if (slot.Data.BlendMode == BlendMode.Additive && !canvasGroupTintBlack) color.a = 0;
+					}
+					else {
+						color.a = (byte)(a * slot.A * regionAttachment.A * 255);
+						color.r = (byte)(r * slot.R * regionAttachment.R * 255);
+						color.g = (byte)(g * slot.G * regionAttachment.G * 255);
+						color.b = (byte)(b * slot.B * regionAttachment.B * 255);
+					}
+
+					cbi[vertexIndex] = color; cbi[vertexIndex + 1] = color; cbi[vertexIndex + 2] = color; cbi[vertexIndex + 3] = color;
+
+					float[] regionUVs = regionAttachment.UVs;
+					ubi[vertexIndex].x = regionUVs[RegionAttachment.BLX]; ubi[vertexIndex].y = regionUVs[RegionAttachment.BLY];
+					ubi[vertexIndex + 1].x = regionUVs[RegionAttachment.BRX]; ubi[vertexIndex + 1].y = regionUVs[RegionAttachment.BRY];
+					ubi[vertexIndex + 2].x = regionUVs[RegionAttachment.ULX]; ubi[vertexIndex + 2].y = regionUVs[RegionAttachment.ULY];
+					ubi[vertexIndex + 3].x = regionUVs[RegionAttachment.URX]; ubi[vertexIndex + 3].y = regionUVs[RegionAttachment.URY];
+
+					if (x1 < bmin.x) bmin.x = x1; // Potential first attachment bounds initialization. Initial min should not block initial max. Same for Y below.
+					if (x1 > bmax.x) bmax.x = x1;
+					if (x2 < bmin.x) bmin.x = x2;
+					else if (x2 > bmax.x) bmax.x = x2;
+					if (x3 < bmin.x) bmin.x = x3;
+					else if (x3 > bmax.x) bmax.x = x3;
+					if (x4 < bmin.x) bmin.x = x4;
+					else if (x4 > bmax.x) bmax.x = x4;
+
+					if (y1 < bmin.y) bmin.y = y1;
+					if (y1 > bmax.y) bmax.y = y1;
+					if (y2 < bmin.y) bmin.y = y2;
+					else if (y2 > bmax.y) bmax.y = y2;
+					if (y3 < bmin.y) bmin.y = y3;
+					else if (y3 > bmax.y) bmax.y = y3;
+					if (y4 < bmin.y) bmin.y = y4;
+					else if (y4 > bmax.y) bmax.y = y4;
+
+					vertexIndex += 4;
+				}
+				else { //if (settings.renderMeshes) {
+					MeshAttachment meshAttachment = attachment as MeshAttachment;
+					if (meshAttachment != null) {
+						int verticesArrayLength = meshAttachment.WorldVerticesLength;
+						if (tempVerts.Length < verticesArrayLength) this.tempVerts = tempVerts = new float[verticesArrayLength];
+						meshAttachment.ComputeWorldVertices(slot, tempVerts);
+
+						if (settings.pmaVertexColors) {
+							color.a = (byte)(a * slot.A * meshAttachment.A * 255);
+							color.r = (byte)(r * slot.R * meshAttachment.R * color.a);
+							color.g = (byte)(g * slot.G * meshAttachment.G * color.a);
+							color.b = (byte)(b * slot.B * meshAttachment.B * color.a);
+							if (slot.Data.BlendMode == BlendMode.Additive && !canvasGroupTintBlack) color.a = 0;
+						}
+						else {
+							color.a = (byte)(a * slot.A * meshAttachment.A * 255);
+							color.r = (byte)(r * slot.R * meshAttachment.R * 255);
+							color.g = (byte)(g * slot.G * meshAttachment.G * 255);
+							color.b = (byte)(b * slot.B * meshAttachment.B * 255);
+						}
+
+						float[] attachmentUVs = meshAttachment.UVs;
+
+						// Potential first attachment bounds initialization. See conditions in RegionAttachment logic.
+						if (vertexIndex == 0) {
+							// Initial min should not block initial max.
+							// vi == vertexIndex does not always mean the bounds are fresh. It could be a submesh. Do not nuke old values by omitting the check.
+							// Should know that this is the first attachment in the submesh. slotIndex == startSlot could be an empty slot.
+							float fx = tempVerts[0], fy = tempVerts[1];
+							if (fx < bmin.x) bmin.x = fx;
+							if (fx > bmax.x) bmax.x = fx;
+							if (fy < bmin.y) bmin.y = fy;
+							if (fy > bmax.y) bmax.y = fy;
+						}
+
+						for (int iii = 0; iii < verticesArrayLength; iii += 2) {
+							float x = tempVerts[iii], y = tempVerts[iii + 1];
+							vbi[vertexIndex].x = x; vbi[vertexIndex].y = y; vbi[vertexIndex].z = z;
+							cbi[vertexIndex] = color; ubi[vertexIndex].x = attachmentUVs[iii]; ubi[vertexIndex].y = attachmentUVs[iii + 1];
+
+							if (x < bmin.x) bmin.x = x;
+							else if (x > bmax.x) bmax.x = x;
+
+							if (y < bmin.y) bmin.y = y;
+							else if (y > bmax.y) bmax.y = y;
+
+							vertexIndex++;
+						}
+					}
+				}
 			}
 		}
 
-		clipper.ClipEnd(slot);
+		this.meshBoundsMin = bmin;
+		this.meshBoundsMax = bmax;
+		this.meshBoundsThickness = lastSlotIndex * settings.zSpacing;
+
+		int submeshInstructionCount = instruction.submeshInstructions.Count;
+		submeshes.Count = submeshInstructionCount;
+
+		// Add triangles
+		if (updateTriangles) {
+			// Match submesh buffers count with submeshInstruction count.
+			if (this.submeshes.Items.Length < submeshInstructionCount) {
+				this.submeshes.Resize(submeshInstructionCount);
+				for (int i = 0, n = submeshInstructionCount; i < n; i++) {
+					ExposedList<int> submeshBuffer = this.submeshes.Items[i];
+					if (submeshBuffer == null)
+						this.submeshes.Items[i] = new ExposedList<int>();
+					else
+						submeshBuffer.Clear(false);
+				}
+			}
+
+			SubmeshInstruction[] submeshInstructionsItems = instruction.submeshInstructions.Items; // This relies on the resize above.
+
+			// Fill the buffers.
+			int attachmentFirstVertex = 0;
+			for (int smbi = 0; smbi < submeshInstructionCount; smbi++) {
+				SubmeshInstruction submeshInstruction = submeshInstructionsItems[smbi];
+				ExposedList<int> currentSubmeshBuffer = this.submeshes.Items[smbi];
+				{ //submesh.Resize(submesh.rawTriangleCount);
+					int newTriangleCount = submeshInstruction.rawTriangleCount;
+					if (newTriangleCount > currentSubmeshBuffer.Items.Length)
+						Array.Resize(ref currentSubmeshBuffer.Items, newTriangleCount);
+					else if (newTriangleCount < currentSubmeshBuffer.Items.Length) {
+						// Zero the extra.
+						int[] sbi = currentSubmeshBuffer.Items;
+						for (int ei = newTriangleCount, nn = sbi.Length; ei < nn; ei++)
+							sbi[ei] = 0;
+					}
+					currentSubmeshBuffer.Count = newTriangleCount;
+				}
+
+				int[] tris = currentSubmeshBuffer.Items;
+				int triangleIndex = 0;
+				Skeleton skeleton = submeshInstruction.skeleton;
+				Slot[] drawOrderItems = skeleton.DrawOrder.Items;
+				for (int slotIndex = submeshInstruction.startSlot, endSlot = submeshInstruction.endSlot; slotIndex < endSlot; slotIndex++) {
+					Slot slot = drawOrderItems[slotIndex];
+					if (!slot.Bone.Active) continue;
+
+					Attachment attachment = drawOrderItems[slotIndex].Attachment;
+					if (attachment is RegionAttachment) {
+						tris[triangleIndex] = attachmentFirstVertex;
+						tris[triangleIndex + 1] = attachmentFirstVertex + 2;
+						tris[triangleIndex + 2] = attachmentFirstVertex + 1;
+						tris[triangleIndex + 3] = attachmentFirstVertex + 2;
+						tris[triangleIndex + 4] = attachmentFirstVertex + 3;
+						tris[triangleIndex + 5] = attachmentFirstVertex + 1;
+						triangleIndex += 6;
+						attachmentFirstVertex += 4;
+						continue;
+					}
+					MeshAttachment meshAttachment = attachment as MeshAttachment;
+					if (meshAttachment != null) {
+						int[] attachmentTriangles = meshAttachment.Triangles;
+						for (int ii = 0, nn = attachmentTriangles.Length; ii < nn; ii++, triangleIndex++)
+							tris[triangleIndex] = attachmentFirstVertex + attachmentTriangles[ii];
+						attachmentFirstVertex += meshAttachment.WorldVerticesLength >> 1; // length/2;
+					}
+				}
+			}
+		}
 	}
-	clipper.ClipEnd();
-
-	this.meshBoundsMin = meshBoundsMin;
-	this.meshBoundsMax = meshBoundsMax;
-	meshBoundsThickness = instruction.endSlot * zSpacing;
-
-	// Trim or zero submesh triangles.
-	int[] currentSubmeshItems = submesh.Items;
-	for (int i = submesh.Count, n = currentSubmeshItems.Length; i < n; i++)
-		currentSubmeshItems[i] = 0;
-
-	submeshIndex++; // Next AddSubmesh will use a new submeshIndex value.
-
-}
 
 }
