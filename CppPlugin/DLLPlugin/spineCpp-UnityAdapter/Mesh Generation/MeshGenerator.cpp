@@ -660,116 +660,122 @@ namespace SpineUnity {
 
 		// Add data to vertex buffers
 		{
-			if (totalVertexCount > vertexBuffer.Items.Length) { // Manual ExposedList.Resize()
-				Array.Resize(ref vertexBuffer.Items, totalVertexCount);
-				Array.Resize(ref uvBuffer.Items, totalVertexCount);
-				Array.Resize(ref colorBuffer.Items, totalVertexCount);
+			if (totalVertexCount > vertexBuffer->size()) { // Manual ExposedList.Resize()
+				vertexBuffer->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
+				uvBuffer->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
+				colorBuffer->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
 			}
-			vertexBuffer.Count = uvBuffer.Count = colorBuffer.Count = totalVertexCount;
+			vertexBuffer->setSizeDirectly(totalVertexCount);
+			uvBuffer->setSizeDirectly(totalVertexCount);
+			colorBuffer->setSizeDirectly(totalVertexCount);
 		}
 
 		// Populate Verts
-		Color32 color = default(Color32);
+		Color32 color = Color32::DefaultV();
 
 		int vertexIndex = 0;
-		float[] tempVerts = this.tempVerts;
-		Vector2 bmin = this.meshBoundsMin;
-		Vector2 bmax = this.meshBoundsMax;
+		float* tempVerts = this->tempVerts->buffer();
+		glm::vec2 bmin = this->meshBoundsMin;
+		glm::vec2 bmax = this->meshBoundsMax;
 
-		Vector3[] vbi = vertexBuffer.Items;
-		Vector2[] ubi = uvBuffer.Items;
-		Color32[] cbi = colorBuffer.Items;
+		glm::vec3* vbi = vertexBuffer->buffer();
+		glm::vec2* ubi = uvBuffer->buffer();
+		Color32* cbi = colorBuffer->buffer();
 		int lastSlotIndex = 0;
 
 		// drawOrder[endSlot] is excluded
-		for (int si = 0, n = instruction.submeshInstructions.Count; si < n; si++) {
-			SubmeshInstruction submesh = instruction.submeshInstructions.Items[si];
-			Skeleton skeleton = submesh.skeleton;
-			Slot[] drawOrderItems = skeleton.DrawOrder.Items;
-			float a = skeleton.A, r = skeleton.R, g = skeleton.G, b = skeleton.B;
+		for (int si = 0, n = instruction.submeshInstructions->size(); si < n; si++) {
+			SubmeshInstruction submesh = (*instruction.submeshInstructions)[si];
+			Skeleton* skeleton = submesh.skeleton;
+			Vector<Slot*>& drawOrderItems = skeleton->getDrawOrder();
+			float a = skeleton->getColor().a;
+			float r = skeleton->getColor().r;
+			float g = skeleton->getColor().g;
+			float b = skeleton->getColor().b;
 
 			int endSlot = submesh.endSlot;
 			int startSlot = submesh.startSlot;
 			lastSlotIndex = endSlot;
 
 			if (settings.tintBlack) {
-				Vector2 rg, b2;
+				glm::vec2  rg;
+				glm::vec2  b2;
 				int vi = vertexIndex;
-				b2.y = 1f;
-
+				b2.y = 1.0f;
 				{
-					if (uv2 == null) {
-						uv2 = new ExposedList<Vector2>();
-						uv3 = new ExposedList<Vector2>();
+					if (totalVertexCount > uv2->size()) { // Manual ExposedList.Resize()
+						uv2->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
+						uv3->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
 					}
-					if (totalVertexCount > uv2.Items.Length) { // Manual ExposedList.Resize()
-						Array.Resize(ref uv2.Items, totalVertexCount);
-						Array.Resize(ref uv3.Items, totalVertexCount);
-					}
-					uv2.Count = uv3.Count = totalVertexCount;
+					uv2->setSizeDirectly(totalVertexCount);
+					uv3->setSizeDirectly(totalVertexCount);
 				}
 
-				Vector2[] uv2i = uv2.Items;
-				Vector2[] uv3i = uv3.Items;
+				glm::vec2* uv2i = uv2->buffer();
+				glm::vec2* uv3i = uv3->buffer();
 
-				for (int slotIndex = startSlot; slotIndex < endSlot; slotIndex++) {
-					Slot slot = drawOrderItems[slotIndex];
-					if (!slot.Bone.Active) continue;
-					Attachment attachment = slot.Attachment;
+				for (int slotIndex = startSlot; slotIndex < endSlot; slotIndex++)
+				{
+					Slot* slot = drawOrderItems[slotIndex];
+					if (!slot->getBone().isActive())
+					{
+						continue;
+					}
+					Attachment* attachment = slot->getAttachment();
 
-					rg.x = slot.R2; //r
-					rg.y = slot.G2; //g
-					b2.x = slot.B2; //b
+					rg.x = slot->getDarkColor().r; //r
+					rg.y = slot->getDarkColor().g; //g
+					b2.x = slot->getDarkColor().b; //b
 					b2.y = 1.0f;
 
-					RegionAttachment regionAttachment = attachment as RegionAttachment;
-					if (regionAttachment != null) {
+					if (IsThisAttachment<RegionAttachment>(attachment))
+					{
+						RegionAttachment* regionAttachment = static_cast<RegionAttachment*>(attachment);
 						if (settings.pmaVertexColors) {
-							float alpha = a * slot.A * regionAttachment.A;
+							float alpha = a * slot->getColor().a * regionAttachment->getColor().a;
 							rg.x *= alpha;
 							rg.y *= alpha;
 							b2.x *= alpha;
-							b2.y = slot.Data.BlendMode == BlendMode.Additive ? 0 : alpha;
+							b2.y = slot->getData().getBlendMode() == BlendMode_Additive ? 0 : alpha;
 						}
 						uv2i[vi] = rg; uv2i[vi + 1] = rg; uv2i[vi + 2] = rg; uv2i[vi + 3] = rg;
 						uv3i[vi] = b2; uv3i[vi + 1] = b2; uv3i[vi + 2] = b2; uv3i[vi + 3] = b2;
 						vi += 4;
 					}
-					else { //} if (settings.renderMeshes) {
-						MeshAttachment meshAttachment = attachment as MeshAttachment;
-						if (meshAttachment != null) {
-							if (settings.pmaVertexColors) {
-								float alpha = a * slot.A * meshAttachment.A;
-								rg.x *= alpha;
-								rg.y *= alpha;
-								b2.x *= alpha;
-								b2.y = slot.Data.BlendMode == BlendMode.Additive ? 0 : alpha;
-							}
-							int verticesArrayLength = meshAttachment.WorldVerticesLength;
-							for (int iii = 0; iii < verticesArrayLength; iii += 2) {
-								uv2i[vi] = rg;
-								uv3i[vi] = b2;
-								vi++;
-							}
+					else  if (IsThisAttachment<MeshAttachment>(attachment)) {
+						MeshAttachment* meshAttachment = static_cast<MeshAttachment*> (attachment);
+
+						if (settings.pmaVertexColors) {
+							float alpha = a * slot->getColor().a * meshAttachment->getColor().a;
+							rg.x *= alpha;
+							rg.y *= alpha;
+							b2.x *= alpha;
+							b2.y = slot->getData().getBlendMode() == BlendMode_Additive ? 0 : alpha;
+						}
+						int verticesArrayLength = meshAttachment->getWorldVerticesLength();
+						for (int iii = 0; iii < verticesArrayLength; iii += 2) {
+							uv2i[vi] = rg;
+							uv3i[vi] = b2;
+							vi++;
 						}
 					}
 				}
 			}
 
 			for (int slotIndex = startSlot; slotIndex < endSlot; slotIndex++) {
-				Slot slot = drawOrderItems[slotIndex];
-				if (!slot.Bone.Active) continue;
-				Attachment attachment = slot.Attachment;
+				Slot* slot = drawOrderItems[slotIndex];
+				if (!slot->getBone().isActive()) continue;
+				Attachment* attachment = slot->getAttachment();
 				float z = slotIndex * settings.zSpacing;
 
 				RegionAttachment regionAttachment = attachment as RegionAttachment;
 				if (regionAttachment != null) {
 					regionAttachment.ComputeWorldVertices(slot, tempVerts, 0);
 
-					float x1 = tempVerts[RegionAttachment.BLX], y1 = tempVerts[RegionAttachment.BLY];
-					float x2 = tempVerts[RegionAttachment.ULX], y2 = tempVerts[RegionAttachment.ULY];
-					float x3 = tempVerts[RegionAttachment.URX], y3 = tempVerts[RegionAttachment.URY];
-					float x4 = tempVerts[RegionAttachment.BRX], y4 = tempVerts[RegionAttachment.BRY];
+					float x1 = tempVerts[RegionAttachment::BLX], y1 = tempVerts[RegionAttachment::BLY];
+					float x2 = tempVerts[RegionAttachment::ULX], y2 = tempVerts[RegionAttachment::ULY];
+					float x3 = tempVerts[RegionAttachment::URX], y3 = tempVerts[RegionAttachment::URY];
+					float x4 = tempVerts[RegionAttachment::BRX], y4 = tempVerts[RegionAttachment::BRY];
 					vbi[vertexIndex].x = x1; vbi[vertexIndex].y = y1; vbi[vertexIndex].z = z;
 					vbi[vertexIndex + 1].x = x4; vbi[vertexIndex + 1].y = y4; vbi[vertexIndex + 1].z = z;
 					vbi[vertexIndex + 2].x = x2; vbi[vertexIndex + 2].y = y2; vbi[vertexIndex + 2].z = z;
