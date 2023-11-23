@@ -15,6 +15,16 @@
 #include "unity_spinecpp_plugin.h"
 
 namespace SpineUnity {
+	struct Bounds
+	{
+		glm::vec3 Center;
+		glm::vec3  Extents;
+
+		static Bounds Default()
+		{
+			return { {0.0f,0.0f,0.0f}, {0.0f,0.0f,0.0f} };
+		}
+	};
 
 	SP_API class MeshGenerator {
 		struct Settings {
@@ -42,7 +52,7 @@ namespace SpineUnity {
 		Ref<spine::Vector<glm::vec3>> vertexBuffer = CreateRef<spine::Vector<glm::vec3>>();
 		Ref<spine::Vector<glm::vec2>> uvBuffer = CreateRef<spine::Vector<glm::vec2>>();
 		Ref<spine::Vector<spine::Color32>> colorBuffer = CreateRef<spine::Vector<spine::Color32>>();
-		
+
 		Ref<spine::Vector<spine::Vector<int>*>> submeshes = CreateRef<spine::Vector< spine::Vector<int>*>>();
 
 		glm::vec2 meshBoundsMin;
@@ -95,11 +105,11 @@ namespace SpineUnity {
 		void BuildMesh(SkeletonRendererInstruction& instruction, bool updateTriangles);
 		void BuildMeshWithArrays(SkeletonRendererInstruction& instruction, bool updateTriangles);
 		void ScaleVertexData(float scale);
-		
+		SpineUnity::Bounds GetMeshBounds();
 		void AddAttachmentTintBlack(float r2, float g2, float b2, float a, int vertexCount);
 	public:
 		// Step 3 : Transfer vertex and triangle data to UnityEngine.Mesh
-
+		2023年11月23日23:47:10 
 	};
 
 

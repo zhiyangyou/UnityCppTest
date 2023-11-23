@@ -104,6 +104,11 @@
 					"Types": [
 						"UnityEngine.Vector2"
 					]
+				},
+				{
+					"Types": [
+						"UnityEngine.Bounds"
+					]
 				}
 			]
 		},
@@ -427,7 +432,8 @@
 					]
 				}
 			],
-			
+			"Properties": [
+			],
 			"Methods": [
 				{
 					"Name": "MarkDynamic",

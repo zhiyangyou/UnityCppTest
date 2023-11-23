@@ -974,11 +974,24 @@ namespace SpineUnity {
 		meshBoundsThickness *= scale;
 	}
 
+	SpineUnity::Bounds MeshGenerator::GetMeshBounds()
+	{
+		if ((meshBoundsMin.x) >= std::numeric_limits<float>::max() * 0.5f) { // meshBoundsMin.x == BoundsMinDefault // == doesn't work on float Infinity constants.
+			return Bounds::Default();
+		}
+		float halfWidth = (meshBoundsMax.x - meshBoundsMin.x) * 0.5f;
+		float halfHeight = (meshBoundsMax.y - meshBoundsMin.y) * 0.5f;
+		return
+		{
+			{meshBoundsMin.x + halfWidth, meshBoundsMin.y + halfHeight,0.0f},
+			{halfWidth, halfHeight, meshBoundsThickness * 0.5f}
+		};
+	}
+
 	void MeshGenerator::AddAttachmentTintBlack(float r2, float g2, float b2, float a, int vertexCount)
 	{
 		glm::vec2 rg(r2, g2);
 		glm::vec2  bo(b2, a);
-
 		int ovc = vertexBuffer->size();
 		int newVertexCount = ovc + vertexCount;
 		{
