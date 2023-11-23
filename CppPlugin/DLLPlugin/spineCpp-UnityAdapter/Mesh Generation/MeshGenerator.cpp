@@ -7,7 +7,9 @@ namespace SpineUnity {
 
 	MeshGenerator::MeshGenerator()
 	{
-		submeshes->add(CreateRef<spine::Vector<int>>()); // start with 1 submesh.
+		submeshes->add(new spine::Vector<int>()); // start with 1 submesh.
+		float zero = 0.0f;
+		tempVerts->addAll(8, zero);
 	}
 
 
@@ -16,6 +18,7 @@ namespace SpineUnity {
 	{
 		return att->getRTTI().instanceOf(T::rtti);
 	}
+
 
 	void MeshGenerator::GenerateSingleSubmeshInstruction(SkeletonRendererInstruction& instructionOutput, spine::Skeleton& skeleton, UnityEngine::Material& material)
 	{
@@ -391,13 +394,16 @@ namespace SpineUnity {
 		int newSubmeshCount = submeshIndex + 1;
 		if (submeshes->size() < newSubmeshCount)
 		{
-			submeshes->setSize(newSubmeshCount, CreateRef<spine::Vector<int>>());
+			submeshes->setSizeWithFunc(newSubmeshCount, [](void* ptrAddress)
+				{
+					new (ptrAddress) spine::Vector<int>();
+				});
 		}
 
-		Ref<spine::Vector<int>> submesh = (*submeshes)[submeshIndex];
+		spine::Vector<int>* submesh = (*submeshes)[submeshIndex];
 		if (submesh == nullptr)
 		{
-			(*submeshes)[submeshIndex] = submesh = CreateRef<spine::Vector<int>>();
+			(*submeshes)[submeshIndex] = submesh = new spine::Vector<int>();
 		}
 
 		submesh->clear();
@@ -543,25 +549,20 @@ namespace SpineUnity {
 
 				//AddAttachment(workingVerts, uvs, color, attachmentTriangleIndices, attachmentVertexCount, attachmentIndexCount, ref meshBoundsMin, ref meshBoundsMax, z);
 				int ovc = vertexBuffer->size();
-				// Add data to vertex buffers
-				{
-					int newVertexCount = ovc + attachmentVertexCount;
-					int oldArraySize = vertexBuffer->size();
-					if (newVertexCount > oldArraySize)
-					{
-						int newArraySize = (int)(oldArraySize * 1.3f);
-						if (newArraySize < newVertexCount)
-						{
-							newArraySize = newVertexCount;
-						}
-						vertexBuffer->setSizeDirectlyAndEnsureCapcity(newArraySize);
-						uvBuffer->setSizeDirectlyAndEnsureCapcity(newArraySize);
-						colorBuffer->setSizeDirectlyAndEnsureCapcity(newArraySize);
-					}
-					vertexBuffer->setSizeDirectly(newVertexCount);
-					uvBuffer->setSizeDirectly(newVertexCount);
-					colorBuffer->setSizeDirectly(newVertexCount);
 
+				// Add data to vertex buffers
+				int newVertexCount = ovc + attachmentVertexCount;
+				int oldArraySize = vertexBuffer->size();
+				if (newVertexCount > oldArraySize)
+				{
+					int newArraySize = (int)(oldArraySize * 1.3f);
+					if (newArraySize < newVertexCount)
+					{
+						newArraySize = newVertexCount;
+					}
+					vertexBuffer->setSize(newArraySize, {});
+					uvBuffer->setSize(newArraySize, {});
+					colorBuffer->setSize(newArraySize, {});
 				}
 
 				glm::vec3* vbi = vertexBuffer->buffer();
@@ -612,14 +613,15 @@ namespace SpineUnity {
 
 
 				// Add data to triangle buffer
-				if (updateTriangles) {
+				if (updateTriangles)
+				{
 					int oldTriangleCount = submesh->size();
 					{ //submesh.Resize(oldTriangleCount + attachmentIndexCount);
 						int newTriangleCount = oldTriangleCount + attachmentIndexCount;
-						if (newTriangleCount > submesh->size()) {
-							submesh->setSizeDirectlyAndEnsureCapcity(newTriangleCount);
+						if (newTriangleCount > submesh->size())
+						{
+							submesh->setSize(newTriangleCount, 0);
 						}
-						submesh->setSizeDirectly(newTriangleCount);
 					}
 					//int[] submeshItems = submesh.Items;
 					for (int i = 0; i < attachmentIndexCount; i++)
@@ -658,23 +660,18 @@ namespace SpineUnity {
 		bool canvasGroupTintBlack = settings.tintBlack && settings.canvasGroupTintBlack;
 		int totalVertexCount = instruction.rawVertexCount;
 
-		// Add data to vertex buffers
-		{
-			if (totalVertexCount > vertexBuffer->size()) { // Manual ExposedList.Resize()
-				vertexBuffer->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
-				uvBuffer->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
-				colorBuffer->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
-			}
-			vertexBuffer->setSizeDirectly(totalVertexCount);
-			uvBuffer->setSizeDirectly(totalVertexCount);
-			colorBuffer->setSizeDirectly(totalVertexCount);
-		}
 
+		// Add data to vertex buffers
+
+		if (totalVertexCount > vertexBuffer->size()) { // Manual ExposedList.Resize()
+			vertexBuffer->setSize(totalVertexCount, {});
+			uvBuffer->setSize(totalVertexCount, {});
+			colorBuffer->setSize(totalVertexCount, {});
+		}
 		// Populate Verts
 		Color32 color = Color32::DefaultV();
 
 		int vertexIndex = 0;
-		float* tempVerts = this->tempVerts->buffer();
 		glm::vec2 bmin = this->meshBoundsMin;
 		glm::vec2 bmax = this->meshBoundsMax;
 
@@ -702,13 +699,10 @@ namespace SpineUnity {
 				glm::vec2  b2;
 				int vi = vertexIndex;
 				b2.y = 1.0f;
-				{
-					if (totalVertexCount > uv2->size()) { // Manual ExposedList.Resize()
-						uv2->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
-						uv3->setSizeDirectlyAndEnsureCapcity(totalVertexCount);
-					}
-					uv2->setSizeDirectly(totalVertexCount);
-					uv3->setSizeDirectly(totalVertexCount);
+
+				if (totalVertexCount > uv2->size()) { // Manual ExposedList.Resize()
+					uv2->setSize(totalVertexCount, {});
+					uv3->setSize(totalVertexCount, {});
 				}
 
 				glm::vec2* uv2i = uv2->buffer();
@@ -768,40 +762,40 @@ namespace SpineUnity {
 				Attachment* attachment = slot->getAttachment();
 				float z = slotIndex * settings.zSpacing;
 
-				RegionAttachment regionAttachment = attachment as RegionAttachment;
-				if (regionAttachment != null) {
-					regionAttachment.ComputeWorldVertices(slot, tempVerts, 0);
-
-					float x1 = tempVerts[RegionAttachment::BLX], y1 = tempVerts[RegionAttachment::BLY];
-					float x2 = tempVerts[RegionAttachment::ULX], y2 = tempVerts[RegionAttachment::ULY];
-					float x3 = tempVerts[RegionAttachment::URX], y3 = tempVerts[RegionAttachment::URY];
-					float x4 = tempVerts[RegionAttachment::BRX], y4 = tempVerts[RegionAttachment::BRY];
+				if (IsThisAttachment<RegionAttachment>(attachment))
+				{
+					RegionAttachment* regionAttachment = static_cast<RegionAttachment*>(attachment);
+					regionAttachment->computeWorldVertices(*slot, *tempVerts, 0);
+					float x1 = (*tempVerts)[RegionAttachment::BLX], y1 = (*tempVerts)[RegionAttachment::BLY];
+					float x2 = (*tempVerts)[RegionAttachment::ULX], y2 = (*tempVerts)[RegionAttachment::ULY];
+					float x3 = (*tempVerts)[RegionAttachment::URX], y3 = (*tempVerts)[RegionAttachment::URY];
+					float x4 = (*tempVerts)[RegionAttachment::BRX], y4 = (*tempVerts)[RegionAttachment::BRY];
 					vbi[vertexIndex].x = x1; vbi[vertexIndex].y = y1; vbi[vertexIndex].z = z;
 					vbi[vertexIndex + 1].x = x4; vbi[vertexIndex + 1].y = y4; vbi[vertexIndex + 1].z = z;
 					vbi[vertexIndex + 2].x = x2; vbi[vertexIndex + 2].y = y2; vbi[vertexIndex + 2].z = z;
 					vbi[vertexIndex + 3].x = x3; vbi[vertexIndex + 3].y = y3; vbi[vertexIndex + 3].z = z;
 
 					if (settings.pmaVertexColors) {
-						color.a = (byte)(a * slot.A * regionAttachment.A * 255);
-						color.r = (byte)(r * slot.R * regionAttachment.R * color.a);
-						color.g = (byte)(g * slot.G * regionAttachment.G * color.a);
-						color.b = (byte)(b * slot.B * regionAttachment.B * color.a);
-						if (slot.Data.BlendMode == BlendMode.Additive && !canvasGroupTintBlack) color.a = 0;
+						color.a = (uint8_t)(a * slot->getColor().a * regionAttachment->getColor().a * 255.0f);
+						color.r = (uint8_t)(r * slot->getColor().r * regionAttachment->getColor().r * color.a);
+						color.g = (uint8_t)(g * slot->getColor().g * regionAttachment->getColor().g * color.a);
+						color.b = (uint8_t)(b * slot->getColor().b * regionAttachment->getColor().b * color.a);
+						if (slot->getData().getBlendMode() == BlendMode_Additive && !canvasGroupTintBlack) color.a = 0;
 					}
 					else {
-						color.a = (byte)(a * slot.A * regionAttachment.A * 255);
-						color.r = (byte)(r * slot.R * regionAttachment.R * 255);
-						color.g = (byte)(g * slot.G * regionAttachment.G * 255);
-						color.b = (byte)(b * slot.B * regionAttachment.B * 255);
+						color.a = (uint8_t)(a * slot->getColor().a * regionAttachment->getColor().a * 255.0f);
+						color.r = (uint8_t)(r * slot->getColor().r * regionAttachment->getColor().r * 255.0f);
+						color.g = (uint8_t)(g * slot->getColor().g * regionAttachment->getColor().g * 255.0f);
+						color.b = (uint8_t)(b * slot->getColor().b * regionAttachment->getColor().b * 255.0f);
 					}
 
 					cbi[vertexIndex] = color; cbi[vertexIndex + 1] = color; cbi[vertexIndex + 2] = color; cbi[vertexIndex + 3] = color;
 
-					float[] regionUVs = regionAttachment.UVs;
-					ubi[vertexIndex].x = regionUVs[RegionAttachment.BLX]; ubi[vertexIndex].y = regionUVs[RegionAttachment.BLY];
-					ubi[vertexIndex + 1].x = regionUVs[RegionAttachment.BRX]; ubi[vertexIndex + 1].y = regionUVs[RegionAttachment.BRY];
-					ubi[vertexIndex + 2].x = regionUVs[RegionAttachment.ULX]; ubi[vertexIndex + 2].y = regionUVs[RegionAttachment.ULY];
-					ubi[vertexIndex + 3].x = regionUVs[RegionAttachment.URX]; ubi[vertexIndex + 3].y = regionUVs[RegionAttachment.URY];
+					Vector<float>& regionUVs = regionAttachment->getUVs();
+					ubi[vertexIndex].x = regionUVs[RegionAttachment::BLX]; ubi[vertexIndex].y = regionUVs[RegionAttachment::BLY];
+					ubi[vertexIndex + 1].x = regionUVs[RegionAttachment::BRX]; ubi[vertexIndex + 1].y = regionUVs[RegionAttachment::BRY];
+					ubi[vertexIndex + 2].x = regionUVs[RegionAttachment::ULX]; ubi[vertexIndex + 2].y = regionUVs[RegionAttachment::ULY];
+					ubi[vertexIndex + 3].x = regionUVs[RegionAttachment::URX]; ubi[vertexIndex + 3].y = regionUVs[RegionAttachment::URY];
 
 					if (x1 < bmin.x) bmin.x = x1; // Potential first attachment bounds initialization. Initial min should not block initial max. Same for Y below.
 					if (x1 > bmax.x) bmax.x = x1;
@@ -823,110 +817,128 @@ namespace SpineUnity {
 
 					vertexIndex += 4;
 				}
-				else { //if (settings.renderMeshes) {
-					MeshAttachment meshAttachment = attachment as MeshAttachment;
-					if (meshAttachment != null) {
-						int verticesArrayLength = meshAttachment.WorldVerticesLength;
-						if (tempVerts.Length < verticesArrayLength) this.tempVerts = tempVerts = new float[verticesArrayLength];
-						meshAttachment.ComputeWorldVertices(slot, tempVerts);
+				else if (IsThisAttachment<MeshAttachment>(attachment))
+				{ //if (settings.renderMeshes) {
+					MeshAttachment* meshAttachment = static_cast<MeshAttachment*>(attachment);
 
-						if (settings.pmaVertexColors) {
-							color.a = (byte)(a * slot.A * meshAttachment.A * 255);
-							color.r = (byte)(r * slot.R * meshAttachment.R * color.a);
-							color.g = (byte)(g * slot.G * meshAttachment.G * color.a);
-							color.b = (byte)(b * slot.B * meshAttachment.B * color.a);
-							if (slot.Data.BlendMode == BlendMode.Additive && !canvasGroupTintBlack) color.a = 0;
-						}
-						else {
-							color.a = (byte)(a * slot.A * meshAttachment.A * 255);
-							color.r = (byte)(r * slot.R * meshAttachment.R * 255);
-							color.g = (byte)(g * slot.G * meshAttachment.G * 255);
-							color.b = (byte)(b * slot.B * meshAttachment.B * 255);
-						}
+					int verticesArrayLength = meshAttachment->getWorldVerticesLength();
+					if (tempVerts->size() < verticesArrayLength)
+					{
+						this->tempVerts->setSize(verticesArrayLength, 0);
+					}
+					meshAttachment->computeWorldVertices(*slot, *tempVerts);
 
-						float[] attachmentUVs = meshAttachment.UVs;
+					if (settings.pmaVertexColors) {
+						color.a = (uint8_t)(a * slot->getColor().a * meshAttachment->getColor().a * 255.0f);
+						color.r = (uint8_t)(r * slot->getColor().r * meshAttachment->getColor().r * color.a);
+						color.g = (uint8_t)(g * slot->getColor().g * meshAttachment->getColor().g * color.a);
+						color.b = (uint8_t)(b * slot->getColor().b * meshAttachment->getColor().b * color.a);
+						if (slot->getData().getBlendMode() == BlendMode_Additive && !canvasGroupTintBlack) color.a = 0;
+					}
+					else {
+						color.a = (uint8_t)(a * slot->getColor().a * meshAttachment->getColor().a * 255.0f);
+						color.r = (uint8_t)(r * slot->getColor().r * meshAttachment->getColor().r * 255.0f);
+						color.g = (uint8_t)(g * slot->getColor().g * meshAttachment->getColor().g * 255.0f);
+						color.b = (uint8_t)(b * slot->getColor().b * meshAttachment->getColor().b * 255.0f);
+					}
 
-						// Potential first attachment bounds initialization. See conditions in RegionAttachment logic.
-						if (vertexIndex == 0) {
-							// Initial min should not block initial max.
-							// vi == vertexIndex does not always mean the bounds are fresh. It could be a submesh. Do not nuke old values by omitting the check.
-							// Should know that this is the first attachment in the submesh. slotIndex == startSlot could be an empty slot.
-							float fx = tempVerts[0], fy = tempVerts[1];
-							if (fx < bmin.x) bmin.x = fx;
-							if (fx > bmax.x) bmax.x = fx;
-							if (fy < bmin.y) bmin.y = fy;
-							if (fy > bmax.y) bmax.y = fy;
-						}
+					Vector<float>& attachmentUVs = meshAttachment->getUVs();
 
-						for (int iii = 0; iii < verticesArrayLength; iii += 2) {
-							float x = tempVerts[iii], y = tempVerts[iii + 1];
-							vbi[vertexIndex].x = x; vbi[vertexIndex].y = y; vbi[vertexIndex].z = z;
-							cbi[vertexIndex] = color; ubi[vertexIndex].x = attachmentUVs[iii]; ubi[vertexIndex].y = attachmentUVs[iii + 1];
+					// Potential first attachment bounds initialization. See conditions in RegionAttachment logic.
+					if (vertexIndex == 0) {
+						// Initial min should not block initial max.
+						// vi == vertexIndex does not always mean the bounds are fresh. It could be a submesh. Do not nuke old values by omitting the check.
+						// Should know that this is the first attachment in the submesh. slotIndex == startSlot could be an empty slot.
+						float fx = (*tempVerts)[0];
+						float fy = (*tempVerts)[1];
+						if (fx < bmin.x) bmin.x = fx;
+						if (fx > bmax.x) bmax.x = fx;
+						if (fy < bmin.y) bmin.y = fy;
+						if (fy > bmax.y) bmax.y = fy;
+					}
 
-							if (x < bmin.x) bmin.x = x;
-							else if (x > bmax.x) bmax.x = x;
+					for (int iii = 0; iii < verticesArrayLength; iii += 2) {
+						float x = (*tempVerts)[iii], y = (*tempVerts)[iii + 1];
+						vbi[vertexIndex].x = x; vbi[vertexIndex].y = y; vbi[vertexIndex].z = z;
+						cbi[vertexIndex] = color; ubi[vertexIndex].x = attachmentUVs[iii]; ubi[vertexIndex].y = attachmentUVs[iii + 1];
 
-							if (y < bmin.y) bmin.y = y;
-							else if (y > bmax.y) bmax.y = y;
+						if (x < bmin.x) bmin.x = x;
+						else if (x > bmax.x) bmax.x = x;
 
-							vertexIndex++;
-						}
+						if (y < bmin.y) bmin.y = y;
+						else if (y > bmax.y) bmax.y = y;
+
+						vertexIndex++;
 					}
 				}
 			}
 		}
 
-		this.meshBoundsMin = bmin;
-		this.meshBoundsMax = bmax;
-		this.meshBoundsThickness = lastSlotIndex * settings.zSpacing;
+		meshBoundsMin = bmin;
+		meshBoundsMax = bmax;
+		meshBoundsThickness = lastSlotIndex * settings.zSpacing;
 
-		int submeshInstructionCount = instruction.submeshInstructions.Count;
-		submeshes.Count = submeshInstructionCount;
+		int submeshInstructionCount = instruction.submeshInstructions->size();
+		submeshes->setSizeWithFunc(submeshInstructionCount, [](void* ptrAddress)
+			{
+				new(ptrAddress) spine::Vector<int>();
+			}
+		);
 
 		// Add triangles
 		if (updateTriangles) {
 			// Match submesh buffers count with submeshInstruction count.
-			if (this.submeshes.Items.Length < submeshInstructionCount) {
-				this.submeshes.Resize(submeshInstructionCount);
+			if (submeshes->size() < submeshInstructionCount) {
+				submeshes->setSizeWithFunc(submeshInstructionCount, [](void* ptr)
+					{
+						new(ptr) spine::Vector<int>();
+					}
+				);
 				for (int i = 0, n = submeshInstructionCount; i < n; i++) {
-					ExposedList<int> submeshBuffer = this.submeshes.Items[i];
-					if (submeshBuffer == null)
-						this.submeshes.Items[i] = new ExposedList<int>();
+					spine::Vector<int>* submeshBuffer = (*submeshes)[i];
+					if (submeshBuffer == nullptr)
+					{
+						(*submeshes)[i] = new spine::Vector<int>();
+					}
 					else
-						submeshBuffer.Clear(false);
+					{
+						submeshBuffer->clear();
+					}
 				}
 			}
 
-			SubmeshInstruction[] submeshInstructionsItems = instruction.submeshInstructions.Items; // This relies on the resize above.
+			Ref<spine::Vector<SubmeshInstruction>> submeshInstructionsItems = instruction.submeshInstructions; // This relies on the resize above.
 
 			// Fill the buffers.
 			int attachmentFirstVertex = 0;
 			for (int smbi = 0; smbi < submeshInstructionCount; smbi++) {
-				SubmeshInstruction submeshInstruction = submeshInstructionsItems[smbi];
-				ExposedList<int> currentSubmeshBuffer = this.submeshes.Items[smbi];
+				SubmeshInstruction& submeshInstruction = (*submeshInstructionsItems)[smbi];
+				spine::Vector<int>* currentSubmeshBuffer = (*submeshes)[smbi];
 				{ //submesh.Resize(submesh.rawTriangleCount);
 					int newTriangleCount = submeshInstruction.rawTriangleCount;
-					if (newTriangleCount > currentSubmeshBuffer.Items.Length)
-						Array.Resize(ref currentSubmeshBuffer.Items, newTriangleCount);
-					else if (newTriangleCount < currentSubmeshBuffer.Items.Length) {
-						// Zero the extra.
-						int[] sbi = currentSubmeshBuffer.Items;
-						for (int ei = newTriangleCount, nn = sbi.Length; ei < nn; ei++)
+					if (newTriangleCount > currentSubmeshBuffer->size())
+					{
+						currentSubmeshBuffer->setSize(newTriangleCount, 0);
+					}
+					else if (newTriangleCount < currentSubmeshBuffer->size()) {
+						int sbiLen = currentSubmeshBuffer->size();
+						int* sbi = currentSubmeshBuffer->buffer();
+						for (int ei = newTriangleCount, nn = sbiLen; ei < nn; ei++)
 							sbi[ei] = 0;
 					}
-					currentSubmeshBuffer.Count = newTriangleCount;
 				}
 
-				int[] tris = currentSubmeshBuffer.Items;
+				int* tris = currentSubmeshBuffer->buffer();
 				int triangleIndex = 0;
-				Skeleton skeleton = submeshInstruction.skeleton;
-				Slot[] drawOrderItems = skeleton.DrawOrder.Items;
+				Skeleton* skeleton = submeshInstruction.skeleton;
+				Vector<Slot*>& drawOrderItems = skeleton->getDrawOrder();
 				for (int slotIndex = submeshInstruction.startSlot, endSlot = submeshInstruction.endSlot; slotIndex < endSlot; slotIndex++) {
-					Slot slot = drawOrderItems[slotIndex];
-					if (!slot.Bone.Active) continue;
+					Slot* slot = drawOrderItems[slotIndex];
+					if (!slot->getBone().isActive()) continue;
 
-					Attachment attachment = drawOrderItems[slotIndex].Attachment;
-					if (attachment is RegionAttachment) {
+					Attachment* attachment = drawOrderItems[slotIndex]->getAttachment();
+					if (IsThisAttachment<RegionAttachment>(attachment))
+					{
 						tris[triangleIndex] = attachmentFirstVertex;
 						tris[triangleIndex + 1] = attachmentFirstVertex + 2;
 						tris[triangleIndex + 2] = attachmentFirstVertex + 1;
@@ -937,15 +949,51 @@ namespace SpineUnity {
 						attachmentFirstVertex += 4;
 						continue;
 					}
-					MeshAttachment meshAttachment = attachment as MeshAttachment;
-					if (meshAttachment != null) {
-						int[] attachmentTriangles = meshAttachment.Triangles;
-						for (int ii = 0, nn = attachmentTriangles.Length; ii < nn; ii++, triangleIndex++)
+					else if (IsThisAttachment<MeshAttachment>(attachment))
+					{
+						MeshAttachment* meshAttachment = static_cast<MeshAttachment*> (attachment);
+						Vector<unsigned short>& attachmentTriangles = meshAttachment->getTriangles();
+						for (int ii = 0, nn = attachmentTriangles.size(); ii < nn; ii++, triangleIndex++)
 							tris[triangleIndex] = attachmentFirstVertex + attachmentTriangles[ii];
-						attachmentFirstVertex += meshAttachment.WorldVerticesLength >> 1; // length/2;
+						attachmentFirstVertex += (meshAttachment->getWorldVerticesLength() >> 1); // length/2;
 					}
 				}
 			}
+		}
+	}
+
+	void MeshGenerator::ScaleVertexData(float scale)
+	{
+		glm::vec3* vertBuffer = vertexBuffer->buffer();
+		for (int i = 0, n = vertexBuffer->size(); i < n; i++) {
+			(*(vertBuffer + i)) *= scale; // vbi[i].x *= scale; vbi[i].y *= scale;
+		}
+
+		meshBoundsMin *= scale;
+		meshBoundsMax *= scale;
+		meshBoundsThickness *= scale;
+	}
+
+	void MeshGenerator::AddAttachmentTintBlack(float r2, float g2, float b2, float a, int vertexCount)
+	{
+		glm::vec2 rg(r2, g2);
+		glm::vec2  bo(b2, a);
+
+		int ovc = vertexBuffer->size();
+		int newVertexCount = ovc + vertexCount;
+		{
+			if (uv2 == nullptr) {
+				uv2 = CreateRef<spine::Vector<glm::vec2>>();
+				uv3 = CreateRef<spine::Vector<glm::vec2>>();
+			}
+			if (newVertexCount > uv2->size()) { // Manual ExposedList.Resize()
+				uv2->setSize(newVertexCount, {});
+				uv3->setSize(newVertexCount, {});
+			}
+		}
+		for (int i = 0; i < vertexCount; i++) {
+			(*uv2)[ovc + i] = rg;
+			(*uv3)[ovc + i] = bo;
 		}
 	}
 

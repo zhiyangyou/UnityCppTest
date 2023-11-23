@@ -51,6 +51,7 @@ namespace App
             _mesh.Clear();
             _mesh.MarkDynamic();
             System.String str;
+            UnityEngine.Bounds b;
             // UnityEngine.Object.Destroy();
             // UnityEngine.Object.DestroyImmediate();
             // UnityEngine.Application.isPlaying;
