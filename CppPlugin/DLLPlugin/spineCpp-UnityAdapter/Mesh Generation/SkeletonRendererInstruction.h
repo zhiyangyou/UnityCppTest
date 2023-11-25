@@ -1,7 +1,5 @@
 ﻿#pragma once
-#include <spine/Vector.h>
-#include <spine/Skeleton.h>
-
+#include <spine/Vector.h> 
 #include "SpineMesh.h"
 #include "SpineCppAdapterCore.h"
 

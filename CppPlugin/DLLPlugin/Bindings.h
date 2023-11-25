@@ -580,11 +580,6 @@ namespace System
 
 namespace System
 {
-	template<> struct IEquatable_1<UnityEngine::Bounds>;
-}
-
-namespace System
-{
 	template<> struct IComparable_1<System::Boolean>;
 }
 
@@ -1141,23 +1136,6 @@ namespace System
 		IEquatable_1<UnityEngine::Vector2>& operator=(IEquatable_1<UnityEngine::Vector2>&& other);
 		bool operator==(const IEquatable_1<UnityEngine::Vector2>& other) const;
 		bool operator!=(const IEquatable_1<UnityEngine::Vector2>& other) const;
-	};
-}
-
-namespace System
-{
-	template<> struct IEquatable_1<UnityEngine::Bounds> : virtual System::Object
-	{
-		IEquatable_1(decltype(nullptr));
-		IEquatable_1(Plugin::InternalUse, int32_t handle);
-		IEquatable_1(const IEquatable_1<UnityEngine::Bounds>& other);
-		IEquatable_1(IEquatable_1<UnityEngine::Bounds>&& other);
-		virtual ~IEquatable_1();
-		IEquatable_1<UnityEngine::Bounds>& operator=(const IEquatable_1<UnityEngine::Bounds>& other);
-		IEquatable_1<UnityEngine::Bounds>& operator=(decltype(nullptr));
-		IEquatable_1<UnityEngine::Bounds>& operator=(IEquatable_1<UnityEngine::Bounds>&& other);
-		bool operator==(const IEquatable_1<UnityEngine::Bounds>& other) const;
-		bool operator!=(const IEquatable_1<UnityEngine::Bounds>& other) const;
 	};
 }
 

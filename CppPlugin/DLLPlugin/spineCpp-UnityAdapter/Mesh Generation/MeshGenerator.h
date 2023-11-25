@@ -6,14 +6,20 @@
 #include <glm/glm.hpp> 
 
 #include <spine/Vector.h>
-#include <spine/Color.h>
-#include <spine/SkeletonClipping.h>
+#include <spine/Color.h> 
+#include <spine/HashMap.h>
 
 #include "Bindings.h"
 #include "SkeletonRendererInstruction.h"
 #include "SpineCppAdapterCore.h"
 #include "unity_spinecpp_plugin.h"
 
+namespace spine
+{
+	class RegionAttachment;
+	class MeshAttachment;
+	class SkeletonData;
+}
 namespace SpineUnity {
 	struct Bounds
 	{
@@ -108,8 +114,25 @@ namespace SpineUnity {
 		SpineUnity::Bounds GetMeshBounds();
 		void AddAttachmentTintBlack(float r2, float g2, float b2, float a, int vertexCount);
 	public:
+		//2023年11月25日12:17:18 移植代码
 		// Step 3 : Transfer vertex and triangle data to UnityEngine.Mesh
-		2023年11月23日23:47:10 
+		void FillVertexData(UnityEngine::Mesh& mesh);
+		void FillLateVertexData(UnityEngine::Mesh& mesh);
+		void FillTriangles(UnityEngine::Mesh& mesh);
+	public:
+		void SolveTangents2DEnsureSize(spine::Vector<glm::vec4>& tangentBuffer, spine::Vector<glm::vec2>& tempTanBuffer, int vertexCount, int vertexBufferLength);
+		void SolveTangents2DTriangles(spine::Vector<glm::vec2>& tempTanBuffer, spine::Vector<int>& triangles, int triangleCount, spine::Vector<glm::vec3>& vertices, spine::Vector<glm::vec2>& uvs, int vertexCount);
+		void SolveTangents2DBuffer(spine::Vector<glm::vec4>& tangents, spine::Vector<glm::vec2>& tempTanBuffer, int vertexCount);
+	private:
+		Ref<spine::Vector<glm::vec3>>AttachmentVerts = CreateRef<spine::Vector<glm::vec3>>();
+		Ref<spine::Vector<glm::vec2>> AttachmentUVs = CreateRef<spine::Vector<glm::vec2>>();
+		Ref<spine::Vector<spine::Color32>>AttachmentColors32 = CreateRef<spine::Vector<spine::Color32>>();
+		Ref<spine::Vector<int>> AttachmentIndices = CreateRef<spine::Vector<int>>();
+
+	public:
+		//CS侧 没有对这个的引用
+		//void FillMeshLocal(UnityEngine::Mesh& mesh, spine::RegionAttachment* regionAttachment);
+		//void FillMeshLocal(UnityEngine::Mesh& mesh, spine::MeshAttachment* meshAttachment, spine::SkeletonData* skeletonData);
 	};
 
 

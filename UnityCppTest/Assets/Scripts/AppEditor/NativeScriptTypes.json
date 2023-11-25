@@ -104,11 +104,6 @@
 					"Types": [
 						"UnityEngine.Vector2"
 					]
-				},
-				{
-					"Types": [
-						"UnityEngine.Bounds"
-					]
 				}
 			]
 		},
