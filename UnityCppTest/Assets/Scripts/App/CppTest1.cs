@@ -1,9 +1,12 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using App.Utils;
 using Spine.Unity;
 using Unity.Collections;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace App
 {
@@ -39,6 +42,29 @@ namespace App
         private Proxy_Atlas _proxyAtlas = null;
         private Proxy_SkeletonData _proxySkeletonData = null;
 
+        static void ReflectMesh_SetArrayForChannelImpl_Injected()
+        {
+            
+            Type meshType = typeof(Mesh);
+
+            // 获取SetSizedNativeArrayForChannel方法
+            MethodInfo mi_SetArrayForChannelImpl_Injected = meshType.GetMethod("SetArrayForChannelImpl_Injected", BindingFlags.Static | BindingFlags.NonPublic);
+            MethodInfo mi_Obj2Ptr = typeof(Object).GetMethod("GetPtrFromInstanceID", BindingFlags.Static | BindingFlags.NonPublic);
+            IntPtr ptr =  mi_SetArrayForChannelImpl_Injected.MethodHandle.Value;
+            int a = 0;
+            Mesh m = new Mesh();
+            var param = new object[3];
+            param[0] = (object)m.GetInstanceID();
+            param[1] = typeof(Mesh);
+            param[2] = null;
+            IntPtr _unity_self =(IntPtr) mi_Obj2Ptr.Invoke(null, param) ;
+            Debug.Log(_unity_self);
+            Debug.Log($"is mono {param[2]}");
+            // IntPtr _unity_self = Object.MarshalledUnityObject.MarshalNotNull(m);
+            // Mesh.SetArrayForChannelImpl_Injected(_unity_self, channel, format, dim, values, arraySize, valuesStart, valuesCount, flags);
+            // m.SetVertices();
+            //Marshal.GetFunctionPointerForDelegate();
+        }
         private void OnGUI()
         {
             //使用这个来装换Unity的对象Handle
@@ -47,11 +73,7 @@ namespace App
             // UnityEngine. (ObjectStore.Get(meshHandle) as UnityEngine.Mesh);
 
             // UnityEngine.Material mat = new Material();
-            _mesh = new Mesh();
-            _mesh.Clear();
-            _mesh.MarkDynamic();
-            System.String str;
-            UnityEngine.Bounds b = new Bounds();
+    
             // UnityEngine.Object.Destroy();
             // UnityEngine.Object.DestroyImmediate();
             // UnityEngine.Application.isPlaying;
@@ -64,6 +86,7 @@ namespace App
             // _mesh.SetUVs(,,,);
             if (GUI.Button(new Rect(100, 100, 100, 100), "Call Cpp"))
             {
+                ReflectMesh_SetArrayForChannelImpl_Injected();
                 string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
                 string jsonContent = skeletonDataAsset.skeletonJSON.text;
                 _proxyAtlas = new Proxy_Atlas(atlasContent);

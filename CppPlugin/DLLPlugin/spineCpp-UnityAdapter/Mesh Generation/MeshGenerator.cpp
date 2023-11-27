@@ -389,7 +389,7 @@ namespace SpineUnity {
 	{
 
 		using namespace  spine;
-		Settings settings = this->settings();
+		Settings settings = this->settings;
 
 		int newSubmeshCount = submeshIndex + 1;
 		if (submeshes->size() < newSubmeshCount)
@@ -656,7 +656,7 @@ namespace SpineUnity {
 	void MeshGenerator::BuildMeshWithArrays(SkeletonRendererInstruction& instruction, bool updateTriangles)
 	{
 		using namespace  spine;
-		Settings settings = this->settings();
+		Settings settings = this->settings;
 		bool canvasGroupTintBlack = settings.tintBlack && settings.canvasGroupTintBlack;
 		int totalVertexCount = instruction.rawVertexCount;
 
@@ -1007,6 +1007,160 @@ namespace SpineUnity {
 		for (int i = 0; i < vertexCount; i++) {
 			(*uv2)[ovc + i] = rg;
 			(*uv3)[ovc + i] = bo;
+		}
+	}
+
+
+
+	void MeshGenerator::FillVertexData(UnityEngine::Mesh& mesh)
+	{
+		glm::vec3* vbi = vertexBuffer->buffer();
+		glm::vec2* ubi = uvBuffer->buffer();
+		spine::Color32* cbi = colorBuffer->buffer();
+		int vbiLength = vertexBuffer->size();
+
+		// Zero the extra.
+		{
+			int listCount = vertexBuffer->size();
+			for (int i = listCount; i < vbiLength; i++)
+			{
+				vbi[i] = glm::vec3(0.0f);
+			}
+		}
+
+		// Set the vertex buffer.
+		{
+			mesh.vertices = vbi;
+			mesh.uv = ubi;
+			mesh.colors32 = cbi;
+			mesh.bounds = GetMeshBounds();
+		}
+
+		{
+			if (settings.addNormals) {
+				int oldLength = normals->size();
+
+				if (oldLength != vbiLength) {
+					this->normals->setSize(vbiLength, glm::vec3(0.0f, 0.0f, -1.0f));
+				}
+				mesh.normals = normals;
+			}
+
+			if (settings.tintBlack) {
+				if (uv2 != nullptr && uv2->size() > 0) {
+					// Sometimes, the vertex buffer becomes smaller. We need to trim the size of the tint black buffers to match.
+					if (vbiLength != uv2->size()) {
+						uv2->setSize(vbiLength, glm::vec2(0.0f));
+						uv3->setSize(vbiLength, glm::vec2(0.0f));
+					}
+					mesh.uv2 = uv2;
+					mesh.uv3 = uv3;
+				}
+			}
+		}
+	}
+
+	void MeshGenerator::FillLateVertexData(UnityEngine::Mesh& mesh)
+	{
+		if (settings.calculateTangents) {
+			int vertexCount = vertexBuffer->size();
+			//ExposedList<int>[] sbi = submeshes.Items;
+			int submeshCount = submeshes->size();
+
+			SolveTangents2DEnsureSize(*tangents, *tempTanBuffer, vertexCount, vertexBuffer->size());
+			for (int i = 0; i < submeshCount; i++) {
+				spine::Vector<int>* submesh = (*submeshes)[i];
+				int triangleCount = submesh->size();
+				SolveTangents2DTriangles(*tempTanBuffer, *submesh, triangleCount, *vertexBuffer, *uvBuffer, vertexCount);
+			}
+			SolveTangents2DBuffer(*tangents, *tempTanBuffer, vertexCount);
+			mesh.tangents = tangents;
+		}
+	}
+
+	void MeshGenerator::FillTriangles(UnityEngine::Mesh& mesh)
+	{
+		int submeshCount = submeshes->size(); 
+		mesh.subMeshCount = submeshCount;
+		for (int i = 0; i < submeshCount; i++)
+		{
+			mesh.SetTriangles(submeshesItems[i].Items, 0, submeshesItems[i].Count, i, false);
+		}
+	}
+
+	void MeshGenerator::SolveTangents2DEnsureSize(spine::Vector<glm::vec4>& tangentBuffer, spine::Vector<glm::vec2>& tempTanBuffer, int vertexCount, int vertexBufferLength)
+	{
+		if (tangentBuffer.size() != vertexBufferLength)
+		{
+			tangentBuffer.setSize(vertexBufferLength, {});
+		}
+		if (tempTanBuffer.size() < vertexCount * 2)
+		{
+			tempTanBuffer.setSize(vertexCount * 2, {});
+		}
+	}
+
+	void MeshGenerator::SolveTangents2DTriangles(spine::Vector<glm::vec2>& tempTanBuffer, spine::Vector<int>& triangles, int triangleCount, spine::Vector<glm::vec3>& vertices, spine::Vector<glm::vec2>& uvs, int vertexCount)
+	{
+		glm::vec2 sdir;
+		glm::vec2 tdir;
+		for (int t = 0; t < triangleCount; t += 3) {
+			int i1 = triangles[t + 0];
+			int i2 = triangles[t + 1];
+			int i3 = triangles[t + 2];
+
+			glm::vec3 v1 = vertices[i1];
+			glm::vec3 v2 = vertices[i2];
+			glm::vec3 v3 = vertices[i3];
+
+			glm::vec2 w1 = uvs[i1];
+			glm::vec2 w2 = uvs[i2];
+			glm::vec2 w3 = uvs[i3];
+
+			float x1 = v2.x - v1.x;
+			float x2 = v3.x - v1.x;
+			float y1 = v2.y - v1.y;
+			float y2 = v3.y - v1.y;
+
+			float s1 = w2.x - w1.x;
+			float s2 = w3.x - w1.x;
+			float t1 = w2.y - w1.y;
+			float t2 = w3.y - w1.y;
+
+			float div = s1 * t2 - s2 * t1;
+			float r = (div == 0.0f) ? 0.0f : 1.0f / div;
+
+			sdir.x = (t2 * x1 - t1 * x2) * r;
+			sdir.y = (t2 * y1 - t1 * y2) * r;
+			tempTanBuffer[i1] = tempTanBuffer[i2] = tempTanBuffer[i3] = sdir;
+
+			tdir.x = (s1 * x2 - s2 * x1) * r;
+			tdir.y = (s1 * y2 - s2 * y1) * r;
+			tempTanBuffer[vertexCount + i1] = tempTanBuffer[vertexCount + i2] = tempTanBuffer[vertexCount + i3] = tdir;
+		}
+	}
+
+	void MeshGenerator::SolveTangents2DBuffer(spine::Vector<glm::vec4>& tangents, spine::Vector<glm::vec2>& tempTanBuffer, int vertexCount)
+	{
+		glm::vec4 tangent;
+		tangent.z = 0;
+		for (int i = 0; i < vertexCount; ++i) {
+			glm::vec2  t = tempTanBuffer[i];
+
+			// t.Normalize() (aggressively inlined). Even better if offloaded to GPU via vertex shader.
+			float magnitude = spine::MathUtil::sqrt(t.x * t.x + t.y * t.y);
+			if (magnitude > 1E-05) {
+				float reciprocalMagnitude = 1.0f / magnitude;
+				t.x *= reciprocalMagnitude;
+				t.y *= reciprocalMagnitude;
+			}
+
+			glm::vec2  t2 = tempTanBuffer[vertexCount + i];
+			tangent.x = t.x;
+			tangent.y = t.y;
+			//tangent.z = 0;
+			tangent.w = (t.y * t2.x > t.x * t2.y) ? 1 : -1; // 2D direction calculation. Used for binormals.
+			tangents[i] = tangent;
 		}
 	}
 

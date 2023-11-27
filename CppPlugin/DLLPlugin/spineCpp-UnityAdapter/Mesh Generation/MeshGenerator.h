@@ -48,7 +48,7 @@ namespace SpineUnity {
 		};
 
 	public:
-		Settings settings() { return MeshGenerator::Settings::Default(); }
+		Settings settings = Settings::Default();
 		const float BoundsMinDefault = std::numeric_limits<float>::min();
 		const float BoundsMaxDefault = std::numeric_limits<float>::max();
 		MeshGenerator();
