@@ -1,7 +1,15 @@
 {
-	"Assemblies": [
-	],
+	"Assemblies": [],
 	"Types": [
+		{
+			"Name": " UnityEngine.Rendering.VertexAttribute"
+		},
+		{
+			"Name": " UnityEngine.Rendering.VertexAttributeFormat"
+		},
+		{
+			"Name": " UnityEngine.Rendering.MeshUpdateFlags"
+		},
 		{
 			"Name": " UnityEngine.HideFlags"
 		},
@@ -285,22 +293,32 @@
 					"Set": {}
 				}
 			],
-			"Methods":[
+			"Methods": [
 				{
 					"Name": "Destroy",
-					"ParamTypes": ["UnityEngine.Object"]
+					"ParamTypes": [
+						"UnityEngine.Object"
+					]
 				},
 				{
 					"Name": "Destroy",
-					"ParamTypes": ["UnityEngine.Object","System.Single"]
+					"ParamTypes": [
+						"UnityEngine.Object",
+						"System.Single"
+					]
 				},
 				{
 					"Name": "DestroyImmediate",
-					"ParamTypes": ["UnityEngine.Object"]
+					"ParamTypes": [
+						"UnityEngine.Object"
+					]
 				},
 				{
 					"Name": "DestroyImmediate",
-					"ParamTypes": ["UnityEngine.Object","System.Boolean"]
+					"ParamTypes": [
+						"UnityEngine.Object",
+						"System.Boolean"
+					]
 				}
 			]
 		},
@@ -329,6 +347,32 @@
 				{
 					"Name": "IsUnityEditor",
 					"ParamTypes": []
+				},
+				{
+					"Name": "GetMeshSetArrayForChannelImplFuncPtr",
+					"ParamTypes": []
+				},
+				{
+					"Name": "GetMeshUnitySelfIntPtr",
+					"ParamTypes": [
+						"System.Int32"
+					]
+				},
+				{
+					"Name": "GetUnityObjectInstanceId",
+					"ParamTypes": [
+						"System.Int32"
+					]
+				},
+				{
+					"Name": "Mesh_SetVertices_SetArrayForChannelImpl_Injected",
+					"ParamTypes": [
+						"System.Int32",
+						"System.IntPtr",
+						"System.Int32",
+						"System.Int32",
+						"System.Int32"
+					]
 				}
 			]
 		},
@@ -370,8 +414,7 @@
 		},
 		{
 			"Name": "UnityEngine.Material",
-			"Properties": [
-			]
+			"Properties": []
 		},
 		{
 			"Name": "System.Collections.IEnumerator",
@@ -397,8 +440,7 @@
 		},
 		{
 			"Name": "UnityEngine.GameObject",
-			"Constructors": [
-			],
+			"Constructors": [],
 			"Methods": [
 				{
 					"Name": "AddComponent",
@@ -423,11 +465,20 @@
 			"Name": "UnityEngine.Mesh",
 			"Constructors": [
 				{
-					"ParamTypes": [
-					]
+					"ParamTypes": []
 				}
 			],
 			"Properties": [
+				{
+					"Name": "bounds",
+					"Get": {},
+					"Set": {}
+				},
+				{
+					"Name": "subMeshCount",
+					"Get": {},
+					"Set": {}
+				}
 			],
 			"Methods": [
 				{
@@ -503,8 +554,6 @@
 			]
 		}
 	],
-	"Arrays": [
-	],
-	"Delegates": [
-	]
+	"Arrays": [],
+	"Delegates": []
 }

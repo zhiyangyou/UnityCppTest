@@ -303,6 +303,30 @@ namespace System
 /*BEGIN TYPE DECLARATIONS*/
 namespace UnityEngine
 {
+	namespace Rendering
+	{
+		struct VertexAttribute;
+	}
+}
+
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		struct VertexAttributeFormat;
+	}
+}
+
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		struct MeshUpdateFlags;
+	}
+}
+
+namespace UnityEngine
+{
 	struct HideFlags;
 }
 
@@ -661,6 +685,9 @@ namespace System
 		virtual void ThrowReferenceToThis();
 		
 		/*BEGIN UNBOXING METHOD DECLARATIONS*/
+		explicit operator UnityEngine::Rendering::VertexAttribute();
+		explicit operator UnityEngine::Rendering::VertexAttributeFormat();
+		explicit operator UnityEngine::Rendering::MeshUpdateFlags();
 		explicit operator UnityEngine::HideFlags();
 		explicit operator System::Decimal();
 		explicit operator UnityEngine::Vector4();
@@ -755,6 +782,100 @@ namespace Plugin
 }
 
 /*BEGIN TYPE DEFINITIONS*/
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		struct VertexAttribute
+		{
+			int32_t Value;
+			static const UnityEngine::Rendering::VertexAttribute Position;
+			static const UnityEngine::Rendering::VertexAttribute Normal;
+			static const UnityEngine::Rendering::VertexAttribute Tangent;
+			static const UnityEngine::Rendering::VertexAttribute Color;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord0;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord1;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord2;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord3;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord4;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord5;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord6;
+			static const UnityEngine::Rendering::VertexAttribute TexCoord7;
+			static const UnityEngine::Rendering::VertexAttribute BlendWeight;
+			static const UnityEngine::Rendering::VertexAttribute BlendIndices;
+			explicit VertexAttribute(int32_t value);
+			explicit operator int32_t() const;
+			bool operator==(VertexAttribute other);
+			bool operator!=(VertexAttribute other);
+			explicit operator System::Enum();
+			explicit operator System::ValueType();
+			explicit operator System::Object();
+			explicit operator System::IFormattable();
+			explicit operator System::IComparable();
+			explicit operator System::IConvertible();
+		};
+	}
+}
+
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		struct VertexAttributeFormat
+		{
+			int32_t Value;
+			static const UnityEngine::Rendering::VertexAttributeFormat Float32;
+			static const UnityEngine::Rendering::VertexAttributeFormat Float16;
+			static const UnityEngine::Rendering::VertexAttributeFormat UNorm8;
+			static const UnityEngine::Rendering::VertexAttributeFormat SNorm8;
+			static const UnityEngine::Rendering::VertexAttributeFormat UNorm16;
+			static const UnityEngine::Rendering::VertexAttributeFormat SNorm16;
+			static const UnityEngine::Rendering::VertexAttributeFormat UInt8;
+			static const UnityEngine::Rendering::VertexAttributeFormat SInt8;
+			static const UnityEngine::Rendering::VertexAttributeFormat UInt16;
+			static const UnityEngine::Rendering::VertexAttributeFormat SInt16;
+			static const UnityEngine::Rendering::VertexAttributeFormat UInt32;
+			static const UnityEngine::Rendering::VertexAttributeFormat SInt32;
+			explicit VertexAttributeFormat(int32_t value);
+			explicit operator int32_t() const;
+			bool operator==(VertexAttributeFormat other);
+			bool operator!=(VertexAttributeFormat other);
+			explicit operator System::Enum();
+			explicit operator System::ValueType();
+			explicit operator System::Object();
+			explicit operator System::IFormattable();
+			explicit operator System::IComparable();
+			explicit operator System::IConvertible();
+		};
+	}
+}
+
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		struct MeshUpdateFlags
+		{
+			int32_t Value;
+			static const UnityEngine::Rendering::MeshUpdateFlags Default;
+			static const UnityEngine::Rendering::MeshUpdateFlags DontValidateIndices;
+			static const UnityEngine::Rendering::MeshUpdateFlags DontResetBoneBounds;
+			static const UnityEngine::Rendering::MeshUpdateFlags DontNotifyMeshUsers;
+			static const UnityEngine::Rendering::MeshUpdateFlags DontRecalculateBounds;
+			explicit MeshUpdateFlags(int32_t value);
+			explicit operator int32_t() const;
+			bool operator==(MeshUpdateFlags other);
+			bool operator!=(MeshUpdateFlags other);
+			explicit operator System::Enum();
+			explicit operator System::ValueType();
+			explicit operator System::Object();
+			explicit operator System::IFormattable();
+			explicit operator System::IComparable();
+			explicit operator System::IConvertible();
+		};
+	}
+}
+
 namespace UnityEngine
 {
 	struct HideFlags
@@ -1523,6 +1644,10 @@ namespace App
 	namespace UnityUtils
 	{
 		System::Boolean IsUnityEditor();
+		void* GetMeshSetArrayForChannelImplFuncPtr();
+		void* GetMeshUnitySelfIntPtr(System::Int32 instanceId);
+		System::Int32 GetUnityObjectInstanceId(System::Int32 objectHandle);
+		void Mesh_SetVertices_SetArrayForChannelImpl_Injected(System::Int32 meshInstanceId, void* arrayPointer, System::Int32 arraySize, System::Int32 valueStartIndex, System::Int32 valueCount);
 	}
 }
 
@@ -1701,6 +1826,10 @@ namespace UnityEngine
 		bool operator==(const Mesh& other) const;
 		bool operator!=(const Mesh& other) const;
 		Mesh();
+		UnityEngine::Bounds GetBounds();
+		void SetBounds(UnityEngine::Bounds& value);
+		System::Int32 GetSubMeshCount();
+		void SetSubMeshCount(System::Int32 value);
 		virtual void MarkDynamic();
 		virtual void Clear();
 	};

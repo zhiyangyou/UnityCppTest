@@ -1,6 +1,7 @@
 
+#include "UnityMeshWrapper.h"
 #include "MeshGenerator.h"
-
+#include "UnityMeshWrapper.h"
 #include <spine/spine.h>
 
 namespace SpineUnity {
@@ -1030,10 +1031,11 @@ namespace SpineUnity {
 
 		// Set the vertex buffer.
 		{
-			mesh.vertices = vbi;
-			mesh.uv = ubi;
-			mesh.colors32 = cbi;
-			mesh.bounds = GetMeshBounds();
+			MeshWrapper::SetVertices(mesh, vbi, sizeof(glm::vec3) * vertexBuffer->size(), vertexBuffer->size());
+			MeshWrapper::SetUVs0(mesh, ubi, sizeof(glm::vec2) * uvBuffer->size(), uvBuffer->size());
+			MeshWrapper::SetColor32(mesh, cbi, sizeof(spine::Color32) * colorBuffer->size(), colorBuffer->size());
+			mesh.SetBounds(GetMeshBounds());
+			//mesh.bounds = GetMeshBounds();
 		}
 
 		{
@@ -1043,7 +1045,8 @@ namespace SpineUnity {
 				if (oldLength != vbiLength) {
 					this->normals->setSize(vbiLength, glm::vec3(0.0f, 0.0f, -1.0f));
 				}
-				mesh.normals = normals;
+				MeshWrapper::SetNormals(mesh, this->normals->buffer(), sizeof(glm::vec3) * this->normals->size(), this->normals->size());
+				//mesh.normals = normals;
 			}
 
 			if (settings.tintBlack) {
@@ -1053,8 +1056,8 @@ namespace SpineUnity {
 						uv2->setSize(vbiLength, glm::vec2(0.0f));
 						uv3->setSize(vbiLength, glm::vec2(0.0f));
 					}
-					mesh.uv2 = uv2;
-					mesh.uv3 = uv3;
+					MeshWrapper::SetUVs2(mesh, uv2->buffer(), sizeof(glm::vec2) * uv2->size(), uv2->size());
+					MeshWrapper::SetUVs3(mesh, uv3->buffer(), sizeof(glm::vec2) * uv3->size(), uv3->size());
 				}
 			}
 		}
@@ -1074,14 +1077,14 @@ namespace SpineUnity {
 				SolveTangents2DTriangles(*tempTanBuffer, *submesh, triangleCount, *vertexBuffer, *uvBuffer, vertexCount);
 			}
 			SolveTangents2DBuffer(*tangents, *tempTanBuffer, vertexCount);
-			mesh.tangents = tangents;
+			MeshWrapper::SetTangents(mesh, tangents->buffer(), tangents->size() * sizeof(glm::vec4), tangents->size());
 		}
 	}
 
 	void MeshGenerator::FillTriangles(UnityEngine::Mesh& mesh)
 	{
-		int submeshCount = submeshes->size(); 
-		mesh.subMeshCount = submeshCount;
+		int submeshCount = submeshes->size();
+		mesh.SetSubMeshCount(submeshCount);
 		for (int i = 0; i < submeshCount; i++)
 		{
 			mesh.SetTriangles(submeshesItems[i].Items, 0, submeshesItems[i].Count, i, false);

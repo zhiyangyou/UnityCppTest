@@ -222,6 +222,7 @@
     <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SkeletonRendererInstruction.cpp" />
     <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SpineCppAdapterCore.cpp" />
     <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\SpineMesh.cpp" />
+    <ClCompile Include="spineCpp-UnityAdapter\Mesh Generation\UnityMeshWrapper.cpp" />
     <ClCompile Include="unity_spinecpp_plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +237,7 @@
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SkeletonRendererInstruction.h" />
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SpineCppAdapterCore.h" />
     <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\SpineMesh.h" />
+    <ClInclude Include="spineCpp-UnityAdapter\Mesh Generation\UnityMeshWrapper.h" />
     <ClInclude Include="unity_spinecpp_plugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

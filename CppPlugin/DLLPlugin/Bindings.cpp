@@ -41,6 +41,12 @@ namespace Plugin
 	int32_t (*EnumerableGetEnumerator)(int32_t handle);
 	
 	/*BEGIN FUNCTION POINTERS*/
+	int32_t (*BoxVertexAttribute)(UnityEngine::Rendering::VertexAttribute val);
+	UnityEngine::Rendering::VertexAttribute (*UnboxVertexAttribute)(int32_t valHandle);
+	int32_t (*BoxVertexAttributeFormat)(UnityEngine::Rendering::VertexAttributeFormat val);
+	UnityEngine::Rendering::VertexAttributeFormat (*UnboxVertexAttributeFormat)(int32_t valHandle);
+	int32_t (*BoxMeshUpdateFlags)(UnityEngine::Rendering::MeshUpdateFlags val);
+	UnityEngine::Rendering::MeshUpdateFlags (*UnboxMeshUpdateFlags)(int32_t valHandle);
 	int32_t (*BoxHideFlags)(UnityEngine::HideFlags val);
 	UnityEngine::HideFlags (*UnboxHideFlags)(int32_t valHandle);
 	void (*ReleaseSystemDecimal)(int32_t handle);
@@ -76,6 +82,10 @@ namespace Plugin
 	void* (*AppObjectCreateProxyMethodGetStringCStrSystemString)(int32_t strHandle);
 	int32_t (*AppObjectCreateProxyMethodCreateGo)();
 	int32_t (*AppUnityUtilsMethodIsUnityEditor)();
+	void* (*AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr)();
+	void* (*AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32)(int32_t instanceId);
+	int32_t (*AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32)(int32_t objectHandle);
+	void (*AppUnityUtilsMethodMesh_SetVertices_SetArrayForChannelImpl_InjectedSystemInt32_SystemIntPtr_SystemInt32_SystemInt32_SystemInt32)(int32_t meshInstanceId, void* arrayPointer, int32_t arraySize, int32_t valueStartIndex, int32_t valueCount);
 	int32_t (*UnityEngineComponentPropertyGetTransform)(int32_t thisHandle);
 	int32_t (*UnityEngineApplicationPropertyGetIsPlaying)();
 	int32_t (*UnityEngineApplicationPropertyGetIsEditor)();
@@ -86,6 +96,10 @@ namespace Plugin
 	int32_t (*UnityEngineGameObjectMethodAddComponentMyGameBaseBallScript)(int32_t thisHandle);
 	int32_t (*UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType)(UnityEngine::PrimitiveType type);
 	int32_t (*UnityEngineMeshConstructor)();
+	int32_t (*UnityEngineMeshPropertyGetBounds)(int32_t thisHandle);
+	void (*UnityEngineMeshPropertySetBounds)(int32_t thisHandle, int32_t valueHandle);
+	int32_t (*UnityEngineMeshPropertyGetSubMeshCount)(int32_t thisHandle);
+	void (*UnityEngineMeshPropertySetSubMeshCount)(int32_t thisHandle, int32_t value);
 	void (*UnityEngineMeshMethodMarkDynamic)(int32_t thisHandle);
 	void (*UnityEngineMeshMethodClear)(int32_t thisHandle);
 	void (*UnityEngineDebugMethodLogSystemObject)(int32_t messageHandle);
@@ -1240,6 +1254,490 @@ namespace System
 }
 
 /*BEGIN METHOD DEFINITIONS*/
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		VertexAttribute::VertexAttribute(int32_t value)
+			: Value(value)
+		{
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator int32_t() const
+		{
+			return Value;
+		}
+		
+		bool UnityEngine::Rendering::VertexAttribute::operator==(VertexAttribute other)
+		{
+			return Value == other.Value;
+		}
+		
+		bool UnityEngine::Rendering::VertexAttribute::operator!=(VertexAttribute other)
+		{
+			return Value != other.Value;
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator System::Enum()
+		{
+			int32_t handle = Plugin::BoxVertexAttribute(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Enum(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator System::ValueType()
+		{
+			int32_t handle = Plugin::BoxVertexAttribute(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::ValueType(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator System::Object()
+		{
+			int32_t handle = Plugin::BoxVertexAttribute(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Object(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator System::IFormattable()
+		{
+			int32_t handle = Plugin::BoxVertexAttribute(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IFormattable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator System::IComparable()
+		{
+			int32_t handle = Plugin::BoxVertexAttribute(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IComparable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttribute::operator System::IConvertible()
+		{
+			int32_t handle = Plugin::BoxVertexAttribute(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IConvertible(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+	}
+}
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::Position(0);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::Normal(1);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::Tangent(2);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::Color(3);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord0(4);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord1(5);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord2(6);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord3(7);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord4(8);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord5(9);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord6(10);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::TexCoord7(11);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::BlendWeight(12);
+const UnityEngine::Rendering::VertexAttribute UnityEngine::Rendering::VertexAttribute::BlendIndices(13);
+
+namespace System
+{
+	System::Object::operator UnityEngine::Rendering::VertexAttribute()
+	{
+		UnityEngine::Rendering::VertexAttribute returnVal(Plugin::UnboxVertexAttribute(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		VertexAttributeFormat::VertexAttributeFormat(int32_t value)
+			: Value(value)
+		{
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator int32_t() const
+		{
+			return Value;
+		}
+		
+		bool UnityEngine::Rendering::VertexAttributeFormat::operator==(VertexAttributeFormat other)
+		{
+			return Value == other.Value;
+		}
+		
+		bool UnityEngine::Rendering::VertexAttributeFormat::operator!=(VertexAttributeFormat other)
+		{
+			return Value != other.Value;
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator System::Enum()
+		{
+			int32_t handle = Plugin::BoxVertexAttributeFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Enum(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator System::ValueType()
+		{
+			int32_t handle = Plugin::BoxVertexAttributeFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::ValueType(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator System::Object()
+		{
+			int32_t handle = Plugin::BoxVertexAttributeFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Object(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator System::IFormattable()
+		{
+			int32_t handle = Plugin::BoxVertexAttributeFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IFormattable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator System::IComparable()
+		{
+			int32_t handle = Plugin::BoxVertexAttributeFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IComparable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::VertexAttributeFormat::operator System::IConvertible()
+		{
+			int32_t handle = Plugin::BoxVertexAttributeFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IConvertible(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+	}
+}
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::Float32(0);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::Float16(1);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::UNorm8(2);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::SNorm8(3);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::UNorm16(4);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::SNorm16(5);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::UInt8(6);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::SInt8(7);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::UInt16(8);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::SInt16(9);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::UInt32(10);
+const UnityEngine::Rendering::VertexAttributeFormat UnityEngine::Rendering::VertexAttributeFormat::SInt32(11);
+
+namespace System
+{
+	System::Object::operator UnityEngine::Rendering::VertexAttributeFormat()
+	{
+		UnityEngine::Rendering::VertexAttributeFormat returnVal(Plugin::UnboxVertexAttributeFormat(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
+	namespace Rendering
+	{
+		MeshUpdateFlags::MeshUpdateFlags(int32_t value)
+			: Value(value)
+		{
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator int32_t() const
+		{
+			return Value;
+		}
+		
+		bool UnityEngine::Rendering::MeshUpdateFlags::operator==(MeshUpdateFlags other)
+		{
+			return Value == other.Value;
+		}
+		
+		bool UnityEngine::Rendering::MeshUpdateFlags::operator!=(MeshUpdateFlags other)
+		{
+			return Value != other.Value;
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator System::Enum()
+		{
+			int32_t handle = Plugin::BoxMeshUpdateFlags(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Enum(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator System::ValueType()
+		{
+			int32_t handle = Plugin::BoxMeshUpdateFlags(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::ValueType(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator System::Object()
+		{
+			int32_t handle = Plugin::BoxMeshUpdateFlags(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Object(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator System::IFormattable()
+		{
+			int32_t handle = Plugin::BoxMeshUpdateFlags(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IFormattable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator System::IComparable()
+		{
+			int32_t handle = Plugin::BoxMeshUpdateFlags(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IComparable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::MeshUpdateFlags::operator System::IConvertible()
+		{
+			int32_t handle = Plugin::BoxMeshUpdateFlags(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IConvertible(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+	}
+}
+const UnityEngine::Rendering::MeshUpdateFlags UnityEngine::Rendering::MeshUpdateFlags::Default(0);
+const UnityEngine::Rendering::MeshUpdateFlags UnityEngine::Rendering::MeshUpdateFlags::DontValidateIndices(1);
+const UnityEngine::Rendering::MeshUpdateFlags UnityEngine::Rendering::MeshUpdateFlags::DontResetBoneBounds(2);
+const UnityEngine::Rendering::MeshUpdateFlags UnityEngine::Rendering::MeshUpdateFlags::DontNotifyMeshUsers(4);
+const UnityEngine::Rendering::MeshUpdateFlags UnityEngine::Rendering::MeshUpdateFlags::DontRecalculateBounds(8);
+
+namespace System
+{
+	System::Object::operator UnityEngine::Rendering::MeshUpdateFlags()
+	{
+		UnityEngine::Rendering::MeshUpdateFlags returnVal(Plugin::UnboxMeshUpdateFlags(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
 namespace UnityEngine
 {
 	HideFlags::HideFlags(int32_t value)
@@ -5297,6 +5795,57 @@ namespace App
 		}
 		return returnValue;
 	}
+	
+	void* App::UnityUtils::GetMeshSetArrayForChannelImplFuncPtr()
+	{
+		auto returnValue = Plugin::AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void* App::UnityUtils::GetMeshUnitySelfIntPtr(System::Int32 instanceId)
+	{
+		auto returnValue = Plugin::AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32(instanceId);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	System::Int32 App::UnityUtils::GetUnityObjectInstanceId(System::Int32 objectHandle)
+	{
+		auto returnValue = Plugin::AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32(objectHandle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void App::UnityUtils::Mesh_SetVertices_SetArrayForChannelImpl_Injected(System::Int32 meshInstanceId, void* arrayPointer, System::Int32 arraySize, System::Int32 valueStartIndex, System::Int32 valueCount)
+	{
+		Plugin::AppUnityUtilsMethodMesh_SetVertices_SetArrayForChannelImpl_InjectedSystemInt32_SystemIntPtr_SystemInt32_SystemInt32_SystemInt32(meshInstanceId, arrayPointer, arraySize, valueStartIndex, valueCount);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
 }
 
 namespace UnityEngine
@@ -6187,6 +6736,56 @@ namespace UnityEngine
 		if (returnValue)
 		{
 			Plugin::ReferenceManagedClass(returnValue);
+		}
+	}
+	
+	UnityEngine::Bounds UnityEngine::Mesh::GetBounds()
+	{
+		auto returnValue = Plugin::UnityEngineMeshPropertyGetBounds(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return UnityEngine::Bounds(Plugin::InternalUse::Only, returnValue);
+	}
+	
+	void UnityEngine::Mesh::SetBounds(UnityEngine::Bounds& value)
+	{
+		Plugin::UnityEngineMeshPropertySetBounds(Handle, value.Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	System::Int32 UnityEngine::Mesh::GetSubMeshCount()
+	{
+		auto returnValue = Plugin::UnityEngineMeshPropertyGetSubMeshCount(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void UnityEngine::Mesh::SetSubMeshCount(System::Int32 value)
+	{
+		Plugin::UnityEngineMeshPropertySetSubMeshCount(Handle, value);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
 		}
 	}
 	
@@ -7594,6 +8193,18 @@ DLLEXPORT void Init(
 	int32_t maxManagedObjects = *(int32_t*)curMemory;
 	curMemory += sizeof(int32_t);
 	/*BEGIN INIT BODY PARAMETER READS*/
+	Plugin::BoxVertexAttribute = *(int32_t (**)(UnityEngine::Rendering::VertexAttribute val))curMemory;
+	curMemory += sizeof(Plugin::BoxVertexAttribute);
+	Plugin::UnboxVertexAttribute = *(UnityEngine::Rendering::VertexAttribute (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxVertexAttribute);
+	Plugin::BoxVertexAttributeFormat = *(int32_t (**)(UnityEngine::Rendering::VertexAttributeFormat val))curMemory;
+	curMemory += sizeof(Plugin::BoxVertexAttributeFormat);
+	Plugin::UnboxVertexAttributeFormat = *(UnityEngine::Rendering::VertexAttributeFormat (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxVertexAttributeFormat);
+	Plugin::BoxMeshUpdateFlags = *(int32_t (**)(UnityEngine::Rendering::MeshUpdateFlags val))curMemory;
+	curMemory += sizeof(Plugin::BoxMeshUpdateFlags);
+	Plugin::UnboxMeshUpdateFlags = *(UnityEngine::Rendering::MeshUpdateFlags (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxMeshUpdateFlags);
 	Plugin::BoxHideFlags = *(int32_t (**)(UnityEngine::HideFlags val))curMemory;
 	curMemory += sizeof(Plugin::BoxHideFlags);
 	Plugin::UnboxHideFlags = *(UnityEngine::HideFlags (**)(int32_t valHandle))curMemory;
@@ -7664,6 +8275,14 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodCreateGo);
 	Plugin::AppUnityUtilsMethodIsUnityEditor = *(int32_t (**)())curMemory;
 	curMemory += sizeof(Plugin::AppUnityUtilsMethodIsUnityEditor);
+	Plugin::AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr = *(void* (**)())curMemory;
+	curMemory += sizeof(Plugin::AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr);
+	Plugin::AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32 = *(void* (**)(int32_t instanceId))curMemory;
+	curMemory += sizeof(Plugin::AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32);
+	Plugin::AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32 = *(int32_t (**)(int32_t objectHandle))curMemory;
+	curMemory += sizeof(Plugin::AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32);
+	Plugin::AppUnityUtilsMethodMesh_SetVertices_SetArrayForChannelImpl_InjectedSystemInt32_SystemIntPtr_SystemInt32_SystemInt32_SystemInt32 = *(void (**)(int32_t meshInstanceId, void* arrayPointer, int32_t arraySize, int32_t valueStartIndex, int32_t valueCount))curMemory;
+	curMemory += sizeof(Plugin::AppUnityUtilsMethodMesh_SetVertices_SetArrayForChannelImpl_InjectedSystemInt32_SystemIntPtr_SystemInt32_SystemInt32_SystemInt32);
 	Plugin::UnityEngineComponentPropertyGetTransform = *(int32_t (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineComponentPropertyGetTransform);
 	Plugin::UnityEngineApplicationPropertyGetIsPlaying = *(int32_t (**)())curMemory;
@@ -7684,6 +8303,14 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::UnityEngineGameObjectMethodCreatePrimitiveUnityEnginePrimitiveType);
 	Plugin::UnityEngineMeshConstructor = *(int32_t (**)())curMemory;
 	curMemory += sizeof(Plugin::UnityEngineMeshConstructor);
+	Plugin::UnityEngineMeshPropertyGetBounds = *(int32_t (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshPropertyGetBounds);
+	Plugin::UnityEngineMeshPropertySetBounds = *(void (**)(int32_t thisHandle, int32_t valueHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshPropertySetBounds);
+	Plugin::UnityEngineMeshPropertyGetSubMeshCount = *(int32_t (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshPropertyGetSubMeshCount);
+	Plugin::UnityEngineMeshPropertySetSubMeshCount = *(void (**)(int32_t thisHandle, int32_t value))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineMeshPropertySetSubMeshCount);
 	Plugin::UnityEngineMeshMethodMarkDynamic = *(void (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineMeshMethodMarkDynamic);
 	Plugin::UnityEngineMeshMethodClear = *(void (**)(int32_t thisHandle))curMemory;
