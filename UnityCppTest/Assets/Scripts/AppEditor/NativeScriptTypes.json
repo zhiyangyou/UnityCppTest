@@ -11,6 +11,12 @@
 			"Name": " UnityEngine.Rendering.MeshUpdateFlags"
 		},
 		{
+			"Name": " UnityEngine.Rendering.IndexFormat"
+		},
+		{
+			"Name": " UnityEngine.MeshTopology"
+		},
+		{
 			"Name": " UnityEngine.HideFlags"
 		},
 		{
@@ -31,6 +37,11 @@
 				{
 					"Types": [
 						"System.Boolean"
+					]
+				},
+				{
+					"Types": [
+						"UnityEngine.Bounds"
 					]
 				},
 				{
@@ -280,6 +291,29 @@
 			]
 		},
 		{
+			"Name": "UnityEngine.Bounds",
+			"Constructors": [
+				{
+					"ParamTypes": [
+					]
+				}
+			],
+			"Properties": [
+				{
+					"Name": "extents",
+					"Get": {},
+					"Set": {}
+				},
+				{
+					"Name": "center",
+					"Get": {},
+					"Set": {}
+				}
+			],
+			"Methods": [
+			]
+		},
+		{
 			"Name": "UnityEngine.Object",
 			"Properties": [
 				{
@@ -346,6 +380,10 @@
 			"Methods": [
 				{
 					"Name": "IsUnityEditor",
+					"ParamTypes": []
+				},
+				{
+					"Name": "GetMeshSetIndicesImplFuncPtr",
 					"ParamTypes": []
 				},
 				{

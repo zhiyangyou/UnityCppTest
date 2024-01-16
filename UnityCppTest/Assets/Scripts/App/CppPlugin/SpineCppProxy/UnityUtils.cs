@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using NativeScript;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace App
         }
 
         private static MethodInfo s_MiSetArrayForChannelImpl_Injected = null;
+        private static MethodInfo s_MiSetIndicesImpl_Injected = null;
         private static MethodInfo s_MiObj2Ptr = null;
 
         static UnityUtils()
@@ -26,6 +28,7 @@ namespace App
             Type meshType = typeof(Mesh);
 
             s_MiSetArrayForChannelImpl_Injected = meshType.GetMethod("SetArrayForChannelImpl_Injected", BindingFlags.Static | BindingFlags.NonPublic);
+            s_MiSetIndicesImpl_Injected = meshType.GetMethod("SetIndicesNativeArrayImpl_Injected", BindingFlags.Static | BindingFlags.NonPublic);
             s_MiObj2Ptr = typeof(Object).GetMethod("GetPtrFromInstanceID", BindingFlags.Static | BindingFlags.NonPublic);
         }
 
@@ -52,6 +55,11 @@ namespace App
         public static IntPtr GetMeshSetArrayForChannelImplFuncPtr()
         {
             return s_MiSetArrayForChannelImpl_Injected.MethodHandle.Value;
+        }
+        
+        public static IntPtr GetMeshSetIndicesImplFuncPtr()
+        {
+            return s_MiSetIndicesImpl_Injected.MethodHandle.Value;
         }
 
 
@@ -101,9 +109,22 @@ namespace App
 
         public static void Mesh_SetUV0_XX(  )
         {
+            UnityEngine.Bounds b = new Bounds();
+            b.center = new Vector3();
+            b.extents = new Vector3();
+            
             Mesh m = new Mesh();
             m.subMeshCount = 1;
-            m.SetTriangles();
+            // m.SetTriangles();
+            // m.SetVertices();
+            m.SetTriangles(new List<int>(),0,100,2,false);
+
+            int subMesh = 0;
+            int indexLen = 100;
+            int indexStart = 0;
+            
+            m.SetIndices(new List<int>(),indexStart,indexLen,MeshTopology.Triangles,subMesh,false,0);
+            // m.SetIndices();
             // m.uv2
 
 

@@ -455,6 +455,14 @@ namespace NativeScript
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.Rendering.MeshUpdateFlags UnboxMeshUpdateFlagsDelegateType(int valHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxIndexFormatDelegateType(UnityEngine.Rendering.IndexFormat val);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Rendering.IndexFormat UnboxIndexFormatDelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxMeshTopologyDelegateType(UnityEngine.MeshTopology val);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.MeshTopology UnboxMeshTopologyDelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int BoxHideFlagsDelegateType(UnityEngine.HideFlags val);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.HideFlags UnboxHideFlagsDelegateType(int valHandle);
@@ -501,6 +509,22 @@ namespace NativeScript
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate UnityEngine.Vector2 UnboxVector2DelegateType(int valHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate void ReleaseUnityEngineBoundsDelegateType(int handle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int UnityEngineBoundsConstructorDelegateType();
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector3 UnityEngineBoundsPropertyGetExtentsDelegateType(int thisHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate void UnityEngineBoundsPropertySetExtentsDelegateType(int thisHandle, ref UnityEngine.Vector3 value);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate UnityEngine.Vector3 UnityEngineBoundsPropertyGetCenterDelegateType(int thisHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate void UnityEngineBoundsPropertySetCenterDelegateType(int thisHandle, ref UnityEngine.Vector3 value);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int BoxBoundsDelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate int UnboxBoundsDelegateType(int valHandle);
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate int UnityEngineObjectPropertyGetNameDelegateType(int thisHandle);
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate void UnityEngineObjectPropertySetNameDelegateType(int thisHandle, int valueHandle);
@@ -524,6 +548,8 @@ namespace NativeScript
 		delegate int AppObjectCreateProxyMethodCreateGoDelegateType();
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate bool AppUnityUtilsMethodIsUnityEditorDelegateType();
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		delegate System.IntPtr AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtrDelegateType();
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		delegate System.IntPtr AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtrDelegateType();
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -660,6 +686,10 @@ namespace NativeScript
 		static readonly UnboxVertexAttributeFormatDelegateType UnboxVertexAttributeFormatDelegate = new UnboxVertexAttributeFormatDelegateType(UnboxVertexAttributeFormat);
 		static readonly BoxMeshUpdateFlagsDelegateType BoxMeshUpdateFlagsDelegate = new BoxMeshUpdateFlagsDelegateType(BoxMeshUpdateFlags);
 		static readonly UnboxMeshUpdateFlagsDelegateType UnboxMeshUpdateFlagsDelegate = new UnboxMeshUpdateFlagsDelegateType(UnboxMeshUpdateFlags);
+		static readonly BoxIndexFormatDelegateType BoxIndexFormatDelegate = new BoxIndexFormatDelegateType(BoxIndexFormat);
+		static readonly UnboxIndexFormatDelegateType UnboxIndexFormatDelegate = new UnboxIndexFormatDelegateType(UnboxIndexFormat);
+		static readonly BoxMeshTopologyDelegateType BoxMeshTopologyDelegate = new BoxMeshTopologyDelegateType(BoxMeshTopology);
+		static readonly UnboxMeshTopologyDelegateType UnboxMeshTopologyDelegate = new UnboxMeshTopologyDelegateType(UnboxMeshTopology);
 		static readonly BoxHideFlagsDelegateType BoxHideFlagsDelegate = new BoxHideFlagsDelegateType(BoxHideFlags);
 		static readonly UnboxHideFlagsDelegateType UnboxHideFlagsDelegate = new UnboxHideFlagsDelegateType(UnboxHideFlags);
 		static readonly ReleaseSystemDecimalDelegateType ReleaseSystemDecimalDelegate = new ReleaseSystemDecimalDelegateType(ReleaseSystemDecimal);
@@ -683,6 +713,14 @@ namespace NativeScript
 		static readonly UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2DelegateType UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2Delegate = new UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2DelegateType(UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2);
 		static readonly BoxVector2DelegateType BoxVector2Delegate = new BoxVector2DelegateType(BoxVector2);
 		static readonly UnboxVector2DelegateType UnboxVector2Delegate = new UnboxVector2DelegateType(UnboxVector2);
+		static readonly ReleaseUnityEngineBoundsDelegateType ReleaseUnityEngineBoundsDelegate = new ReleaseUnityEngineBoundsDelegateType(ReleaseUnityEngineBounds);
+		static readonly UnityEngineBoundsConstructorDelegateType UnityEngineBoundsConstructorDelegate = new UnityEngineBoundsConstructorDelegateType(UnityEngineBoundsConstructor);
+		static readonly UnityEngineBoundsPropertyGetExtentsDelegateType UnityEngineBoundsPropertyGetExtentsDelegate = new UnityEngineBoundsPropertyGetExtentsDelegateType(UnityEngineBoundsPropertyGetExtents);
+		static readonly UnityEngineBoundsPropertySetExtentsDelegateType UnityEngineBoundsPropertySetExtentsDelegate = new UnityEngineBoundsPropertySetExtentsDelegateType(UnityEngineBoundsPropertySetExtents);
+		static readonly UnityEngineBoundsPropertyGetCenterDelegateType UnityEngineBoundsPropertyGetCenterDelegate = new UnityEngineBoundsPropertyGetCenterDelegateType(UnityEngineBoundsPropertyGetCenter);
+		static readonly UnityEngineBoundsPropertySetCenterDelegateType UnityEngineBoundsPropertySetCenterDelegate = new UnityEngineBoundsPropertySetCenterDelegateType(UnityEngineBoundsPropertySetCenter);
+		static readonly BoxBoundsDelegateType BoxBoundsDelegate = new BoxBoundsDelegateType(BoxBounds);
+		static readonly UnboxBoundsDelegateType UnboxBoundsDelegate = new UnboxBoundsDelegateType(UnboxBounds);
 		static readonly UnityEngineObjectPropertyGetNameDelegateType UnityEngineObjectPropertyGetNameDelegate = new UnityEngineObjectPropertyGetNameDelegateType(UnityEngineObjectPropertyGetName);
 		static readonly UnityEngineObjectPropertySetNameDelegateType UnityEngineObjectPropertySetNameDelegate = new UnityEngineObjectPropertySetNameDelegateType(UnityEngineObjectPropertySetName);
 		static readonly UnityEngineObjectPropertyGetHideFlagsDelegateType UnityEngineObjectPropertyGetHideFlagsDelegate = new UnityEngineObjectPropertyGetHideFlagsDelegateType(UnityEngineObjectPropertyGetHideFlags);
@@ -695,6 +733,7 @@ namespace NativeScript
 		static readonly AppObjectCreateProxyMethodGetStringCStrSystemStringDelegateType AppObjectCreateProxyMethodGetStringCStrSystemStringDelegate = new AppObjectCreateProxyMethodGetStringCStrSystemStringDelegateType(AppObjectCreateProxyMethodGetStringCStrSystemString);
 		static readonly AppObjectCreateProxyMethodCreateGoDelegateType AppObjectCreateProxyMethodCreateGoDelegate = new AppObjectCreateProxyMethodCreateGoDelegateType(AppObjectCreateProxyMethodCreateGo);
 		static readonly AppUnityUtilsMethodIsUnityEditorDelegateType AppUnityUtilsMethodIsUnityEditorDelegate = new AppUnityUtilsMethodIsUnityEditorDelegateType(AppUnityUtilsMethodIsUnityEditor);
+		static readonly AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtrDelegateType AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtrDelegate = new AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtrDelegateType(AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtr);
 		static readonly AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtrDelegateType AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtrDelegate = new AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtrDelegateType(AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr);
 		static readonly AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32DelegateType AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32Delegate = new AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32DelegateType(AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32);
 		static readonly AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32DelegateType AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32Delegate = new AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32DelegateType(AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32);
@@ -762,6 +801,7 @@ namespace NativeScript
 			NativeScript.Bindings.ObjectStore.Init(1000);
 			NativeScript.Bindings.StructStore<System.Decimal>.Init(1000);
 			NativeScript.Bindings.StructStore<UnityEngine.Color32>.Init(1000);
+			NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Init(1000);
 			/*END STORE INIT CALLS*/
 
 			// Allocate unmanaged memory
@@ -896,6 +936,14 @@ namespace NativeScript
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxMeshUpdateFlagsDelegate));
 			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxIndexFormatDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxIndexFormatDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxMeshTopologyDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxMeshTopologyDelegate));
+			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxHideFlagsDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxHideFlagsDelegate));
@@ -942,6 +990,22 @@ namespace NativeScript
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxVector2Delegate));
 			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(ReleaseUnityEngineBoundsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineBoundsConstructorDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineBoundsPropertyGetExtentsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineBoundsPropertySetExtentsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineBoundsPropertyGetCenterDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineBoundsPropertySetCenterDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(BoxBoundsDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnboxBoundsDelegate));
+			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineObjectPropertyGetNameDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(UnityEngineObjectPropertySetNameDelegate));
@@ -965,6 +1029,8 @@ namespace NativeScript
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(AppObjectCreateProxyMethodCreateGoDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(AppUnityUtilsMethodIsUnityEditorDelegate));
+			curMemory += IntPtr.Size;
+			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtrDelegate));
 			curMemory += IntPtr.Size;
 			Marshal.WriteIntPtr(memory, curMemory, Marshal.GetFunctionPointerForDelegate(AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtrDelegate));
 			curMemory += IntPtr.Size;
@@ -1333,6 +1399,96 @@ namespace NativeScript
 				UnityEngine.Debug.LogException(ex);
 				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
 				return default(UnityEngine.Rendering.MeshUpdateFlags);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(BoxIndexFormatDelegateType))]
+		static int BoxIndexFormat(UnityEngine.Rendering.IndexFormat val)
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxIndexFormatDelegateType))]
+		static UnityEngine.Rendering.IndexFormat UnboxIndexFormat(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = (UnityEngine.Rendering.IndexFormat)val;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Rendering.IndexFormat);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Rendering.IndexFormat);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(BoxMeshTopologyDelegateType))]
+		static int BoxMeshTopology(UnityEngine.MeshTopology val)
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxMeshTopologyDelegateType))]
+		static UnityEngine.MeshTopology UnboxMeshTopology(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = (UnityEngine.MeshTopology)val;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.MeshTopology);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.MeshTopology);
 			}
 		}
 		
@@ -1850,6 +2006,184 @@ namespace NativeScript
 			}
 		}
 		
+		[MonoPInvokeCallback(typeof(ReleaseUnityEngineBoundsDelegateType))]
+		static void ReleaseUnityEngineBounds(int handle)
+		{
+			try
+			{
+				if (handle != 0)
+			{
+				NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Remove(handle);
+			}
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineBoundsConstructorDelegateType))]
+		static int UnityEngineBoundsConstructor()
+		{
+			try
+			{
+				var returnValue = NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Store(new UnityEngine.Bounds());
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineBoundsPropertyGetExtentsDelegateType))]
+		static UnityEngine.Vector3 UnityEngineBoundsPropertyGetExtents(int thisHandle)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Bounds)NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Get(thisHandle);
+				var returnValue = thiz.extents;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector3);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector3);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineBoundsPropertySetExtentsDelegateType))]
+		static void UnityEngineBoundsPropertySetExtents(int thisHandle, ref UnityEngine.Vector3 value)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Bounds)NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Get(thisHandle);
+				thiz.extents = value;
+				NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Replace(thisHandle, ref thiz);
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineBoundsPropertyGetCenterDelegateType))]
+		static UnityEngine.Vector3 UnityEngineBoundsPropertyGetCenter(int thisHandle)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Bounds)NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Get(thisHandle);
+				var returnValue = thiz.center;
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector3);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(UnityEngine.Vector3);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnityEngineBoundsPropertySetCenterDelegateType))]
+		static void UnityEngineBoundsPropertySetCenter(int thisHandle, ref UnityEngine.Vector3 value)
+		{
+			try
+			{
+				var thiz = (UnityEngine.Bounds)NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Get(thisHandle);
+				thiz.center = value;
+				NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Replace(thisHandle, ref thiz);
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(BoxBoundsDelegateType))]
+		static int BoxBounds(int valHandle)
+		{
+			try
+			{
+				var val = (UnityEngine.Bounds)NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Get(valHandle);
+				var returnValue = NativeScript.Bindings.ObjectStore.Store((object)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(UnboxBoundsDelegateType))]
+		static int UnboxBounds(int valHandle)
+		{
+			try
+			{
+				var val = NativeScript.Bindings.ObjectStore.Get(valHandle);
+				var returnValue = NativeScript.Bindings.StructStore<UnityEngine.Bounds>.Store((UnityEngine.Bounds)val);
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(int);
+			}
+		}
+		
 		[MonoPInvokeCallback(typeof(UnityEngineObjectPropertyGetNameDelegateType))]
 		static int UnityEngineObjectPropertyGetName(int thisHandle)
 		{
@@ -2103,6 +2437,28 @@ namespace NativeScript
 				UnityEngine.Debug.LogException(ex);
 				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
 				return default(bool);
+			}
+		}
+		
+		[MonoPInvokeCallback(typeof(AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtrDelegateType))]
+		static System.IntPtr AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtr()
+		{
+			try
+			{
+				var returnValue = App.UnityUtils.GetMeshSetIndicesImplFuncPtr();
+				return returnValue;
+			}
+			catch (System.NullReferenceException ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpExceptionSystemNullReferenceException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(System.IntPtr);
+			}
+			catch (System.Exception ex)
+			{
+				UnityEngine.Debug.LogException(ex);
+				NativeScript.Bindings.SetCsharpException(NativeScript.Bindings.ObjectStore.Store(ex));
+				return default(System.IntPtr);
 			}
 		}
 		

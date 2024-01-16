@@ -327,6 +327,19 @@ namespace UnityEngine
 
 namespace UnityEngine
 {
+	namespace Rendering
+	{
+		struct IndexFormat;
+	}
+}
+
+namespace UnityEngine
+{
+	struct MeshTopology;
+}
+
+namespace UnityEngine
+{
 	struct HideFlags;
 }
 
@@ -384,6 +397,11 @@ namespace UnityEngine
 namespace UnityEngine
 {
 	struct Vector2;
+}
+
+namespace UnityEngine
+{
+	struct Bounds;
 }
 
 namespace UnityEngine
@@ -520,6 +538,11 @@ namespace MyGame
 namespace System
 {
 	template<> struct IEquatable_1<System::Boolean>;
+}
+
+namespace System
+{
+	template<> struct IEquatable_1<UnityEngine::Bounds>;
 }
 
 namespace System
@@ -688,12 +711,15 @@ namespace System
 		explicit operator UnityEngine::Rendering::VertexAttribute();
 		explicit operator UnityEngine::Rendering::VertexAttributeFormat();
 		explicit operator UnityEngine::Rendering::MeshUpdateFlags();
+		explicit operator UnityEngine::Rendering::IndexFormat();
+		explicit operator UnityEngine::MeshTopology();
 		explicit operator UnityEngine::HideFlags();
 		explicit operator System::Decimal();
 		explicit operator UnityEngine::Vector4();
 		explicit operator UnityEngine::Vector3();
 		explicit operator UnityEngine::Color32();
 		explicit operator UnityEngine::Vector2();
+		explicit operator UnityEngine::Bounds();
 		explicit operator UnityEngine::PrimitiveType();
 		explicit operator System::Boolean();
 		explicit operator System::SByte();
@@ -878,6 +904,52 @@ namespace UnityEngine
 
 namespace UnityEngine
 {
+	namespace Rendering
+	{
+		struct IndexFormat
+		{
+			int32_t Value;
+			static const UnityEngine::Rendering::IndexFormat UInt16;
+			static const UnityEngine::Rendering::IndexFormat UInt32;
+			explicit IndexFormat(int32_t value);
+			explicit operator int32_t() const;
+			bool operator==(IndexFormat other);
+			bool operator!=(IndexFormat other);
+			explicit operator System::Enum();
+			explicit operator System::ValueType();
+			explicit operator System::Object();
+			explicit operator System::IFormattable();
+			explicit operator System::IComparable();
+			explicit operator System::IConvertible();
+		};
+	}
+}
+
+namespace UnityEngine
+{
+	struct MeshTopology
+	{
+		int32_t Value;
+		static const UnityEngine::MeshTopology Triangles;
+		static const UnityEngine::MeshTopology Quads;
+		static const UnityEngine::MeshTopology Lines;
+		static const UnityEngine::MeshTopology LineStrip;
+		static const UnityEngine::MeshTopology Points;
+		explicit MeshTopology(int32_t value);
+		explicit operator int32_t() const;
+		bool operator==(MeshTopology other);
+		bool operator!=(MeshTopology other);
+		explicit operator System::Enum();
+		explicit operator System::ValueType();
+		explicit operator System::Object();
+		explicit operator System::IFormattable();
+		explicit operator System::IComparable();
+		explicit operator System::IConvertible();
+	};
+}
+
+namespace UnityEngine
+{
 	struct HideFlags
 	{
 		int32_t Value;
@@ -985,6 +1057,23 @@ namespace System
 		IEquatable_1<System::Boolean>& operator=(IEquatable_1<System::Boolean>&& other);
 		bool operator==(const IEquatable_1<System::Boolean>& other) const;
 		bool operator!=(const IEquatable_1<System::Boolean>& other) const;
+	};
+}
+
+namespace System
+{
+	template<> struct IEquatable_1<UnityEngine::Bounds> : virtual System::Object
+	{
+		IEquatable_1(decltype(nullptr));
+		IEquatable_1(Plugin::InternalUse, int32_t handle);
+		IEquatable_1(const IEquatable_1<UnityEngine::Bounds>& other);
+		IEquatable_1(IEquatable_1<UnityEngine::Bounds>&& other);
+		virtual ~IEquatable_1();
+		IEquatable_1<UnityEngine::Bounds>& operator=(const IEquatable_1<UnityEngine::Bounds>& other);
+		IEquatable_1<UnityEngine::Bounds>& operator=(decltype(nullptr));
+		IEquatable_1<UnityEngine::Bounds>& operator=(IEquatable_1<UnityEngine::Bounds>&& other);
+		bool operator==(const IEquatable_1<UnityEngine::Bounds>& other) const;
+		bool operator!=(const IEquatable_1<UnityEngine::Bounds>& other) const;
 	};
 }
 
@@ -1606,6 +1695,32 @@ namespace UnityEngine
 
 namespace UnityEngine
 {
+	struct Bounds : Plugin::ManagedType
+	{
+		Bounds(decltype(nullptr));
+		Bounds(Plugin::InternalUse, int32_t handle);
+		Bounds(const Bounds& other);
+		Bounds(Bounds&& other);
+		virtual ~Bounds();
+		Bounds& operator=(const Bounds& other);
+		Bounds& operator=(decltype(nullptr));
+		Bounds& operator=(Bounds&& other);
+		bool operator==(const Bounds& other) const;
+		bool operator!=(const Bounds& other) const;
+		Bounds();
+		UnityEngine::Vector3 GetExtents();
+		void SetExtents(UnityEngine::Vector3& value);
+		UnityEngine::Vector3 GetCenter();
+		void SetCenter(UnityEngine::Vector3& value);
+		explicit operator System::ValueType();
+		explicit operator System::Object();
+		explicit operator System::IFormattable();
+		explicit operator System::IEquatable_1<UnityEngine::Bounds>();
+	};
+}
+
+namespace UnityEngine
+{
 	struct Object : virtual System::Object
 	{
 		Object(decltype(nullptr));
@@ -1644,6 +1759,7 @@ namespace App
 	namespace UnityUtils
 	{
 		System::Boolean IsUnityEditor();
+		void* GetMeshSetIndicesImplFuncPtr();
 		void* GetMeshSetArrayForChannelImplFuncPtr();
 		void* GetMeshUnitySelfIntPtr(System::Int32 instanceId);
 		System::Int32 GetUnityObjectInstanceId(System::Int32 objectHandle);

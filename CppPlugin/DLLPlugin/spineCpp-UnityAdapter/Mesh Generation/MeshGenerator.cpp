@@ -20,6 +20,14 @@ namespace SpineUnity {
 		return att->getRTTI().instanceOf(T::rtti);
 	}
 
+	void ConvertSpineBounds(const SpineUnity::Bounds& spineBounds, UnityEngine::Bounds& unityBounds)
+	{
+		UnityEngine::Vector3 center(spineBounds.Center.x, spineBounds.Center.y, spineBounds.Center.z);
+		UnityEngine::Vector3 extends(spineBounds.Extents.x, spineBounds.Extents.y, spineBounds.Extents.z);
+		unityBounds.SetCenter(center);
+		unityBounds.SetExtents(extends);
+	}
+
 
 	void MeshGenerator::GenerateSingleSubmeshInstruction(SkeletonRendererInstruction& instructionOutput, spine::Skeleton& skeleton, UnityEngine::Material& material)
 	{
@@ -1031,11 +1039,12 @@ namespace SpineUnity {
 
 		// Set the vertex buffer.
 		{
-			MeshWrapper::SetVertices(mesh, vbi, sizeof(glm::vec3) * vertexBuffer->size(), vertexBuffer->size());
-			MeshWrapper::SetUVs0(mesh, ubi, sizeof(glm::vec2) * uvBuffer->size(), uvBuffer->size());
-			MeshWrapper::SetColor32(mesh, cbi, sizeof(spine::Color32) * colorBuffer->size(), colorBuffer->size());
-			mesh.SetBounds(GetMeshBounds());
-			//mesh.bounds = GetMeshBounds();
+			MeshWrapper::SetVertices(mesh, vbi, vertexBuffer->size());
+			MeshWrapper::SetUVs0(mesh, ubi, uvBuffer->size());
+			MeshWrapper::SetColor32(mesh, cbi, colorBuffer->size());
+			UnityEngine::Bounds ub;
+			ConvertSpineBounds(GetMeshBounds(), ub);
+			mesh.SetBounds(ub);
 		}
 
 		{
@@ -1045,7 +1054,7 @@ namespace SpineUnity {
 				if (oldLength != vbiLength) {
 					this->normals->setSize(vbiLength, glm::vec3(0.0f, 0.0f, -1.0f));
 				}
-				MeshWrapper::SetNormals(mesh, this->normals->buffer(), sizeof(glm::vec3) * this->normals->size(), this->normals->size());
+				MeshWrapper::SetNormals(mesh, this->normals->buffer(), this->normals->size());
 				//mesh.normals = normals;
 			}
 
@@ -1056,8 +1065,8 @@ namespace SpineUnity {
 						uv2->setSize(vbiLength, glm::vec2(0.0f));
 						uv3->setSize(vbiLength, glm::vec2(0.0f));
 					}
-					MeshWrapper::SetUVs2(mesh, uv2->buffer(), sizeof(glm::vec2) * uv2->size(), uv2->size());
-					MeshWrapper::SetUVs3(mesh, uv3->buffer(), sizeof(glm::vec2) * uv3->size(), uv3->size());
+					MeshWrapper::SetUVs2(mesh, uv2->buffer(), uv2->size());
+					MeshWrapper::SetUVs3(mesh, uv3->buffer(), uv3->size());
 				}
 			}
 		}
@@ -1077,7 +1086,7 @@ namespace SpineUnity {
 				SolveTangents2DTriangles(*tempTanBuffer, *submesh, triangleCount, *vertexBuffer, *uvBuffer, vertexCount);
 			}
 			SolveTangents2DBuffer(*tangents, *tempTanBuffer, vertexCount);
-			MeshWrapper::SetTangents(mesh, tangents->buffer(), tangents->size() * sizeof(glm::vec4), tangents->size());
+			MeshWrapper::SetTangents(mesh, tangents->buffer(), tangents->size());
 		}
 	}
 
@@ -1087,7 +1096,9 @@ namespace SpineUnity {
 		mesh.SetSubMeshCount(submeshCount);
 		for (int i = 0; i < submeshCount; i++)
 		{
-			mesh.SetTriangles(submeshesItems[i].Items, 0, submeshesItems[i].Count, i, false);
+			spine::Vector<int>* subMesh = (*submeshes)[i];
+			MeshWrapper::SetTriangle(mesh, subMesh->buffer(), subMesh->size(), i, false);
+			//mesh.SetTriangles(subMesh->buffer(), 0, subMesh->size(), i, false);
 		}
 	}
 

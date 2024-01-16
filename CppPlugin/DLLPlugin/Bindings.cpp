@@ -47,6 +47,10 @@ namespace Plugin
 	UnityEngine::Rendering::VertexAttributeFormat (*UnboxVertexAttributeFormat)(int32_t valHandle);
 	int32_t (*BoxMeshUpdateFlags)(UnityEngine::Rendering::MeshUpdateFlags val);
 	UnityEngine::Rendering::MeshUpdateFlags (*UnboxMeshUpdateFlags)(int32_t valHandle);
+	int32_t (*BoxIndexFormat)(UnityEngine::Rendering::IndexFormat val);
+	UnityEngine::Rendering::IndexFormat (*UnboxIndexFormat)(int32_t valHandle);
+	int32_t (*BoxMeshTopology)(UnityEngine::MeshTopology val);
+	UnityEngine::MeshTopology (*UnboxMeshTopology)(int32_t valHandle);
 	int32_t (*BoxHideFlags)(UnityEngine::HideFlags val);
 	UnityEngine::HideFlags (*UnboxHideFlags)(int32_t valHandle);
 	void (*ReleaseSystemDecimal)(int32_t handle);
@@ -70,6 +74,14 @@ namespace Plugin
 	UnityEngine::Vector2 (*UnityEngineVector2Methodop_AdditionUnityEngineVector2_UnityEngineVector2)(UnityEngine::Vector2& a, UnityEngine::Vector2& b);
 	int32_t (*BoxVector2)(UnityEngine::Vector2& val);
 	UnityEngine::Vector2 (*UnboxVector2)(int32_t valHandle);
+	void (*ReleaseUnityEngineBounds)(int32_t handle);
+	int32_t (*UnityEngineBoundsConstructor)();
+	UnityEngine::Vector3 (*UnityEngineBoundsPropertyGetExtents)(int32_t thisHandle);
+	void (*UnityEngineBoundsPropertySetExtents)(int32_t thisHandle, UnityEngine::Vector3& value);
+	UnityEngine::Vector3 (*UnityEngineBoundsPropertyGetCenter)(int32_t thisHandle);
+	void (*UnityEngineBoundsPropertySetCenter)(int32_t thisHandle, UnityEngine::Vector3& value);
+	int32_t (*BoxBounds)(int32_t valHandle);
+	int32_t (*UnboxBounds)(int32_t valHandle);
 	int32_t (*UnityEngineObjectPropertyGetName)(int32_t thisHandle);
 	void (*UnityEngineObjectPropertySetName)(int32_t thisHandle, int32_t valueHandle);
 	UnityEngine::HideFlags (*UnityEngineObjectPropertyGetHideFlags)(int32_t thisHandle);
@@ -82,6 +94,7 @@ namespace Plugin
 	void* (*AppObjectCreateProxyMethodGetStringCStrSystemString)(int32_t strHandle);
 	int32_t (*AppObjectCreateProxyMethodCreateGo)();
 	int32_t (*AppUnityUtilsMethodIsUnityEditor)();
+	void* (*AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtr)();
 	void* (*AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr)();
 	void* (*AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32)(int32_t instanceId);
 	int32_t (*AppUnityUtilsMethodGetUnityObjectInstanceIdSystemInt32)(int32_t objectHandle);
@@ -948,6 +961,31 @@ namespace Plugin
 		}
 	}
 	
+	int32_t RefCountsLenUnityEngineBounds;
+	int32_t* RefCountsUnityEngineBounds;
+	
+	void ReferenceManagedUnityEngineBounds(int32_t handle)
+	{
+		assert(handle >= 0 && handle < RefCountsLenUnityEngineBounds);
+		if (handle != 0)
+		{
+			RefCountsUnityEngineBounds[handle]++;
+		}
+	}
+	
+	void DereferenceManagedUnityEngineBounds(int32_t handle)
+	{
+		assert(handle >= 0 && handle < RefCountsLenUnityEngineBounds);
+		if (handle != 0)
+		{
+			int32_t numRemain = --RefCountsUnityEngineBounds[handle];
+			if (numRemain == 0)
+			{
+				ReleaseUnityEngineBounds(handle);
+			}
+		}
+	}
+	
 	// Free list for MyGame::BaseBallScript pointers
 	
 	int32_t BaseBallScriptFreeListSize;
@@ -1740,6 +1778,312 @@ namespace System
 
 namespace UnityEngine
 {
+	namespace Rendering
+	{
+		IndexFormat::IndexFormat(int32_t value)
+			: Value(value)
+		{
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator int32_t() const
+		{
+			return Value;
+		}
+		
+		bool UnityEngine::Rendering::IndexFormat::operator==(IndexFormat other)
+		{
+			return Value == other.Value;
+		}
+		
+		bool UnityEngine::Rendering::IndexFormat::operator!=(IndexFormat other)
+		{
+			return Value != other.Value;
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator System::Enum()
+		{
+			int32_t handle = Plugin::BoxIndexFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Enum(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator System::ValueType()
+		{
+			int32_t handle = Plugin::BoxIndexFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::ValueType(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator System::Object()
+		{
+			int32_t handle = Plugin::BoxIndexFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::Object(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator System::IFormattable()
+		{
+			int32_t handle = Plugin::BoxIndexFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IFormattable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator System::IComparable()
+		{
+			int32_t handle = Plugin::BoxIndexFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IComparable(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+		UnityEngine::Rendering::IndexFormat::operator System::IConvertible()
+		{
+			int32_t handle = Plugin::BoxIndexFormat(*this);
+			if (Plugin::unhandledCsharpException)
+			{
+				System::Exception* ex = Plugin::unhandledCsharpException;
+				Plugin::unhandledCsharpException = nullptr;
+				ex->ThrowReferenceToThis();
+				delete ex;
+			}
+			if (handle)
+			{
+				Plugin::ReferenceManagedClass(handle);
+				return System::IConvertible(Plugin::InternalUse::Only, handle);
+			}
+			return nullptr;
+		}
+		
+	}
+}
+const UnityEngine::Rendering::IndexFormat UnityEngine::Rendering::IndexFormat::UInt16(0);
+const UnityEngine::Rendering::IndexFormat UnityEngine::Rendering::IndexFormat::UInt32(1);
+
+namespace System
+{
+	System::Object::operator UnityEngine::Rendering::IndexFormat()
+	{
+		UnityEngine::Rendering::IndexFormat returnVal(Plugin::UnboxIndexFormat(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
+	MeshTopology::MeshTopology(int32_t value)
+		: Value(value)
+	{
+	}
+	
+	UnityEngine::MeshTopology::operator int32_t() const
+	{
+		return Value;
+	}
+	
+	bool UnityEngine::MeshTopology::operator==(MeshTopology other)
+	{
+		return Value == other.Value;
+	}
+	
+	bool UnityEngine::MeshTopology::operator!=(MeshTopology other)
+	{
+		return Value != other.Value;
+	}
+	
+	UnityEngine::MeshTopology::operator System::Enum()
+	{
+		int32_t handle = Plugin::BoxMeshTopology(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Enum(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::MeshTopology::operator System::ValueType()
+	{
+		int32_t handle = Plugin::BoxMeshTopology(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::ValueType(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::MeshTopology::operator System::Object()
+	{
+		int32_t handle = Plugin::BoxMeshTopology(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Object(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::MeshTopology::operator System::IFormattable()
+	{
+		int32_t handle = Plugin::BoxMeshTopology(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IFormattable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::MeshTopology::operator System::IComparable()
+	{
+		int32_t handle = Plugin::BoxMeshTopology(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IComparable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::MeshTopology::operator System::IConvertible()
+	{
+		int32_t handle = Plugin::BoxMeshTopology(*this);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IConvertible(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+}
+const UnityEngine::MeshTopology UnityEngine::MeshTopology::Triangles(0);
+const UnityEngine::MeshTopology UnityEngine::MeshTopology::Quads(2);
+const UnityEngine::MeshTopology UnityEngine::MeshTopology::Lines(3);
+const UnityEngine::MeshTopology UnityEngine::MeshTopology::LineStrip(4);
+const UnityEngine::MeshTopology UnityEngine::MeshTopology::Points(5);
+
+namespace System
+{
+	System::Object::operator UnityEngine::MeshTopology()
+	{
+		UnityEngine::MeshTopology returnVal(Plugin::UnboxMeshTopology(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
 	HideFlags::HideFlags(int32_t value)
 		: Value(value)
 	{
@@ -2295,6 +2639,87 @@ namespace System
 	}
 	
 	bool IEquatable_1<System::Boolean>::operator!=(const IEquatable_1<System::Boolean>& other) const
+	{
+		return Handle != other.Handle;
+	}
+}
+
+namespace System
+{
+	IEquatable_1<UnityEngine::Bounds>::IEquatable_1(decltype(nullptr))
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>::IEquatable_1(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>::IEquatable_1(const IEquatable_1<UnityEngine::Bounds>& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>::IEquatable_1(IEquatable_1<UnityEngine::Bounds>&& other)
+		: IEquatable_1(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>::~IEquatable_1<UnityEngine::Bounds>()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>& IEquatable_1<UnityEngine::Bounds>::operator=(const IEquatable_1<UnityEngine::Bounds>& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedClass(this->Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedClass(this->Handle);
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>& IEquatable_1<UnityEngine::Bounds>::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	IEquatable_1<UnityEngine::Bounds>& IEquatable_1<UnityEngine::Bounds>::operator=(IEquatable_1<UnityEngine::Bounds>&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedClass(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool IEquatable_1<UnityEngine::Bounds>::operator==(const IEquatable_1<UnityEngine::Bounds>& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool IEquatable_1<UnityEngine::Bounds>::operator!=(const IEquatable_1<UnityEngine::Bounds>& other) const
 	{
 		return Handle != other.Handle;
 	}
@@ -5562,6 +5987,242 @@ namespace System
 
 namespace UnityEngine
 {
+	Bounds::Bounds(decltype(nullptr))
+	{
+	}
+	
+	Bounds::Bounds(Plugin::InternalUse, int32_t handle)
+	{
+		Handle = handle;
+		if (handle)
+		{
+			Plugin::ReferenceManagedUnityEngineBounds(Handle);
+		}
+	}
+	
+	Bounds::Bounds(const Bounds& other)
+		: Bounds(Plugin::InternalUse::Only, other.Handle)
+	{
+	}
+	
+	Bounds::Bounds(Bounds&& other)
+		: Bounds(Plugin::InternalUse::Only, other.Handle)
+	{
+		other.Handle = 0;
+	}
+	
+	Bounds::~Bounds()
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineBounds(Handle);
+			Handle = 0;
+		}
+	}
+	
+	Bounds& Bounds::operator=(const Bounds& other)
+	{
+		if (this->Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineBounds(Handle);
+		}
+		this->Handle = other.Handle;
+		if (this->Handle)
+		{
+			Plugin::ReferenceManagedUnityEngineBounds(Handle);
+		}
+		return *this;
+	}
+	
+	Bounds& Bounds::operator=(decltype(nullptr))
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineBounds(Handle);
+			Handle = 0;
+		}
+		return *this;
+	}
+	
+	Bounds& Bounds::operator=(Bounds&& other)
+	{
+		if (Handle)
+		{
+			Plugin::DereferenceManagedUnityEngineBounds(Handle);
+		}
+		Handle = other.Handle;
+		other.Handle = 0;
+		return *this;
+	}
+	
+	bool Bounds::operator==(const Bounds& other) const
+	{
+		return Handle == other.Handle;
+	}
+	
+	bool Bounds::operator!=(const Bounds& other) const
+	{
+		return Handle != other.Handle;
+	}
+	
+	UnityEngine::Bounds::Bounds()
+	{
+		auto returnValue = Plugin::UnityEngineBoundsConstructor();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		Handle = returnValue;
+		if (returnValue)
+		{
+			Plugin::ReferenceManagedUnityEngineBounds(Handle);
+		}
+	}
+	
+	UnityEngine::Vector3 UnityEngine::Bounds::GetExtents()
+	{
+		auto returnValue = Plugin::UnityEngineBoundsPropertyGetExtents(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void UnityEngine::Bounds::SetExtents(UnityEngine::Vector3& value)
+	{
+		Plugin::UnityEngineBoundsPropertySetExtents(Handle, value);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	UnityEngine::Vector3 UnityEngine::Bounds::GetCenter()
+	{
+		auto returnValue = Plugin::UnityEngineBoundsPropertyGetCenter(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void UnityEngine::Bounds::SetCenter(UnityEngine::Vector3& value)
+	{
+		Plugin::UnityEngineBoundsPropertySetCenter(Handle, value);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+	}
+	
+	UnityEngine::Bounds::operator System::ValueType()
+	{
+		int32_t handle = Plugin::BoxBounds(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::ValueType(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Bounds::operator System::Object()
+	{
+		int32_t handle = Plugin::BoxBounds(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::Object(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Bounds::operator System::IFormattable()
+	{
+		int32_t handle = Plugin::BoxBounds(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IFormattable(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+	
+	UnityEngine::Bounds::operator System::IEquatable_1<UnityEngine::Bounds>()
+	{
+		int32_t handle = Plugin::BoxBounds(Handle);
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		if (handle)
+		{
+			Plugin::ReferenceManagedClass(handle);
+			return System::IEquatable_1<UnityEngine::Bounds>(Plugin::InternalUse::Only, handle);
+		}
+		return nullptr;
+	}
+}
+
+namespace System
+{
+	System::Object::operator UnityEngine::Bounds()
+	{
+		UnityEngine::Bounds returnVal(Plugin::InternalUse::Only, Plugin::UnboxBounds(Handle));
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnVal;
+	}
+}
+
+namespace UnityEngine
+{
 	Object::Object(decltype(nullptr))
 	{
 	}
@@ -5786,6 +6447,19 @@ namespace App
 	System::Boolean App::UnityUtils::IsUnityEditor()
 	{
 		auto returnValue = Plugin::AppUnityUtilsMethodIsUnityEditor();
+		if (Plugin::unhandledCsharpException)
+		{
+			System::Exception* ex = Plugin::unhandledCsharpException;
+			Plugin::unhandledCsharpException = nullptr;
+			ex->ThrowReferenceToThis();
+			delete ex;
+		}
+		return returnValue;
+	}
+	
+	void* App::UnityUtils::GetMeshSetIndicesImplFuncPtr()
+	{
+		auto returnValue = Plugin::AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtr();
 		if (Plugin::unhandledCsharpException)
 		{
 			System::Exception* ex = Plugin::unhandledCsharpException;
@@ -8205,6 +8879,14 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::BoxMeshUpdateFlags);
 	Plugin::UnboxMeshUpdateFlags = *(UnityEngine::Rendering::MeshUpdateFlags (**)(int32_t valHandle))curMemory;
 	curMemory += sizeof(Plugin::UnboxMeshUpdateFlags);
+	Plugin::BoxIndexFormat = *(int32_t (**)(UnityEngine::Rendering::IndexFormat val))curMemory;
+	curMemory += sizeof(Plugin::BoxIndexFormat);
+	Plugin::UnboxIndexFormat = *(UnityEngine::Rendering::IndexFormat (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxIndexFormat);
+	Plugin::BoxMeshTopology = *(int32_t (**)(UnityEngine::MeshTopology val))curMemory;
+	curMemory += sizeof(Plugin::BoxMeshTopology);
+	Plugin::UnboxMeshTopology = *(UnityEngine::MeshTopology (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxMeshTopology);
 	Plugin::BoxHideFlags = *(int32_t (**)(UnityEngine::HideFlags val))curMemory;
 	curMemory += sizeof(Plugin::BoxHideFlags);
 	Plugin::UnboxHideFlags = *(UnityEngine::HideFlags (**)(int32_t valHandle))curMemory;
@@ -8251,6 +8933,22 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::BoxVector2);
 	Plugin::UnboxVector2 = *(UnityEngine::Vector2 (**)(int32_t valHandle))curMemory;
 	curMemory += sizeof(Plugin::UnboxVector2);
+	Plugin::ReleaseUnityEngineBounds = *(void (**)(int32_t handle))curMemory;
+	curMemory += sizeof(Plugin::ReleaseUnityEngineBounds);
+	Plugin::UnityEngineBoundsConstructor = *(int32_t (**)())curMemory;
+	curMemory += sizeof(Plugin::UnityEngineBoundsConstructor);
+	Plugin::UnityEngineBoundsPropertyGetExtents = *(UnityEngine::Vector3 (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineBoundsPropertyGetExtents);
+	Plugin::UnityEngineBoundsPropertySetExtents = *(void (**)(int32_t thisHandle, UnityEngine::Vector3& value))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineBoundsPropertySetExtents);
+	Plugin::UnityEngineBoundsPropertyGetCenter = *(UnityEngine::Vector3 (**)(int32_t thisHandle))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineBoundsPropertyGetCenter);
+	Plugin::UnityEngineBoundsPropertySetCenter = *(void (**)(int32_t thisHandle, UnityEngine::Vector3& value))curMemory;
+	curMemory += sizeof(Plugin::UnityEngineBoundsPropertySetCenter);
+	Plugin::BoxBounds = *(int32_t (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::BoxBounds);
+	Plugin::UnboxBounds = *(int32_t (**)(int32_t valHandle))curMemory;
+	curMemory += sizeof(Plugin::UnboxBounds);
 	Plugin::UnityEngineObjectPropertyGetName = *(int32_t (**)(int32_t thisHandle))curMemory;
 	curMemory += sizeof(Plugin::UnityEngineObjectPropertyGetName);
 	Plugin::UnityEngineObjectPropertySetName = *(void (**)(int32_t thisHandle, int32_t valueHandle))curMemory;
@@ -8275,6 +8973,8 @@ DLLEXPORT void Init(
 	curMemory += sizeof(Plugin::AppObjectCreateProxyMethodCreateGo);
 	Plugin::AppUnityUtilsMethodIsUnityEditor = *(int32_t (**)())curMemory;
 	curMemory += sizeof(Plugin::AppUnityUtilsMethodIsUnityEditor);
+	Plugin::AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtr = *(void* (**)())curMemory;
+	curMemory += sizeof(Plugin::AppUnityUtilsMethodGetMeshSetIndicesImplFuncPtr);
 	Plugin::AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr = *(void* (**)())curMemory;
 	curMemory += sizeof(Plugin::AppUnityUtilsMethodGetMeshSetArrayForChannelImplFuncPtr);
 	Plugin::AppUnityUtilsMethodGetMeshUnitySelfIntPtrSystemInt32 = *(void* (**)(int32_t instanceId))curMemory;
@@ -8394,6 +9094,10 @@ DLLEXPORT void Init(
 	Plugin::RefCountsUnityEngineColor32 = (int32_t*)curMemory;
 	curMemory += 1000 * sizeof(int32_t);
 	Plugin::RefCountsLenUnityEngineColor32 = 1000;
+	
+	Plugin::RefCountsUnityEngineBounds = (int32_t*)curMemory;
+	curMemory += 1000 * sizeof(int32_t);
+	Plugin::RefCountsLenUnityEngineBounds = 1000;
 	
 	Plugin::BaseBallScriptFreeListSize = 1000;
 	Plugin::BaseBallScriptFreeList = (MyGame::BaseBallScript**)curMemory;
