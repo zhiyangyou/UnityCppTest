@@ -4,7 +4,6 @@
 #include <string>
 #include <cstdio>
 #include <cassert>
-#include <spine/dll.h>
 
 template<typename T>
 using Ref = std::shared_ptr<T>;

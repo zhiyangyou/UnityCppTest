@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using SpineCpp = spine_cpp.Spine;
 
 namespace spine_cpp
@@ -14,12 +15,17 @@ namespace spine_cpp
                 {
                     disposable.Dispose();
                 }
+
                 list.Clear();
             }
 
             public static SpineCpp.String CreateSpineString(string str)
             {
-                return new SpineCpp.String(str, true, false);
+                var ptrChars = Marshal.StringToHGlobalAnsi(str);
+                var ret = new SpineCpp.String(ptrChars, false, true);
+                Marshal.FreeHGlobal(ptrChars);
+                return ret;
+                // return new SpineCpp.String(str, true, false);
             }
         }
 

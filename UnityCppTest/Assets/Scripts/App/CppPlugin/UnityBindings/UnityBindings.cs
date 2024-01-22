@@ -657,11 +657,13 @@ namespace NativeScript
 		/*END DELEGATE TYPES*/
 
 #if UNITY_EDITOR_WIN
-		private static readonly string pluginTempPath = Application.dataPath + PLUGIN_TEMP_PATH;
+		private static readonly string pluginTempPath = Application.dataPath + "/Plugins/win32/spine_cpp.dll";
+		// private const string pluginTempPath =  "F:\\_UnityWorkSpace\\_UnityProject\\UnityCppTest\\DLLExportDir\\spine_cpp.dll";
 #endif
 		public static Exception UnhandledCppException;
 #if UNITY_EDITOR
-		private static readonly string pluginPath = Application.dataPath + PLUGIN_PATH;
+		private static readonly string pluginPath =Application.dataPath + "/Plugins/win32/spine_cpp_origin.dll";
+		// private const string pluginPath = "F:\\_UnityWorkSpace\\_UnityProject\\UnityCppTest\\DLLExportDir\\spine_cpp_origin.dll";
 		public static SetCsharpExceptionDelegate SetCsharpException;
 #endif
 		static IntPtr memory;
@@ -1174,6 +1176,7 @@ namespace NativeScript
 #endif
 #if UNITY_EDITOR_WIN
 			File.Delete(pluginTempPath);
+			UnityEngine.Debug.Log($"删除临时的dll{pluginTempPath}");
 #endif
 		}
 

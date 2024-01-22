@@ -71,12 +71,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\..\DLLExportDir</OutDir>
+    <OutDir>$(SolutionDir)..\..\UnityCppTest\Assets\Plugins\win32</OutDir>
     <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(SolutionDir);$(SolutionDir)..\..\glm;$(IncludePath)</IncludePath>
+    <TargetName>spine_cpp_origin</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\..\DLLExportDir</OutDir>
+    <OutDir>$(SolutionDir)..\..\UnityCppTest\Assets\Plugins\win32</OutDir>
     <IncludePath>$(SolutionDir)spine-runtimes\spine-cpp\spine-cpp\include;$(SolutionDir);$(SolutionDir)..\..\glm;$(IncludePath)</IncludePath>
+    <TargetName>spine_cpp_origin</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

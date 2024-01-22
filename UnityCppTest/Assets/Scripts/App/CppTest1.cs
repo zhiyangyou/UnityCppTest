@@ -40,8 +40,8 @@ namespace App
         private UnityEngine.Mesh _mesh;
         [SerializeField] public SkeletonDataAsset skeletonDataAsset;
 
-        private Proxy_Atlas _proxyAtlas = null;
-        private Proxy_SkeletonData _proxySkeletonData = null;
+        // private Proxy_Atlas _proxyAtlas = null;
+        // private Proxy_SkeletonData _proxySkeletonData = null;
 
 
         private void OnGUI()
@@ -67,10 +67,10 @@ namespace App
             {
                 // var mesh = new Mesh();
                 // UnityUtils.Mesh_SetVertices_SetArrayForChannelImpl_Injected();
-                string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
-                string jsonContent = skeletonDataAsset.skeletonJSON.text;
-                _proxyAtlas = new Proxy_Atlas(atlasContent);
-                _proxySkeletonData = new Proxy_SkeletonData(_proxyAtlas, jsonContent);
+                // string atlasContent = (skeletonDataAsset.atlasAssets[0] as SpineAtlasAsset).atlasFile.text;
+                // string jsonContent = skeletonDataAsset.skeletonJSON.text;
+                // _proxyAtlas = new Proxy_Atlas(atlasContent);
+                // _proxySkeletonData = new Proxy_SkeletonData(_proxyAtlas, jsonContent);
             }
 
             if (GUI.Button(new Rect(100, 200, 100, 100), "GC"))

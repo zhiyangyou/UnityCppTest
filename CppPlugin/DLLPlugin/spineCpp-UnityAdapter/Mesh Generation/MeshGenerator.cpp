@@ -1,7 +1,6 @@
 
 #include "UnityMeshWrapper.h"
 #include "MeshGenerator.h"
-#include "UnityMeshWrapper.h"
 #include <spine/spine.h>
 
 namespace SpineUnity {

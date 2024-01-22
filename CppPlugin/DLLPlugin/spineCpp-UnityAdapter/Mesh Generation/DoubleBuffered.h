@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "SpineCppAdapterCore.h"
+
 namespace SpineUnity {
 
 	template<typename T>

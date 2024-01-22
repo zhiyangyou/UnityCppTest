@@ -1,8 +1,7 @@
 #pragma once
 #include <limits>
-#include <memory>
-#include <vector>
-#include <initializer_list>
+//#include <memory>
+#include <initializer_list> 
 #include <glm/glm.hpp> 
 
 #include <spine/Vector.h>

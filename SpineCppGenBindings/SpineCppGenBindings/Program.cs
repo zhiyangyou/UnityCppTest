@@ -17,18 +17,7 @@ using Type = CppSharp.AST.Type;
 
 namespace SpineCppGenBindings;
 
-public class DllPluginTypeMap : TypeMap
-{
-    public override bool IsIgnored
-    {
-        get { return false; }
-    }
-
-    public override Type CSharpSignatureType(TypePrinterContext ctx)
-    {
-        return base.CSharpSignatureType(ctx);
-    }
-}
+    
 
 public class SpineCppLibrary : ILibrary
 {
@@ -65,6 +54,23 @@ public class SpineCppLibrary : ILibrary
             return _spineIncludeDir;
         }
     }
+    private string _glmIncludeDir = "";
+
+    private string GLMIncludeDir
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_glmIncludeDir))
+            {
+                var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+                _glmIncludeDir = curDir.Parent.Parent.Parent.Parent.Parent.FullName +
+                                 "\\glm";
+            }
+
+            return _glmIncludeDir;
+        }
+    }
+    
 
     private string _spineAdapterIncludeDir = "";
 
@@ -110,7 +116,7 @@ public class SpineCppLibrary : ILibrary
             {
                 var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
                 _spineDllDir = curDir.Parent.Parent.Parent.Parent.Parent.FullName +
-                               "\\DLLExportDir";
+                               "\\UnityCppTest\\Assets\\Plugins\\win32";
             }
 
             return _spineDllDir;
@@ -220,10 +226,14 @@ public class SpineCppLibrary : ILibrary
         var module = options.AddModule("spine_cpp");
 
         module.IncludeDirs.Add(RootIncludeDir);
-
+        
+        module.IncludeDirs.Add(GLMIncludeDir);
+        // module.Headers.Add("glm/glm.hpp");
+        
         module.IncludeDirs.Add(SpineIncludeDir);
         module.Headers.Add("spine/spine.h");
         module.Headers.Add("spine/dll.h");
+        
         module.Defines.Add("_WIN32");
 
         module.IncludeDirs.Add(SpineAdapterIncludeDir);
@@ -240,8 +250,8 @@ public class SpineCppLibrary : ILibrary
         // module.LibraryName = "DLLPlugin";
 
 
-        // module.LibraryDirs.Add(SpineDllDir);
-        // module.Libraries.Add("DLLPlugin.dll");
+        module.LibraryDirs.Add(SpineDllDir);
+        module.Libraries.Add("spine_cpp.dll");
 
         foreach (var fileInfo in new DirectoryInfo(SpineCppFileDir).GetFiles())
         {

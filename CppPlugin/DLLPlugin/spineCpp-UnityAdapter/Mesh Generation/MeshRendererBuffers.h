@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <vector>
-
 #include "Bindings.h"
 #include "DoubleBuffered.h"
 #include "SkeletonRendererInstruction.h"

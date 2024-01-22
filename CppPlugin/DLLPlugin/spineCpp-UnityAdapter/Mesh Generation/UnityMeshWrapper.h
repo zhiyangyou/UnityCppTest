@@ -3,7 +3,6 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 #include <spine/Color.h>
-#include <spine/Vector.h>
 
 #include "Bindings.h"
 

@@ -213,6 +213,8 @@ namespace Spine.Unity {
 
 		public override void Clear () {
 			atlas = null;
+			atlas_Cpp.Dispose();
+			atlas_Cpp = null;
 			_unitySpineCppTextureLoader.Dispose();
 			_unitySpineCppTextureLoader = null;
 			_OnSpineCppTextureLoader_Load = null;
@@ -263,8 +265,8 @@ namespace Spine.Unity {
 				Clear();
 				return null;
 			}
-
-			if (atlas_Cpp != null) return atlas_Cpp;
+			
+			if (atlas_Cpp != null && atlas_Cpp.__Instance != IntPtr.Zero) return atlas_Cpp;
 
 			try {
 				TextureLoader loader;
@@ -278,6 +280,11 @@ namespace Spine.Unity {
 				return atlas_Cpp;
 			} catch (Exception ex) {
 				Debug.LogError("Error reading atlas file for atlas asset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, this);
+				if (atlas_Cpp.__Instance != IntPtr.Zero)
+				{
+					atlas_Cpp.Dispose();
+				}
+				atlas_Cpp = null;
 				return null;
 			}
 		}
